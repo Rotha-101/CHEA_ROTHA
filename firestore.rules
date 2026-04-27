@@ -1,0 +1,68 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      // For this single-user portfolio, the admin is the specific user email
+      return isAuthenticated() && (
+        (request.auth.token.email == "rotha2002.edu@gmail.com" && request.auth.token.email_verified == true) ||
+        (request.auth.token.email == "admin@jarothea.com")
+      );
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+    
+    // Profile
+    match /profile/{documentId} {
+      allow read: if true; // Publicly readable
+      allow write: if isAdmin();
+    }
+
+    // Projects
+    match /projects/{projectId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Experience
+    match /experience/{experienceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Education
+    match /education/{educationId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Skills
+    match /skills/{skillId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Blog
+    match /blog/{postId} {
+      // Only allow reading published posts unless admin
+      allow read: if (resource == null) || (resource.data.status == 'published') || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Settings
+    match /settings/{documentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

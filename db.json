@@ -1,0 +1,355 @@
+{
+  "profile": {
+    "name": "CHEA Rotha",
+    "title": "Data Scientist & Machine Learning Engineer",
+    "bio": "Data Scientist with an Engineering Degree in Data Science from the Institute of Technology of Cambodia (ITC). Experienced in machine learning, time-series forecasting, and data visualization with hands-on delivery of predictive models, hybrid ML frameworks, and real-world analytics for policy and business decisions.",
+    "email": "chearotha.itc.edu@gmail.com",
+    "phone": "+855-97 4865 856",
+    "location": "Toul Kork, Phnom Penh, Cambodia",
+    "github": "https://github.com/Rotha-101",
+    "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
+    "profilePhotoUrl": "/uploads/1777025100450-655554977-download.jpg",
+    "coverImageUrl": "/uploads/1777077015388-189201799-yellow_kyoto.jpg",
+    "cvUrl": "/uploads/1776911762226-000000000-CHEA-Rotha-CV.pdf"
+  },
+  "skills": [
+    {
+      "id": "skill-001",
+      "name": "Python",
+      "level": 95,
+      "category": "Programming",
+      "priority": 1,
+      "iconUrl": "/uploads/1776994522594-195716052-Screenshot 2026-04-24 083510.png"
+    },
+    {
+      "id": "skill-002",
+      "name": "SQL",
+      "level": 90,
+      "category": "Programming",
+      "priority": 2,
+      "iconUrl": "/uploads/1776997750999-965465235-1.png"
+    },
+    {
+      "id": "skill-003",
+      "name": "Scikit-learn",
+      "level": 90,
+      "category": "Machine Learning",
+      "priority": 3,
+      "iconUrl": "/uploads/1776997871444-379218308-2.webp"
+    },
+    {
+      "id": "skill-004",
+      "name": "TensorFlow & Keras",
+      "level": 85,
+      "category": "Machine Learning",
+      "priority": 4,
+      "iconUrl": "/uploads/1776997904868-902082973-3.jpg"
+    },
+    {
+      "id": "skill-005",
+      "name": "XGBoost & LightGBM",
+      "level": 88,
+      "category": "Machine Learning",
+      "priority": 5,
+      "iconUrl": "/uploads/1776997935198-795373356-4.webp"
+    },
+    {
+      "id": "skill-006",
+      "name": "LSTM & SARIMAX",
+      "level": 87,
+      "category": "Time Series Forecasting",
+      "priority": 6,
+      "iconUrl": "/uploads/1776924679115-844291373-Desert-With-Mountains-Moon.jpg"
+    },
+    {
+      "id": "skill-007",
+      "name": "ARIMA, SARIMA, Prophet",
+      "level": 85,
+      "category": "Time Series Forecasting",
+      "priority": 7,
+      "iconUrl": "/uploads/1776932398152-37517242-gdtography.jpg"
+    },
+    {
+      "id": "skill-009",
+      "name": "Matplotlib, Seaborn, Plotly",
+      "level": 88,
+      "category": "Data Visualization",
+      "priority": 9,
+      "iconUrl": "/uploads/1776932406078-192278685-comet.jpg"
+    },
+    {
+      "id": "skill-010",
+      "name": "Power BI & Tableau",
+      "level": 84,
+      "category": "Data Visualization",
+      "priority": 10,
+      "iconUrl": "/uploads/1776932414758-517369120-green_sea.jpg"
+    },
+    {
+      "id": "skill-011",
+      "name": "Hugging Face, NLTK, spaCy",
+      "level": 78,
+      "category": "NLP",
+      "priority": 11,
+      "iconUrl": "/uploads/1776932425006-386292081-forest-landscape.jpg"
+    },
+    {
+      "id": "skill-012",
+      "name": "MySQL, PostgreSQL, SQLite",
+      "level": 86,
+      "category": "Database",
+      "priority": 12,
+      "iconUrl": "/uploads/1776932437216-755861420-mountain.jpg"
+    },
+    {
+      "id": "skill-014",
+      "name": "Statistics & Data Storytelling",
+      "level": 89,
+      "category": "Core Strengths",
+      "priority": 14,
+      "iconUrl": "/uploads/1776932444982-615577727-frozen-shores-burning-sky.jpeg"
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-001",
+      "title": "Laptop Price Prediction",
+      "description": "Built an end-to-end pricing model for laptop market data: data cleaning, exploratory analysis, feature engineering, and model comparison. Trained and evaluated Linear Regression, Random Forest, and SVR, with SVR delivering the best predictive accuracy.",
+      "imageUrl": "/uploads/1776999975567-826319831-Screenshot 2026-04-24 100602.png",
+      "tags": [
+        "Python",
+        "Pandas",
+        "Scikit-learn",
+        "SVR",
+        "EDA"
+      ],
+      "githubUrl": "https://github.com/Rotha-101/Data-Science-Project.git",
+      "liveUrl": "https://claude.ai/new",
+      "status": "Completed",
+      "priority": 1
+    },
+    {
+      "id": "proj-002",
+      "title": "Hotel Reservation System Database",
+      "description": "Designed and implemented a relational database for hotel operations covering room booking, client management, staff scheduling, and payment confirmation workflows. Produced ERD and normalized schema with key constraints for robust data integrity.",
+      "imageUrl": "/uploads/1776924622399-26271097-Fantasy-Autumn.png",
+      "tags": [
+        "MySQL",
+        "SQL",
+        "ERD",
+        "Relational Modeling"
+      ],
+      "githubUrl": "",
+      "liveUrl": "",
+      "status": "Completed",
+      "priority": 2
+    },
+    {
+      "id": "proj-003",
+      "title": "Forecasting Tourism in Cambodia",
+      "description": "Performed time-series forecasting on Cambodia tourism data using Python and statistical models. Preprocessed data, evaluated models with MSE, and identified seasonality and post-COVID recovery trends to support planning and policy insights.",
+      "imageUrl": "/uploads/1776924629707-966758291-Fantasy-Landscape3.png",
+      "tags": [
+        "Time Series",
+        "Forecasting",
+        "Python",
+        "Statsmodels",
+        "MSE"
+      ],
+      "githubUrl": "",
+      "liveUrl": "",
+      "status": "Completed",
+      "priority": 3
+    },
+    {
+      "id": "proj-004",
+      "title": "Crop Yield Prediction & Recommendation",
+      "description": "Developed machine learning models for crop yield prediction using agricultural, soil, and weather features. Compared Random Forest and XGBoost, evaluated with RÂ²/MAE/RMSE, and built a recommendation component for suitable crop selection.",
+      "imageUrl": "/uploads/1776924638175-509470636-Solitary-Glow.png",
+      "tags": [
+        "XGBoost",
+        "Random Forest",
+        "Feature Engineering",
+        "R2",
+        "MAE",
+        "RMSE"
+      ],
+      "githubUrl": "",
+      "liveUrl": "",
+      "status": "Completed",
+      "priority": 4
+    }
+  ],
+  "experience": [
+    {
+      "id": "exp-001",
+      "title": "Data Scientist",
+      "company": "Ministry of Planning, Cambodia",
+      "location": "Phnom Penh, Cambodia",
+      "startDate": "Feb 2025",
+      "endDate": "Oct 2025",
+      "current": false,
+      "description": "- Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
+      "priority": 1,
+      "photos": [
+        "/uploads/1776925026967-918270238-astronaut.png",
+        "/uploads/1776925026999-375907261-astronaut_jellyfish.jpg",
+        "/uploads/1776925027003-45543015-astronaut2.png",
+        "/uploads/1776925027017-245953123-autumns.hues.png",
+        "/uploads/1776998950915-201500073-anime-eye-nord.png",
+        "/uploads/1776998950921-206891513-anime-nord.png",
+        "/uploads/1776998950926-607423736-anime-pond.png",
+        "/uploads/1776998951005-476709704-anime-water.png",
+        "/uploads/1776998951029-435453362-Antman.jpg",
+        "/uploads/1776998951034-563428941-apple_gruvbox.jpg"
+      ]
+    },
+    {
+      "id": "exp-002",
+      "title": "Instructor - Data Science",
+      "company": "Sunrise Institute",
+      "location": "Phnom Penh, Cambodia",
+      "startDate": "Jan 2024",
+      "endDate": "Feb 2025",
+      "current": false,
+      "description": "- Taught EDA, statistics, machine learning, forecasting, and data visualization with practical Python and Power BI projects.\\n- Guided students in dashboard building, analysis, and insight generation from real datasets.\\n- Designed hands-on exercises and mini-projects to strengthen analytical and coding skills.\\n- Mentored students on data storytelling for technical and non-technical audiences.\\n- Supported students in applying ML and statistical methods to real-world problems.",
+      "priority": 2,
+      "photos": [
+        "/uploads/1776925041991-204063774-city-rain.png",
+        "/uploads/1776925042001-510816041-city-skyline.jpg",
+        "/uploads/1776925042006-818576742-city-sundown.png",
+        "/uploads/1776925042048-306140675-colored-silence.jpg"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "id": "edu-001",
+      "institution": "Institute of Technology of Cambodia (ITC)",
+      "degree": "Engineering Degree",
+      "field": "Data Science (Applied Mathematics and Statistics)",
+      "startDate": "2020",
+      "endDate": "2025",
+      "description": "Thesis: Analysis and Forecasting of Inflation in Cambodia.",
+      "priority": 1,
+      "photos": [
+        "/uploads/1776918735927-404003877-ITC 4.jpg",
+        "/uploads/1776925056670-374990553-core_memory.jpg",
+        "/uploads/1776925056706-492507391-cyberpunk.png",
+        "/uploads/1776925056740-681312270-dark-star.jpg"
+      ]
+    },
+    {
+      "id": "edu-002",
+      "institution": "Aii Language Center",
+      "degree": "Language Studies",
+      "field": "English and French (Basic)",
+      "startDate": "2019",
+      "endDate": "2022",
+      "description": "Language training focused on professional communication.",
+      "priority": 2,
+      "photos": [
+        "/uploads/1776924654889-633213024-Fantasy-Autumn.png",
+        "/uploads/1776925066588-624191321-fantasy-mountain1.jpg",
+        "/uploads/1776925066595-587521035-fantasy-mountain2.jpg",
+        "/uploads/1776925066602-213389545-fantasy-mountain3.jpg"
+      ]
+    }
+  ],
+  "settings": {
+    "showAbout": true,
+    "showExperience": true,
+    "showProjects": true,
+    "showGallery": false,
+    "showSkills": true,
+    "showBlog": true,
+    "showContact": true,
+    "heroBackgroundImageUrl": "",
+    "footerText": "Chea Rotha. All rights reserved.",
+    "maintenanceMode": false,
+    "primaryColor": "#fbbf24",
+    "gmailUser": "Rotha2002.edu@gmail.com",
+    "gmailPass": "@@@Rotha1213",
+    "showReferences": true,
+    "siteLogoUrl": "",
+    "announcementText": "",
+    "showAnnouncementBar": true,
+    "secondaryColor": "#30cb10",
+    "heroHeadline": "khmer ",
+    "heroSubheadline": "Khmer  GPT",
+    "heroCtaLabel": "vjsfhvasdfgadfgbadfhb",
+    "heroCtaUrl": "sdfgadsfghdsfgbdgbg"
+  },
+  "blog": [
+    {
+      "title": "Articles on Civil engineering",
+      "content": "<h2><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/traffic-engineers-build-roads-that-invite-crashes-because-they-rely-on-outdated-research-and-faulty-data-223710\"><strong>Traffic engineers build roads that invite crashes because they rely on outdated research and faulty&nbsp;data</strong></a></h2><p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/profiles/wesley-marshall-1512110\">Wesley Marshall</a>, <em>University of Colorado Denver</em></p><p>A traffic engineer argues that, contrary to his professionÃ¢â‚¬â„¢s view, Ã¢â‚¬Ëœhuman errorÃ¢â‚¬â„¢ is not the main cause of deaths in car crashes in the US.</p>",
+      "excerpt": "What a gaping hole on a bridge reveals about aging infrastructure in Canada",
+      "imageUrl": "/uploads/1776835929229-966487069-file-20250422-56-vefd7q.avif",
+      "tags": [
+        ""
+      ],
+      "status": "published",
+      "createdAt": "2026-04-22T05:31:01.537Z",
+      "seoTitle": "https://theconversation.com/how-rising-wages-for-construction-workers-are-shifting-the-foundations-of-the-housing-market-255087",
+      "seoDescription": "",
+      "seoKeywords": "Civil",
+      "id": "1776835945185"
+    },
+    {
+      "title": "CDC reviewing eight projects, $490M in capital",
+      "content": "<p></p><p>A Ã¢â‚¬Å“One Window ServiceÃ¢â‚¬Â meeting of the Cambodian Investment Board to examine and discuss investment project registration applications was held on the morning of April 21. The meeting was chaired by Chea Vuthy, CIB secretary-general, with participation from representatives of several government institutions, including subnational administrations.</p><p>According to the CDC, the eight projects have a combined capital of $490 million and are expected to create around 2,000 jobs. Among them, four projects fall under the industrial sector, including: a factory for manufacturing household electrical appliances; a factory producing inflatable mattresses, toys and swimming equipment; a yarn production and dyeing factory; and an expansion project adding garment washing operations to an existing garment and embroidery factory.</p>",
+      "excerpt": "Eight investment proposals Ã¢â‚¬â€ seven new projects and one an expansion Ã¢â‚¬â€ worth nearly $500 million in total investment capital are under review by the Cambodian Investment Board (CIB) of the Council for the Development of Cambodia (CDC), prior to official approval.",
+      "imageUrl": "/uploads/1776831898140-714794076-389.jpg",
+      "tags": [
+        ""
+      ],
+      "status": "published",
+      "createdAt": "2026-04-22T04:23:28.218Z",
+      "seoTitle": "https://phnompenhpost.com/business/cdc-reviewing-eight-projects-490m-in-capital/",
+      "seoDescription": "",
+      "seoKeywords": "",
+      "id": "1776831924851"
+    },
+    {
+      "title": "Artificial Intelligence",
+      "content": "<p>The U.S. State Department has ordered a global push to bring attention to what it says are widespread ‌efforts by Chinese companies, including AI startup DeepSeek, to steal intellectual property from U.S. artificial intelligence labs, according to a diplomatic cable seen by Reuters.</p>",
+      "excerpt": "Exclusive: US State Dept orders global warning about alleged China AI thefts by DeepSeek, others",
+      "imageUrl": "/uploads/1777077224828-211037617-KIK4AUMDLBLZ3MA7ULN3KENZZQ.avif",
+      "tags": [
+        "Deepseek"
+      ],
+      "status": "published",
+      "createdAt": "2026-04-25T00:32:34.887Z",
+      "seoTitle": "",
+      "seoDescription": "",
+      "seoKeywords": "",
+      "id": "1777077226855"
+    }
+  ],
+  "activity_logs": [],
+  "stats": [],
+  "references": [
+    {
+      "id": "ref-001",
+      "name": "PHAUK Sokkhey, Ph.D",
+      "title": "Deputy Head of Department of Applied Mathematics and Statistics (AMS), and Head of Master Program of Data Science",
+      "description": "Academic supervisor and senior data science educator at the Institute of Technology of Cambodia.",
+      "phone": "012 939 310",
+      "email": "phauk.sokkhey@itc.edu.kh",
+      "profileImageUrl": "/uploads/1776932012794-727741959-Screenshot 2026-04-23 151310.png",
+      "priority": 1,
+      "profileUrl": "https://www.researchgate.net/profile/Sokkhey-Phauk"
+    },
+    {
+      "id": "ref-002",
+      "name": "Mr. Pakrina Long",
+      "title": "IT Lecturer in Data Science at Institute of Technology of Cambodia",
+      "description": "Lecturer and professional reference in data science and applied analytics.",
+      "phone": "010 64 44 96",
+      "email": "long.pakrigna@itc.edu.kh",
+      "profileImageUrl": "/uploads/1776918642495-571297268-174418-1920x1080-desktop-full-hd-the-godfather-wallpaper.jpg",
+      "priority": 2
+    }
+  ]
+}
