@@ -1,1 +1,0 @@
-export const analyticsService = { async trackVisit() { return; }, async trackEvent(eventName: string, metadata?: any) { return; }, async getStats() { return { totalViews: 0, uniqueVisitors: 0 }; }, async getRecentActivity() { return []; } };
