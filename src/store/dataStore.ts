@@ -3,7 +3,6 @@ import { create } from 'zustand';
 const API_URL = '/api';
 const REQUEST_TIMEOUT_MS = 6000;
 const STATIC_JSON_URL = `${import.meta.env.BASE_URL}db.json`;
-const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';
 const NORMALIZED_BASE_URL = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
@@ -57,12 +56,14 @@ async function fetchCollection(collection: string) {
     const data = await fetchJsonWithTimeout(`${API_URL}/db/${collection}`);
     return normalizeUploads(data);
   } catch (apiError) {
-    if (!IS_STATIC_DEPLOY) {
+    console.warn(`API request for "${collection}" failed. Falling back to static db.json.`, apiError);
+    try {
+      const staticData = await fetchJsonWithTimeout(STATIC_JSON_URL);
+      return normalizeUploads(staticData?.[collection]);
+    } catch (staticError) {
+      console.error(`Static fallback for "${collection}" failed.`, staticError);
       throw apiError;
     }
-
-    const staticData = await fetchJsonWithTimeout(STATIC_JSON_URL);
-    return normalizeUploads(staticData?.[collection]);
   }
 }
 
@@ -133,6 +134,7 @@ interface Reference {
   phone: string;
   email: string;
   profileImageUrl?: string;
+  profileUrl?: string;
   priority: number;
 }
 
@@ -210,7 +212,7 @@ export const useDataStore = create<DataState>((set, get) => ({
       ]);
       
       set({ 
-        profile: Object.keys(profileData).length ? profileData : null, 
+        profile: profileData && Object.keys(profileData).length ? profileData : null, 
         skills: Array.isArray(skillsData) ? skillsData : [], 
         references: Array.isArray(referencesData) ? referencesData : [],
         profileLoaded: true 
