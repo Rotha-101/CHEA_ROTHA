@@ -90,7 +90,8 @@ export default function Profile() {
       });
 
       if (!uploadRes.ok) {
-        throw new Error(`Upload API failed (${uploadRes.status})`);
+        const errorData = await uploadRes.json().catch(() => ({}));
+        throw new Error(errorData.error || `Upload failed (${uploadRes.status})`);
       }
       const uploadData = await uploadRes.json();
       if (!uploadData?.url) {
@@ -103,16 +104,22 @@ export default function Profile() {
       currentData[fieldName] = url;
       reset(currentData);
 
-      await fetch(`${API_URL}/db/profile`, {
+      const saveRes = await fetch(`${API_URL}/db/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentData)
       });
+
+      if (!saveRes.ok) {
+        const errorData = await saveRes.json().catch(() => ({}));
+        throw new Error(errorData.error || `Save failed (${saveRes.status})`);
+      }
+
       setProfile(currentData);
       alert(`${fieldName} uploaded and saved to GitHub successfully!`);
-    } catch (error) {
+    } catch (error: any) {
       console.error(`Error uploading ${fieldName}:`, error);
-      alert(`Failed to upload ${fieldName}. Ensure your GITHUB_TOKEN is set in Vercel.`);
+      alert(`Upload Failed: ${error.message}. \n\nTip: If on Vercel, check your GITHUB_TOKEN.`);
     }
   };
 
