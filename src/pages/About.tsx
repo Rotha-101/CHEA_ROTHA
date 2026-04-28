@@ -24,7 +24,7 @@ export default function About() {
       >
         <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">About Me</h1>
         <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed whitespace-pre-wrap text-lg">
-          {profile?.bio}
+          {profile?.aboutMe || profile?.bio}
         </p>
       </motion.div>
     </div>

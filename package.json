@@ -4,9 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --port=5173 --host=0.0.0.0",
-    "dev:server": "node server.mjs",
-    "dev:full": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "dev": "concurrently \"npm run dev:vite\" \"npm run dev:server\"",
+    "dev:vite": "vite --port=5173 --host=0.0.0.0",
+    "dev:server": "tsx server.ts",
+    "dev:full": "npm run dev",
     "build": "vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist",

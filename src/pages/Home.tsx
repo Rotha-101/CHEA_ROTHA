@@ -16,6 +16,7 @@ interface Profile {
   name: string;
   title: string;
   bio: string;
+  aboutMe?: string;
   email: string;
   phone: string;
   location: string;
@@ -64,7 +65,7 @@ export default function Home() {
             
             {/* Left Column - Profile Photo */}
             <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start">
-              <div className="relative w-full max-w-md aspect-[3/4] rounded-3xl overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
+              <div className="relative w-full max-w-[17rem] sm:max-w-xs md:max-w-sm lg:max-w-[22rem] xl:max-w-[23rem] aspect-[3/4] rounded-3xl overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
                 {profile.profilePhotoUrl ? (
                   <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (

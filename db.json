@@ -2,15 +2,16 @@
   "profile": {
     "name": "CHEA Rotha",
     "title": "Data Scientist & Machine Learning Engineer",
-    "bio": "Data Scientist with an Engineering Degree in Data Science from the Institute of Technology of Cambodia (ITC). Experienced in machine learning, time-series forecasting, and data visualization with hands-on delivery of predictive models, hybrid ML frameworks, and real-world analytics for policy and business decisions.",
+    "bio": "A personal website is an excellent way for data scientists to showcase their skills, projects, and professional achievements. It serves as a centralized platform to highlight your portfolio, CV, and other relevant content. Here’s a structured approach to building one:",
     "email": "chearotha.itc.edu@gmail.com",
     "phone": "+855-97 4865 856",
     "location": "Toul Kork, Phnom Penh, Cambodia",
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
-    "profilePhotoUrl": "/uploads/1777025100450-655554977-download.jpg",
-    "coverImageUrl": "/uploads/1777077015388-189201799-yellow_kyoto.jpg",
-    "cvUrl": "/uploads/1776911762226-000000000-CHEA-Rotha-CV.pdf"
+    "profilePhotoUrl": "http://localhost:3001/uploads/1777369395809-99691980-image_2025-04-01_22-14-40.png",
+    "coverImageUrl": "http://localhost:3001/uploads/1777368643273-898852510-explorer_green_day.jpg",
+    "cvUrl": "/uploads/1776911762226-000000000-CHEA-Rotha-CV.pdf",
+    "aboutMe": "Artificial Intelligence (AI) refers to the development of computer systems capable of performing tasks that typically require human intelligence, such as reasoning, learning, decision-making, and perception. AI encompasses a wide range of technologies, including machine learning, deep learning, and natural language processing (NLP)."
   },
   "skills": [
     {
@@ -268,8 +269,8 @@
     "footerText": "Chea Rotha. All rights reserved.",
     "maintenanceMode": false,
     "primaryColor": "#fbbf24",
-    "gmailUser": "Rotha2002.edu@gmail.com",
-    "gmailPass": "@@@Rotha1213",
+    "gmailUser": "",
+    "gmailPass": "",
     "showReferences": true,
     "siteLogoUrl": "",
     "announcementText": "",

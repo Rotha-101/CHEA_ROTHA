@@ -21,6 +21,7 @@ interface Profile {
   name: string;
   title: string;
   bio: string;
+  aboutMe?: string;
   email: string;
   phone: string;
   location: string;
@@ -123,6 +124,7 @@ interface DataState {
   experienceLoaded: boolean;
   settingsLoaded: boolean;
 
+  setProfile: (profile: Profile | null) => void;
   fetchProfileAndSkills: () => Promise<void>;
   fetchProjects: () => Promise<void>;
   fetchExperienceAndEducation: () => Promise<void>;
@@ -142,6 +144,11 @@ export const useDataStore = create<DataState>((set, get) => ({
   projectsLoaded: false,
   experienceLoaded: false,
   settingsLoaded: false,
+
+  setProfile: (profile) => set({
+    profile,
+    profileLoaded: true,
+  }),
 
   fetchProfileAndSkills: async () => {
     if (get().profileLoaded) return;

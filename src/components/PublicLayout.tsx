@@ -1,50 +1,86 @@
-import { Outlet } from 'react-router-dom';
-import { cn } from '../lib/utils';
-import { Github, Linkedin, Mail, Sun, Moon, Home, User, Briefcase, Folder, GraduationCap, Code2, Image, MessageSquare, Shield, FileText, Globe, Users, ChevronLeft, ChevronRight } from 'lucide-react';
-import { motion } from 'motion/react';
-import { useThemeStore } from '../store/themeStore';
-import { useDataStore } from '../store/dataStore';
-import { analyticsService } from '../lib/analytics';
 import React, { useEffect, useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import {
+  Briefcase,
+  Code2,
+  FileText,
+  Folder,
+  Github,
+  Globe,
+  GraduationCap,
+  Home,
+  Image,
+  Linkedin,
+  Mail,
+  Menu,
+  MessageSquare,
+  Moon,
+  Sun,
+  User,
+  Users,
+  X,
+} from 'lucide-react';
+import { cn } from '../lib/utils';
+import { analyticsService } from '../lib/analytics';
+import { useDataStore } from '../store/dataStore';
+import { useThemeStore } from '../store/themeStore';
+
+const HEADER_HEIGHT = 80;
+const SECTION_SCROLL_OFFSET = 96;
 
 export function PublicLayout() {
   const { theme, toggleTheme } = useThemeStore();
   const { settings, fetchSettings, profile, fetchProfileAndSkills } = useDataStore();
   const [activeSection, setActiveSection] = useState('home');
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-  // Fetch settings and profile on mount so background URL is available
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768) {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     fetchSettings();
     fetchProfileAndSkills();
   }, [fetchSettings, fetchProfileAndSkills]);
 
   const navigation = [
-    { name: 'Home',       href: '#home',       icon: Home,         show: true },
-    { name: 'About',      href: '#about',      icon: User,         show: settings?.showAbout      !== false },
-    { name: 'Experience', href: '#experience', icon: Briefcase,    show: settings?.showExperience !== false },
+    { name: 'Home', href: '#home', icon: Home, show: true },
+    { name: 'About', href: '#about', icon: User, show: settings?.showAbout !== false },
+    { name: 'Experience', href: '#experience', icon: Briefcase, show: settings?.showExperience !== false },
     { name: 'Education', href: '#education', icon: GraduationCap, show: settings?.showExperience !== false },
-    { name: 'Projects',   href: '#projects',   icon: Folder,      show: settings?.showProjects   !== false },
-    { name: 'Gallery',    href: '#gallery',    icon: Image,        show: settings?.showGallery    !== false },
-    { name: 'Skills',     href: '#skills',     icon: Code2,        show: settings?.showSkills     !== false },
-    { name: 'Blog',       href: '#blog',       icon: FileText,     show: settings?.showBlog       !== false },
-    { name: 'Reference',  href: '#reference',  icon: Users,        show: settings?.showReferences !== false },
-    { name: 'Contact',    href: '#contact',    icon: MessageSquare,show: settings?.showContact    !== false },
-  ].filter(nav => nav.show);
+    { name: 'Projects', href: '#projects', icon: Folder, show: settings?.showProjects !== false },
+    { name: 'Gallery', href: '#gallery', icon: Image, show: settings?.showGallery !== false },
+    { name: 'Skills', href: '#skills', icon: Code2, show: settings?.showSkills !== false },
+    { name: 'Blog', href: '#blog', icon: FileText, show: settings?.showBlog !== false },
+    { name: 'Reference', href: '#reference', icon: Users, show: settings?.showReferences !== false },
+    { name: 'Contact', href: '#contact', icon: MessageSquare, show: settings?.showContact !== false },
+  ].filter((nav) => nav.show);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = navigation.map(nav => nav.href.substring(1));
-      let current = '';
+      const sections = navigation.map((nav) => nav.href.substring(1));
+      const scrollPosition = window.scrollY + SECTION_SCROLL_OFFSET;
+      let currentSection = sections[0] || 'home';
+
       for (const section of sections) {
         const element = document.getElementById(section);
-        if (element && window.scrollY >= element.offsetTop - 200) {
-          current = section;
+        if (element && scrollPosition >= element.offsetTop) {
+          currentSection = section;
         }
       }
-      if (current) setActiveSection(current);
+
+      setActiveSection(currentSection);
     };
-    window.addEventListener('scroll', handleScroll);
+
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [navigation]);
 
@@ -56,19 +92,18 @@ export function PublicLayout() {
     e.preventDefault();
     const targetId = href.replace('#', '');
     const element = document.getElementById(targetId);
-    if (element) {
-      window.scrollTo({ top: element.offsetTop, behavior: 'smooth' });
-      setActiveSection(targetId);
-    }
+
+    if (!element) return;
+
+    const top = element.getBoundingClientRect().top + window.scrollY - SECTION_SCROLL_OFFSET;
+    window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
+    setActiveSection(targetId);
   };
 
-  // Use settings bg URL first, then fall back to the Cover Image uploaded in profile
   const bgImage = settings?.heroBackgroundImageUrl || profile?.coverImageUrl;
 
   return (
-    <div className="min-h-screen font-sans flex relative overflow-x-hidden transition-colors duration-500">
-
-      {/* ── FULL-SCREEN BACKGROUND (sits behind everything) ── */}
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans transition-colors duration-500">
       {bgImage && (
         <div
           aria-hidden
@@ -77,157 +112,190 @@ export function PublicLayout() {
         />
       )}
 
-      {/* Light-mode tint overlay  – heavy in light mode for readability */}
       <div
         aria-hidden
         className={cn(
           'fixed inset-0 z-0 pointer-events-none transition-colors duration-500',
-          bgImage
-            ? 'bg-white/85 dark:bg-zinc-950/80'   // tinted overlay when image exists
-            : 'bg-white dark:bg-zinc-950'           // solid when no image
+          bgImage ? 'bg-white/85 dark:bg-zinc-950/80' : 'bg-white dark:bg-zinc-950'
         )}
       />
 
-      {/* Toggle sidebar button when closed */}
-      {!sidebarOpen && (
-        <button
-          onClick={() => setSidebarOpen(true)}
-          className="fixed left-4 top-4 z-50 rounded-full ui bg-amber-400/90 text-zinc-950 p-3 shadow-2xl hover:bg-amber-500 transition-colors"
-          aria-label="Open navigation"
-        >
-          <ChevronRight className="w-5 h-5" />
-        </button>
-      )}
-
-      {/* ── SIDEBAR ── */}
-      <aside className={cn(
-        'fixed top-0 left-0 h-screen z-50 flex flex-col bg-white/70 dark:bg-zinc-950/70 backdrop-blur-xl saturate-150 border-r border-zinc-200/60 dark:border-zinc-800/60 transition-all duration-300',
-        sidebarOpen ? 'translate-x-0 w-20 lg:w-64' : '-translate-x-full w-64'
-      )}>
-
-        {/* Logo row */}
-        <div className="h-20 flex items-center justify-between lg:px-8 border-b border-zinc-200/60 dark:border-zinc-800/60">
-          <a href="#home" onClick={e => scrollToSection(e, '#home')} className="flex items-center group">
-            <span className="text-2xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-500 dark:group-hover:text-amber-400 transition-colors">
+      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/60 bg-white/78 backdrop-blur-xl saturate-150 transition-colors duration-500 dark:border-zinc-800/60 dark:bg-zinc-950/80">
+        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center">
+            <span className="font-display text-2xl font-bold tracking-tighter text-zinc-900 transition-colors group-hover:text-amber-500 dark:text-white dark:group-hover:text-amber-400">
               CR.
             </span>
           </a>
-          <div className="flex items-center gap-2">
-            <div className="hidden lg:flex items-center gap-3">
-              <a href="https://github.com/Rotha-101" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" title="GitHub">
+
+          <nav className="hidden items-center gap-1 md:flex">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => scrollToSection(e, item.href)}
+                className={cn(
+                  'rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200',
+                  activeSection === item.href.substring(1)
+                    ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400'
+                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-white'
+                )}
+              >
+                {item.name}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-3 md:flex">
+              <a
+                href="https://github.com/Rotha-101"
+                target="_blank"
+                rel="noreferrer"
+                className="text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
+                title="GitHub"
+              >
                 <Github className="h-4 w-4" />
               </a>
-              <a href="https://www.linkedin.com/in/chea-rotha-44268b2a5/" target="_blank" rel="noreferrer" className="text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors" title="LinkedIn">
+              <a
+                href="https://www.linkedin.com/in/chea-rotha-44268b2a5/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-zinc-400 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                title="LinkedIn"
+              >
                 <Linkedin className="h-4 w-4" />
               </a>
-              <a href="mailto:chearotha.itc.edu@gmail.com" className="text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors" title="Email">
+              <a
+                href="mailto:chearotha.itc.edu@gmail.com"
+                className="text-zinc-400 transition-colors hover:text-red-500 dark:hover:text-red-400"
+                title="Email"
+              >
                 <Mail className="h-4 w-4" />
               </a>
+            </div>
+
+            <div className="hidden items-center gap-2 md:flex">
               <button
-                onClick={() => setSidebarOpen(false)}
-                className="ui p-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                aria-label="Close navigation"
+                onClick={() => toggleTheme()}
+                className="ui rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                aria-label="Toggle theme"
               >
-                <ChevronLeft className="w-5 h-5" />
+                {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
             </div>
-            <div className="lg:hidden">
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="ui p-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-                aria-label="Close navigation"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-            </div>
+
+            <button
+              onClick={() => toggleTheme()}
+              className="ui rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white md:hidden"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen((open) => !open)}
+              className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white md:hidden"
+              aria-label="Toggle mobile menu"
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation"
+            >
+              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+      </header>
 
-        {/* Nav links */}
-        <nav className="flex-1 py-8 flex flex-col gap-1 px-4 overflow-y-auto">
-          {navigation.map((item) => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={e => scrollToSection(e, item.href)}
-              title={item.name}
-              className={cn(
-                'flex items-center gap-4 px-4 py-3 rounded-xl transition-all duration-200 group relative',
-                activeSection === item.href.substring(1)
-                  ? 'bg-amber-400/10 dark:bg-amber-400/10 text-amber-600 dark:text-amber-400'
-                  : 'text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-white/50 dark:hover:bg-zinc-800/50'
-              )}
-            >
-              <item.icon className={cn(
-                'w-5 h-5 flex-shrink-0 transition-colors',
-                activeSection === item.href.substring(1) ? 'text-amber-500' : 'text-zinc-400 group-hover:text-zinc-500 dark:group-hover:text-zinc-300'
-              )} />
-              <span className="hidden lg:block font-medium text-sm tracking-wide">{item.name}</span>
-              {activeSection === item.href.substring(1) && (
-                <motion.div
-                  layoutId="sidebar-indicator"
-                  className="absolute left-0 top-2 bottom-2 w-1 bg-amber-400 rounded-r-full"
-                  transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                />
-              )}
-            </a>
-          ))}
+      <div aria-hidden style={{ height: HEADER_HEIGHT }} />
+
+      {mobileMenuOpen && (
+        <nav
+          id="mobile-navigation"
+          className="fixed inset-x-0 top-20 z-40 border-b border-zinc-200/60 bg-white/92 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/92 md:hidden"
+        >
+          <div className="mx-auto flex max-h-[calc(100vh-5rem)] max-w-7xl flex-col gap-1 overflow-y-auto p-4">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                onClick={(e) => {
+                  scrollToSection(e, item.href);
+                  setMobileMenuOpen(false);
+                }}
+                className={cn(
+                  'flex items-center gap-3 rounded-lg px-4 py-3 font-medium transition-all duration-200',
+                  activeSection === item.href.substring(1)
+                    ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400'
+                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-white'
+                )}
+              >
+                <item.icon className="h-5 w-5" />
+                {item.name}
+              </a>
+            ))}
+
+            <div className="flex gap-4 border-t border-zinc-200/60 px-4 pt-4 dark:border-zinc-800/60">
+              <a
+                href="https://github.com/Rotha-101"
+                target="_blank"
+                rel="noreferrer"
+                className="text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
+                title="GitHub"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/chea-rotha-44268b2a5/"
+                target="_blank"
+                rel="noreferrer"
+                className="text-zinc-400 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
+                title="LinkedIn"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href="mailto:chearotha.itc.edu@gmail.com"
+                className="text-zinc-400 transition-colors hover:text-red-500 dark:hover:text-red-400"
+                title="Email"
+              >
+                <Mail className="h-5 w-5" />
+              </a>
+            </div>
+          </div>
         </nav>
+      )}
 
-        {/* Bottom actions */}
-        <div className="p-4 border-t border-zinc-200/60 dark:border-zinc-800/60 flex flex-col gap-2 items-center lg:items-start">
-          <button
-            onClick={toggleTheme}
-            className="p-3 rounded-xl w-full flex items-center justify-center lg:justify-start gap-4 text-zinc-500 hover:text-amber-500 hover:bg-white/50 dark:text-zinc-400 dark:hover:text-amber-400 dark:hover:bg-zinc-800/60 transition-all duration-300"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            <span className="hidden lg:block text-sm font-medium">Toggle Theme</span>
-          </button>
+      <aside className="hidden" />
 
-          <a
-            href="/admin"
-            className="p-3 rounded-xl w-full flex items-center justify-center lg:justify-start gap-4 text-zinc-500 hover:text-amber-500 hover:bg-white/50 dark:text-zinc-400 dark:hover:text-amber-400 dark:hover:bg-zinc-800/60 transition-all duration-300"
-            title="Admin Access"
-          >
-            <Shield className="h-5 w-5" />
-            <span className="hidden lg:block text-sm font-medium">Admin Access</span>
-          </a>
-        </div>
-      </aside>
-
-      {/* ── MAINTENANCE OVERLAY ── */}
       {settings?.maintenanceMode && (
-        <div className="fixed inset-0 z-[100] bg-zinc-950 flex items-center justify-center p-8">
-          <div className="max-w-md w-full text-center space-y-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950 p-8">
+          <div className="max-w-md w-full space-y-8 text-center">
             <div className="flex justify-center">
-              <div className="p-6 bg-amber-400/10 rounded-3xl border border-amber-400/20 animate-pulse">
-                <Globe className="w-16 h-16 text-amber-400" />
+              <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6 animate-pulse">
+                <Globe className="h-16 w-16 text-amber-400" />
               </div>
             </div>
             <div className="space-y-4">
-              <h1 className="text-4xl font-display font-bold text-white tracking-tight">System Updating</h1>
-              <p className="text-zinc-400 leading-relaxed">We're currently performing scheduled maintenance. We'll be back online very shortly.</p>
+              <h1 className="font-display text-4xl font-bold tracking-tight text-white">System Updating</h1>
+              <p className="leading-relaxed text-zinc-400">
+                We&apos;re currently performing scheduled maintenance. We&apos;ll be back online very shortly.
+              </p>
             </div>
-            <div className="pt-8 flex justify-center gap-4">
-              <div className="h-1 w-8 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="h-1 w-8 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="h-1 w-8 bg-amber-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="flex justify-center gap-4 pt-8">
+              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         </div>
       )}
 
-      {/* ── MAIN CONTENT ── */}
-      <main className={cn(
-        'relative z-10 flex-grow transition-all duration-300',
-        sidebarOpen ? 'ml-20 lg:ml-64 w-[calc(100%-5rem)] lg:w-[calc(100%-16rem)]' : 'ml-0 w-full'
-      )}>
+      <main className="relative z-10 w-full flex-grow">
         <Outlet />
 
-        <footer className="bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border-t border-zinc-200/50 dark:border-zinc-800/50 mt-24 transition-colors duration-500">
-          <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-center items-center gap-4">
-            <p className="text-sm text-zinc-500 dark:text-zinc-400 font-mono">
+        <footer className="mt-24 border-t border-zinc-200/50 bg-white/50 backdrop-blur-sm transition-colors duration-500 dark:border-zinc-800/50 dark:bg-zinc-900/50">
+          <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-4 py-12 sm:flex-row sm:px-6 lg:px-8">
+            <p className="font-mono text-sm text-zinc-500 dark:text-zinc-400">
               &copy; {new Date().getFullYear()} {settings?.footerText || 'Chea Rotha. All rights reserved.'}
             </p>
           </div>

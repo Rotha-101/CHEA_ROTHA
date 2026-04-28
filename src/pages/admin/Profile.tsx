@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDataStore } from '../../store/dataStore';
 
 const API_URL = '/api';
 
@@ -7,6 +8,7 @@ interface ProfileForm {
   name: string;
   title: string;
   bio: string;
+  aboutMe?: string;
   email: string;
   phone: string;
   location: string;
@@ -21,6 +23,7 @@ export default function Profile() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const { register, handleSubmit, reset, getValues } = useForm<ProfileForm>();
+  const setProfile = useDataStore((state) => state.setProfile);
 
   useEffect(() => {
     async function fetchProfile() {
@@ -28,7 +31,12 @@ export default function Profile() {
         const res = await fetch(`${API_URL}/db/profile`);
         const data = await res.json();
         if (Object.keys(data).length > 0) {
-          reset(data as ProfileForm);
+          const normalizedData = {
+            ...data,
+            aboutMe: data.aboutMe ?? data.bio ?? ''
+          } as ProfileForm;
+          reset(normalizedData);
+          setProfile(normalizedData);
         }
       } catch (e) {
         console.error(e);
@@ -36,7 +44,7 @@ export default function Profile() {
       setLoading(false);
     }
     fetchProfile();
-  }, [reset]);
+  }, [reset, setProfile]);
 
   const onSubmit = async (data: ProfileForm) => {
     setSaving(true);
@@ -46,6 +54,7 @@ export default function Profile() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
+      setProfile(data);
       alert('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -85,6 +94,7 @@ export default function Profile() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentData)
       });
+      setProfile(currentData);
       alert(`${fieldName} uploaded successfully!`);
     } catch (error) {
       console.error(`Error uploading ${fieldName}:`, error);
@@ -174,9 +184,22 @@ export default function Profile() {
           </div>
 
           <div className="sm:col-span-6">
-            <label htmlFor="bio" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Biography</label>
+            <label htmlFor="bio" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Biography (Hero Section)</label>
             <div className="mt-1">
               <textarea id="bio" rows={5} {...register('bio')} className="shadow-sm focus:ring-amber-500 focus:border-amber-500 block w-full resize-y sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md transition-colors leading-6" />
+            </div>
+          </div>
+
+          <div className="sm:col-span-6">
+            <label htmlFor="aboutMe" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">About Me</label>
+            <div className="mt-1">
+              <textarea
+                id="aboutMe"
+                rows={6}
+                {...register('aboutMe')}
+                className="shadow-sm focus:ring-amber-500 focus:border-amber-500 block w-full resize-y sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md transition-colors leading-6"
+                placeholder="Write the full About Me text for the About section."
+              />
             </div>
           </div>
 
