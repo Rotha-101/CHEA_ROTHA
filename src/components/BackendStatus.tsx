@@ -2,10 +2,14 @@ import { useEffect } from 'react';
 import { useStatusStore } from '../store/statusStore';
 import { AlertCircle, Check } from 'lucide-react';
 
+const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';
+
 export function BackendStatus() {
   const { backendConnected, checkBackendStatus } = useStatusStore();
 
   useEffect(() => {
+    if (IS_STATIC_DEPLOY) return;
+
     // Check on mount
     checkBackendStatus();
 
@@ -13,6 +17,10 @@ export function BackendStatus() {
     const interval = setInterval(checkBackendStatus, 5000);
     return () => clearInterval(interval);
   }, [checkBackendStatus]);
+
+  if (IS_STATIC_DEPLOY) {
+    return null;
+  }
 
   if (backendConnected) {
     return (

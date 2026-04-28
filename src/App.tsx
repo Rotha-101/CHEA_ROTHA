@@ -29,6 +29,8 @@ import AdminMediaLibrary from './pages/admin/MediaLibrary';
 import AdminUsers from './pages/admin/Users';
 import AdminActivityLogs from './pages/admin/ActivityLogs';
 
+const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
 export default function App() {
   const { theme } = useThemeStore();
   const { settings } = useDataStore();
@@ -50,7 +52,7 @@ export default function App() {
   }, [theme, settings?.primaryColor]);
 
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={routerBase}>
       <Helmet>
         <title>{settings?.footerText?.replace('. All rights reserved.', '') || 'Portfolio'}</title>
         <meta name="description" content="Professional Portfolio and Content Management System" />

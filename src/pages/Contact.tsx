@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
 import { useDataStore } from '../store/dataStore';
 
+const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';
+
 export default function Contact() {
   const { profile, profileLoaded, fetchProfileAndSkills } = useDataStore();
   const [name, setName] = useState('');
@@ -61,6 +63,19 @@ export default function Contact() {
     setErrorMsg('');
 
     try {
+      if (IS_STATIC_DEPLOY) {
+        const recipientEmail = profile?.email || 'chearotha.itc.edu@gmail.com';
+        const mailtoParams = new URLSearchParams({
+          subject: `Portfolio message from ${name.trim()}`,
+          body: `Name: ${name.trim()}\nEmail: ${email.trim()}\n\n${message.trim()}`
+        });
+
+        window.location.href = `mailto:${recipientEmail}?${mailtoParams.toString()}`;
+        setStatus('success');
+        setTimeout(() => setStatus('idle'), 2000);
+        return;
+      }
+
       const res = await fetch(`/api/send-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -187,7 +202,11 @@ export default function Contact() {
           {status === 'success' && (
             <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-green-700 dark:text-green-400">
               <CheckCircle className="w-5 h-5 flex-shrink-0" />
-              <p className="text-sm font-medium">Message sent successfully! I will get back to you soon.</p>
+              <p className="text-sm font-medium">
+                {IS_STATIC_DEPLOY
+                  ? 'Your email app has been opened with the message details.'
+                  : 'Message sent successfully! I will get back to you soon.'}
+              </p>
             </div>
           )}
 

@@ -2,6 +2,11 @@ import { create } from 'zustand';
 
 const API_URL = '/api';
 const REQUEST_TIMEOUT_MS = 6000;
+const STATIC_JSON_URL = `${import.meta.env.BASE_URL}db.json`;
+const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';
+const NORMALIZED_BASE_URL = import.meta.env.BASE_URL.endsWith('/')
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
 
 async function fetchJsonWithTimeout(url: string) {
   const controller = new AbortController();
@@ -14,6 +19,50 @@ async function fetchJsonWithTimeout(url: string) {
     return await res.json();
   } finally {
     window.clearTimeout(timer);
+  }
+}
+
+function normalizeAssetUrl(value: string) {
+  if (value.startsWith('http://localhost:3001/uploads/')) {
+    return `${NORMALIZED_BASE_URL}uploads/${value.split('/uploads/')[1]}`;
+  }
+
+  if (value.startsWith('/uploads/')) {
+    return `${NORMALIZED_BASE_URL}${value.replace(/^\//, '')}`;
+  }
+
+  return value;
+}
+
+function normalizeUploads<T>(value: T): T {
+  if (typeof value === 'string') {
+    return normalizeAssetUrl(value) as T;
+  }
+
+  if (Array.isArray(value)) {
+    return value.map((item) => normalizeUploads(item)) as T;
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>).map(([key, entryValue]) => [key, normalizeUploads(entryValue)])
+    ) as T;
+  }
+
+  return value;
+}
+
+async function fetchCollection(collection: string) {
+  try {
+    const data = await fetchJsonWithTimeout(`${API_URL}/db/${collection}`);
+    return normalizeUploads(data);
+  } catch (apiError) {
+    if (!IS_STATIC_DEPLOY) {
+      throw apiError;
+    }
+
+    const staticData = await fetchJsonWithTimeout(STATIC_JSON_URL);
+    return normalizeUploads(staticData?.[collection]);
   }
 }
 
@@ -155,9 +204,9 @@ export const useDataStore = create<DataState>((set, get) => ({
     
     try {
       const [profileData, skillsData, referencesData] = await Promise.all([
-        fetchJsonWithTimeout(`${API_URL}/db/profile`),
-        fetchJsonWithTimeout(`${API_URL}/db/skills`),
-        fetchJsonWithTimeout(`${API_URL}/db/references`)
+        fetchCollection('profile'),
+        fetchCollection('skills'),
+        fetchCollection('references')
       ]);
       
       set({ 
@@ -181,7 +230,7 @@ export const useDataStore = create<DataState>((set, get) => ({
     if (get().projectsLoaded) return;
     
     try {
-      const projectsData = await fetchJsonWithTimeout(`${API_URL}/db/projects`);
+      const projectsData = await fetchCollection('projects');
       set({ 
         projects: Array.isArray(projectsData) ? projectsData : [], 
         projectsLoaded: true 
@@ -200,8 +249,8 @@ export const useDataStore = create<DataState>((set, get) => ({
     
     try {
       const [expData, eduData] = await Promise.all([
-        fetchJsonWithTimeout(`${API_URL}/db/experience`),
-        fetchJsonWithTimeout(`${API_URL}/db/education`)
+        fetchCollection('experience'),
+        fetchCollection('education')
       ]);
       
       set({ 
@@ -222,7 +271,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   fetchSettings: async () => {
     if (get().settingsLoaded) return;
     try {
-      const settingsData = await fetchJsonWithTimeout(`${API_URL}/db/settings`);
+      const settingsData = await fetchCollection('settings');
       if (Object.keys(settingsData || {}).length > 0) {
         set({ settings: settingsData as SiteSettings, settingsLoaded: true });
       } else {
