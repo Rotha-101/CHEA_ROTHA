@@ -15,6 +15,7 @@ import {
   Menu,
   MessageSquare,
   Moon,
+  Shield,
   Sun,
   User,
   Users,
@@ -22,6 +23,7 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { analyticsService } from '../lib/analytics';
+import { useAuthStore } from '../store/authStore';
 import { useDataStore } from '../store/dataStore';
 import { useThemeStore } from '../store/themeStore';
 
@@ -30,6 +32,7 @@ const SECTION_SCROLL_OFFSET = 96;
 
 export function PublicLayout() {
   const { theme, toggleTheme } = useThemeStore();
+  const { isAdmin } = useAuthStore();
   const { settings, fetchSettings, profile, fetchProfileAndSkills } = useDataStore();
   const [activeSection, setActiveSection] = useState('home');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -101,6 +104,7 @@ export function PublicLayout() {
   };
 
   const bgImage = settings?.heroBackgroundImageUrl || profile?.coverImageUrl;
+  const adminLabel = isAdmin ? 'Dashboard' : 'Login';
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans transition-colors duration-500">
@@ -183,6 +187,15 @@ export function PublicLayout() {
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
               </button>
+
+              <a
+                href="/admin"
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-amber-400 hover:text-amber-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-amber-400 dark:hover:text-amber-400"
+                title="Admin Login"
+              >
+                <Shield className="h-4 w-4" />
+                {adminLabel}
+              </a>
             </div>
 
             <button
@@ -233,6 +246,18 @@ export function PublicLayout() {
                 {item.name}
               </a>
             ))}
+
+            <div className="flex gap-4 border-t border-zinc-200/60 px-4 pt-4 dark:border-zinc-800/60">
+              <a
+                href="/admin"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 text-zinc-500 transition-colors hover:text-amber-600 dark:text-zinc-400 dark:hover:text-amber-400"
+                title="Admin Login"
+              >
+                <Shield className="h-5 w-5" />
+                <span className="text-sm font-medium">{adminLabel}</span>
+              </a>
+            </div>
 
             <div className="flex gap-4 border-t border-zinc-200/60 px-4 pt-4 dark:border-zinc-800/60">
               <a
