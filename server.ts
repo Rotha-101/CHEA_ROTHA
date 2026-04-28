@@ -53,12 +53,12 @@ const upload = multer({ storage });
 // API: List all media
 app.get('/api/media', (req, res) => {
   const host = req.get('host') || `localhost:${PORT}`;
-  
+
   fs.readdir(uploadDir, (err, files) => {
     if (err) {
       return res.status(500).json({ error: 'Failed to scan directory' });
     }
-    
+
     const mediaFiles = files.map(file => {
       const isImage = file.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
       const isDoc = file.match(/\.(pdf|doc|docx)$/i);
@@ -69,22 +69,40 @@ app.get('/api/media', (req, res) => {
         type: isImage ? 'image' : isDoc ? 'document' : 'other'
       };
     });
-    
+
     res.json(mediaFiles);
   });
 });
 
-// API: Upload file
+// API: Upload file (Supports both Multipart and Base64 JSON)
 app.post('/api/upload', upload.single('file'), (req, res) => {
+  const host = req.get('host') || `localhost:${PORT}`;
+
+  // Handle Base64 JSON (from updated frontend)
+  if (req.body.file && req.body.filename) {
+    const { file, filename } = req.body;
+    const uniqueName = `${Date.now()}-${filename}`;
+    const filePath = path.join(uploadDir, uniqueName);
+
+    fs.writeFileSync(filePath, Buffer.from(file, 'base64'));
+
+    return res.json({
+      name: uniqueName,
+      url: `http://${host}/uploads/${uniqueName}`,
+      path: uniqueName,
+      type: filename.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i) ? 'image' : 'document'
+    });
+  }
+
+  // Handle traditional multipart
   if (!req.file) {
     return res.status(400).json({ error: 'No file uploaded' });
   }
-  
-  const host = req.get('host') || `localhost:${PORT}`;
+
   const file = req.file;
   const isImage = file.filename.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i);
   const isDoc = file.filename.match(/\.(pdf|doc|docx)$/i);
-  
+
   res.json({
     name: file.filename,
     url: `http://${host}/uploads/${file.filename}`,
@@ -97,7 +115,7 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 app.delete('/api/media/:filename', (req, res) => {
   const filename = req.params.filename;
   const filePath = path.join(uploadDir, filename);
-  
+
   if (fs.existsSync(filePath)) {
     fs.unlink(filePath, (err) => {
       if (err) return res.status(500).json({ error: 'Failed to delete file' });
@@ -128,7 +146,7 @@ app.post('/api/db/:collection', async (req, res) => {
 // API: Send contact email via Gmail
 app.post('/api/send-email', async (req, res) => {
   const { name, senderEmail, message, recipientEmail } = req.body;
-  
+
   // Validate input fields
   if (!name || !senderEmail || !message || !recipientEmail) {
     return res.status(400).json({ error: 'Missing required fields: name, email, message, and recipient email are all required.' });
@@ -153,7 +171,7 @@ app.post('/api/send-email', async (req, res) => {
     const gmailPass = settings.gmailPass || process.env.GMAIL_PASS;
 
     if (!gmailUser || !gmailPass) {
-      return res.status(503).json({ 
+      return res.status(503).json({
         error: 'Email configuration not set up',
         details: 'Gmail credentials are not configured. Please go to Admin > Settings and enter your Gmail address and 16-digit Gmail App Password.'
       });
@@ -161,14 +179,14 @@ app.post('/api/send-email', async (req, res) => {
 
     // Validate Gmail credentials format
     if (!gmailUser.includes('@gmail.com')) {
-      return res.status(503).json({ 
+      return res.status(503).json({
         error: 'Invalid Gmail address',
         details: 'Please ensure your Gmail address ends with @gmail.com in Admin > Settings.'
       });
     }
 
     if (gmailPass.length < 16) {
-      return res.status(503).json({ 
+      return res.status(503).json({
         error: 'Invalid Gmail App Password',
         details: 'Gmail App Password must be 16 digits. Get it from https://myaccount.google.com/apppasswords'
       });
@@ -180,9 +198,9 @@ app.post('/api/send-email', async (req, res) => {
       host: 'smtp.gmail.com',
       port: 587,
       secure: false,
-      auth: { 
-        user: gmailUser, 
-        pass: gmailPass 
+      auth: {
+        user: gmailUser,
+        pass: gmailPass
       },
     });
 
@@ -193,7 +211,7 @@ app.post('/api/send-email', async (req, res) => {
     });
 
     // Sanitize message to prevent HTML injection
-    const sanitizedMessage = message.replace(/[<>]/g, (char) => ({'<': '&lt;', '>': '&gt;'}[char] || char));
+    const sanitizedMessage = message.replace(/[<>]/g, (char) => ({ '<': '&lt;', '>': '&gt;' }[char] || char));
 
     const mailOptions = {
       from: `"${name}" <${gmailUser}>`,
@@ -224,17 +242,17 @@ app.post('/api/send-email', async (req, res) => {
     // Log successful email send
     console.log('Email sent successfully:', info.messageId);
 
-    res.json({ 
-      success: true, 
+    res.json({
+      success: true,
       message: 'Email sent successfully! I will get back to you soon.',
-      messageId: info.messageId 
+      messageId: info.messageId
     });
   } catch (error: any) {
     console.error('Email send error:', error);
-    
+
     // Provide specific error messages based on error type
     let userMessage = 'Failed to send email. Please try again later.';
-    
+
     if (error.message.includes('authentication') || error.message.includes('Invalid login')) {
       userMessage = 'Gmail authentication failed. Please verify your Gmail address and 16-digit Gmail App Password in Admin > Settings.';
     } else if (error.message.includes('connect')) {
@@ -243,7 +261,7 @@ app.post('/api/send-email', async (req, res) => {
       userMessage = 'Ensure 2-Step Verification is enabled on your Gmail account and you\'re using a valid App Password.';
     }
 
-    res.status(500).json({ 
+    res.status(500).json({
       error: userMessage,
       details: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
