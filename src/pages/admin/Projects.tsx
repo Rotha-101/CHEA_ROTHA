@@ -50,18 +50,35 @@ export default function Projects() {
 
     setUploadingImage(true);
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      
+      // Convert to base64 for serverless GitHub upload
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve) => {
+        reader.onload = () => {
+          const result = reader.result as string;
+          resolve(result.split(',')[1]); // Remove the data:image/...;base64, prefix
+        };
+        reader.readAsDataURL(file);
+      });
+
+      const base64Content = await base64Promise;
+
       const res = await fetch(`${API_URL}/upload`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          file: base64Content,
+          filename: file.name
+        }),
       });
       const data = await res.json();
-      setValue('imageUrl', data.url);
+      if (data.url) {
+        setValue('imageUrl', data.url);
+      } else {
+        throw new Error(data.error || 'Upload failed');
+      }
     } catch (error) {
       console.error("Error uploading image:", error);
-      alert("Failed to upload image.");
+      alert("Failed to upload image. Ensure GITHUB_TOKEN is set.");
     }
     setUploadingImage(false);
   };
@@ -82,13 +99,13 @@ export default function Projects() {
       } else {
         newProjects.push({ ...formattedData, id: Date.now().toString() });
       }
-      
+
       await fetch(`${API_URL}/db/projects`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newProjects)
       });
-      
+
       setIsFormOpen(false);
       setEditingId(null);
       reset();

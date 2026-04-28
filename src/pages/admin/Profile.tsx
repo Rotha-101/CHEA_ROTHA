@@ -55,7 +55,7 @@ export default function Profile() {
         body: JSON.stringify(data)
       });
       setProfile(data);
-      alert('Profile updated successfully!');
+      alert('Profile updated successfully! Deployment sync may take a minute.');
     } catch (error) {
       console.error('Error updating profile:', error);
       alert('Failed to update profile.');
@@ -68,13 +68,27 @@ export default function Profile() {
     if (!file) return;
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
-      
+      // Convert to base64 for serverless GitHub upload
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve) => {
+        reader.onload = () => {
+          const result = reader.result as string;
+          resolve(result.split(',')[1]); // Remove the data:image/...;base64, prefix
+        };
+        reader.readAsDataURL(file);
+      });
+
+      const base64Content = await base64Promise;
+
       const uploadRes = await fetch(`${API_URL}/upload`, {
         method: 'POST',
-        body: formData,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          file: base64Content,
+          filename: file.name
+        }),
       });
+
       if (!uploadRes.ok) {
         throw new Error(`Upload API failed (${uploadRes.status})`);
       }
@@ -83,22 +97,22 @@ export default function Profile() {
         throw new Error('Upload did not return a file URL.');
       }
       const url = uploadData.url;
-      
-      // Update the form data and save to firestore immediately for the file
+
+      // Update the form data
       const currentData = { ...getValues() };
       currentData[fieldName] = url;
       reset(currentData);
-      
+
       await fetch(`${API_URL}/db/profile`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(currentData)
       });
       setProfile(currentData);
-      alert(`${fieldName} uploaded successfully!`);
+      alert(`${fieldName} uploaded and saved to GitHub successfully!`);
     } catch (error) {
       console.error(`Error uploading ${fieldName}:`, error);
-      alert(`Failed to upload ${fieldName}. Make sure the backend server is running on port 3001.`);
+      alert(`Failed to upload ${fieldName}. Ensure your GITHUB_TOKEN is set in Vercel.`);
     }
   };
 
@@ -107,13 +121,13 @@ export default function Profile() {
   return (
     <div className="max-w-3xl mx-auto">
       <h1 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8">Edit Profile</h1>
-      
+
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 px-4 py-5 sm:rounded-xl sm:p-6 transition-colors">
         <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
           <div className="sm:col-span-6 border-b border-zinc-200 dark:border-zinc-800 pb-6 mb-2">
             <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Media & Assets</h3>
-            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Upload your profile photo, cover image, and resume.</p>
-            
+            <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Upload your profile photo (circle view), cover image, and resume.</p>
+
             <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
               <div className="rounded-lg border border-zinc-200 dark:border-zinc-800 p-4 min-w-0 flex flex-col gap-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Profile Photo</label>
