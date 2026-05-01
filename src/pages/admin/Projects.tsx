@@ -78,7 +78,7 @@ export default function Projects() {
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      alert("Failed to upload image. Ensure GITHUB_TOKEN is set.");
+      alert(`Upload Failed: ${error instanceof Error ? error.message : 'Unknown error'}\n\nTip: Make sure your local server is running (npm run dev).`);
     }
     setUploadingImage(false);
   };

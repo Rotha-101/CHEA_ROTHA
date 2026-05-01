@@ -36,9 +36,9 @@ export default function Home() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center pt-16 md:pt-0">
 
-            {/* Left Column - Profile Photo (Circle) */}
+            {/* Left Column - Profile Photo (Box) */}
             <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start">
-              <div className="relative w-full max-w-[17rem] sm:max-w-xs md:max-w-sm lg:max-w-[22rem] xl:max-w-[23rem] aspect-square rounded-full overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
+              <div className="relative w-full max-w-[17rem] sm:max-w-xs md:max-w-sm lg:max-w-[22rem] xl:max-w-[24rem] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
                 {profile.profilePhotoUrl ? (
                   <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover" />
                 ) : (

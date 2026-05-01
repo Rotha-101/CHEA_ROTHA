@@ -89,6 +89,10 @@ interface Skill {
   category: string;
   priority: number;
   iconUrl?: string;
+  description?: string;
+  yearsOfExperience?: number;
+  isHighlighted?: boolean;
+  certificationUrl?: string;
 }
 
 interface Project {

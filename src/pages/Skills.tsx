@@ -55,13 +55,14 @@ const getSkillBlurb = (name: string, category: string, level: number) => {
 };
 
 export default function Skills() {
-  const { skills, profileLoaded, fetchProfileAndSkills } = useDataStore();
+  const { skills, profileLoaded, fetchProfileAndSkills, settings, settingsLoaded, fetchSettings } = useDataStore();
 
   useEffect(() => {
     fetchProfileAndSkills();
-  }, [fetchProfileAndSkills]);
+    fetchSettings();
+  }, [fetchProfileAndSkills, fetchSettings]);
 
-  if (!profileLoaded) {
+  if (!profileLoaded || !settingsLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
@@ -69,7 +70,41 @@ export default function Skills() {
     );
   }
 
-  const sortedSkills = [...skills].sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
+  const CATEGORY_ORDER = (settings as any)?.skillCategoryOrder || [
+    'IDE & Editors',
+    'Programming Languages',
+    'Data Wrangling & EDA',
+    'Machine Learning',
+    'Time Series Forecasting',
+    'Deep Learning & AI',
+    'NLP',
+    'Cloud & MLOps',
+    'Data Engineering',
+    'Experiment Tracking & Model Management',
+    'Statistics & Math',
+    'Data Visualization',
+    'Databases',
+    'Core Strengths'
+  ];
+
+  const groupedSkills: { category: string; skills: typeof skills }[] = [];
+  
+  // Add categories in the exact specified order
+  CATEGORY_ORDER.forEach(category => {
+    const categorySkills = skills.filter(s => s.category === category).sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
+    if (categorySkills.length > 0) {
+      groupedSkills.push({ category, skills: categorySkills });
+    }
+  });
+
+  // Add any other categories that are not in CATEGORY_ORDER
+  const otherCategories = Array.from(new Set(skills.map(s => s.category).filter(c => !CATEGORY_ORDER.includes(c))));
+  otherCategories.forEach(category => {
+    const categorySkills = skills.filter(s => s.category === category).sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
+    if (categorySkills.length > 0) {
+      groupedSkills.push({ category, skills: categorySkills });
+    }
+  });
 
   return (
     <div className="relative min-h-screen">
@@ -86,53 +121,99 @@ export default function Skills() {
             Technical Arsenal
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            A visual tool-grid of skills, frameworks, and technical strengths with custom logo support.
+            A categorized visual tool-grid of skills, frameworks, and technical strengths with custom logo support.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
-          {sortedSkills.map((skill, idx) => {
-            const level = normalizeLevel(skill.level);
-            return (
-              <motion.article
-                key={skill.id}
-                initial={{ opacity: 0, y: 12 }}
+        <div className="space-y-16">
+          {groupedSkills.map((group, groupIdx) => (
+            <div key={group.category}>
+              <motion.h2 
+                initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: idx * 0.03 }}
-                className="group rounded-xl border border-white/30 dark:border-zinc-700/60 bg-white/35 dark:bg-zinc-900/45 backdrop-blur-xl p-3 sm:p-4 shadow-[0_8px_24px_rgba(0,0,0,0.2)] hover:border-amber-400/70 hover:-translate-y-0.5 transition-all duration-300"
+                transition={{ delay: groupIdx * 0.1 }}
+                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6 border-b border-zinc-200 dark:border-zinc-800 pb-2"
               >
-                <div className="h-28 sm:h-32 rounded-3xl bg-white/20 dark:bg-zinc-900/35 border border-white/25 dark:border-zinc-700/50 backdrop-blur-md flex items-center justify-center overflow-hidden">
-                  {skill.iconUrl ? (
-                    <div className="block h-full w-full overflow-hidden" title={`${skill.name} logo`}>
-                      <img
-                        src={skill.iconUrl}
-                        alt={`${skill.name} logo`}
-                        className="h-full w-full object-cover"
-                        loading="lazy"
-                      />
-                    </div>
-                  ) : (
-                    <div className="h-14 w-14 rounded-2xl bg-amber-100/70 dark:bg-amber-500/10 border border-amber-300/40 dark:border-amber-500/30 text-amber-700 dark:text-amber-300 flex items-center justify-center">
-                      {getSkillIcon(skill.name, skill.category)}
-                    </div>
-                  )}
-                </div>
+                {group.category}
+              </motion.h2>
+              <div className="relative w-full overflow-hidden py-6">
+                <motion.div 
+                  className="flex gap-4 sm:gap-6 w-max"
+                  animate={{ x: ["0%", "-50%"] }}
+                  transition={{ 
+                    duration: 25 + (group.skills.length * 2), 
+                    repeat: Infinity, 
+                    ease: "linear",
+                  }}
+                  whileHover={{ animationPlayState: 'paused' }}
+                >
+                  {/* We render the list twice for seamless looping */}
+                  {[...group.skills, ...group.skills, ...group.skills].map((skill, idx) => {
+                    const level = normalizeLevel(skill.level);
+                    return (
+                      <motion.article
+                        key={`${skill.id}-${idx}`}
+                        whileHover={{ y: -8, scale: 1.05 }}
+                        className={`relative flex flex-col items-center p-4 rounded-2xl transition-all duration-500 w-[150px] sm:w-[170px] h-[220px] flex-shrink-0 ${
+                          skill.isHighlighted 
+                            ? 'bg-amber-400/10 border border-amber-400/30 shadow-[0_0_25px_rgba(245,158,11,0.15)]' 
+                            : 'bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20'
+                        } backdrop-blur-md cursor-pointer group`}
+                      >
+                        {/* Icon Container */}
+                        <div className="relative flex-1 w-full flex items-center justify-center mb-4">
+                          <div className={`absolute inset-4 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                            skill.isHighlighted ? 'bg-amber-400' : 'bg-white'
+                          }`} />
+                          
+                          <div className="h-full w-full p-2 flex items-center justify-center relative z-0">
+                            {skill.iconUrl ? (
+                              <img
+                                src={skill.iconUrl}
+                                alt={`${skill.name} logo`}
+                                className="max-h-16 sm:max-h-20 w-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                                loading="lazy"
+                              />
+                            ) : (
+                              <div className="h-10 w-10 sm:h-12 sm:w-12 text-amber-500 flex items-center justify-center">
+                                {getSkillIcon(skill.name, skill.category)}
+                              </div>
+                            )}
+                          </div>
+                        </div>
 
-                <div className="mt-3 sm:mt-4">
-                  <h3 className="text-sm sm:text-base font-semibold text-zinc-900 dark:text-white text-center line-clamp-1">
-                    {skill.name}
-                  </h3>
-                  <p className="mt-1 text-[11px] sm:text-xs uppercase tracking-[0.14em] text-zinc-500 dark:text-zinc-400 text-center line-clamp-1">
-                    {skill.category}
-                  </p>
-                  <p className="mt-2 text-[12px] leading-snug text-zinc-600 dark:text-zinc-300 text-center line-clamp-3 min-h-[3.2em]">
-                    {getSkillBlurb(skill.name, skill.category, level)}
-                  </p>
-                </div>
-
-              </motion.article>
-            );
-          })}
+                        <div className="text-center w-full mt-auto">
+                          <div className="h-12 mb-1 flex flex-col justify-center px-1">
+                            <h3 className="text-xs sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-2 leading-tight">
+                              {skill.name}
+                            </h3>
+                            <p className="mt-1 text-[8px] sm:text-[9px] font-mono font-medium uppercase tracking-[0.12em] text-zinc-500 dark:text-zinc-400/70 line-clamp-1">
+                              {skill.category}
+                            </p>
+                          </div>
+                          
+                          <div className="w-full h-0.5 bg-white/10 rounded-full overflow-hidden">
+                            <motion.div 
+                              initial={{ width: 0 }}
+                              animate={{ width: `${level}%` }}
+                              transition={{ duration: 1, delay: 0.5 }}
+                              className={`h-full ${skill.isHighlighted ? 'bg-amber-400 shadow-[0_0_8px_rgba(245,158,11,0.5)]' : 'bg-white/40'}`}
+                            />
+                          </div>
+                          
+                          <div className="mt-2 h-8 overflow-hidden">
+                            <p className="text-[10px] leading-snug text-zinc-600 dark:text-zinc-300/80 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                              {skill.description || getSkillBlurb(skill.name, skill.category, level)}
+                            </p>
+                          </div>
+                        </div>
+                      </motion.article>
+                    );
+                  })}
+                </motion.div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const API_URL = '/api';
-import { Plus, Edit2, Trash2 } from 'lucide-react';
+import { Plus, Edit2, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
 
 interface Skill {
   id: string;
@@ -11,6 +11,10 @@ interface Skill {
   category: string;
   priority: number;
   iconUrl?: string;
+  description?: string;
+  yearsOfExperience?: number;
+  isHighlighted?: boolean;
+  certificationUrl?: string;
 }
 
 export default function Skills() {
@@ -19,6 +23,11 @@ export default function Skills() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [categoryOrderList, setCategoryOrderList] = useState<string[]>([]);
+  const [newCategoryName, setNewCategoryName] = useState("");
+  const [savingCategories, setSavingCategories] = useState(false);
+  const [filterCategory, setFilterCategory] = useState<string>("All");
 
   const { register, handleSubmit, reset, setValue, watch } = useForm<Omit<Skill, 'id'>>();
   const iconUrl = watch('iconUrl');
@@ -37,8 +46,85 @@ export default function Skills() {
     setLoading(false);
   };
 
+  const fetchCategoryOrder = async () => {
+    try {
+      const res = await fetch(`${API_URL}/db/settings`);
+      const settings = await res.json();
+      if (settings.skillCategoryOrder && Array.isArray(settings.skillCategoryOrder)) {
+        setCategoryOrderList(settings.skillCategoryOrder);
+      } else {
+        setCategoryOrderList([
+          'IDE & Editors',
+          'Programming Languages',
+          'Data Wrangling & EDA',
+          'Machine Learning',
+          'Time Series Forecasting',
+          'Deep Learning & AI',
+          'NLP',
+          'Cloud & MLOps',
+          'Data Engineering',
+          'Experiment Tracking & Model Management',
+          'Statistics & Math',
+          'Data Visualization',
+          'Databases',
+          'Core Strengths'
+        ]);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const saveCategoryOrder = async () => {
+    setSavingCategories(true);
+    try {
+      const res = await fetch(`${API_URL}/db/settings`);
+      const settings = await res.json();
+      
+      settings.skillCategoryOrder = categoryOrderList;
+
+      await fetch(`${API_URL}/db/settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings)
+      });
+      setIsCategoryModalOpen(false);
+    } catch (e) {
+      alert("Failed to save category order.");
+    }
+    setSavingCategories(false);
+  };
+
+  const moveCategoryUp = (index: number) => {
+    if (index === 0) return;
+    const newList = [...categoryOrderList];
+    [newList[index - 1], newList[index]] = [newList[index], newList[index - 1]];
+    setCategoryOrderList(newList);
+  };
+
+  const moveCategoryDown = (index: number) => {
+    if (index === categoryOrderList.length - 1) return;
+    const newList = [...categoryOrderList];
+    [newList[index + 1], newList[index]] = [newList[index], newList[index + 1]];
+    setCategoryOrderList(newList);
+  };
+
+  const removeCategory = (index: number) => {
+    const newList = [...categoryOrderList];
+    newList.splice(index, 1);
+    setCategoryOrderList(newList);
+  };
+
+  const addCategory = () => {
+    if (newCategoryName.trim()) {
+      setCategoryOrderList([...categoryOrderList, newCategoryName.trim()]);
+      setNewCategoryName("");
+    }
+  };
+
   useEffect(() => {
     fetchSkills();
+    fetchCategoryOrder();
   }, []);
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +161,7 @@ export default function Skills() {
       }
     } catch (error) {
       console.error("Error uploading image:", error);
-      alert("Failed to upload image. Ensure GITHUB_TOKEN is set.");
+      alert(`Upload Failed: ${error instanceof Error ? error.message : 'Unknown error'}\n\nTip: Make sure your local server is running (npm run dev).`);
     }
     setUploadingImage(false);
   };
@@ -85,7 +171,8 @@ export default function Skills() {
       const formattedData = {
         ...data,
         level: Number(data.level),
-        priority: Number(data.priority) || 0
+        priority: Number(data.priority) || 0,
+        yearsOfExperience: data.yearsOfExperience ? Number(data.yearsOfExperience) : undefined,
       };
 
       let newSkills = [...skills];
@@ -107,7 +194,7 @@ export default function Skills() {
       fetchSkills();
     } catch (error) {
       console.error("Error saving skill:", error);
-      alert("Failed to save skill.");
+      alert(`Failed to save skill: ${error instanceof Error ? error.message : 'Unknown error'}`);
     }
   };
 
@@ -139,18 +226,92 @@ export default function Skills() {
     <div className="max-w-5xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Skills</h1>
-        <button
-          onClick={() => {
-            setEditingId(null);
-            reset({ name: '', level: 50, category: 'Frontend', priority: 0 });
-            setIsFormOpen(true);
-          }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
-        >
-          <Plus className="-ml-1 mr-2 h-5 w-5" />
-          Add Skill
-        </button>
+        <div className="flex gap-3">
+          <button
+            onClick={() => setIsCategoryModalOpen(true)}
+            className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors bg-white dark:bg-zinc-900"
+          >
+            Category Order
+          </button>
+          <select
+            value={filterCategory}
+            onChange={(e) => setFilterCategory(e.target.value)}
+            className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors"
+          >
+            <option value="All">All Categories</option>
+            {categoryOrderList.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+          <button
+            onClick={() => {
+              setEditingId(null);
+              reset({ name: '', level: 50, category: 'Frontend', priority: 0 });
+              setIsFormOpen(true);
+            }}
+            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
+          >
+            <Plus className="-ml-1 mr-2 h-5 w-5" />
+            Add Skill
+          </button>
+        </div>
       </div>
+
+      {isCategoryModalOpen && (
+        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
+          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-2">
+            Manage Category Order
+          </h2>
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
+            Use the arrows to reorder categories, or add a new category to the list. This controls the order they appear on your public Skills page.
+          </p>
+          
+          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg max-h-[400px] overflow-y-auto mb-4 bg-zinc-50/50 dark:bg-zinc-950/20">
+            {categoryOrderList.map((cat, index) => (
+              <li key={cat} className="p-3 flex items-center justify-between hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors group">
+                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{cat}</span>
+                <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-1.5 text-zinc-400 hover:text-amber-500 disabled:opacity-30 disabled:hover:text-zinc-400 cursor-pointer disabled:cursor-not-allowed">
+                    <ArrowUp className="w-4 h-4" />
+                  </button>
+                  <button type="button" onClick={() => moveCategoryDown(index)} disabled={index === categoryOrderList.length - 1} className="p-1.5 text-zinc-400 hover:text-amber-500 disabled:opacity-30 disabled:hover:text-zinc-400 cursor-pointer disabled:cursor-not-allowed">
+                    <ArrowDown className="w-4 h-4" />
+                  </button>
+                  <button type="button" onClick={() => removeCategory(index)} className="p-1.5 text-zinc-400 hover:text-red-500 cursor-pointer">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </li>
+            ))}
+            {categoryOrderList.length === 0 && (
+              <li className="p-4 text-center text-sm text-zinc-500">No categories found.</li>
+            )}
+          </ul>
+          
+          <div className="flex gap-3 mb-6">
+            <input 
+              type="text" 
+              value={newCategoryName} 
+              onChange={(e) => setNewCategoryName(e.target.value)} 
+              onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addCategory())}
+              placeholder="Enter new category name..." 
+              className="flex-1 sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" 
+            />
+            <button type="button" onClick={addCategory} className="px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+              Add Category
+            </button>
+          </div>
+
+          <div className="flex justify-end gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
+            <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+              Cancel
+            </button>
+            <button type="button" onClick={saveCategoryOrder} disabled={savingCategories} className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors disabled:opacity-50">
+              {savingCategories ? 'Saving...' : 'Save Category Order'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {isFormOpen && (
         <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
@@ -166,7 +327,12 @@ export default function Skills() {
 
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Category</label>
-                <input type="text" {...register('category', { required: true })} placeholder="e.g., Frontend, Backend, Tools" className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <select {...register('category', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500">
+                  <option value="">Select a category</option>
+                  {categoryOrderList.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
               </div>
 
               <div className="sm:col-span-3">
@@ -177,6 +343,28 @@ export default function Skills() {
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority (lower is first)</label>
                 <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              </div>
+
+              <div className="sm:col-span-6">
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description / Custom Blurb</label>
+                <textarea rows={2} {...register('description')} placeholder="A brief description of how you use this skill..." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Years of Experience</label>
+                <input type="number" step="0.5" min="0" {...register('yearsOfExperience')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              </div>
+
+              <div className="sm:col-span-4">
+                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Certification URL (Optional)</label>
+                <input type="url" {...register('certificationUrl')} placeholder="https://..." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              </div>
+
+              <div className="sm:col-span-6 flex items-center">
+                <input type="checkbox" id="isHighlighted" {...register('isHighlighted')} className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-zinc-300 rounded" />
+                <label htmlFor="isHighlighted" className="ml-2 block text-sm text-zinc-700 dark:text-zinc-300">
+                  Highlight this skill (shows special glow/badge on the public page)
+                </label>
               </div>
 
               <div className="sm:col-span-6">
@@ -207,7 +395,9 @@ export default function Skills() {
 
       <div className="bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-colors">
         <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {skills.map((skill) => (
+          {skills
+            .filter(s => filterCategory === "All" || s.category === filterCategory)
+            .map((skill) => (
             <li key={skill.id} className="p-4 sm:px-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-4">

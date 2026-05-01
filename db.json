@@ -2,57 +2,267 @@
   "profile": {
     "name": "CHEA Rotha",
     "title": "Data Scientist & Machine Learning Engineer",
-    "bio": "A personal website is an excellent way for data scientists to showcase their skills, projects, and professional achievements. It serves as a centralized platform to highlight your portfolio, CV, and other relevant content. Here’s a structured approach to building one:",
+    "bio": "Transforming data into strategic assets through machine learning and advanced analytics. I build intelligent systems that not only predict outcomes but shape smarter decisions. Passionate about innovation, scalability, and real-world impact.",
     "email": "chearotha.itc.edu@gmail.com",
     "phone": "+855-97 4865 856",
     "location": "Toul Kork, Phnom Penh, Cambodia",
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
-    "profilePhotoUrl": "http://localhost:3001/uploads/1777369395809-99691980-image_2025-04-01_22-14-40.png",
-    "coverImageUrl": "http://localhost:3001/uploads/1777368643273-898852510-explorer_green_day.jpg",
+    "profilePhotoUrl": "http://localhost:3001/uploads/1777623602626-photo_2026-05-01_15-19-33.jpg",
+    "coverImageUrl": "http://localhost:3001/uploads/1777635831538-heres-like-100-more-environment-screenshots-in-4k-to-use-as-v0-OdiurmQhB7HNiEZLKdDxwcU_F3qizHXF0Qun8S1RejQ.webp",
     "cvUrl": "/uploads/1776911762226-000000000-CHEA-Rotha-CV.pdf",
-    "aboutMe": "Artificial Intelligence (AI) refers to the development of computer systems capable of performing tasks that typically require human intelligence, such as reasoning, learning, decision-making, and perception. AI encompasses a wide range of technologies, including machine learning, deep learning, and natural language processing (NLP)."
+    "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale."
   },
   "skills": [
+    {
+      "name": "Java",
+      "level": 50,
+      "category": "Programming Languages",
+      "priority": 0,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777632476143-java-512px.png",
+      "id": "1777632478197"
+    },
+    {
+      "name": "Pytorch",
+      "level": 70,
+      "category": "Machine Learning",
+      "priority": 0,
+      "description": "Building flexible and efficient deep learning models with PyTorch for research and production applications.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://github.com/pytorch/pytorch.git",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649187302-pytorch-512px.png",
+      "id": "1777649191084"
+    },
+    {
+      "name": "Vs code",
+      "level": 90,
+      "category": "IDE & Editors",
+      "priority": 1,
+      "id": "1777617533364",
+      "description": "",
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777625610328-visual-studio-code.svg",
+      "yearsOfExperience": 5
+    },
     {
       "id": "skill-001",
       "name": "Python",
       "level": 95,
-      "category": "Programming",
+      "category": "Programming Languages",
       "priority": 1,
-      "iconUrl": "/uploads/1776994522594-195716052-Screenshot 2026-04-24 083510.png"
+      "iconUrl": "http://localhost:3001/uploads/1777629578167-python.svg",
+      "description": "",
+      "certificationUrl": "",
+      "isHighlighted": false
     },
     {
-      "id": "skill-002",
-      "name": "SQL",
-      "level": 90,
-      "category": "Programming",
-      "priority": 2,
-      "iconUrl": "/uploads/1776997750999-965465235-1.png"
+      "name": "DBeaver",
+      "level": 50,
+      "category": "Databases",
+      "priority": 1,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777630500988-dbeaver-512px.png",
+      "id": "1777630502565"
+    },
+    {
+      "name": "Power BI",
+      "level": 80,
+      "category": "Data Visualization",
+      "priority": 1,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777631104275-azure-power-bi-embedded-512px.png",
+      "id": "1777631106154"
     },
     {
       "id": "skill-003",
       "name": "Scikit-learn",
       "level": 90,
       "category": "Machine Learning",
-      "priority": 3,
-      "iconUrl": "/uploads/1776997871444-379218308-2.webp"
+      "priority": 1,
+      "iconUrl": "http://localhost:3001/uploads/1777648715400-scikit-learn-512px.png",
+      "description": "Building, training, and evaluating machine learning models using Scikit-learn, including preprocessing, feature engineering, and performance optimization.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://github.com/scikit-learn/scikit-learn.git",
+      "isHighlighted": false
+    },
+    {
+      "id": "skill-002",
+      "name": "SQL",
+      "level": 90,
+      "category": "Programming Languages",
+      "priority": 2,
+      "iconUrl": "http://localhost:3001/uploads/1777632224673-azure-sql-database-512px.png",
+      "description": "",
+      "certificationUrl": "",
+      "isHighlighted": false
+    },
+    {
+      "name": "Jupiter Notebook",
+      "level": 90,
+      "category": "IDE & Editors",
+      "priority": 2,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777629958893-jupyter.svg",
+      "id": "1777629960734"
+    },
+    {
+      "name": "C#",
+      "level": 50,
+      "category": "Programming Languages",
+      "priority": 2,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777630117571-csharp-512px.png",
+      "id": "1777630119123"
     },
     {
       "id": "skill-004",
       "name": "TensorFlow & Keras",
       "level": 85,
       "category": "Machine Learning",
-      "priority": 4,
-      "iconUrl": "/uploads/1776997904868-902082973-3.jpg"
+      "priority": 2,
+      "iconUrl": "http://localhost:3001/uploads/1777648949386-tensorflow-light-512px.png",
+      "description": "Building and deploying deep learning models using TensorFlow, including neural networks, model training, and performance optimization.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://github.com/tensorflow/tensorflow.git",
+      "isHighlighted": false
     },
     {
-      "id": "skill-005",
-      "name": "XGBoost & LightGBM",
-      "level": 88,
+      "id": "skill-012",
+      "name": "MySQL",
+      "level": 80,
+      "category": "Databases",
+      "priority": 2,
+      "iconUrl": "http://localhost:3001/uploads/1777649921003-mysql-wordmark-light-512px.png",
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false
+    },
+    {
+      "name": "C++",
+      "level": 50,
+      "category": "Programming Languages",
+      "priority": 3,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777630457556-cplusplus-512px.png",
+      "id": "1777630459103"
+    },
+    {
+      "name": "Cursor",
+      "level": 99,
+      "category": "IDE & Editors",
+      "priority": 3,
+      "description": "",
+      "yearsOfExperience": 2,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777631696244-cursor-256px.png",
+      "id": "1777631646190"
+    },
+    {
+      "name": "Keras",
+      "level": 50,
       "category": "Machine Learning",
+      "priority": 3,
+      "description": "Building and training deep learning models using Keras, with a focus on neural network design, experimentation, and optimization.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://github.com/keras-team/keras.git",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649090374-keras-512px.png",
+      "id": "1777649091587"
+    },
+    {
+      "name": "SQLite",
+      "level": 70,
+      "category": "Databases",
+      "priority": 3,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649983638-sqlite-512px.png",
+      "id": "1777649984979"
+    },
+    {
+      "name": "Matlab",
+      "level": 50,
+      "category": "Programming Languages",
+      "priority": 4,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777632447236-matlab-512px.png",
+      "id": "1777632449594"
+    },
+    {
+      "name": "Pycharm",
+      "level": 70,
+      "category": "IDE & Editors",
+      "priority": 4,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649392072-pycharm-512px.png",
+      "id": "1777649400937"
+    },
+    {
+      "name": "MongoDB",
+      "level": 70,
+      "category": "Databases",
+      "priority": 4,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777650052998-mongodb-512px.png",
+      "id": "1777650054598"
+    },
+    {
+      "name": "Antigravity",
+      "level": 90,
+      "category": "IDE & Editors",
       "priority": 5,
-      "iconUrl": "/uploads/1776997935198-795373356-4.webp"
+      "description": "",
+      "yearsOfExperience": 2,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649485673-antigravity-google-mono-512px.png",
+      "id": "1777649487202"
+    },
+    {
+      "name": "PostgreSQL",
+      "level": 80,
+      "category": "Databases",
+      "priority": 5,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777650108850-postgresql-512px.png",
+      "id": "1777650111475"
     },
     {
       "id": "skill-006",
@@ -63,6 +273,30 @@
       "iconUrl": "/uploads/1776924679115-844291373-Desert-With-Mountains-Moon.jpg"
     },
     {
+      "name": "R programming",
+      "level": 50,
+      "category": "Programming Languages",
+      "priority": 6,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777632605118-rstudio-ide-512px.png",
+      "id": "1777632606230"
+    },
+    {
+      "name": "Spyder IDE",
+      "level": 70,
+      "category": "IDE & Editors",
+      "priority": 6,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649543159-spyder-ide-512px.png",
+      "id": "1777649544603"
+    },
+    {
       "id": "skill-007",
       "name": "ARIMA, SARIMA, Prophet",
       "level": 85,
@@ -71,12 +305,48 @@
       "iconUrl": "/uploads/1776932398152-37517242-gdtography.jpg"
     },
     {
+      "name": "Codex",
+      "level": 90,
+      "category": "IDE & Editors",
+      "priority": 7,
+      "description": "",
+      "yearsOfExperience": 1,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649610660-codex-openai-512px.png",
+      "id": "1777649618686"
+    },
+    {
+      "name": "R Studio",
+      "level": 80,
+      "category": "IDE & Editors",
+      "priority": 8,
+      "description": "",
+      "yearsOfExperience": 4,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649660589-rstudio-ide-512px.png",
+      "id": "1777649663200"
+    },
+    {
       "id": "skill-009",
       "name": "Matplotlib, Seaborn, Plotly",
       "level": 88,
       "category": "Data Visualization",
       "priority": 9,
       "iconUrl": "/uploads/1776932406078-192278685-comet.jpg"
+    },
+    {
+      "name": "Eclipse IDE",
+      "level": 80,
+      "category": "IDE & Editors",
+      "priority": 9,
+      "description": "",
+      "yearsOfExperience": 3,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777649773282-eclipse-ide-512px.png",
+      "id": "1777649780057"
     },
     {
       "id": "skill-010",
@@ -95,20 +365,24 @@
       "iconUrl": "/uploads/1776932425006-386292081-forest-landscape.jpg"
     },
     {
-      "id": "skill-012",
-      "name": "MySQL, PostgreSQL, SQLite",
-      "level": 86,
-      "category": "Database",
-      "priority": 12,
-      "iconUrl": "/uploads/1776932437216-755861420-mountain.jpg"
-    },
-    {
       "id": "skill-014",
       "name": "Statistics & Data Storytelling",
       "level": 89,
       "category": "Core Strengths",
       "priority": 14,
       "iconUrl": "/uploads/1776932444982-615577727-frozen-shores-burning-sky.jpeg"
+    },
+    {
+      "name": "SQL Server",
+      "level": 70,
+      "category": "Databases",
+      "priority": 6,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777650178059-azure-sql-server-512px.png",
+      "id": "1777650179743"
     }
   ],
   "projects": [
@@ -116,7 +390,7 @@
       "id": "proj-001",
       "title": "Laptop Price Prediction",
       "description": "Built an end-to-end pricing model for laptop market data: data cleaning, exploratory analysis, feature engineering, and model comparison. Trained and evaluated Linear Regression, Random Forest, and SVR, with SVR delivering the best predictive accuracy.",
-      "imageUrl": "/uploads/1776999975567-826319831-Screenshot 2026-04-24 100602.png",
+      "imageUrl": "http://localhost:3001/uploads/1777615251123-Laptop Price Prediction.jpg",
       "tags": [
         "Python",
         "Pandas",
@@ -133,7 +407,7 @@
       "id": "proj-002",
       "title": "Hotel Reservation System Database",
       "description": "Designed and implemented a relational database for hotel operations covering room booking, client management, staff scheduling, and payment confirmation workflows. Produced ERD and normalized schema with key constraints for robust data integrity.",
-      "imageUrl": "/uploads/1776924622399-26271097-Fantasy-Autumn.png",
+      "imageUrl": "http://localhost:3001/uploads/1777614837382-hotel.jpg",
       "tags": [
         "MySQL",
         "SQL",
@@ -149,7 +423,7 @@
       "id": "proj-003",
       "title": "Forecasting Tourism in Cambodia",
       "description": "Performed time-series forecasting on Cambodia tourism data using Python and statistical models. Preprocessed data, evaluated models with MSE, and identified seasonality and post-COVID recovery trends to support planning and policy insights.",
-      "imageUrl": "/uploads/1776924629707-966758291-Fantasy-Landscape3.png",
+      "imageUrl": "http://localhost:3001/uploads/1777615055289-Tourism in Cambodia.webp",
       "tags": [
         "Time Series",
         "Forecasting",
@@ -166,7 +440,7 @@
       "id": "proj-004",
       "title": "Crop Yield Prediction & Recommendation",
       "description": "Developed machine learning models for crop yield prediction using agricultural, soil, and weather features. Compared Random Forest and XGBoost, evaluated with RÂ²/MAE/RMSE, and built a recommendation component for suitable crop selection.",
-      "imageUrl": "/uploads/1776924638175-509470636-Solitary-Glow.png",
+      "imageUrl": "http://localhost:3001/uploads/1777615063853-Crop Yield.jpeg",
       "tags": [
         "XGBoost",
         "Random Forest",
@@ -190,19 +464,12 @@
       "startDate": "Feb 2025",
       "endDate": "Oct 2025",
       "current": false,
-      "description": "- Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
+      "description": "Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
       "priority": 1,
       "photos": [
-        "/uploads/1776925026967-918270238-astronaut.png",
-        "/uploads/1776925026999-375907261-astronaut_jellyfish.jpg",
-        "/uploads/1776925027003-45543015-astronaut2.png",
-        "/uploads/1776925027017-245953123-autumns.hues.png",
-        "/uploads/1776998950915-201500073-anime-eye-nord.png",
-        "/uploads/1776998950921-206891513-anime-nord.png",
-        "/uploads/1776998950926-607423736-anime-pond.png",
-        "/uploads/1776998951005-476709704-anime-water.png",
-        "/uploads/1776998951029-435453362-Antman.jpg",
-        "/uploads/1776998951034-563428941-apple_gruvbox.jpg"
+        "http://localhost:3001/uploads/1777651076666-955901603-unnamed.webp",
+        "http://localhost:3001/uploads/1777651113389-40266478-photo_2026-05-01_22-56-14.jpg",
+        "http://localhost:3001/uploads/1777651149323-220632765-photo_2025-05-16_18-52-23.jpg"
       ]
     },
     {
@@ -216,11 +483,23 @@
       "description": "- Taught EDA, statistics, machine learning, forecasting, and data visualization with practical Python and Power BI projects.\\n- Guided students in dashboard building, analysis, and insight generation from real datasets.\\n- Designed hands-on exercises and mini-projects to strengthen analytical and coding skills.\\n- Mentored students on data storytelling for technical and non-technical audiences.\\n- Supported students in applying ML and statistical methods to real-world problems.",
       "priority": 2,
       "photos": [
-        "/uploads/1776925041991-204063774-city-rain.png",
-        "/uploads/1776925042001-510816041-city-skyline.jpg",
-        "/uploads/1776925042006-818576742-city-sundown.png",
-        "/uploads/1776925042048-306140675-colored-silence.jpg"
+        "http://localhost:3001/uploads/1777613764523-215775523-sunrise.JPG"
       ]
+    },
+    {
+      "title": "Battery Energy Storage System Engineer",
+      "company": "SchneicTech Group",
+      "location": "Toul Kork, Phnom Penh, Cambodia",
+      "startDate": "Nov 2025",
+      "endDate": "Present",
+      "current": true,
+      "description": "Analyzed BESS performance data, built dashboards, and developed data-driven models to optimize energy efficiency and system reliability. Collaborated with engineering teams to monitor systems, troubleshoot issues, and support deployment.\n",
+      "priority": 1,
+      "photos": [
+        "http://localhost:3001/uploads/1777651642155-353643884-photo_2026-05-01_23-07-00.jpg",
+        "http://localhost:3001/uploads/1777651652149-428117364-photo_2026-05-01_23-07-03.jpg"
+      ],
+      "id": "1777651659053"
     }
   ],
   "education": [
@@ -235,9 +514,10 @@
       "priority": 1,
       "photos": [
         "/uploads/1776918735927-404003877-ITC 4.jpg",
-        "/uploads/1776925056670-374990553-core_memory.jpg",
-        "/uploads/1776925056706-492507391-cyberpunk.png",
-        "/uploads/1776925056740-681312270-dark-star.jpg"
+        "http://localhost:3001/uploads/1777651864647-875118475-photo_2026-05-01_23-10-39.jpg",
+        "http://localhost:3001/uploads/1777651869359-255245543-photo_2026-05-01_23-10-31.jpg",
+        "http://localhost:3001/uploads/1777651876262-822497541-photo_2026-05-01_23-10-28.jpg",
+        "http://localhost:3001/uploads/1777651882091-869034565-photo_2026-05-01_23-10-24.jpg"
       ]
     },
     {
@@ -250,10 +530,7 @@
       "description": "Language training focused on professional communication.",
       "priority": 2,
       "photos": [
-        "/uploads/1776924654889-633213024-Fantasy-Autumn.png",
-        "/uploads/1776925066588-624191321-fantasy-mountain1.jpg",
-        "/uploads/1776925066595-587521035-fantasy-mountain2.jpg",
-        "/uploads/1776925066602-213389545-fantasy-mountain3.jpg"
+        "http://localhost:3001/uploads/1777613991192-704625837-tk_building.jpg"
       ]
     }
   ],
@@ -279,7 +556,16 @@
     "heroHeadline": "khmer ",
     "heroSubheadline": "Khmer  GPT",
     "heroCtaLabel": "vjsfhvasdfgadfgbadfhb",
-    "heroCtaUrl": "sdfgadsfghdsfgbdgbg"
+    "heroCtaUrl": "sdfgadsfghdsfgbdgbg",
+    "skillCategoryOrder": [
+      "IDE & Editors",
+      "Programming Languages",
+      "Machine Learning",
+      "Statistics & Math",
+      "Data Visualization",
+      "Databases",
+      "Core Strengths"
+    ]
   },
   "blog": [
     {
@@ -349,8 +635,9 @@
       "description": "Lecturer and professional reference in data science and applied analytics.",
       "phone": "010 64 44 96",
       "email": "long.pakrigna@itc.edu.kh",
-      "profileImageUrl": "/uploads/1776918642495-571297268-174418-1920x1080-desktop-full-hd-the-godfather-wallpaper.jpg",
-      "priority": 2
+      "profileImageUrl": "http://localhost:3001/uploads/1777635088710-932733601-Screenshot 2026-05-01 183112.png",
+      "priority": 2,
+      "profileUrl": ""
     }
   ]
 }

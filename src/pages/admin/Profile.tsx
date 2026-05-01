@@ -119,7 +119,7 @@ export default function Profile() {
       alert(`${fieldName} uploaded and saved to GitHub successfully!`);
     } catch (error: any) {
       console.error(`Error uploading ${fieldName}:`, error);
-      alert(`Upload Failed: ${error.message}. \n\nTip: If on Vercel, check your GITHUB_TOKEN.`);
+      alert(`Upload Failed: ${error instanceof Error ? error.message : 'Unknown error'}\n\nTip: Make sure your local server is running (npm run dev).`);
     }
   };
 

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
+import { motion } from 'motion/react';
 import { Outlet } from 'react-router-dom';
 import {
   Briefcase,
@@ -53,38 +54,42 @@ export function PublicLayout() {
     fetchProfileAndSkills();
   }, [fetchSettings, fetchProfileAndSkills]);
 
-  const navigation = [
+  const navigation = useMemo(() => [
     { name: 'Home', href: '#home', icon: Home, show: true },
     { name: 'About', href: '#about', icon: User, show: settings?.showAbout !== false },
     { name: 'Experience', href: '#experience', icon: Briefcase, show: settings?.showExperience !== false },
-    { name: 'Education', href: '#education', icon: GraduationCap, show: settings?.showExperience !== false },
+    { name: 'Education', href: '#education', icon: GraduationCap, show: settings?.showEducation !== false },
     { name: 'Projects', href: '#projects', icon: Folder, show: settings?.showProjects !== false },
     { name: 'Gallery', href: '#gallery', icon: Image, show: settings?.showGallery !== false },
     { name: 'Skills', href: '#skills', icon: Code2, show: settings?.showSkills !== false },
     { name: 'Blog', href: '#blog', icon: FileText, show: settings?.showBlog !== false },
     { name: 'Reference', href: '#reference', icon: Users, show: settings?.showReferences !== false },
     { name: 'Contact', href: '#contact', icon: MessageSquare, show: settings?.showContact !== false },
-  ].filter((nav) => nav.show);
+  ].filter((nav) => nav.show), [settings]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navigation.map((nav) => nav.href.substring(1));
-      const scrollPosition = window.scrollY + SECTION_SCROLL_OFFSET;
-      let currentSection = sections[0] || 'home';
-
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element && scrollPosition >= element.offsetTop) {
-          currentSection = section;
-        }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        // 96px matches the SECTION_SCROLL_OFFSET, and we trigger when the top of the section hits the top 20% of viewport
+        rootMargin: '-96px 0px -80% 0px',
+        threshold: 0,
       }
+    );
 
-      setActiveSection(currentSection);
-    };
+    const sections = navigation.map((nav) => nav.href.substring(1));
+    sections.forEach((sectionId) => {
+      const element = document.getElementById(sectionId);
+      if (element) observer.observe(element);
+    });
 
-    handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => observer.disconnect();
   }, [navigation]);
 
   useEffect(() => {
@@ -120,11 +125,11 @@ export function PublicLayout() {
         aria-hidden
         className={cn(
           'fixed inset-0 z-0 pointer-events-none transition-colors duration-500',
-          bgImage ? 'bg-white/85 dark:bg-zinc-950/80' : 'bg-white dark:bg-zinc-950'
+          bgImage ? 'bg-white/60 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'
         )}
       />
 
-      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/60 bg-white/78 backdrop-blur-xl saturate-150 transition-colors duration-500 dark:border-zinc-800/60 dark:bg-zinc-950/80">
+      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-colors duration-500">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center">
             <span className="font-display text-2xl font-bold tracking-tighter text-zinc-900 transition-colors group-hover:text-amber-500 dark:text-white dark:group-hover:text-amber-400">
@@ -139,12 +144,19 @@ export function PublicLayout() {
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
                 className={cn(
-                  'rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200',
+                  'relative rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-200 z-0',
                   activeSection === item.href.substring(1)
-                    ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400'
-                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-white'
+                    ? 'text-zinc-900 dark:text-white'
+                    : 'text-zinc-600 hover:bg-white/20 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white'
                 )}
               >
+                {activeSection === item.href.substring(1) && (
+                  <motion.div
+                    layoutId="activeTabIndicatorDesktop"
+                    className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-md shadow-sm border border-white/40 dark:border-white/10 rounded-lg -z-10"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
                 {item.name}
               </a>
             ))}
@@ -224,7 +236,7 @@ export function PublicLayout() {
       {mobileMenuOpen && (
         <nav
           id="mobile-navigation"
-          className="fixed inset-x-0 top-20 z-40 border-b border-zinc-200/60 bg-white/92 backdrop-blur-xl dark:border-zinc-800/60 dark:bg-zinc-950/92 md:hidden"
+          className="fixed inset-x-0 top-20 z-40 border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:hidden"
         >
           <div className="mx-auto flex max-h-[calc(100vh-5rem)] max-w-7xl flex-col gap-1 overflow-y-auto p-4">
             {navigation.map((item) => (
@@ -236,14 +248,21 @@ export function PublicLayout() {
                   setMobileMenuOpen(false);
                 }}
                 className={cn(
-                  'flex items-center gap-3 rounded-lg px-4 py-3 font-medium transition-all duration-200',
+                  'relative flex items-center gap-3 rounded-lg px-4 py-3 font-medium transition-colors duration-200 z-0',
                   activeSection === item.href.substring(1)
-                    ? 'bg-amber-50 text-amber-600 dark:bg-amber-950/40 dark:text-amber-400'
-                    : 'text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800/50 dark:hover:text-white'
+                    ? 'text-zinc-900 dark:text-white'
+                    : 'text-zinc-600 hover:bg-white/20 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white'
                 )}
               >
-                <item.icon className="h-5 w-5" />
-                {item.name}
+                {activeSection === item.href.substring(1) && (
+                  <motion.div
+                    layoutId="activeTabIndicatorMobile"
+                    className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-md shadow-sm border border-white/40 dark:border-white/10 rounded-lg -z-10"
+                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                  />
+                )}
+                <item.icon className="relative z-10 h-5 w-5" />
+                <span className="relative z-10">{item.name}</span>
               </a>
             ))}
 

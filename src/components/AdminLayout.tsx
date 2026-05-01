@@ -18,13 +18,16 @@ import {
 } from 'lucide-react';
 import { cn } from '../lib/utils';
 import { useThemeStore } from '../store/themeStore';
+import { useDataStore } from '../store/dataStore';
 import { motion } from 'motion/react';
 
 export function AdminLayout() {
   const { user, profile, isAdmin, isLoading, setUser, setLoading } = useAuthStore();
   const { theme, toggleTheme } = useThemeStore();
+  const { settings, fetchSettings, profile: publicProfile, fetchProfileAndSkills } = useDataStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const bgImage = settings?.heroBackgroundImageUrl || publicProfile?.coverImageUrl;
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -32,6 +35,8 @@ export function AdminLayout() {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   useEffect(() => {
+    fetchSettings();
+    fetchProfileAndSkills();
     const isLocalAuth = localStorage.getItem('localMockAuth');
     if (isLocalAuth === 'true') {
       const mockProfile = {
@@ -47,7 +52,7 @@ export function AdminLayout() {
       setUser(null, null);
     }
     setLoading(false);
-  }, [setUser, setLoading]);
+  }, [setUser, setLoading, fetchSettings, fetchProfileAndSkills]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -86,8 +91,19 @@ export function AdminLayout() {
 
   if (!user || !isAdmin) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 transition-colors duration-300">
-        <div className="max-w-md w-full space-y-8 p-8 bg-white dark:bg-zinc-900 rounded-xl shadow-lg border border-zinc-200 dark:border-zinc-800">
+      <div className="min-h-screen flex items-center justify-center transition-colors duration-300 relative bg-primary">
+        {bgImage && (
+          <div
+            aria-hidden
+            className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+            style={{ backgroundImage: `url("${bgImage}")` }}
+          />
+        )}
+        <div
+          aria-hidden
+          className={"fixed inset-0 z-0 pointer-events-none transition-colors duration-300 " + (bgImage ? 'bg-white/60 dark:bg-black/50' : 'bg-white dark:bg-black')}
+        />
+        <div className="relative z-10 max-w-md w-full space-y-8 p-8 bg-white/60 dark:bg-black/60 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/20 dark:border-white/10">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Admin Access</h2>
             <p className="mt-2 text-zinc-600 dark:text-zinc-400">Please sign in with your credentials to access the CMS.</p>
@@ -158,10 +174,22 @@ export function AdminLayout() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-100 dark:bg-zinc-950 flex transition-colors duration-300">
-      <div className="w-64 bg-white dark:bg-zinc-900 shadow-md border-r border-zinc-200 dark:border-zinc-800 flex flex-col">
-        <div className="h-16 flex items-center justify-between px-6 border-b border-zinc-200 dark:border-zinc-800">
-          <h1 className="text-xl font-bold text-zinc-800 dark:text-white">Portfolio CMS</h1>
+    <div className="h-screen overflow-hidden flex transition-colors duration-300 relative bg-primary">
+      {bgImage && (
+        <div
+          aria-hidden
+          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
+          style={{ backgroundImage: `url("${bgImage}")` }}
+        />
+      )}
+      <div
+        aria-hidden
+        className={"fixed inset-0 z-0 pointer-events-none transition-colors duration-300 " + (bgImage ? 'bg-white/60 dark:bg-black/50' : 'bg-white dark:bg-black')}
+      />
+
+      <div className="relative z-10 w-64 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-md border-r border-white/20 dark:border-white/10 flex flex-col">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-white/20 dark:border-white/10">
+          <h1 className="text-xl font-bold text-zinc-900 dark:text-white drop-shadow-sm">Portfolio CMS</h1>
           <button
             onClick={toggleTheme}
             className="p-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
@@ -170,7 +198,7 @@ export function AdminLayout() {
             {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
           </button>
         </div>
-        <nav className="p-4 space-y-1 flex-1 overflow-y-auto">
+        <nav className="p-4 space-y-1 flex-1">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -179,8 +207,8 @@ export function AdminLayout() {
                 to={item.href}
                 className={cn(
                   isActive
-                    ? 'bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400'
-                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white',
+                    ? 'bg-white/50 dark:bg-white/10 shadow-sm border border-white/40 dark:border-white/5 text-zinc-900 dark:text-white'
+                    : 'text-zinc-700 dark:text-zinc-400 hover:bg-white/30 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white',
                   'group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors'
                 )}
               >
@@ -198,7 +226,7 @@ export function AdminLayout() {
             );
           })}
         </nav>
-        <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
+        <div className="p-4 border-t border-white/20 dark:border-white/10">
           <button
             onClick={handleLogout}
             className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white w-full transition-colors"
@@ -209,7 +237,7 @@ export function AdminLayout() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto">
+      <div className="relative z-10 flex-1 overflow-y-auto">
         <main className="p-8">
           <motion.div
             key={location.pathname}
