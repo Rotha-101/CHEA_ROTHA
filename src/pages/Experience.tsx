@@ -30,11 +30,19 @@ interface EducationItem {
 
 function PhotoPreviewLoop({ photos }: { photos?: string[] }) {
   const list = photos || [];
+  const [isMobile, setIsMobile] = useState(false);
   const [startIndex, setStartIndex] = useState(0);
   const [lightbox, setLightbox] = useState<number | null>(null);
 
-  const visibleCount = Math.min(4, list.length);
-  const shouldLoop = list.length > 1; // Loop if more than 1 photo exists
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const visibleCount = isMobile ? 1 : Math.min(4, list.length);
+  const shouldLoop = list.length > (isMobile ? 1 : 0); // Always loop if more than 1 photo on mobile, or any on desktop if we want movement
 
   useEffect(() => {
     if (!shouldLoop) return;
@@ -70,19 +78,26 @@ function PhotoPreviewLoop({ photos }: { photos?: string[] }) {
     <>
       <div className="mt-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/40 p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {visiblePhotos.map(({ idx, url }, i) => (
+          {visiblePhotos.map(({ idx, url }) => (
             <button
               key={`${url}-${idx}-${startIndex}`}
               onClick={() => setLightbox(idx)}
-              className={`group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-300 dark:border-zinc-700 hover:border-amber-400 transition-colors bg-zinc-100 dark:bg-zinc-800 ${i > 0 ? 'hidden sm:block' : ''}`}
+              className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-300 dark:border-zinc-700 hover:border-amber-400 transition-colors bg-zinc-100 dark:bg-zinc-800"
               title={`Open photo ${idx + 1}`}
             >
-              <img
+            <AnimatePresence mode="popLayout">
+              <motion.img
+                key={url}
                 src={url}
                 alt=""
                 loading="lazy"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
                 className="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-300"
               />
+            </AnimatePresence>
             </button>
           ))}
         </div>
