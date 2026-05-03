@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useDataStore } from '../store/dataStore';
 
 interface BlogPost {
   id: string;
@@ -15,29 +16,17 @@ interface BlogPost {
 }
 
 export default function Blog() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { blog, blogLoaded, fetchBlog } = useDataStore();
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch(`/api/db/blog`);
-        if (!res.ok) throw new Error('Failed to fetch blog');
-        const allPosts = (await res.json()) || [];
-        const data = allPosts
-          .filter((p: any) => p.status === 'published')
-          .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-        setPosts(data);
-      } catch (error) {
-        console.error("Error fetching blog posts:", error);
-      }
-      setLoading(false);
-    };
+    fetchBlog();
+  }, [fetchBlog]);
 
-    fetchPosts();
-  }, []);
+  const posts = blog
+    .filter((p: any) => p.status === 'published')
+    .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
-  if (loading) return (
+  if (!blogLoaded) return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
