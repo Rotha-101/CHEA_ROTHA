@@ -428,12 +428,7 @@ export default function BlogPost() {
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="relative z-10 mt-12 border-t border-white/20 dark:border-zinc-800/50 bg-white/20 dark:bg-black/20 backdrop-blur-xl py-10 text-center">
-        <p className="text-zinc-500 dark:text-zinc-400 text-sm font-mono tracking-widest uppercase">
-          &copy; {new Date().getFullYear()} {profile?.name || 'Portfolio'}. Crafted for excellence.
-        </p>
-      </footer>
+
     </div>
   );
 }
