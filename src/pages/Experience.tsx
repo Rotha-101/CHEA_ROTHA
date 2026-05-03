@@ -69,7 +69,7 @@ function PhotoPreviewLoop({ photos }: { photos?: string[] }) {
   return (
     <>
       <div className="mt-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/40 p-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           {visiblePhotos.map(({ idx, url }) => (
             <button
               key={`${url}-${idx}-${startIndex}`}
