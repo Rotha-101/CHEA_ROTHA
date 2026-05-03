@@ -55,7 +55,7 @@ const getSkillBlurb = (name: string, category: string, level: number) => {
 };
 
 export default function Skills() {
-  const { skills, profileLoaded, fetchProfileAndSkills } = useDataStore();
+  const { skills, profileLoaded, fetchProfileAndSkills, settings } = useDataStore();
   const [liveSettings, setLiveSettings] = useState<Record<string, any> | null>(null);
   const [settingsReady, setSettingsReady] = useState(false);
 
@@ -80,7 +80,7 @@ export default function Skills() {
     );
   }
 
-  const CATEGORY_ORDER: string[] = liveSettings?.skillCategoryOrder || [
+  const CATEGORY_ORDER: string[] = liveSettings?.skillCategoryOrder || settings?.skillCategoryOrder || [
     'IDE & Editors',
     'Programming Languages',
     'Data Wrangling & EDA',
@@ -97,8 +97,8 @@ export default function Skills() {
     'Core Strengths'
   ];
 
-  // Always read disabled list from fresh API data
-  const DISABLED_CATEGORIES: string[] = liveSettings?.disabledSkillCategories || [];
+  // Always read disabled list from fresh API data (fallback to Zustand settings on Vercel)
+  const DISABLED_CATEGORIES: string[] = liveSettings?.disabledSkillCategories || settings?.disabledSkillCategories || [];
 
   const disabledSet = new Set(DISABLED_CATEGORIES.map(c => c.trim().toLowerCase()));
   const orderSet = new Set(CATEGORY_ORDER.map(c => c.trim().toLowerCase()));
