@@ -207,69 +207,7 @@ export default function BlogPost() {
       </nav>
 
       <main className="relative z-10 flex-grow pb-24">
-        {/* Hero Header */}
-        <header className="relative w-full py-16 md:py-28 overflow-hidden">
-          <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-            {/* Meta badges */}
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="flex flex-wrap items-center justify-center gap-3 mb-8">
-              {post!.tags.filter(Boolean).slice(0, 3).map(tag => (
-                <span key={tag} className="px-3 py-1 bg-amber-500/20 backdrop-blur-sm text-amber-700 dark:text-amber-300 text-xs font-bold uppercase tracking-wider rounded-full border border-amber-500/30">
-                  {tag}
-                </span>
-              ))}
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6 leading-[1.1]"
-            >
-              {post!.title}
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-10"
-            >
-              {post!.excerpt}
-            </motion.p>
-
-            {/* Stats row */}
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="flex flex-wrap items-center justify-center gap-6 text-sm text-zinc-500 dark:text-zinc-400">
-              <div className="flex items-center gap-1.5 bg-white/40 dark:bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30 dark:border-white/10">
-                <Calendar className="w-4 h-4 text-amber-500" />
-                {new Date(post!.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
-              </div>
-              <div className="flex items-center gap-1.5 bg-white/40 dark:bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30 dark:border-white/10">
-                <Clock className="w-4 h-4 text-amber-500" />
-                {readingTime} min read
-              </div>
-              {profile?.name && (
-                <div className="flex items-center gap-2 bg-white/40 dark:bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-full border border-white/30 dark:border-white/10">
-                  {profile.profilePhotoUrl && <img src={profile.profilePhotoUrl} alt={profile.name} className="w-5 h-5 rounded-full object-cover" />}
-                  <span>{profile.name}</span>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        </header>
-
-        {/* Featured Image */}
-        {post!.imageUrl && (
-          <div className="max-w-6xl mx-auto px-4 mb-16">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.97 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.35 }}
-              className="aspect-[21/9] rounded-3xl overflow-hidden shadow-2xl border border-white/30 dark:border-zinc-800/80"
-            >
-              <img src={post!.imageUrl} alt={post!.title} className="w-full h-full object-cover" />
-            </motion.div>
-          </div>
-        )}
+        <div className="h-10"></div> {/* Spacer for nav */}
 
         {/* Content Layout */}
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -293,8 +231,30 @@ export default function BlogPost() {
 
           {/* Main article content */}
           <article className="lg:col-span-7">
+            <header className="mb-10">
+              <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+                {post!.title}
+              </h1>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
+                <div className="flex items-center gap-1.5">
+                  <Calendar className="w-4 h-4 text-amber-500" />
+                  {new Date(post!.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <Clock className="w-4 h-4 text-amber-500" />
+                  {readingTime} min read
+                </div>
+              </div>
+            </header>
+
+            {post!.imageUrl && (
+              <div className="mb-10 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-lg">
+                <img src={post!.imageUrl} alt={post!.title} className="w-full h-auto object-cover" />
+              </div>
+            )}
+
             <div
-              className="prose prose-lg max-w-none"
+              className="prose prose-lg max-w-none dark:prose-invert prose-amber"
               dangerouslySetInnerHTML={{ __html: processedContent }}
             />
 
