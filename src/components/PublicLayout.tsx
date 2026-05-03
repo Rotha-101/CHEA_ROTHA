@@ -337,13 +337,7 @@ export function PublicLayout() {
       <main className="relative z-10 w-full flex-grow">
         <Outlet />
 
-        <footer className="mt-24 border-t border-zinc-200/50 bg-white/50 backdrop-blur-sm transition-colors duration-500 dark:border-zinc-800/50 dark:bg-zinc-900/50">
-          <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-4 py-12 sm:flex-row sm:px-6 lg:px-8">
-            <p className="font-mono text-sm text-zinc-500 dark:text-zinc-400">
-              &copy; {new Date().getFullYear()} {settings?.footerText || 'Chea Rotha. All rights reserved.'}
-            </p>
-          </div>
-        </footer>
+
       </main>
     </div>
   );
