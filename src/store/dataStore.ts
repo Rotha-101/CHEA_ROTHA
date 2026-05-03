@@ -155,6 +155,7 @@ interface BlogPost {
 }
 
 interface SiteSettings {
+  siteLogoText: string;
   showAbout: boolean;
   showExperience: boolean;
   showProjects: boolean;
@@ -209,7 +210,10 @@ export const useDataStore = create<DataState>((set, get) => ({
   education: normalizeUploads(staticDbRaw.education || []) as Education[],
   references: normalizeUploads(staticDbRaw.references || []) as Reference[],
   blog: normalizeUploads(staticDbRaw.blog || []) as BlogPost[],
-  settings: normalizeUploads(staticDbRaw.settings) as SiteSettings,
+  settings: normalizeUploads({
+    ...staticDbRaw.settings,
+    siteLogoText: staticDbRaw.settings?.siteLogoText || 'CR.'
+  }) as SiteSettings,
   
   profileLoaded: true,
   projectsLoaded: true,

@@ -29,6 +29,7 @@ interface SiteSettings {
   secondaryColor: string;
   gmailUser: string;
   gmailPass: string;
+  siteLogoText: string;
 }
 
 export default function Settings() {
@@ -59,7 +60,8 @@ export default function Settings() {
             heroBackgroundImageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2048',
             footerText: 'Chea Rotha. All rights reserved.',
             maintenanceMode: false,
-            primaryColor: '#fbbf24'
+            primaryColor: '#fbbf24',
+            siteLogoText: 'CR.'
           });
         }
       } catch (err) {
@@ -168,6 +170,12 @@ export default function Settings() {
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Site Logo URL</label>
               <input type="text" {...register('siteLogoUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
               <p className="mt-2 text-xs text-zinc-500">Optional logo image for the site header.</p>
+            </div>
+            
+            <div className="sm:col-span-6">
+              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Site Logo Text</label>
+              <input type="text" {...register('siteLogoText')} placeholder="e.g. CR." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <p className="mt-2 text-xs text-zinc-500">The text displayed next to the robot animation (e.g., CR., RR.).</p>
             </div>
 
             <div className="sm:col-span-6">
