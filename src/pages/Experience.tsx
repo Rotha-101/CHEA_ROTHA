@@ -34,7 +34,7 @@ function PhotoPreviewLoop({ photos }: { photos?: string[] }) {
   const [lightbox, setLightbox] = useState<number | null>(null);
 
   const visibleCount = Math.min(4, list.length);
-  const shouldLoop = list.length > 4;
+  const shouldLoop = list.length > 1; // Loop if more than 1 photo exists
 
   useEffect(() => {
     if (!shouldLoop) return;
@@ -70,11 +70,11 @@ function PhotoPreviewLoop({ photos }: { photos?: string[] }) {
     <>
       <div className="mt-5 rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/60 dark:bg-zinc-900/40 p-4">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-          {visiblePhotos.map(({ idx, url }) => (
+          {visiblePhotos.map(({ idx, url }, i) => (
             <button
               key={`${url}-${idx}-${startIndex}`}
               onClick={() => setLightbox(idx)}
-              className="group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-300 dark:border-zinc-700 hover:border-amber-400 transition-colors bg-zinc-100 dark:bg-zinc-800"
+              className={`group relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-zinc-300 dark:border-zinc-700 hover:border-amber-400 transition-colors bg-zinc-100 dark:bg-zinc-800 ${i > 0 ? 'hidden sm:block' : ''}`}
               title={`Open photo ${idx + 1}`}
             >
               <img
