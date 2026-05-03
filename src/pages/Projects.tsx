@@ -16,18 +16,18 @@ interface Project {
 }
 
 export default function Projects() {
-  const { projects, projectsLoaded, fetchProjects } = useDataStore();
-
+  const { projects, projectsLoaded, fetchProjects, settings } = useDataStore();
+ 
   useEffect(() => {
     fetchProjects();
   }, [fetchProjects]);
-
+ 
   if (!projectsLoaded) return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="w-6 h-6 border-2 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
-
+ 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -35,19 +35,20 @@ export default function Projects() {
       transition: { staggerChildren: 0.1 }
     }
   };
-
+ 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" as any } }
   };
-
+ 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-3xl mb-20">
-        <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">Selected Works</h1>
+        <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+          {settings?.projectsTitle || 'Selected Works'}
+        </h1>
         <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
-          A showcase of my work in Data Science, Machine Learning, and Software Development. 
-          Focusing on predictive modeling, data pipelines, and actionable insights.
+          {settings?.projectsSubtitle || 'A showcase of my work in Data Science, Machine Learning, and Software Development. Focusing on predictive modeling, data pipelines, and actionable insights.'}
         </p>
       </div>
 

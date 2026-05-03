@@ -136,10 +136,10 @@ export default function Skills() {
             Core Skills
           </p>
           <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-5">
-            Technical Arsenal
+            {settings?.skillsTitle || 'Technical Arsenal'}
           </h1>
           <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            A categorized visual tool-grid of skills, frameworks, and technical strengths with custom logo support.
+            {settings?.skillsSubtitle || 'A categorized visual tool-grid of skills, frameworks, and technical strengths with custom logo support.'}
           </p>
         </motion.div>
 

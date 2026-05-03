@@ -269,12 +269,13 @@ export default function Experience() {
     education,
     experienceLoaded,
     fetchExperienceAndEducation,
+    settings,
   } = useDataStore();
-
+ 
   useEffect(() => {
     fetchExperienceAndEducation();
   }, [fetchExperienceAndEducation]);
-
+ 
   if (!experienceLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -282,7 +283,7 @@ export default function Experience() {
       </div>
     );
   }
-
+ 
   const formatDate = (dateString: string) => {
     try {
       return format(parseISO(dateString), 'MMM yyyy');
@@ -290,16 +291,16 @@ export default function Experience() {
       return dateString;
     }
   };
-
+ 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="space-y-24">
         <section className="w-full">
           <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white">
-            Experience
+            {settings?.experienceTitle || 'Experience'}
           </h2>
           <p className="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            My professional journey and roles.
+            {settings?.experienceSubtitle || 'My professional journey and roles.'}
           </p>
           <div className="mt-8 space-y-5">
             {experiences.map((exp: ExperienceItem) => (
@@ -314,13 +315,13 @@ export default function Experience() {
             ))}
           </div>
         </section>
-
+ 
         <section id="education" className="w-full">
           <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white">
-            Education
+            {settings?.educationTitle || 'Education'}
           </h2>
           <p className="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Academic background and qualifications.
+            {settings?.educationSubtitle || 'Academic background and qualifications.'}
           </p>
           <div className="mt-8 space-y-5">
             {education.map((edu: EducationItem) => (

@@ -16,24 +16,24 @@ interface BlogPost {
 }
 
 export default function Blog() {
-  const { blog, blogLoaded, fetchBlog } = useDataStore();
-
+  const { blog, blogLoaded, fetchBlog, settings } = useDataStore();
+ 
   useEffect(() => {
     fetchBlog();
   }, [fetchBlog]);
-
+ 
   const posts = blog
     .filter((p: any) => p.status === 'published')
     .sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-
+ 
   if (!blogLoaded) return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
-
+ 
   if (posts.length === 0) return null;
-
+ 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <motion.div 
@@ -42,8 +42,12 @@ export default function Blog() {
         viewport={{ once: true }}
         className="max-w-3xl mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">Latest Articles</h2>
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">Thoughts, tutorials, and insights on software development.</p>
+        <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+          {settings?.blogTitle || 'Latest Articles'}
+        </h2>
+        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+          {settings?.blogSubtitle || 'Thoughts, tutorials, and insights on software development.'}
+        </p>
       </motion.div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

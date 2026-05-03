@@ -16,12 +16,12 @@ interface ReferenceItem {
 }
 
 export default function Reference() {
-  const { references, profileLoaded, fetchProfileAndSkills } = useDataStore();
-
+  const { references, profileLoaded, fetchProfileAndSkills, settings } = useDataStore();
+ 
   useEffect(() => {
     fetchProfileAndSkills();
   }, [fetchProfileAndSkills]);
-
+ 
   if (!profileLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
@@ -29,11 +29,11 @@ export default function Reference() {
       </div>
     );
   }
-
+ 
   if (!references?.length) return null;
-
+ 
   const sortedReferences = [...references].sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
-
+ 
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <motion.div
@@ -43,10 +43,10 @@ export default function Reference() {
         className="max-w-3xl mb-16"
       >
         <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
-          References
+          {settings?.referencesTitle || 'References'}
         </h2>
         <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          Professional references and contact points.
+          {settings?.referencesSubtitle || 'Professional references and contact points.'}
         </p>
       </motion.div>
 

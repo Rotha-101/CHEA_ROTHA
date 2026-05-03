@@ -6,7 +6,7 @@ import { useDataStore } from '../store/dataStore';
 const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';
 
 export default function Contact() {
-  const { profile, profileLoaded, fetchProfileAndSkills } = useDataStore();
+  const { profile, profileLoaded, fetchProfileAndSkills, settings } = useDataStore();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -112,10 +112,10 @@ export default function Contact() {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-3xl mb-16">
         <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
-          Get in Touch
+          {settings?.contactTitle || 'Get in Touch'}
         </h1>
         <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
-          Feel free to reach out for collaborations or just a friendly hello.
+          {settings?.contactSubtitle || 'Feel free to reach out for collaborations or just a friendly hello.'}
         </p>
       </div>
 

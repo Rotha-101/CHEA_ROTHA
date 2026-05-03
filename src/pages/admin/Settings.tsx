@@ -30,6 +30,22 @@ interface SiteSettings {
   gmailUser: string;
   gmailPass: string;
   siteLogoText: string;
+  experienceTitle: string;
+  experienceSubtitle: string;
+  educationTitle: string;
+  educationSubtitle: string;
+  projectsTitle: string;
+  projectsSubtitle: string;
+  skillsTitle: string;
+  skillsSubtitle: string;
+  blogTitle: string;
+  blogSubtitle: string;
+  referencesTitle: string;
+  referencesSubtitle: string;
+  contactTitle: string;
+  contactSubtitle: string;
+  aboutTitle: string;
+  aboutSubtitle: string;
 }
 
 export default function Settings() {
@@ -61,7 +77,22 @@ export default function Settings() {
             footerText: 'Chea Rotha. All rights reserved.',
             maintenanceMode: false,
             primaryColor: '#fbbf24',
-            siteLogoText: 'CR.'
+            siteLogoText: 'CR.',
+            experienceTitle: 'Experience',
+            experienceSubtitle: 'My professional journey and roles.',
+            educationTitle: 'Education',
+            educationSubtitle: 'Academic background and qualifications.',
+            projectsTitle: 'Selected Works',
+            projectsSubtitle: 'A showcase of my work in Data Science, Machine Learning, and Software Development.',
+            skillsTitle: 'Technical Arsenal',
+            skillsSubtitle: 'A curated selection of my professional skills and technologies.',
+            blogTitle: 'Latest Articles',
+            blogSubtitle: 'Thoughts, tutorials, and insights on software development.',
+            referencesTitle: 'References',
+            referencesSubtitle: 'Professional references and contact points.',
+            contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
+            aboutTitle: 'About Me',
+            aboutSubtitle: ''
           });
         }
       } catch (err) {
@@ -204,6 +235,35 @@ export default function Settings() {
               <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Brand Secondary Color</label>
               <input type="color" {...register('secondaryColor')} className="mt-1 block w-full h-10 p-1 rounded-md border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950" />
             </div>
+          </div>
+        </div>
+
+        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
+          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Section Titles & Subtitles</h3>
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Customize the headers for each part of your website.</p>
+          
+          <div className="mt-6 space-y-8">
+            {[
+              { id: 'about', label: 'About' },
+              { id: 'experience', label: 'Experience' },
+              { id: 'education', label: 'Education' },
+              { id: 'projects', label: 'Projects' },
+              { id: 'skills', label: 'Skills' },
+              { id: 'blog', label: 'Blog' },
+              { id: 'references', label: 'References' },
+              { id: 'contact', label: 'Contact' }
+            ].map((section) => (
+              <div key={section.id} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                <div className="sm:col-span-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">{section.label} Title</label>
+                  <input type="text" {...register(`${section.id}Title` as keyof SiteSettings)} className="block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                </div>
+                <div className="sm:col-span-1">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">{section.label} Subtitle</label>
+                  <input type="text" {...register(`${section.id}Subtitle` as keyof SiteSettings)} className="block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

@@ -168,6 +168,19 @@ interface SiteSettings {
   siteLogoUrl: string;
   announcementText: string;
   showAnnouncementBar: boolean;
+  siteLogoText: string;
+  showAbout: boolean;
+  showExperience: boolean;
+  showProjects: boolean;
+  showGallery: boolean;
+  showSkills: boolean;
+  showBlog: boolean;
+  showReferences: boolean;
+  showContact: boolean;
+  heroBackgroundImageUrl: string;
+  siteLogoUrl: string;
+  announcementText: string;
+  showAnnouncementBar: boolean;
   heroHeadline: string;
   heroSubheadline: string;
   heroCtaLabel: string;
@@ -176,6 +189,22 @@ interface SiteSettings {
   maintenanceMode: boolean;
   primaryColor: string;
   secondaryColor: string;
+  experienceTitle: string;
+  experienceSubtitle: string;
+  educationTitle: string;
+  educationSubtitle: string;
+  projectsTitle: string;
+  projectsSubtitle: string;
+  skillsTitle: string;
+  skillsSubtitle: string;
+  blogTitle: string;
+  blogSubtitle: string;
+  referencesTitle: string;
+  referencesSubtitle: string;
+  contactTitle: string;
+  contactSubtitle: string;
+  aboutTitle: string;
+  aboutSubtitle: string;
 }
 
 interface DataState {
@@ -342,7 +371,23 @@ export const useDataStore = create<DataState>((set, get) => ({
             footerText: 'Chea Rotha. All rights reserved.',
             maintenanceMode: false,
             primaryColor: '#fbbf24',
-            secondaryColor: '#38bdf8'
+            secondaryColor: '#38bdf8',
+            experienceTitle: 'Experience',
+            experienceSubtitle: 'My professional journey and roles.',
+            educationTitle: 'Education',
+            educationSubtitle: 'Academic background and qualifications.',
+            projectsTitle: 'Selected Works',
+            projectsSubtitle: 'A showcase of my work in Data Science, Machine Learning, and Software Development.',
+            skillsTitle: 'Technical Arsenal',
+            skillsSubtitle: 'A curated selection of my professional skills and technologies.',
+            blogTitle: 'Latest Articles',
+            blogSubtitle: 'Thoughts, tutorials, and insights on software development.',
+            referencesTitle: 'References',
+            referencesSubtitle: 'Professional references and contact points.',
+            contactTitle: 'Get in Touch',
+            contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
+            aboutTitle: 'About Me',
+            aboutSubtitle: ''
           },
           settingsLoaded: true
         });
@@ -370,7 +415,23 @@ export const useDataStore = create<DataState>((set, get) => ({
           footerText: 'Chea Rotha. All rights reserved.',
           maintenanceMode: false,
           primaryColor: '#fbbf24',
-          secondaryColor: '#38bdf8'
+          secondaryColor: '#38bdf8',
+          experienceTitle: 'Experience',
+          experienceSubtitle: 'My professional journey and roles.',
+          educationTitle: 'Education',
+          educationSubtitle: 'Academic background and qualifications.',
+          projectsTitle: 'Selected Works',
+          projectsSubtitle: 'A showcase of my work in Data Science, Machine Learning, and Software Development.',
+          skillsTitle: 'Technical Arsenal',
+          skillsSubtitle: 'A curated selection of my professional skills and technologies.',
+          blogTitle: 'Latest Articles',
+          blogSubtitle: 'Thoughts, tutorials, and insights on software development.',
+          referencesTitle: 'References',
+          referencesSubtitle: 'Professional references and contact points.',
+          contactTitle: 'Get in Touch',
+          contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
+          aboutTitle: 'About Me',
+          aboutSubtitle: ''
         },
         settingsLoaded: true
       });
