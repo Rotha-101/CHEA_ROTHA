@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import staticDbRaw from '../../db.json';
 
 const API_URL = '/api';
 const REQUEST_TIMEOUT_MS = 6000;
@@ -201,20 +202,20 @@ interface DataState {
 }
 
 export const useDataStore = create<DataState>((set, get) => ({
-  profile: null,
-  skills: [],
-  projects: [],
-  experience: [],
-  education: [],
-  references: [],
-  blog: [],
-  settings: null,
+  profile: normalizeUploads(staticDbRaw.profile) as Profile,
+  skills: normalizeUploads(staticDbRaw.skills || []) as Skill[],
+  projects: normalizeUploads(staticDbRaw.projects || []) as Project[],
+  experience: normalizeUploads(staticDbRaw.experience || []) as Experience[],
+  education: normalizeUploads(staticDbRaw.education || []) as Education[],
+  references: normalizeUploads(staticDbRaw.references || []) as Reference[],
+  blog: normalizeUploads(staticDbRaw.blog || []) as BlogPost[],
+  settings: normalizeUploads(staticDbRaw.settings) as SiteSettings,
   
-  profileLoaded: false,
-  projectsLoaded: false,
-  experienceLoaded: false,
-  blogLoaded: false,
-  settingsLoaded: false,
+  profileLoaded: true,
+  projectsLoaded: true,
+  experienceLoaded: true,
+  blogLoaded: true,
+  settingsLoaded: true,
 
   setProfile: (profile) => set({
     profile,
