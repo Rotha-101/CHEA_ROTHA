@@ -59,7 +59,8 @@ export default function BlogPost() {
     fetchBlog();
     fetchProfileAndSkills();
     fetchSettings();
-  }, [fetchBlog, fetchProfileAndSkills, fetchSettings]);
+    window.scrollTo(0, 0);
+  }, [id, fetchBlog, fetchProfileAndSkills, fetchSettings]);
 
   // Apply theme class to html element (same as main app)
   useEffect(() => {
@@ -207,7 +208,7 @@ export default function BlogPost() {
       </nav>
 
       <main className="relative z-10 flex-grow pb-24">
-        <div className="h-10"></div> {/* Spacer for nav */}
+        <div className="h-20"></div> {/* Spacer for nav - increased to match nav height */}
 
         {/* Content Layout */}
         <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
