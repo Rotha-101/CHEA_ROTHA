@@ -359,10 +359,22 @@
       "description": "Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
       "priority": 1,
       "photos": [
-        "http://localhost:3001/uploads/1777651076666-955901603-unnamed.webp",
-        "http://localhost:3001/uploads/1777651113389-40266478-photo_2026-05-01_22-56-14.jpg",
-        "http://localhost:3001/uploads/1777651149323-220632765-photo_2025-05-16_18-52-23.jpg"
+        "http://localhost:3001/uploads/1777651076666-955901603-unnamed.webp"
       ]
+    },
+    {
+      "title": "Battery Energy Storage System Engineer",
+      "company": "SchneicTech Group",
+      "location": "Toul Kork, Phnom Penh, Cambodia",
+      "startDate": "Nov 2025",
+      "endDate": "Present",
+      "current": true,
+      "description": "Analyzed BESS performance data, built dashboards, and developed data-driven models to optimize energy efficiency and system reliability. Collaborated with engineering teams to monitor systems, troubleshoot issues, and support deployment.\n",
+      "priority": 1,
+      "photos": [
+        "http://localhost:3001/uploads/1777651642155-353643884-photo_2026-05-01_23-07-00.jpg"
+      ],
+      "id": "1777651659053"
     },
     {
       "id": "exp-002",
@@ -377,21 +389,6 @@
       "photos": [
         "http://localhost:3001/uploads/1777613764523-215775523-sunrise.JPG"
       ]
-    },
-    {
-      "title": "Battery Energy Storage System Engineer",
-      "company": "SchneicTech Group",
-      "location": "Toul Kork, Phnom Penh, Cambodia",
-      "startDate": "Nov 2025",
-      "endDate": "Present",
-      "current": true,
-      "description": "Analyzed BESS performance data, built dashboards, and developed data-driven models to optimize energy efficiency and system reliability. Collaborated with engineering teams to monitor systems, troubleshoot issues, and support deployment.\n",
-      "priority": 1,
-      "photos": [
-        "http://localhost:3001/uploads/1777651642155-353643884-photo_2026-05-01_23-07-00.jpg",
-        "http://localhost:3001/uploads/1777651652149-428117364-photo_2026-05-01_23-07-03.jpg"
-      ],
-      "id": "1777651659053"
     }
   ],
   "education": [
@@ -405,11 +402,7 @@
       "description": "Thesis: Analysis and Forecasting of Inflation in Cambodia.",
       "priority": 1,
       "photos": [
-        "/uploads/1776918735927-404003877-ITC 4.jpg",
-        "http://localhost:3001/uploads/1777651864647-875118475-photo_2026-05-01_23-10-39.jpg",
-        "http://localhost:3001/uploads/1777651869359-255245543-photo_2026-05-01_23-10-31.jpg",
-        "http://localhost:3001/uploads/1777651876262-822497541-photo_2026-05-01_23-10-28.jpg",
-        "http://localhost:3001/uploads/1777651882091-869034565-photo_2026-05-01_23-10-24.jpg"
+        "/uploads/1776918735927-404003877-ITC 4.jpg"
       ]
     },
     {

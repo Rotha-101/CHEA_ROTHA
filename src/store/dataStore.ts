@@ -12,7 +12,10 @@ async function fetchJsonWithTimeout(url: string) {
   const controller = new AbortController();
   const timer = window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    const res = await fetch(url, { 
+      signal: controller.signal,
+      cache: 'no-store'
+    });
     if (!res.ok) {
       throw new Error(`Request failed (${res.status}) for ${url}`);
     }
@@ -244,11 +247,11 @@ export const useDataStore = create<DataState>((set, get) => ({
     siteLogoText: staticDbRaw.settings?.siteLogoText || 'CR.'
   }) as SiteSettings,
   
-  profileLoaded: true,
-  projectsLoaded: true,
-  experienceLoaded: true,
-  blogLoaded: true,
-  settingsLoaded: true,
+  profileLoaded: false,
+  projectsLoaded: false,
+  experienceLoaded: false,
+  blogLoaded: false,
+  settingsLoaded: false,
 
   setProfile: (profile) => set({
     profile,
