@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const API_URL = '/api';
-import { Plus, Edit2, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
+import { Plus, Edit2, Trash2, ArrowUp, ArrowDown, Eye, EyeOff } from 'lucide-react';
 
 interface Skill {
   id: string;
@@ -25,9 +25,13 @@ export default function Skills() {
   const [uploadingImage, setUploadingImage] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [categoryOrderList, setCategoryOrderList] = useState<string[]>([]);
+  const [disabledCategories, setDisabledCategories] = useState<string[]>([]);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [savingCategories, setSavingCategories] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string>("All");
+  const [toast, setToast] = useState<string | null>(null);
+
+  const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 2500); };
 
   const { register, handleSubmit, reset, setValue, watch } = useForm<Omit<Skill, 'id'>>();
   const iconUrl = watch('iconUrl');
@@ -70,8 +74,35 @@ export default function Skills() {
           'Core Strengths'
         ]);
       }
+      if (settings.disabledSkillCategories && Array.isArray(settings.disabledSkillCategories)) {
+        setDisabledCategories(settings.disabledSkillCategories);
+      }
     } catch (e) {
       console.error(e);
+    }
+  };
+
+    const toggleCategory = async (cat: string) => {
+    const newDisabled = disabledCategories.includes(cat)
+      ? disabledCategories.filter(c => c !== cat)
+      : [...disabledCategories, cat];
+    setDisabledCategories(newDisabled);
+    try {
+      const res = await fetch(`${API_URL}/db/settings`);
+      const current = await res.json();
+      current.disabledSkillCategories = newDisabled;
+      await fetch(`${API_URL}/db/settings`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(current)
+      });
+      const msg = newDisabled.includes(cat)
+        ? '"' + cat + '" hidden from public page'
+        : '"' + cat + '" now visible on public page';
+      showToast(msg);
+    } catch {
+      showToast('Save failed - try again');
+      setDisabledCategories(disabledCategories);
     }
   };
 
@@ -82,6 +113,7 @@ export default function Skills() {
       const settings = await res.json();
       
       settings.skillCategoryOrder = categoryOrderList;
+      settings.disabledSkillCategories = disabledCategories;
 
       await fetch(`${API_URL}/db/settings`, {
         method: 'POST',
@@ -89,6 +121,7 @@ export default function Skills() {
         body: JSON.stringify(settings)
       });
       setIsCategoryModalOpen(false);
+      showToast('Category settings saved!');
     } catch (e) {
       alert("Failed to save category order.");
     }
@@ -110,6 +143,12 @@ export default function Skills() {
   };
 
   const removeCategory = (index: number) => {
+    const catToRemove = categoryOrderList[index];
+    const isUsed = skills.some(s => s.category.trim().toLowerCase() === catToRemove.trim().toLowerCase());
+    if (isUsed) {
+      alert(`Cannot remove "${catToRemove}" because it is currently assigned to one or more skills. Please reassign those skills first, or use the toggle switch to hide it from the public page.`);
+      return;
+    }
     const newList = [...categoryOrderList];
     newList.splice(index, 1);
     setCategoryOrderList(newList);
@@ -224,11 +263,33 @@ export default function Skills() {
 
   return (
     <div className="max-w-5xl mx-auto">
+      {/* Toast */}
+      {toast && (
+        <div className="fixed top-6 right-6 z-[200] px-5 py-3 rounded-xl bg-green-500 text-white text-sm font-medium shadow-lg animate-in slide-in-from-top">
+          {toast}
+        </div>
+      )}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Skills</h1>
         <div className="flex gap-3">
           <button
-            onClick={() => setIsCategoryModalOpen(true)}
+            onClick={() => {
+              const list = [...categoryOrderList];
+              let changed = false;
+              const existing = new Set(list.map(c => c.trim().toLowerCase()));
+              skills.forEach(skill => {
+                const cat = skill.category.trim();
+                if (!existing.has(cat.toLowerCase())) {
+                  list.push(cat);
+                  existing.add(cat.toLowerCase());
+                  changed = true;
+                }
+              });
+              if (changed) {
+                setCategoryOrderList(list);
+              }
+              setIsCategoryModalOpen(true);
+            }}
             className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors bg-white dark:bg-zinc-900"
           >
             Category Order
@@ -266,10 +327,33 @@ export default function Skills() {
             Use the arrows to reorder categories, or add a new category to the list. This controls the order they appear on your public Skills page.
           </p>
           
-          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-lg max-h-[400px] overflow-y-auto mb-4 bg-zinc-50/50 dark:bg-zinc-950/20">
-            {categoryOrderList.map((cat, index) => (
-              <li key={cat} className="p-3 flex items-center justify-between hover:bg-zinc-100 dark:hover:bg-zinc-800/50 transition-colors group">
-                <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{cat}</span>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3 flex items-center gap-1.5">
+            <Eye className="w-3.5 h-3.5 text-green-500" /> = Visible on public page &nbsp;·&nbsp;
+            <EyeOff className="w-3.5 h-3.5 text-zinc-400" /> = Hidden from public page
+          </p>
+          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl max-h-[400px] overflow-y-auto mb-4 bg-zinc-50/50 dark:bg-zinc-950/20">
+            {categoryOrderList.map((cat, index) => {
+              const isDisabled = disabledCategories.includes(cat);
+              return (
+              <li key={cat} className={`p-3 flex items-center justify-between transition-colors group ${isDisabled ? 'opacity-50 bg-zinc-100/50 dark:bg-zinc-800/30' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800/50'}`}>
+                <div className="flex items-center gap-3">
+                  {/* Toggle Switch */}
+                  <button
+                    type="button"
+                    onClick={() => toggleCategory(cat)}
+                    title={isDisabled ? 'Enable on public page' : 'Hide from public page'}
+                    className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none ${
+                      isDisabled ? 'bg-zinc-300 dark:bg-zinc-700' : 'bg-amber-500'
+                    }`}
+                  >
+                    <span
+                      className="inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform"
+                      style={{ transform: `translateX(${isDisabled ? '2px' : '18px'})` }}
+                    />
+                  </button>
+                  <span className={`text-sm font-medium ${isDisabled ? 'line-through text-zinc-400 dark:text-zinc-600' : 'text-zinc-700 dark:text-zinc-300'}`}>{cat}</span>
+                  {isDisabled && <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-400">Hidden</span>}
+                </div>
                 <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
                   <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-1.5 text-zinc-400 hover:text-amber-500 disabled:opacity-30 disabled:hover:text-zinc-400 cursor-pointer disabled:cursor-not-allowed">
                     <ArrowUp className="w-4 h-4" />
@@ -282,7 +366,8 @@ export default function Skills() {
                   </button>
                 </div>
               </li>
-            ))}
+              );
+            })}
             {categoryOrderList.length === 0 && (
               <li className="p-4 text-center text-sm text-zinc-500">No categories found.</li>
             )}

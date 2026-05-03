@@ -14,6 +14,7 @@ import { Helmet } from 'react-helmet-async';
 
 // Public Pages
 import Home from './pages/Home';
+import BlogPost from './pages/BlogPost';
 
 // Admin Pages
 import AdminDashboard from './pages/admin/Dashboard';
@@ -62,6 +63,7 @@ export default function App() {
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout />}>
           <Route index element={<Home />} />
+          <Route path="blog/:id" element={<BlogPost />} />
         </Route>
 
         {/* Admin Routes */}

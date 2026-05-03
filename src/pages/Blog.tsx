@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import { Calendar, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface BlogPost {
   id: string;
@@ -93,9 +94,9 @@ export default function Blog() {
                   </span>
                 ))}
               </div>
-              <button className="inline-flex items-center text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors mt-auto">
-                Read Article <ArrowRight className="ml-1 w-4 h-4" />
-              </button>
+              <Link to={`/blog/${post.id}`} className="inline-flex items-center text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 dark:hover:text-amber-300 transition-colors mt-auto group/btn">
+                Read Article <ArrowRight className="ml-1 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
             </div>
           </motion.article>
         ))}

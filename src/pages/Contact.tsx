@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { AlertCircle, CheckCircle, Mail, MapPin, Phone, Send } from 'lucide-react';
+import { motion } from 'motion/react';
 import { useDataStore } from '../store/dataStore';
 
 const IS_STATIC_DEPLOY = import.meta.env.VITE_STATIC_DEPLOY === 'true';

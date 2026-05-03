@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
 import {
   BrainCircuit,
@@ -55,14 +55,24 @@ const getSkillBlurb = (name: string, category: string, level: number) => {
 };
 
 export default function Skills() {
-  const { skills, profileLoaded, fetchProfileAndSkills, settings, settingsLoaded, fetchSettings } = useDataStore();
+  const { skills, profileLoaded, fetchProfileAndSkills } = useDataStore();
+  const [liveSettings, setLiveSettings] = useState<Record<string, any> | null>(null);
+  const [settingsReady, setSettingsReady] = useState(false);
 
   useEffect(() => {
     fetchProfileAndSkills();
-    fetchSettings();
-  }, [fetchProfileAndSkills, fetchSettings]);
+    // Always fetch FRESH settings from API to bypass the Zustand cache guard.
+    // This ensures admin changes to disabled categories are immediately visible.
+    (async () => {
+      try {
+        const res = await fetch('/api/db/settings');
+        if (res.ok) setLiveSettings(await res.json());
+      } catch { /* show all categories as fallback */ }
+      setSettingsReady(true);
+    })();
+  }, [fetchProfileAndSkills]);
 
-  if (!profileLoaded || !settingsLoaded) {
+  if (!profileLoaded || !settingsReady) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
@@ -70,7 +80,7 @@ export default function Skills() {
     );
   }
 
-  const CATEGORY_ORDER = (settings as any)?.skillCategoryOrder || [
+  const CATEGORY_ORDER: string[] = liveSettings?.skillCategoryOrder || [
     'IDE & Editors',
     'Programming Languages',
     'Data Wrangling & EDA',
@@ -87,18 +97,25 @@ export default function Skills() {
     'Core Strengths'
   ];
 
+  // Always read disabled list from fresh API data
+  const DISABLED_CATEGORIES: string[] = liveSettings?.disabledSkillCategories || [];
+
+  const disabledSet = new Set(DISABLED_CATEGORIES.map(c => c.trim().toLowerCase()));
+  const orderSet = new Set(CATEGORY_ORDER.map(c => c.trim().toLowerCase()));
+
   const groupedSkills: { category: string; skills: typeof skills }[] = [];
   
-  // Add categories in the exact specified order
+  // Add categories in the exact specified order, skipping disabled ones
   CATEGORY_ORDER.forEach(category => {
-    const categorySkills = skills.filter(s => s.category === category).sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
+    if (disabledSet.has(category.trim().toLowerCase())) return; // skip hidden categories
+    const categorySkills = skills.filter(s => s.category.trim().toLowerCase() === category.trim().toLowerCase()).sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
     if (categorySkills.length > 0) {
       groupedSkills.push({ category, skills: categorySkills });
     }
   });
 
   // Add any other categories that are not in CATEGORY_ORDER
-  const otherCategories = Array.from(new Set(skills.map(s => s.category).filter(c => !CATEGORY_ORDER.includes(c))));
+  const otherCategories = Array.from(new Set(skills.map(s => s.category).filter(c => !orderSet.has(c.trim().toLowerCase()) && !disabledSet.has(c.trim().toLowerCase()))));
   otherCategories.forEach(category => {
     const categorySkills = skills.filter(s => s.category === category).sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
     if (categorySkills.length > 0) {
@@ -111,7 +128,8 @@ export default function Skills() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           className="max-w-3xl mb-14"
         >
           <p className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.25em] text-amber-600 dark:text-amber-300 mb-5">
@@ -130,9 +148,10 @@ export default function Skills() {
             <div key={group.category}>
               <motion.h2 
                 initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
                 transition={{ delay: groupIdx * 0.1 }}
-                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6 border-b border-zinc-200 dark:border-zinc-800 pb-2"
+                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6 border-b border-zinc-900 dark:border-white pb-2"
               >
                 {group.category}
               </motion.h2>
@@ -171,7 +190,7 @@ export default function Skills() {
                               <img
                                 src={skill.iconUrl}
                                 alt={`${skill.name} logo`}
-                                className="max-h-16 sm:max-h-20 w-auto object-contain drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)]"
+                                className="max-h-16 sm:max-h-20 w-auto object-contain dark:drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] drop-shadow-none"
                                 loading="lazy"
                               />
                             ) : (

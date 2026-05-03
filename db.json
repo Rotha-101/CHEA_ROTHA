@@ -9,8 +9,8 @@
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
     "profilePhotoUrl": "http://localhost:3001/uploads/1777623602626-photo_2026-05-01_15-19-33.jpg",
-    "coverImageUrl": "http://localhost:3001/uploads/1777635831538-heres-like-100-more-environment-screenshots-in-4k-to-use-as-v0-OdiurmQhB7HNiEZLKdDxwcU_F3qizHXF0Qun8S1RejQ.webp",
-    "cvUrl": "/uploads/1776911762226-000000000-CHEA-Rotha-CV.pdf",
+    "coverImageUrl": "http://localhost:3001/uploads/1777716568408-forest-wallpaper-3840x2160-nature-tranquil-6524.jpg",
+    "cvUrl": "http://localhost:3001/uploads/1777797814048-CHEA ROTHA CV 2026.pdf",
     "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale."
   },
   "skills": [
@@ -74,30 +74,6 @@
       "id": "1777630502565"
     },
     {
-      "name": "Power BI",
-      "level": 80,
-      "category": "Data Visualization",
-      "priority": 1,
-      "description": "",
-      "yearsOfExperience": 5,
-      "certificationUrl": "",
-      "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777631104275-azure-power-bi-embedded-512px.png",
-      "id": "1777631106154"
-    },
-    {
-      "id": "skill-003",
-      "name": "Scikit-learn",
-      "level": 90,
-      "category": "Machine Learning",
-      "priority": 1,
-      "iconUrl": "http://localhost:3001/uploads/1777648715400-scikit-learn-512px.png",
-      "description": "Building, training, and evaluating machine learning models using Scikit-learn, including preprocessing, feature engineering, and performance optimization.",
-      "yearsOfExperience": 4,
-      "certificationUrl": "https://github.com/scikit-learn/scikit-learn.git",
-      "isHighlighted": false
-    },
-    {
       "id": "skill-002",
       "name": "SQL",
       "level": 90,
@@ -131,18 +107,6 @@
       "isHighlighted": false,
       "iconUrl": "http://localhost:3001/uploads/1777630117571-csharp-512px.png",
       "id": "1777630119123"
-    },
-    {
-      "id": "skill-004",
-      "name": "TensorFlow & Keras",
-      "level": 85,
-      "category": "Machine Learning",
-      "priority": 2,
-      "iconUrl": "http://localhost:3001/uploads/1777648949386-tensorflow-light-512px.png",
-      "description": "Building and deploying deep learning models using TensorFlow, including neural networks, model training, and performance optimization.",
-      "yearsOfExperience": 5,
-      "certificationUrl": "https://github.com/tensorflow/tensorflow.git",
-      "isHighlighted": false
     },
     {
       "id": "skill-012",
@@ -181,18 +145,6 @@
       "id": "1777631646190"
     },
     {
-      "name": "Keras",
-      "level": 50,
-      "category": "Machine Learning",
-      "priority": 3,
-      "description": "Building and training deep learning models using Keras, with a focus on neural network design, experimentation, and optimization.",
-      "yearsOfExperience": 4,
-      "certificationUrl": "https://github.com/keras-team/keras.git",
-      "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649090374-keras-512px.png",
-      "id": "1777649091587"
-    },
-    {
       "name": "SQLite",
       "level": 70,
       "category": "Databases",
@@ -229,18 +181,6 @@
       "id": "1777649400937"
     },
     {
-      "name": "MongoDB",
-      "level": 70,
-      "category": "Databases",
-      "priority": 4,
-      "description": "",
-      "yearsOfExperience": 4,
-      "certificationUrl": "",
-      "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777650052998-mongodb-512px.png",
-      "id": "1777650054598"
-    },
-    {
       "name": "Antigravity",
       "level": 90,
       "category": "IDE & Editors",
@@ -263,14 +203,6 @@
       "isHighlighted": false,
       "iconUrl": "http://localhost:3001/uploads/1777650108850-postgresql-512px.png",
       "id": "1777650111475"
-    },
-    {
-      "id": "skill-006",
-      "name": "LSTM & SARIMAX",
-      "level": 87,
-      "category": "Time Series Forecasting",
-      "priority": 6,
-      "iconUrl": "/uploads/1776924679115-844291373-Desert-With-Mountains-Moon.jpg"
     },
     {
       "name": "R programming",
@@ -297,12 +229,16 @@
       "id": "1777649544603"
     },
     {
-      "id": "skill-007",
-      "name": "ARIMA, SARIMA, Prophet",
-      "level": 85,
-      "category": "Time Series Forecasting",
-      "priority": 7,
-      "iconUrl": "/uploads/1776932398152-37517242-gdtography.jpg"
+      "name": "SQL Server",
+      "level": 70,
+      "category": "Databases",
+      "priority": 6,
+      "description": "",
+      "yearsOfExperience": 5,
+      "certificationUrl": "",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1777650178059-azure-sql-server-512px.png",
+      "id": "1777650179743"
     },
     {
       "name": "Codex",
@@ -329,14 +265,6 @@
       "id": "1777649663200"
     },
     {
-      "id": "skill-009",
-      "name": "Matplotlib, Seaborn, Plotly",
-      "level": 88,
-      "category": "Data Visualization",
-      "priority": 9,
-      "iconUrl": "/uploads/1776932406078-192278685-comet.jpg"
-    },
-    {
       "name": "Eclipse IDE",
       "level": 80,
       "category": "IDE & Editors",
@@ -347,42 +275,6 @@
       "isHighlighted": false,
       "iconUrl": "http://localhost:3001/uploads/1777649773282-eclipse-ide-512px.png",
       "id": "1777649780057"
-    },
-    {
-      "id": "skill-010",
-      "name": "Power BI & Tableau",
-      "level": 84,
-      "category": "Data Visualization",
-      "priority": 10,
-      "iconUrl": "/uploads/1776932414758-517369120-green_sea.jpg"
-    },
-    {
-      "id": "skill-011",
-      "name": "Hugging Face, NLTK, spaCy",
-      "level": 78,
-      "category": "NLP",
-      "priority": 11,
-      "iconUrl": "/uploads/1776932425006-386292081-forest-landscape.jpg"
-    },
-    {
-      "id": "skill-014",
-      "name": "Statistics & Data Storytelling",
-      "level": 89,
-      "category": "Core Strengths",
-      "priority": 14,
-      "iconUrl": "/uploads/1776932444982-615577727-frozen-shores-burning-sky.jpeg"
-    },
-    {
-      "name": "SQL Server",
-      "level": 70,
-      "category": "Databases",
-      "priority": 6,
-      "description": "",
-      "yearsOfExperience": 5,
-      "certificationUrl": "",
-      "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777650178059-azure-sql-server-512px.png",
-      "id": "1777650179743"
     }
   ],
   "projects": [
@@ -546,8 +438,8 @@
     "footerText": "Chea Rotha. All rights reserved.",
     "maintenanceMode": false,
     "primaryColor": "#fbbf24",
-    "gmailUser": "",
-    "gmailPass": "",
+    "gmailUser": "chearotha.itc.edu@gmail.com",
+    "gmailPass": "njmh qibb hlse wqnj",
     "showReferences": true,
     "siteLogoUrl": "",
     "announcementText": "",
@@ -561,13 +453,30 @@
       "IDE & Editors",
       "Programming Languages",
       "Machine Learning",
-      "Statistics & Math",
-      "Data Visualization",
-      "Databases",
-      "Core Strengths"
+      "Databases"
+    ],
+    "disabledSkillCategories": [
+      "Programming Languages",
+      "Machine Learning",
+      "Databases"
     ]
   },
   "blog": [
+    {
+      "title": "Artificial Intelligence",
+      "content": "<p>The U.S. State Department has ordered a global push to bring attention to what it says are widespread ‌efforts by Chinese companies, including AI startup DeepSeek, to steal intellectual property from U.S. artificial intelligence labs, according to a diplomatic cable seen by Reuters.</p>",
+      "excerpt": "Exclusive: US State Dept orders global warning about alleged China AI thefts by DeepSeek, others",
+      "imageUrl": "/uploads/1777077224828-211037617-KIK4AUMDLBLZ3MA7ULN3KENZZQ.avif",
+      "tags": [
+        "Deepseek"
+      ],
+      "status": "published",
+      "createdAt": "2026-04-25T00:32:34.887Z",
+      "seoTitle": "",
+      "seoDescription": "",
+      "seoKeywords": "",
+      "id": "1777077226855"
+    },
     {
       "title": "Articles on Civil engineering",
       "content": "<h2><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/traffic-engineers-build-roads-that-invite-crashes-because-they-rely-on-outdated-research-and-faulty-data-223710\"><strong>Traffic engineers build roads that invite crashes because they rely on outdated research and faulty&nbsp;data</strong></a></h2><p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/profiles/wesley-marshall-1512110\">Wesley Marshall</a>, <em>University of Colorado Denver</em></p><p>A traffic engineer argues that, contrary to his professionÃ¢â‚¬â„¢s view, Ã¢â‚¬Ëœhuman errorÃ¢â‚¬â„¢ is not the main cause of deaths in car crashes in the US.</p>",
@@ -599,19 +508,19 @@
       "id": "1776831924851"
     },
     {
-      "title": "Artificial Intelligence",
-      "content": "<p>The U.S. State Department has ordered a global push to bring attention to what it says are widespread ‌efforts by Chinese companies, including AI startup DeepSeek, to steal intellectual property from U.S. artificial intelligence labs, according to a diplomatic cable seen by Reuters.</p>",
-      "excerpt": "Exclusive: US State Dept orders global warning about alleged China AI thefts by DeepSeek, others",
-      "imageUrl": "/uploads/1777077224828-211037617-KIK4AUMDLBLZ3MA7ULN3KENZZQ.avif",
+      "title": "Khmer BESS",
+      "content": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com/search?sca_esv=d1b2e046e6c1a3bf&amp;rlz=1C1MYPO_enKH1196KH1196&amp;sxsrf=ANbL-n6L_gZOACU1NAKoTxyBvsAIwGARsw:1777715413406&amp;udm=2&amp;fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&amp;q=battery+energy+storage+system+operation&amp;sa=X&amp;ved=2ahUKEwjo_Oj9qZqUAxXHyDgGHRjYG7gQtKgLegQIFhAB&amp;biw=1920&amp;bih=911&amp;dpr=1.5#sv=CAMSVhoyKhBlLThrNFp3Sk9KNlJxUUhNMg44azRad0pPSjZScVFITToOUkZ2TEktMkZ1anZaeE0gBCocCgZtb3NhaWMSEGUtOGs0WndKT0o2UnFRSE0YADABGAcgmY6WyQVKCBABGAEgASgB\">hello</a></p><img src=\"https://www.power-sonic.com/wp-content/uploads/2025/08/Battery-Energy-Storage-System-Components-EVESCO-1024x334.png\"><p></p>",
+      "excerpt": "ess",
+      "imageUrl": "http://localhost:3001/uploads/1777715613707-766851729-SWG1_TODAY_2026-01-13.png",
       "tags": [
-        "Deepseek"
+        ""
       ],
       "status": "published",
-      "createdAt": "2026-04-25T00:32:34.887Z",
+      "createdAt": "2026-05-02T09:35:46.980Z",
       "seoTitle": "",
       "seoDescription": "",
       "seoKeywords": "",
-      "id": "1777077226855"
+      "id": "1777715616092"
     }
   ],
   "activity_logs": [],

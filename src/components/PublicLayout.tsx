@@ -125,16 +125,14 @@ export function PublicLayout() {
         aria-hidden
         className={cn(
           'fixed inset-0 z-0 pointer-events-none transition-colors duration-500',
-          bgImage ? 'bg-white/60 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'
+          bgImage ? 'bg-white/90 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'
         )}
       />
 
       <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-colors duration-500">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center">
-            <span className="font-display text-2xl font-bold tracking-tighter text-zinc-900 transition-colors group-hover:text-amber-500 dark:text-white dark:group-hover:text-amber-400">
-              CR.
-            </span>
+            <img src="/robot.gif" alt="Robot Assistant" className="h-10 w-10 sm:h-12 sm:w-12 object-contain hover:scale-105 transition-transform" />
           </a>
 
           <nav className="hidden items-center gap-1 md:flex">

@@ -142,6 +142,17 @@ interface Reference {
   priority: number;
 }
 
+interface BlogPost {
+  id: string;
+  title: string;
+  content: string;
+  excerpt: string;
+  imageUrl: string;
+  tags: string[];
+  status: 'draft' | 'published';
+  createdAt: string;
+}
+
 interface SiteSettings {
   showAbout: boolean;
   showExperience: boolean;
@@ -172,17 +183,20 @@ interface DataState {
   experience: Experience[];
   education: Education[];
   references: Reference[];
+  blog: BlogPost[];
   settings: SiteSettings | null;
   
   profileLoaded: boolean;
   projectsLoaded: boolean;
   experienceLoaded: boolean;
+  blogLoaded: boolean;
   settingsLoaded: boolean;
 
   setProfile: (profile: Profile | null) => void;
   fetchProfileAndSkills: () => Promise<void>;
   fetchProjects: () => Promise<void>;
   fetchExperienceAndEducation: () => Promise<void>;
+  fetchBlog: () => Promise<void>;
   fetchSettings: () => Promise<void>;
 }
 
@@ -193,11 +207,13 @@ export const useDataStore = create<DataState>((set, get) => ({
   experience: [],
   education: [],
   references: [],
+  blog: [],
   settings: null,
   
   profileLoaded: false,
   projectsLoaded: false,
   experienceLoaded: false,
+  blogLoaded: false,
   settingsLoaded: false,
 
   setProfile: (profile) => set({
@@ -270,6 +286,24 @@ export const useDataStore = create<DataState>((set, get) => ({
         experience: [],
         education: [],
         experienceLoaded: true,
+      });
+    }
+  },
+
+  fetchBlog: async () => {
+    if (get().blogLoaded) return;
+    
+    try {
+      const blogData = await fetchCollection('blog');
+      set({ 
+        blog: Array.isArray(blogData) ? blogData : [], 
+        blogLoaded: true 
+      });
+    } catch (error) {
+      console.error("Error fetching blog:", error);
+      set({
+        blog: [],
+        blogLoaded: true,
       });
     }
   },

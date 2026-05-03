@@ -25,3 +25,48 @@ html, body {
 html::-webkit-scrollbar, body::-webkit-scrollbar {
   display: none; /* Chrome, Safari and Opera */
 }
+
+/* Professional Blog Typography */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h2 {
+  @apply text-3xl font-display font-bold mt-12 mb-6 text-zinc-900 dark:text-white;
+}
+
+.prose h3 {
+  @apply text-2xl font-display font-bold mt-8 mb-4 text-zinc-900 dark:text-white;
+}
+
+.prose p {
+  @apply text-lg leading-relaxed mb-6 text-zinc-600 dark:text-zinc-400;
+}
+
+.prose ul, .prose ol {
+  @apply mb-6 ml-6 space-y-2;
+}
+
+.prose li {
+  @apply text-lg text-zinc-600 dark:text-zinc-400;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-amber-500 pl-6 py-2 bg-amber-50/50 dark:bg-amber-900/10 rounded-r-2xl italic text-xl text-zinc-700 dark:text-zinc-300 mb-8;
+}
+
+.prose pre {
+  @apply bg-zinc-950 text-zinc-100 p-6 rounded-2xl overflow-x-auto border border-zinc-800 mb-8 font-mono text-sm;
+}
+
+.prose code {
+  @apply font-mono text-sm bg-zinc-100 dark:bg-zinc-800 text-amber-600 dark:text-amber-400 px-1.5 py-0.5 rounded;
+}
+
+.prose img {
+  @apply rounded-3xl shadow-lg border border-zinc-200 dark:border-zinc-800 my-10;
+}
+
+.prose a {
+  @apply text-amber-600 dark:text-amber-400 font-medium underline underline-offset-4 decoration-amber-500/30 hover:decoration-amber-500 transition-all;
+}

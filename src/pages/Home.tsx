@@ -11,6 +11,8 @@ import Skills from './Skills';
 import Blog from './Blog';
 import Reference from './Reference';
 import Contact from './Contact';
+import SectionReveal from '../components/SectionReveal';
+import { motion } from 'motion/react';
 
 export default function Home() {
   const { profile, profileLoaded, fetchProfileAndSkills, settings, fetchSettings } = useDataStore();
@@ -37,7 +39,12 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center pt-16 md:pt-0">
 
             {/* Left Column - Profile Photo (Box) */}
-            <div className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start">
+            <motion.div 
+              initial={{ opacity: 0, x: -50, scale: 0.9 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start"
+            >
               <div className="relative w-full max-w-[17rem] sm:max-w-xs md:max-w-sm lg:max-w-[22rem] xl:max-w-[24rem] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
                 {profile.profilePhotoUrl ? (
                   <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover" />
@@ -48,24 +55,44 @@ export default function Home() {
                   </div>
                 )}
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column - Content */}
             <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-center">
               <div className="bg-white/70 dark:bg-transparent backdrop-blur-sm dark:backdrop-blur-none rounded-3xl p-8 lg:p-0 lg:bg-transparent lg:dark:bg-transparent transition-all duration-500">
-                <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.05]">
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.05]"
+                >
                   {profile.name || 'Setup Profile'}
-                </h1>
+                </motion.h1>
 
-                <h2 className="mt-5 text-xl md:text-2xl lg:text-3xl font-display font-medium text-amber-600 dark:text-amber-400 tracking-tight">
+                <motion.h2 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="mt-5 text-xl md:text-2xl lg:text-3xl font-display font-medium text-amber-600 dark:text-amber-400 tracking-tight"
+                >
                   {profile.title || 'Add your title in the Admin Panel'}
-                </h2>
+                </motion.h2>
 
-                <p className="mt-6 text-base md:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl">
+                <motion.p 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="mt-6 text-base md:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl"
+                >
                   {profile.bio || 'Your biography will appear here once you set up your profile.'}
-                </p>
+                </motion.p>
 
-                <div className="mt-10 flex flex-wrap items-center gap-6">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="mt-10 flex flex-wrap items-center gap-6"
+                >
                   <a href="#projects" className="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-medium rounded-full text-zinc-950 bg-amber-400 hover:bg-amber-300 transition-colors shadow-lg shadow-amber-500/20">
                     View Projects
                     <ArrowRight className="ml-2 h-5 w-5" />
@@ -96,9 +123,14 @@ export default function Home() {
                       </a>
                     )}
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="mt-14 pt-8 border-t border-zinc-300/50 dark:border-zinc-800/50 flex flex-col sm:flex-row gap-6 font-mono text-sm text-zinc-600 dark:text-zinc-400">
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 1, delay: 0.7 }}
+                  className="mt-14 pt-8 border-t border-zinc-300/50 dark:border-zinc-800/50 flex flex-col sm:flex-row gap-6 font-mono text-sm text-zinc-600 dark:text-zinc-400"
+                >
                   {profile.location && (
                     <div className="flex items-center gap-2.5">
                       <MapPin className="h-4 w-4 text-zinc-500/80" />
@@ -111,7 +143,7 @@ export default function Home() {
                       <span>{profile.phone}</span>
                     </div>
                   )}
-                </div>
+                </motion.div>
               </div>
             </div>
           </div>
@@ -119,14 +151,14 @@ export default function Home() {
       </section>
 
       {/* Other Sections */}
-      {settings?.showAbout !== false && <section id="about"><About /></section>}
-      {settings?.showExperience !== false && <section id="experience"><Experience /></section>}
-      {settings?.showProjects !== false && <section id="projects"><Projects /></section>}
-      {settings?.showGallery !== false && <section id="gallery"><Gallery /></section>}
-      {settings?.showSkills !== false && <section id="skills"><Skills /></section>}
-      {settings?.showBlog !== false && <section id="blog"><Blog /></section>}
-      {settings?.showReferences !== false && <section id="reference"><Reference /></section>}
-      {settings?.showContact !== false && <section id="contact"><Contact /></section>}
+      {settings?.showAbout !== false && <SectionReveal><section id="about"><About /></section></SectionReveal>}
+      {settings?.showExperience !== false && <SectionReveal><section id="experience"><Experience /></section></SectionReveal>}
+      {settings?.showProjects !== false && <SectionReveal><section id="projects"><Projects /></section></SectionReveal>}
+      {settings?.showGallery !== false && <SectionReveal><section id="gallery"><Gallery /></section></SectionReveal>}
+      {settings?.showSkills !== false && <SectionReveal><section id="skills"><Skills /></section></SectionReveal>}
+      {settings?.showBlog !== false && <SectionReveal><section id="blog"><Blog /></section></SectionReveal>}
+      {settings?.showReferences !== false && <SectionReveal><section id="reference"><Reference /></section></SectionReveal>}
+      {settings?.showContact !== false && <SectionReveal><section id="contact"><Contact /></section></SectionReveal>}
     </div>
   );
 }

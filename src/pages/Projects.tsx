@@ -55,7 +55,8 @@ export default function Projects() {
         className="grid gap-10 md:grid-cols-2"
         variants={containerVariants}
         initial="hidden"
-        animate="visible"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
       >
         {projects.map((project) => (
           <motion.div 
