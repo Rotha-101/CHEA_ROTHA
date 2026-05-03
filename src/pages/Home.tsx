@@ -129,7 +129,7 @@ export default function Home() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1, delay: 0.7 }}
-                  className="mt-14 pt-8 border-t border-zinc-300/50 dark:border-zinc-800/50 flex flex-col sm:flex-row gap-6 font-mono text-sm text-zinc-600 dark:text-zinc-400"
+                  className="mt-10 flex flex-col sm:flex-row gap-6 font-mono text-sm text-zinc-600 dark:text-zinc-400"
                 >
                   {profile.location && (
                     <div className="flex items-center gap-2.5">

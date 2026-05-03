@@ -151,7 +151,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: groupIdx * 0.1 }}
-                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6 border-b border-zinc-900 dark:border-white pb-2"
+                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6"
               >
                 {group.category}
               </motion.h2>
