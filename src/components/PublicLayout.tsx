@@ -148,9 +148,7 @@ export function PublicLayout() {
                     layoutId="activeTabIndicatorDesktop"
                     className="absolute inset-0 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-full -z-10"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  >
-                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[#ff4d4d] shadow-[0_0_10px_#ff4d4d]" />
-                  </motion.div>
+                  />
                 )}
                 {item.name}
               </a>
@@ -222,7 +220,7 @@ export function PublicLayout() {
                 {activeSection === item.href.substring(1) && (
                   <motion.div
                     layoutId="activeTabIndicatorMobile"
-                    className="absolute inset-y-2 left-0 w-1 bg-[#ff4d4d] shadow-[0_0_8px_#ff4d4d] rounded-full"
+                    className="absolute inset-0 bg-zinc-100 dark:bg-white/5 rounded-lg -z-10"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
