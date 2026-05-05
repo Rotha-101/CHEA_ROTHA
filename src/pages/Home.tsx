@@ -108,10 +108,10 @@ export default function Home() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-8 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-6"
               >
-                <a href="#projects" className="group relative overflow-hidden px-6 py-3 bg-[#ff4d4d] sm:px-10 sm:py-5 text-white text-[10px] sm:text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(255,77,77,0.3)]">
+                <a href="#projects" className="group relative overflow-hidden px-5 py-2.5 sm:px-8 sm:py-4 bg-[#ff4d4d] text-white text-[9px] sm:text-[10px] font-mono font-black tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(255,77,77,0.3)]">
                   <span className="relative z-10 flex items-center gap-3">
                     Initialize Projects
-                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="h-3 w-3 sm:h-3.5 sm:w-3.5 group-hover:translate-x-2 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </a>
