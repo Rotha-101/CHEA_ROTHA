@@ -34,120 +34,109 @@ export default function Home() {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-24 pb-32 md:pt-32 md:pb-40">
+      <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-40">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
 
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center pt-16 md:pt-0">
-
-            {/* Left Column - Profile Photo (Box) */}
+            {/* Left Column - Profile Visual */}
             <motion.div 
-              initial={{ opacity: 0, x: -50, scale: 0.9 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
               className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start"
             >
-              <div className="relative w-full max-w-[17rem] sm:max-w-xs md:max-w-sm lg:max-w-[22rem] xl:max-w-[24rem] aspect-[3/4] rounded-2xl overflow-hidden shadow-xl border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-zinc-800/50">
-                {profile.profilePhotoUrl ? (
-                  <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover" />
-                ) : (
-                  <div className="w-full h-full flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-600">
-                    <User className="h-24 w-24 mb-4 opacity-40" />
-                    <p className="font-mono text-sm">Upload Profile Photo</p>
-                  </div>
-                )}
+              <div className="relative group">
+                {/* Visual Orbs */}
+                <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
+                <div className="relative w-full max-w-xs aspect-[3/4] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
+                  {profile.profilePhotoUrl ? (
+                    <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
+                  ) : (
+                    <div className="w-full h-full flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-700">
+                      <User className="h-20 w-20 mb-4 opacity-20" />
+                      <p className="font-mono text-[10px] uppercase tracking-widest">Null_Visual</p>
+                    </div>
+                  )}
+                  {/* Decorative corner */}
+                  <div className="absolute top-6 right-6 w-3 h-3 border-t-2 border-r-2 border-[#ff4d4d]/40" />
+                  <div className="absolute bottom-6 left-6 w-3 h-3 border-b-2 border-l-2 border-[#ff4d4d]/40" />
+                </div>
               </div>
             </motion.div>
 
             {/* Right Column - Content */}
-            <div className="lg:col-span-7 order-1 lg:order-2 flex flex-col justify-center">
-              <div className="bg-white/70 dark:bg-transparent backdrop-blur-sm dark:backdrop-blur-none rounded-3xl p-8 lg:p-0 lg:bg-transparent lg:dark:bg-transparent transition-all duration-500">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.1]"
-                >
-                  {profile.name || 'Setup Profile'}
-                </motion.h1>
-
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.3 }}
-                  className="mt-4 text-lg sm:text-xl md:text-2xl lg:text-3xl font-display font-medium text-amber-600 dark:text-amber-400 tracking-tight"
-                >
-                  {profile.title || 'Add your title in the Admin Panel'}
-                </motion.h2>
-
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mt-6 text-sm sm:text-base md:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl"
-                >
-                  {profile.bio || 'Your biography will appear here once you set up your profile.'}
-                </motion.p>
-
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.5 }}
-                  className="mt-10 flex flex-wrap items-center gap-6"
-                >
-                  <a href="#projects" className="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-base font-medium rounded-full text-zinc-950 bg-amber-400 hover:bg-amber-300 transition-colors shadow-lg shadow-amber-500/20">
-                    View Projects
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </a>
-
-                  <div className="flex items-center gap-6 ml-2">
-                    {profile.cvUrl && (
-                      <a href={profile.cvUrl} target="_blank" rel="noreferrer" className="text-zinc-700 hover:text-amber-600 dark:text-zinc-400 dark:hover:text-amber-400 transition-colors font-medium text-sm border-b border-transparent hover:border-amber-400 pb-0.5">
-                        Download CV
-                      </a>
-                    )}
-                    {profile.github && (
-                      <a href={profile.github} target="_blank" rel="noreferrer" className="text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white transition-colors">
-                        <span className="sr-only">GitHub</span>
-                        <Github className="h-6 w-6" />
-                      </a>
-                    )}
-                    {profile.linkedin && (
-                      <a href={profile.linkedin} target="_blank" rel="noreferrer" className="text-zinc-600 hover:text-blue-600 dark:text-zinc-400 dark:hover:text-blue-400 transition-colors">
-                        <span className="sr-only">LinkedIn</span>
-                        <Linkedin className="h-6 w-6" />
-                      </a>
-                    )}
-                    {profile.email && (
-                      <a href={`mailto:${profile.email}`} className="text-zinc-600 hover:text-red-500 dark:text-zinc-400 dark:hover:text-red-400 transition-colors">
-                        <span className="sr-only">Email</span>
-                        <Mail className="h-6 w-6" />
-                      </a>
-                    )}
-                  </div>
-                </motion.div>
-
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 1, delay: 0.7 }}
-                  className="mt-10 flex flex-col sm:flex-row gap-6 font-mono text-sm text-zinc-600 dark:text-zinc-400"
-                >
-                  {profile.location && (
-                    <div className="flex items-center gap-2.5">
-                      <MapPin className="h-4 w-4 text-zinc-500/80" />
-                      <span>{profile.location}</span>
-                    </div>
-                  )}
-                  {profile.phone && (
-                    <div className="flex items-center gap-2.5">
-                      <Phone className="h-4 w-4 text-zinc-500/80" />
-                      <span>{profile.phone}</span>
-                    </div>
-                  )}
-                </motion.div>
+            <div className="lg:col-span-7 order-1 lg:order-2 relative">
+              <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#ff4d4d] mb-6 tracking-[0.4em] uppercase">
+                <span className="w-12 h-px bg-[#ff4d4d]/40" />
+                Core_Identifier
               </div>
+              
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="text-6xl sm:text-7xl lg:text-9xl font-display font-black tracking-tighter text-zinc-950 dark:text-white leading-[0.9] uppercase"
+              >
+                {profile.name?.split(' ')[0] || 'Node'}
+                <br />
+                <span className="text-zinc-100 dark:text-zinc-800 outline-text">{profile.name?.split(' ')[1] || 'Initialized'}</span>
+              </motion.h1>
+
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="mt-8 text-xl sm:text-2xl font-mono font-bold text-[#ff4d4d] tracking-widest uppercase flex items-center gap-4"
+              >
+                <span className="w-2 h-2 rounded-full bg-[#ff4d4d] animate-pulse" />
+                {profile.title}
+              </motion.h2>
+
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="mt-8 text-lg text-zinc-600 dark:text-zinc-500 leading-relaxed max-w-2xl font-medium"
+              >
+                {profile.bio}
+              </motion.p>
+
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
+                className="mt-12 flex flex-wrap items-center gap-6"
+              >
+                <a href="#projects" className="group relative overflow-hidden px-10 py-5 bg-[#ff4d4d] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(255,77,77,0.3)]">
+                  <span className="relative z-10 flex items-center gap-3">
+                    Initialize Projects
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+                </a>
+
+                <div className="flex items-center gap-6">
+                  {profile.github && (
+                    <a href={profile.github} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all">
+                      <Github className="h-5 w-5" />
+                    </a>
+                  )}
+                  {profile.linkedin && (
+                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all">
+                      <Linkedin className="h-5 w-5" />
+                    </a>
+                  )}
+                </div>
+              </motion.div>
             </div>
           </div>
+        </div>
+
+        {/* Scroll Indicator */}
+        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
+          <span className="text-[9px] font-mono font-bold uppercase tracking-[0.5em] text-zinc-500 dark:text-zinc-500">Scroll_To_Explore</span>
+          <div className="w-px h-20 bg-gradient-to-b from-[#ff4d4d] to-transparent animate-shimmer" />
         </div>
       </section>
 

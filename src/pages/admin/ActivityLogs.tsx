@@ -50,7 +50,7 @@ export default function ActivityLogs() {
       <div className="flex justify-between items-center mb-8">
         <div>
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-            <History className="text-amber-500" />
+            <History className="text-[#ff4d4d]" />
             System Audit Trail
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400">Track all administrative changes and system security events.</p>

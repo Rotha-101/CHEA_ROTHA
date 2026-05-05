@@ -141,130 +141,149 @@ export default function Projects() {
     }
   };
 
-  if (loading) return <div className="text-zinc-500 dark:text-zinc-400">Loading projects...</div>;
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-[40vh]">
+      <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Projects</h1>
-        <button
-          onClick={() => {
-            setEditingId(null);
-            reset({ title: '', description: '', imageUrl: '', tags: [], githubUrl: '', liveUrl: '', status: 'Completed', priority: 0 });
-            setIsFormOpen(true);
-          }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
-        >
-          <Plus className="-ml-1 mr-2 h-5 w-5" />
-          Add Project
-        </button>
+    <div className="max-w-5xl mx-auto pb-24">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+        <div>
+          <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-3">
+            <span className="w-8 h-px bg-[#ff4d4d]/30" />
+            REPOSITORY
+          </div>
+          <h1 className="text-4xl font-display font-bold text-white tracking-tight">Project Management</h1>
+          <p className="text-zinc-500 text-sm font-medium mt-2">Curate and manage your technical deployments.</p>
+        </div>
+        {!isFormOpen && (
+          <button
+            onClick={() => {
+              setEditingId(null);
+              reset({ title: '', description: '', imageUrl: '', tags: [], githubUrl: '', liveUrl: '', status: 'Completed', priority: 0 });
+              setIsFormOpen(true);
+            }}
+            className="group px-6 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all flex items-center gap-3 shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase"
+          >
+            <Plus className="h-4 w-4" />
+            Initialize Project
+          </button>
+        )}
       </div>
 
       {isFormOpen && (
-        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-4">
-            {editingId ? 'Edit Project' : 'New Project'}
+        <div className="mb-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff4d4d]/5 blur-[100px] pointer-events-none" />
+          <h2 className="text-xl font-display font-bold text-white mb-8">
+            {editingId ? 'Edit Configuration' : 'New Configuration'}
           </h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <div className="sm:col-span-4">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Title</label>
-                <input type="text" {...register('title', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-8 relative z-10">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-6">
+              <div className="sm:col-span-4 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Title</label>
+                <input type="text" {...register('title', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Status</label>
-                <select {...register('status')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500">
+              <div className="sm:col-span-2 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Status</label>
+                <select {...register('status')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold appearance-none">
                   <option value="Completed">Completed</option>
                   <option value="In Progress">In Progress</option>
                   <option value="Planned">Planned</option>
                 </select>
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description</label>
-                <textarea rows={3} {...register('description', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Description</label>
+                <textarea rows={3} {...register('description', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Project Image</label>
-                <div className="mt-2 flex items-center gap-4">
-                  {imageUrl && (
-                    <img src={imageUrl} alt="Preview" className="h-20 w-32 object-cover rounded-md border border-zinc-200 dark:border-zinc-700" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Project Visual</label>
+                <div className="mt-2 flex flex-col sm:flex-row items-start gap-6">
+                  {imageUrl ? (
+                    <img src={imageUrl} alt="Preview" className="h-32 w-48 object-cover rounded-2xl border border-white/10" />
+                  ) : (
+                    <div className="h-32 w-48 bg-white/5 border border-white/10 rounded-2xl flex items-center justify-center text-zinc-500 font-mono text-[10px]">NO_IMAGE</div>
                   )}
-                  <div className="flex flex-col gap-2">
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm text-zinc-500 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 dark:file:bg-amber-900/30 dark:file:text-amber-400" />
-                    {uploadingImage && <span className="text-xs text-amber-600">Uploading...</span>}
+                  <div className="flex flex-col gap-4 flex-1">
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="w-full text-[10px] text-zinc-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#ff4d4d]/10 file:text-[#ff4d4d] file:font-bold hover:file:bg-[#ff4d4d]/20 transition-all" />
+                    {uploadingImage && <span className="text-[10px] font-mono text-[#ff4d4d] animate-pulse">UPLOADING_ASSETS...</span>}
                   </div>
                 </div>
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Tags (comma separated)</label>
-                <input type="text" {...register('tags' as any)} placeholder="React, TypeScript, Tailwind" className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Tags (Comma Separated)</label>
+                <input type="text" {...register('tags' as any)} placeholder="React, TypeScript, Tailwind" className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">GitHub URL</label>
-                <input type="url" {...register('githubUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">GitHub Node</label>
+                <input type="url" {...register('githubUrl')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Live Demo URL</label>
-                <input type="url" {...register('liveUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Live Endpoint</label>
+                <input type="url" {...register('liveUrl')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority (lower is first)</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-2 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">System Priority</label>
+                <input type="number" {...register('priority')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3">
-              <button type="button" onClick={() => setIsFormOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-                Cancel
+            <div className="flex justify-end gap-4 pt-4">
+              <button type="button" onClick={() => setIsFormOpen(false)} className="px-6 py-4 rounded-2xl border border-white/5 text-zinc-500 text-xs font-bold hover:text-white hover:bg-white/5 transition-all tracking-widest uppercase">
+                Abort
               </button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors">
-                Save Project
+              <button type="submit" className="px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase">
+                Save Node
               </button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-colors">
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {projects.map((project) => (
-            <li key={project.id} className="p-4 sm:px-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
-                  {project.imageUrl ? (
-                    <img src={project.imageUrl} alt="" className="h-12 w-16 object-cover rounded" />
-                  ) : (
-                    <div className="h-12 w-16 bg-zinc-200 dark:bg-zinc-800 rounded flex items-center justify-center">
-                      <ImageIcon className="h-5 w-5 text-zinc-400" />
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="text-sm font-medium text-zinc-900 dark:text-white">{project.title}</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{project.status} • Priority: {project.priority}</p>
+      <div className="grid grid-cols-1 gap-6">
+        {projects.map((project) => (
+          <div key={project.id} className="group bg-white/5 backdrop-blur-md border border-white/5 rounded-3xl p-6 transition-all hover:border-[#ff4d4d]/20 hover:shadow-[0_0_30px_rgba(255,77,77,0.05)]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex flex-col sm:flex-row items-center gap-6 flex-1">
+                {project.imageUrl ? (
+                  <img src={project.imageUrl} alt="" className="h-20 w-32 object-cover rounded-xl border border-white/10 group-hover:scale-105 transition-transform duration-500" />
+                ) : (
+                  <div className="h-20 w-32 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-zinc-500">
+                    <ImageIcon className="h-6 w-6" />
+                  </div>
+                )}
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-bold text-white tracking-tight group-hover:text-[#ff4d4d] transition-colors">{project.title}</h3>
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#ff4d4d]/10 text-[#ff4d4d] uppercase">{project.status}</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-white/5 text-zinc-500 uppercase">PRIORITY_{project.priority}</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(project)} className="p-2 text-zinc-400 hover:text-amber-500 transition-colors">
-                    <Edit2 className="h-4 w-4" />
-                  </button>
-                  <button onClick={() => handleDelete(project.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
               </div>
-            </li>
-          ))}
-          {projects.length === 0 && (
-            <li className="p-6 text-center text-zinc-500 dark:text-zinc-400">No projects found. Add one to get started.</li>
-          )}
-        </ul>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleEdit(project)} className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:border-[#ff4d4d]/30 transition-all">
+                  <Edit2 className="h-4 w-4" />
+                </button>
+                <button onClick={() => handleDelete(project.id)} className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        {projects.length === 0 && (
+          <div className="p-20 text-center bg-white/5 border border-white/5 border-dashed rounded-[40px]">
+            <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">Empty Repository. Initialize New Node.</p>
+          </div>
+        )}
       </div>
     </div>
   );

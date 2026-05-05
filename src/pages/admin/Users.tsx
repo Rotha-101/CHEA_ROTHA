@@ -87,7 +87,7 @@ export default function Users() {
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-          <Shield className="text-amber-500" />
+          <Shield className="text-[#ff4d4d]" />
           User Management
         </h1>
       </div>
@@ -115,8 +115,8 @@ export default function Users() {
                   <tr key={uid} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
                     <td className="px-6 py-4 whitespace-nowrap">
                       <div className="flex items-center">
-                        <div className="h-10 w-10 flex-shrink-0 bg-amber-100 dark:bg-amber-900/30 rounded-full flex items-center justify-center">
-                          <UserIcon className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                        <div className="h-10 w-10 flex-shrink-0 bg-amber-100 dark:bg-[#ff4d4d]/20 rounded-full flex items-center justify-center">
+                          <UserIcon className="h-5 w-5 text-[#ff4d4d] dark:text-[#ff4d4d]" />
                         </div>
                         <div className="ml-4">
                           <div className="text-sm font-medium text-zinc-900 dark:text-white">{user.name || user.displayName || 'Admin'}</div>

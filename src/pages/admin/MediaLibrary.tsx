@@ -31,7 +31,7 @@ function extractUrls(value: any): string[] {
 }
 
 const CATEGORIES = [
-  { id: 'all',        label: 'All',        color: 'bg-amber-400 text-zinc-950' },
+  { id: 'all',        label: 'All',        color: 'bg-[#ff4d4d] text-zinc-950' },
   { id: 'profile',    label: 'Profile',    color: 'bg-blue-500 text-white' },
   { id: 'background', label: 'Background', color: 'bg-purple-500 text-white' },
   { id: 'experience', label: 'Experience', color: 'bg-green-500 text-white' },
@@ -203,14 +203,14 @@ export default function MediaLibrary() {
               placeholder="Search files..."
               value={searchTerm}
               onChange={e => setSearchTerm(e.target.value)}
-              className="pl-9 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-lg text-sm focus:ring-amber-500 focus:border-amber-500 outline-none w-56"
+              className="pl-9 pr-4 py-2 border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-lg text-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d] outline-none w-56"
             />
           </div>
           <div className="relative">
             <input type="file" id="media-upload" className="hidden" onChange={handleUpload} disabled={uploading} />
             <label
               htmlFor="media-upload"
-              className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors cursor-pointer ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              className={`inline-flex items-center px-4 py-2 rounded-lg text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors cursor-pointer ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
             >
               <UploadCloud className="-ml-1 mr-2 h-5 w-5" />
               {uploading ? 'Uploading...' : 'Upload File'}
@@ -231,7 +231,7 @@ export default function MediaLibrary() {
               className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all flex items-center gap-1.5 ${
                 isActive
                   ? cat.color
-                  : 'bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:border-amber-400'
+                  : 'bg-white dark:bg-zinc-900 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-zinc-700 hover:border-[#ff4d4d]'
               }`}
             >
               {cat.label}
@@ -246,7 +246,7 @@ export default function MediaLibrary() {
       {/* Grid */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-24 space-y-4">
-          <div className="w-12 h-12 border-4 border-amber-400 border-t-transparent rounded-full animate-spin" />
+          <div className="w-12 h-12 border-4 border-[#ff4d4d] border-t-transparent rounded-full animate-spin" />
           <p className="text-zinc-500 dark:text-zinc-400 font-mono text-xs uppercase tracking-widest animate-pulse">Loading & categorizing media...</p>
         </div>
       ) : filteredFiles.length === 0 ? (
@@ -257,7 +257,7 @@ export default function MediaLibrary() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {filteredFiles.map(file => (
-            <div key={file.path} className="group relative bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-md hover:border-amber-400/50 transition-all">
+            <div key={file.path} className="group relative bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-md hover:border-[#ff4d4d]/50 transition-all">
               {/* Thumbnail */}
               <div className="aspect-square w-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center overflow-hidden">
                 {file.type === 'image' ? (
@@ -289,7 +289,7 @@ export default function MediaLibrary() {
               <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
                 <button
                   onClick={() => handleCopy(file.url)}
-                  className="p-2 bg-white text-zinc-900 rounded-full hover:bg-amber-400 transition-colors"
+                  className="p-2 bg-white text-zinc-900 rounded-full hover:bg-[#ff4d4d] transition-colors"
                   title={copiedUrl === file.url ? 'Copied!' : 'Copy URL'}
                 >
                   <Copy className={`h-4 w-4 ${copiedUrl === file.url ? 'text-green-600' : ''}`} />

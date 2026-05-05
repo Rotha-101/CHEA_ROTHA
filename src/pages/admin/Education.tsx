@@ -122,7 +122,7 @@ export default function Education() {
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Education</h1>
         <button
           onClick={() => { setEditingId(null); setPhotos([]); reset({ institution: '', degree: '', field: '', startDate: '', endDate: '', description: '', priority: 0 }); setIsFormOpen(true); }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
+          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors"
         >
           <Plus className="-ml-1 mr-2 h-5 w-5" /> Add Education
         </button>
@@ -137,31 +137,31 @@ export default function Education() {
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Institution</label>
-                <input type="text" {...register('institution', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('institution', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Degree</label>
-                <input type="text" {...register('degree', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('degree', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Field of Study</label>
-                <input type="text" {...register('field')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('field')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Start Date</label>
-                <input type="text" placeholder="e.g., 2018" {...register('startDate', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" placeholder="e.g., 2018" {...register('startDate', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">End Date</label>
-                <input type="text" placeholder="e.g., 2022" {...register('endDate')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" placeholder="e.g., 2022" {...register('endDate')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description / Achievements</label>
-                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500" />
+                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
               {/* Photo Upload */}
@@ -169,7 +169,7 @@ export default function Education() {
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2 flex items-center gap-2">
                   <Image className="w-4 h-4" /> Photos (optional — multiple allowed)
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer w-fit px-4 py-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-amber-400 text-zinc-600 dark:text-zinc-400 hover:text-amber-500 transition-colors text-sm">
+                <label className="flex items-center gap-2 cursor-pointer w-fit px-4 py-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-[#ff4d4d] text-zinc-600 dark:text-zinc-400 hover:text-[#ff4d4d] transition-colors text-sm">
                   <Upload className="w-4 h-4" />
                   {uploading ? 'Uploading...' : 'Upload Photos'}
                   <input type="file" accept="image/*" multiple className="hidden" onChange={e => handlePhotoUpload(e.target.files)} disabled={uploading} />
@@ -191,7 +191,7 @@ export default function Education() {
 
             <div className="flex justify-end gap-3">
               <button type="button" onClick={() => { setIsFormOpen(false); setPhotos([]); }} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">Cancel</button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors">Save Education</button>
+              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors">Save Education</button>
             </div>
           </form>
         </div>
@@ -212,12 +212,12 @@ export default function Education() {
                     <h3 className="text-sm font-medium text-zinc-900 dark:text-white">{edu.degree} in {edu.field}</h3>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">
                       {edu.institution} • {edu.startDate} - {edu.endDate} • Priority: {edu.priority}
-                      {edu.photos?.length > 0 && <span className="ml-2 text-amber-500">📷 {edu.photos.length} photo{edu.photos.length > 1 ? 's' : ''}</span>}
+                      {edu.photos?.length > 0 && <span className="ml-2 text-[#ff4d4d]">📷 {edu.photos.length} photo{edu.photos.length > 1 ? 's' : ''}</span>}
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(edu)} className="p-2 text-zinc-400 hover:text-amber-500 transition-colors"><Edit2 className="h-4 w-4" /></button>
+                  <button onClick={() => handleEdit(edu)} className="p-2 text-zinc-400 hover:text-[#ff4d4d] transition-colors"><Edit2 className="h-4 w-4" /></button>
                   <button onClick={() => handleDelete(edu.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors"><Trash2 className="h-4 w-4" /></button>
                 </div>
               </div>

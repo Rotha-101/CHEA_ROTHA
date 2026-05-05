@@ -259,19 +259,31 @@ export default function Skills() {
     }
   };
 
-  if (loading) return <div className="text-zinc-500 dark:text-zinc-400">Loading skills...</div>;
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-[40vh]">
+      <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto pb-24">
       {/* Toast */}
       {toast && (
-        <div className="fixed top-6 right-6 z-[200] px-5 py-3 rounded-xl bg-green-500 text-white text-sm font-medium shadow-lg animate-in slide-in-from-top">
+        <div className="fixed top-6 right-6 z-[200] px-5 py-3 rounded-xl bg-[#ff4d4d] text-white text-[10px] font-mono font-bold tracking-widest shadow-[0_0_30px_rgba(255,77,77,0.3)] animate-in slide-in-from-top uppercase">
           {toast}
         </div>
       )}
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Skills</h1>
-        <div className="flex gap-3">
+
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+        <div>
+          <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-3">
+            <span className="w-8 h-px bg-[#ff4d4d]/30" />
+            ARSENAL
+          </div>
+          <h1 className="text-4xl font-display font-bold text-white tracking-tight">Skill Matrix</h1>
+          <p className="text-zinc-500 text-sm font-medium mt-2">Inventory and proficiency management.</p>
+        </div>
+        <div className="flex flex-wrap gap-3">
           <button
             onClick={() => {
               const list = [...categoryOrderList];
@@ -285,23 +297,21 @@ export default function Skills() {
                   changed = true;
                 }
               });
-              if (changed) {
-                setCategoryOrderList(list);
-              }
+              if (changed) setCategoryOrderList(list);
               setIsCategoryModalOpen(true);
             }}
-            className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors bg-white dark:bg-zinc-900"
+            className="px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white text-[10px] font-bold rounded-2xl transition-all tracking-widest uppercase"
           >
-            Category Order
+            Categories
           </button>
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors"
+            className="px-5 py-3 bg-white/5 hover:bg-white/10 border border-white/5 text-white text-[10px] font-bold rounded-2xl transition-all tracking-widest uppercase outline-none appearance-none cursor-pointer"
           >
-            <option value="All">All Categories</option>
+            <option value="All" className="bg-[#0a0a0a]">Filter: All</option>
             {categoryOrderList.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
+              <option key={cat} value={cat} className="bg-[#0a0a0a]">{cat}</option>
             ))}
           </select>
           <button
@@ -310,212 +320,205 @@ export default function Skills() {
               reset({ name: '', level: 50, category: 'Frontend', priority: 0 });
               setIsFormOpen(true);
             }}
-            className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
+            className="px-5 py-3 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-[10px] font-bold rounded-2xl transition-all shadow-xl tracking-widest uppercase"
           >
-            <Plus className="-ml-1 mr-2 h-5 w-5" />
             Add Skill
           </button>
         </div>
       </div>
 
       {isCategoryModalOpen && (
-        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-2">
-            Manage Category Order
-          </h2>
-          <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-6">
-            Use the arrows to reorder categories, or add a new category to the list. This controls the order they appear on your public Skills page.
-          </p>
+        <div className="mb-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl relative overflow-hidden">
+          <h2 className="text-xl font-display font-bold text-white mb-2">Category Orchestrator</h2>
+          <p className="text-sm text-zinc-500 font-medium mb-10">Define the hierarchy and visibility of your tech stack.</p>
           
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 mb-3 flex items-center gap-1.5">
-            <Eye className="w-3.5 h-3.5 text-green-500" /> = Visible on public page &nbsp;·&nbsp;
-            <EyeOff className="w-3.5 h-3.5 text-zinc-400" /> = Hidden from public page
-          </p>
-          <ul className="divide-y divide-zinc-200 dark:divide-zinc-800 border border-zinc-200 dark:border-zinc-800 rounded-xl max-h-[400px] overflow-y-auto mb-4 bg-zinc-50/50 dark:bg-zinc-950/20">
+          <ul className="divide-y divide-white/5 border border-white/5 rounded-3xl overflow-hidden bg-black/20 mb-8">
             {categoryOrderList.map((cat, index) => {
               const isDisabled = disabledCategories.includes(cat);
               return (
-              <li key={cat} className={`p-3 flex items-center justify-between transition-colors group ${isDisabled ? 'opacity-50 bg-zinc-100/50 dark:bg-zinc-800/30' : 'hover:bg-zinc-100 dark:hover:bg-zinc-800/50'}`}>
-                <div className="flex items-center gap-3">
-                  {/* Toggle Switch */}
+              <li key={cat} className={`p-4 flex items-center justify-between transition-all group ${isDisabled ? 'opacity-40' : 'hover:bg-white/[0.02]'}`}>
+                <div className="flex items-center gap-6">
                   <button
                     type="button"
                     onClick={() => toggleCategory(cat)}
-                    title={isDisabled ? 'Enable on public page' : 'Hide from public page'}
-                    className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none ${
-                      isDisabled ? 'bg-zinc-300 dark:bg-zinc-700' : 'bg-amber-500'
+                    className={`relative inline-flex h-6 w-11 items-center rounded-full transition-all focus:outline-none ${
+                      isDisabled ? 'bg-zinc-800' : 'bg-[#ff4d4d]'
                     }`}
                   >
-                    <span
-                      className="inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform"
-                      style={{ transform: `translateX(${isDisabled ? '2px' : '18px'})` }}
-                    />
+                    <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-all ${isDisabled ? 'translate-x-1' : 'translate-x-6'}`} />
                   </button>
-                  <span className={`text-sm font-medium ${isDisabled ? 'line-through text-zinc-400 dark:text-zinc-600' : 'text-zinc-700 dark:text-zinc-300'}`}>{cat}</span>
-                  {isDisabled && <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-200 dark:bg-zinc-700 text-zinc-500 dark:text-zinc-400">Hidden</span>}
+                  <span className="text-sm font-bold text-white">{cat}</span>
                 </div>
-                <div className="flex gap-1 opacity-60 group-hover:opacity-100 transition-opacity">
-                  <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-1.5 text-zinc-400 hover:text-amber-500 disabled:opacity-30 disabled:hover:text-zinc-400 cursor-pointer disabled:cursor-not-allowed">
+                <div className="flex gap-2">
+                  <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
                     <ArrowUp className="w-4 h-4" />
                   </button>
-                  <button type="button" onClick={() => moveCategoryDown(index)} disabled={index === categoryOrderList.length - 1} className="p-1.5 text-zinc-400 hover:text-amber-500 disabled:opacity-30 disabled:hover:text-zinc-400 cursor-pointer disabled:cursor-not-allowed">
+                  <button type="button" onClick={() => moveCategoryDown(index)} disabled={index === categoryOrderList.length - 1} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
                     <ArrowDown className="w-4 h-4" />
                   </button>
-                  <button type="button" onClick={() => removeCategory(index)} className="p-1.5 text-zinc-400 hover:text-red-500 cursor-pointer">
+                  <button type="button" onClick={() => removeCategory(index)} className="p-2 text-zinc-500 hover:text-red-500">
                     <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </li>
               );
             })}
-            {categoryOrderList.length === 0 && (
-              <li className="p-4 text-center text-sm text-zinc-500">No categories found.</li>
-            )}
           </ul>
           
-          <div className="flex gap-3 mb-6">
+          <div className="flex gap-4 mb-10">
             <input 
               type="text" 
               value={newCategoryName} 
               onChange={(e) => setNewCategoryName(e.target.value)} 
-              onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), addCategory())}
-              placeholder="Enter new category name..." 
-              className="flex-1 sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" 
+              placeholder="Inject new category identifier..." 
+              className="flex-1 px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white text-sm outline-none"
             />
-            <button type="button" onClick={addCategory} className="px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-              Add Category
+            <button type="button" onClick={addCategory} className="px-6 py-4 bg-white/5 hover:bg-white/10 text-white text-[10px] font-bold rounded-2xl transition-all tracking-widest uppercase">
+              Add
             </button>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t border-zinc-200 dark:border-zinc-800">
-            <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-              Cancel
+          <div className="flex justify-end gap-4 pt-8 border-t border-white/5">
+            <button type="button" onClick={() => setIsCategoryModalOpen(false)} className="px-6 py-4 text-zinc-500 text-[10px] font-bold tracking-widest uppercase hover:text-white transition-all">
+              Abort
             </button>
-            <button type="button" onClick={saveCategoryOrder} disabled={savingCategories} className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors disabled:opacity-50">
-              {savingCategories ? 'Saving...' : 'Save Category Order'}
+            <button type="button" onClick={saveCategoryOrder} disabled={savingCategories} className="px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-[10px] font-bold rounded-2xl transition-all tracking-widest uppercase shadow-xl">
+              {savingCategories ? 'SYNCING...' : 'COMMIT CHANGES'}
             </button>
           </div>
         </div>
       )}
 
       {isFormOpen && (
-        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-4">
-            {editingId ? 'Edit Skill' : 'New Skill'}
+        <div className="mb-12 bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl relative overflow-hidden">
+          <h2 className="text-xl font-display font-bold text-white mb-10">
+            {editingId ? 'Modify Skill Node' : 'Initialize New Skill'}
           </h2>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Skill Name</label>
-                <input type="text" {...register('name', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-6">
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Nomenclature</label>
+                <input type="text" {...register('name', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Category</label>
-                <select {...register('category', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500">
-                  <option value="">Select a category</option>
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Classification</label>
+                <select {...register('category', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold appearance-none">
+                  <option value="" className="bg-[#0a0a0a]">Select Category</option>
                   {categoryOrderList.map(cat => (
-                    <option key={cat} value={cat}>{cat}</option>
+                    <option key={cat} value={cat} className="bg-[#0a0a0a]">{cat}</option>
                   ))}
                 </select>
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Proficiency Level (0-100)</label>
-                <input type="number" min="0" max="100" {...register('level', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Proficiency (%)</label>
+                <input type="number" min="0" max="100" {...register('level', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono font-bold" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority (lower is first)</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Priority Index</label>
+                <input type="number" {...register('priority')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+              </div>
+
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Capability Description</label>
+                <textarea rows={2} {...register('description')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
+              </div>
+
+              <div className="sm:col-span-2 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Experience (Years)</label>
+                <input type="number" step="0.5" min="0" {...register('yearsOfExperience')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+              </div>
+
+              <div className="sm:col-span-4 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Certification Uplink</label>
+                <input type="url" {...register('certificationUrl')} placeholder="https://..." className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
               <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description / Custom Blurb</label>
-                <textarea rows={2} {...register('description')} placeholder="A brief description of how you use this skill..." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              </div>
-
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Years of Experience</label>
-                <input type="number" step="0.5" min="0" {...register('yearsOfExperience')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              </div>
-
-              <div className="sm:col-span-4">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Certification URL (Optional)</label>
-                <input type="url" {...register('certificationUrl')} placeholder="https://..." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              </div>
-
-              <div className="sm:col-span-6 flex items-center">
-                <input type="checkbox" id="isHighlighted" {...register('isHighlighted')} className="h-4 w-4 text-amber-500 focus:ring-amber-500 border-zinc-300 rounded" />
-                <label htmlFor="isHighlighted" className="ml-2 block text-sm text-zinc-700 dark:text-zinc-300">
-                  Highlight this skill (shows special glow/badge on the public page)
+                <label className="flex items-center gap-3 group cursor-pointer">
+                  <div className="relative">
+                    <input type="checkbox" {...register('isHighlighted')} className="sr-only peer" />
+                    <div className="w-10 h-6 bg-white/5 rounded-full border border-white/10 peer-checked:bg-[#ff4d4d] transition-all" />
+                    <div className="absolute top-1 left-1 w-4 h-4 bg-white rounded-full transition-all peer-checked:translate-x-4" />
+                  </div>
+                  <span className="text-sm font-medium text-zinc-400 group-hover:text-white transition-colors">Apply Highlight Radiation (Special Glow/Badge)</span>
                 </label>
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Skill Icon</label>
-                <div className="mt-2 flex items-center gap-4">
-                  {iconUrl && (
-                    <img src={iconUrl} alt="Preview" className="h-12 w-12 object-contain rounded-md border border-zinc-200 dark:border-zinc-700" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Icon Visual</label>
+                <div className="mt-2 flex items-center gap-6">
+                  {iconUrl ? (
+                    <img src={iconUrl} alt="Preview" className="h-16 w-16 object-contain rounded-xl bg-white/[0.02] border border-white/10 p-3 shadow-inner" />
+                  ) : (
+                    <div className="h-16 w-16 bg-white/5 border border-white/10 rounded-xl flex items-center justify-center text-zinc-500 font-mono text-[10px]">EMPTY</div>
                   )}
-                  <div className="flex flex-col gap-2">
-                    <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm text-zinc-500 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 dark:file:bg-amber-900/30 dark:file:text-amber-400" />
-                    {uploadingImage && <span className="text-xs text-amber-600">Uploading...</span>}
+                  <div className="flex flex-col gap-4">
+                    <input type="file" accept="image/*" onChange={handleImageUpload} className="text-[10px] text-zinc-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-[#ff4d4d]/10 file:text-[#ff4d4d] file:font-bold hover:file:bg-[#ff4d4d]/20 transition-all" />
+                    {uploadingImage && <span className="text-[10px] font-mono text-[#ff4d4d] animate-pulse">UPLOADING...</span>}
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex justify-end gap-3">
-              <button type="button" onClick={() => setIsFormOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
+            <div className="flex justify-end gap-4 pt-8 border-t border-white/5">
+              <button type="button" onClick={() => setIsFormOpen(false)} className="px-6 py-4 text-zinc-500 text-[10px] font-bold tracking-widest uppercase hover:text-white transition-all">
                 Cancel
               </button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors">
-                Save Skill
+              <button type="submit" className="px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-[10px] font-bold rounded-2xl transition-all tracking-widest uppercase shadow-xl">
+                Commit Skill
               </button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-colors">
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {skills
-            .filter(s => filterCategory === "All" || s.category === filterCategory)
-            .map((skill) => (
-            <li key={skill.id} className="p-4 sm:px-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4">
+      <div className="grid grid-cols-1 gap-4">
+        {skills
+          .filter(s => filterCategory === "All" || s.category === filterCategory)
+          .map((skill) => (
+          <div key={skill.id} className="group bg-white/5 backdrop-blur-md border border-white/5 rounded-3xl p-6 transition-all hover:border-[#ff4d4d]/20">
+            <div className="flex items-center justify-between gap-6">
+              <div className="flex items-center gap-6 flex-1">
+                <div className="w-12 h-12 flex items-center justify-center bg-white/[0.02] rounded-xl border border-white/5 group-hover:scale-110 transition-transform">
                   {skill.iconUrl ? (
                     <img src={skill.iconUrl} alt={skill.name} className="w-8 h-8 object-contain" />
                   ) : (
-                    <div className="w-8 h-8 bg-zinc-200 dark:bg-zinc-800 rounded flex items-center justify-center text-xs text-zinc-500">Icon</div>
+                    <div className="text-[10px] font-mono text-zinc-600">ID</div>
                   )}
-                  <div>
-                    <h3 className="text-sm font-medium text-zinc-900 dark:text-white">{skill.name} <span className="text-xs text-zinc-500 ml-2">({skill.category})</span></h3>
-                    <div className="mt-1 flex items-center gap-2">
-                      <div className="w-32 bg-zinc-200 dark:bg-zinc-800 rounded-full h-1.5">
-                        <div className="bg-amber-500 h-1.5 rounded-full" style={{ width: `${skill.level}%` }}></div>
-                      </div>
-                      <span className="text-xs text-zinc-500 dark:text-zinc-400">{skill.level}% • Priority: {skill.priority}</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-base font-bold text-white group-hover:text-[#ff4d4d] transition-colors">{skill.name}</h3>
+                    <span className="px-2 py-0.5 bg-white/5 rounded text-[10px] font-mono text-zinc-500">{skill.category}</span>
+                    {skill.isHighlighted && <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d4d] animate-pulse" />}
+                  </div>
+                  <div className="mt-2 flex items-center gap-4">
+                    <div className="flex-1 max-w-[200px] h-1.5 bg-white/5 rounded-full overflow-hidden">
+                      <div className="h-full bg-gradient-to-r from-[#ff4d4d]/40 to-[#ff4d4d] rounded-full shadow-[0_0_10px_rgba(255,77,77,0.5)]" style={{ width: `${skill.level}%` }} />
                     </div>
+                    <span className="text-[10px] font-mono font-bold text-zinc-500">{skill.level}%</span>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(skill)} className="p-2 text-zinc-400 hover:text-amber-500 transition-colors">
-                    <Edit2 className="h-4 w-4" />
-                  </button>
-                  <button onClick={() => handleDelete(skill.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
-                </div>
               </div>
-            </li>
-          ))}
-          {skills.length === 0 && (
-            <li className="p-6 text-center text-zinc-500 dark:text-zinc-400">No skills found. Add one to get started.</li>
-          )}
-        </ul>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleEdit(skill)} className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 hover:text-white transition-all">
+                  <Edit2 className="h-4 w-4" />
+                </button>
+                <button onClick={() => handleDelete(skill.id)} className="p-3 rounded-xl bg-white/5 border border-white/5 text-zinc-500 hover:text-red-500 transition-all">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        {skills.length === 0 && (
+          <div className="p-20 text-center bg-white/5 border border-white/5 border-dashed rounded-[40px]">
+            <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">Null Skillset Data. Inject Capability.</p>
+          </div>
+        )}
       </div>
     </div>
   );

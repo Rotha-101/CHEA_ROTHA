@@ -20,7 +20,7 @@ export default function Contact() {
   if (!profileLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -111,153 +111,121 @@ export default function Contact() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-3xl mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-4">
+          <span className="text-[#ff4d4d] font-mono opacity-80">⟩</span>
           {settings?.contactTitle || 'Get in Touch'}
         </h1>
-        <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
           {settings?.contactSubtitle || 'Feel free to reach out for collaborations or just a friendly hello.'}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="space-y-8">
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl flex-shrink-0">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+        <div className="space-y-10">
+          <div className="flex items-start gap-6">
+            <div className="p-4 bg-[#ff4d4d]/5 text-[#ff4d4d] rounded-2xl flex-shrink-0 border border-[#ff4d4d]/10">
               <Mail className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-medium text-zinc-900 dark:text-white">Email</h3>
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">Email</h3>
               <a
                 href={`mailto:${profile?.email}`}
-                className="text-zinc-500 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                className="text-zinc-400 hover:text-[#ff4d4d] transition-colors font-medium"
               >
                 {profile?.email}
               </a>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl flex-shrink-0">
+          <div className="flex items-start gap-6">
+            <div className="p-4 bg-[#ff4d4d]/5 text-[#ff4d4d] rounded-2xl flex-shrink-0 border border-[#ff4d4d]/10">
               <Phone className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-medium text-zinc-900 dark:text-white">Phone</h3>
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">Phone</h3>
               <a
                 href={`tel:${profile?.phone}`}
-                className="text-zinc-500 dark:text-zinc-400 hover:text-amber-600 dark:hover:text-amber-400 transition-colors"
+                className="text-zinc-400 hover:text-[#ff4d4d] transition-colors font-medium"
               >
                 {profile?.phone}
               </a>
             </div>
           </div>
 
-          <div className="flex items-start gap-4">
-            <div className="p-3 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-xl flex-shrink-0">
+          <div className="flex items-start gap-6">
+            <div className="p-4 bg-[#ff4d4d]/5 text-[#ff4d4d] rounded-2xl flex-shrink-0 border border-[#ff4d4d]/10">
               <MapPin className="w-6 h-6" />
             </div>
             <div>
-              <h3 className="text-lg font-medium text-zinc-900 dark:text-white">Location</h3>
-              <p className="text-zinc-500 dark:text-zinc-400">{profile?.location}</p>
+              <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-1">Location</h3>
+              <p className="text-zinc-600 dark:text-zinc-400 font-medium">{profile?.location}</p>
             </div>
           </div>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="space-y-6 bg-white dark:bg-zinc-900/50 p-8 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm"
+          className="space-y-6 bg-zinc-50 dark:bg-white/5 p-8 sm:p-10 rounded-[32px] border border-zinc-200 dark:border-white/5 transition-all duration-500 hover:border-[#ff4d4d]/20"
         >
-          <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Name</label>
+          <div className="space-y-2">
+            <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Name</label>
             <input
               type="text"
               required
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
-              placeholder="John Doe"
+              className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-700"
+              placeholder="Full Name"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Email</label>
+          <div className="space-y-2">
+            <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Email</label>
             <input
               type="email"
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all"
-              placeholder="john@example.com"
+              className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-700"
+              placeholder="email@example.com"
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Message</label>
+          <div className="space-y-2">
+            <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Message</label>
             <textarea
               rows={4}
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all resize-none"
-              placeholder="How can I help you?"
+              className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-700"
+              placeholder="Write your message here..."
             />
           </div>
 
           {status === 'success' && (
-            <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-xl text-green-700 dark:text-green-400">
+            <div className="flex items-center gap-3 p-4 bg-[#ff4d4d]/5 border border-[#ff4d4d]/20 rounded-2xl text-[#ff4d4d]">
               <CheckCircle className="w-5 h-5 flex-shrink-0" />
-              <p className="text-sm font-medium">
+              <p className="text-sm font-bold uppercase tracking-tighter">
                 {IS_STATIC_DEPLOY
-                  ? 'Your email app has been opened with the message details.'
-                  : 'Message sent successfully! I will get back to you soon.'}
+                  ? 'Email Client Launched'
+                  : 'Message Received'}
               </p>
-            </div>
-          )}
-
-          {status === 'error' && (
-            <div className="flex items-start gap-3 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl text-red-700 dark:text-red-400">
-              <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <p className="text-sm font-medium">{errorMsg}</p>
-                {errorMsg.toLowerCase().includes('not set up') && (
-                  <div className="text-xs mt-2 opacity-90 space-y-1">
-                    <p className="font-medium">Email configuration needed:</p>
-                    <ol className="list-decimal list-inside space-y-1">
-                      <li>Go to Admin Dashboard → Settings</li>
-                      <li>Scroll to "Email Settings (Gmail)"</li>
-                      <li>Enter your Gmail address</li>
-                      <li>Generate a 16-digit <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="underline font-medium hover:opacity-75">Gmail App Password</a></li>
-                      <li>Ensure 2-Step Verification is enabled</li>
-                      <li>Save settings and try again</li>
-                    </ol>
-                  </div>
-                )}
-                {(errorMsg.toLowerCase().includes('authentication failed') || errorMsg.toLowerCase().includes('authentication')) && (
-                  <div className="text-xs mt-2 opacity-90 space-y-1">
-                    <p className="font-medium">Gmail rejected the credentials. Please verify:</p>
-                    <ol className="list-decimal list-inside space-y-1">
-                      <li>Gmail address is correct and ends with @gmail.com</li>
-                      <li>Using a 16-digit Gmail App Password (not your regular password)</li>
-                      <li>2-Step Verification is enabled on your Gmail account</li>
-                      <li><a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="underline font-medium hover:opacity-75">Generate a new App Password</a> if needed</li>
-                    </ol>
-                  </div>
-                )}
-              </div>
             </div>
           )}
 
           <button
             type="submit"
             disabled={status === 'sending'}
-            className="w-full py-3 px-6 bg-amber-400 hover:bg-amber-500 disabled:opacity-60 disabled:cursor-not-allowed text-zinc-950 font-medium rounded-xl transition-colors flex items-center justify-center gap-2"
+            className="w-full py-4 px-8 bg-[#ff4d4d] hover:bg-[#ff3333] disabled:opacity-60 disabled:cursor-not-allowed text-white text-base font-bold rounded-2xl transition-all duration-300 flex items-center justify-center gap-3 hover:scale-[1.02] hover:shadow-[0_0_30px_rgba(255,77,77,0.3)]"
           >
             {status === 'sending' ? (
               <>
-                <div className="w-4 h-4 border-2 border-zinc-900/30 border-t-zinc-900 rounded-full animate-spin" />
+                <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
                 Sending...
               </>
             ) : (
               <>
                 <Send className="w-4 h-4" />
-                Send Message
+                Initiate Contact
               </>
             )}
           </button>

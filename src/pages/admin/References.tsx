@@ -138,7 +138,7 @@ export default function References() {
             });
             setIsFormOpen(true);
           }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors"
+          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors"
         >
           <Plus className="-ml-1 mr-2 h-5 w-5" />
           Add Reference
@@ -177,38 +177,38 @@ export default function References() {
 
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Name</label>
-                <input type="text" {...register('name', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('name', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Role / Title</label>
-                <input type="text" {...register('title', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('title', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description</label>
-                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
                 <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Phone</label>
-                <input type="text" {...register('phone')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="text" {...register('phone')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
               <div className="sm:col-span-3">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Email</label>
-                <input type="email" {...register('email')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="email" {...register('email')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
 
               <div className="sm:col-span-6">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Profile Link</label>
-                <input type="url" {...register('profileUrl')} placeholder="https://example.com/profile" className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="url" {...register('profileUrl')} placeholder="https://example.com/profile" className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
                 <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">Add a public profile or reference link so visitors can jump directly to their page.</p>
               </div>
 
               <div className="sm:col-span-2">
                 <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
               </div>
             </div>
 
@@ -216,7 +216,7 @@ export default function References() {
               <button type="button" onClick={() => setIsFormOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
                 Cancel
               </button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors">
+              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors">
                 Save Reference
               </button>
             </div>
@@ -245,7 +245,7 @@ export default function References() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(item)} className="p-2 text-zinc-400 hover:text-amber-500 transition-colors">
+                  <button onClick={() => handleEdit(item)} className="p-2 text-zinc-400 hover:text-[#ff4d4d] transition-colors">
                     <Edit2 className="h-4 w-4" />
                   </button>
                   <button onClick={() => handleDelete(item.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors">

@@ -21,7 +21,7 @@ interface BlogPost {
 
 type FormData = Omit<BlogPost, 'id'>;
 
-const inputCls = 'mt-1 block w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-colors';
+const inputCls = 'mt-1 block w-full rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d] transition-colors';
 const labelCls = 'block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1';
 
 export default function AdminBlog() {
@@ -171,11 +171,11 @@ export default function AdminBlog() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold text-zinc-900 dark:text-white flex items-center gap-2">
-            <FileText className="w-6 h-6 text-amber-500" /> Manage Blog
+            <FileText className="w-6 h-6 text-[#ff4d4d]" /> Manage Blog
           </h1>
           <p className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Create, edit and manage your articles</p>
         </div>
-        <button onClick={openNew} className="inline-flex items-center gap-2 px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-zinc-950 text-sm font-bold rounded-xl shadow-md hover:shadow-amber-500/30 transition-all">
+        <button onClick={openNew} className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#ff4d4d] hover:bg-[#ff4d4d] text-zinc-950 text-sm font-bold rounded-xl shadow-md hover:shadow-[#ff4d4d]/30 transition-all">
           <Plus className="w-4 h-4" /> New Post
         </button>
       </div>
@@ -201,7 +201,7 @@ export default function AdminBlog() {
           <div className="flex items-center justify-between px-6 py-4 border-b border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800/50">
             <h2 className="text-base font-bold text-zinc-900 dark:text-white">{editingId ? 'Edit Post' : 'New Post'}</h2>
             <div className="flex items-center gap-2">
-              <button onClick={() => setPreviewMode(v => !v)} className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${previewMode ? 'border-amber-500 text-amber-600 bg-amber-50 dark:bg-amber-900/20' : 'border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>
+              <button onClick={() => setPreviewMode(v => !v)} className={`inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border transition-colors ${previewMode ? 'border-[#ff4d4d] text-[#ff4d4d] bg-[#ff4d4d]/10 dark:bg-amber-900/20' : 'border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400'}`}>
                 <Eye className="w-3.5 h-3.5" /> Preview
               </button>
               <button onClick={closeForm} className="p-1.5 text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-200 rounded-lg hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
@@ -222,7 +222,7 @@ export default function AdminBlog() {
               <div className="flex gap-1 px-6 pt-4">
                 {(['content', 'seo', 'settings'] as const).map(tab => (
                   <button key={tab} type="button" onClick={() => setActiveTab(tab)}
-                    className={`px-4 py-2 text-sm font-medium rounded-lg capitalize transition-colors ${activeTab === tab ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
+                    className={`px-4 py-2 text-sm font-medium rounded-lg capitalize transition-colors ${activeTab === tab ? 'bg-amber-100 dark:bg-[#ff4d4d]/20 text-[#ff4d4d] dark:text-[#ff4d4d]' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}>
                     {tab}
                   </button>
                 ))}
@@ -257,8 +257,8 @@ export default function AdminBlog() {
                       <div className="flex items-center gap-4 mt-1">
                         {imageUrl && <img src={imageUrl} alt="" className="h-20 w-32 object-cover rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm" />}
                         <div>
-                          <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm text-zinc-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 dark:file:bg-amber-900/30 dark:file:text-amber-400" />
-                          {uploadingImage && <p className="text-xs text-amber-500 mt-1 animate-pulse">Uploading…</p>}
+                          <input type="file" accept="image/*" onChange={handleImageUpload} className="text-sm text-zinc-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-[#ff4d4d]/10 file:text-[#ff4d4d] hover:file:bg-amber-100 dark:file:bg-[#ff4d4d]/20 dark:file:text-[#ff4d4d]" />
+                          {uploadingImage && <p className="text-xs text-[#ff4d4d] mt-1 animate-pulse">Uploading…</p>}
                           {imageUrl && <p className="text-xs text-zinc-400 mt-1 truncate max-w-xs">{imageUrl}</p>}
                         </div>
                       </div>
@@ -310,7 +310,7 @@ export default function AdminBlog() {
                 <button type="button" onClick={closeForm} className="px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-lg text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
                   Cancel
                 </button>
-                <button type="submit" disabled={saving} className="px-6 py-2 bg-amber-500 hover:bg-amber-600 disabled:opacity-60 text-zinc-950 text-sm font-bold rounded-lg shadow transition-colors flex items-center gap-2">
+                <button type="submit" disabled={saving} className="px-6 py-2 bg-[#ff4d4d] hover:bg-[#ff4d4d] disabled:opacity-60 text-zinc-950 text-sm font-bold rounded-lg shadow transition-colors flex items-center gap-2">
                   {saving ? <><span className="w-4 h-4 border-2 border-zinc-950/30 border-t-zinc-950 rounded-full animate-spin" />Saving…</> : 'Save Post'}
                 </button>
               </div>
@@ -323,12 +323,12 @@ export default function AdminBlog() {
       <div className="flex flex-col sm:flex-row gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-400" />
-          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search posts…" className="w-full pl-9 pr-4 py-2.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-amber-500 transition-colors" />
+          <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search posts…" className="w-full pl-9 pr-4 py-2.5 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white text-sm rounded-xl focus:outline-none focus:ring-2 focus:ring-[#ff4d4d] transition-colors" />
         </div>
         <div className="flex gap-2">
           {(['all', 'published', 'draft'] as const).map(s => (
             <button key={s} onClick={() => setFilterStatus(s)}
-              className={`px-4 py-2 text-sm font-medium rounded-xl capitalize transition-colors border ${filterStatus === s ? 'bg-amber-500 text-zinc-950 border-amber-500' : 'border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-amber-500 bg-white dark:bg-zinc-900'}`}>
+              className={`px-4 py-2 text-sm font-medium rounded-xl capitalize transition-colors border ${filterStatus === s ? 'bg-[#ff4d4d] text-zinc-950 border-[#ff4d4d]' : 'border-zinc-300 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-[#ff4d4d] bg-white dark:bg-zinc-900'}`}>
               {s}
             </button>
           ))}
@@ -339,7 +339,7 @@ export default function AdminBlog() {
       <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden">
         {loading ? (
           <div className="p-12 text-center text-zinc-400 flex items-center justify-center gap-3">
-            <span className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+            <span className="w-5 h-5 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin" />
             Loading…
           </div>
         ) : filtered.length === 0 ? (
@@ -383,10 +383,10 @@ export default function AdminBlog() {
                   <button onClick={() => handleToggleStatus(post)} title={post.status === 'published' ? 'Set to Draft' : 'Publish'} className={`p-2 rounded-lg transition-colors ${post.status === 'published' ? 'text-zinc-400 hover:text-yellow-600 hover:bg-yellow-50 dark:hover:bg-yellow-900/20' : 'text-zinc-400 hover:text-green-600 hover:bg-green-50 dark:hover:bg-green-900/20'}`}>
                     {post.status === 'published' ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
-                  <button onClick={() => handleDuplicate(post)} title="Duplicate" className="p-2 text-zinc-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg transition-colors">
+                  <button onClick={() => handleDuplicate(post)} title="Duplicate" className="p-2 text-zinc-400 hover:text-[#ff4d4d] hover:bg-[#ff4d4d]/10 dark:hover:bg-amber-900/20 rounded-lg transition-colors">
                     <Copy className="w-4 h-4" />
                   </button>
-                  <button onClick={() => handleEdit(post)} title="Edit" className="p-2 text-zinc-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-lg transition-colors">
+                  <button onClick={() => handleEdit(post)} title="Edit" className="p-2 text-zinc-400 hover:text-[#ff4d4d] hover:bg-[#ff4d4d]/10 dark:hover:bg-amber-900/20 rounded-lg transition-colors">
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button onClick={() => handleDelete(post.id)} title="Delete" className="p-2 text-zinc-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-lg transition-colors">

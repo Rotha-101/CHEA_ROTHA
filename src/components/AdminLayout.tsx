@@ -86,68 +86,65 @@ export function AdminLayout() {
   };
 
   if (isLoading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#050810]">
+        <div className="w-8 h-8 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   if (!user || !isAdmin) {
     return (
-      <div className="min-h-screen flex items-center justify-center transition-colors duration-300 relative bg-primary">
-        {bgImage && (
-          <div
-            aria-hidden
-            className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
-            style={{ backgroundImage: `url("${bgImage}")` }}
-          />
-        )}
-        <div
-          aria-hidden
-          className={"fixed inset-0 z-0 pointer-events-none transition-colors duration-300 " + (bgImage ? 'bg-white/60 dark:bg-black/50' : 'bg-white dark:bg-black')}
-        />
-        <div className="relative z-10 max-w-md w-full space-y-8 p-8 bg-white/60 dark:bg-black/60 backdrop-blur-xl rounded-xl shadow-[0_8px_32px_rgba(0,0,0,0.1)] border border-white/20 dark:border-white/10">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold text-zinc-900 dark:text-white">Admin Access</h2>
-            <p className="mt-2 text-zinc-600 dark:text-zinc-400">Please sign in with your credentials to access the CMS.</p>
+      <div className="min-h-screen flex items-center justify-center bg-[#050810] relative overflow-hidden font-sans">
+        {/* Background Aura */}
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,77,77,0.05)_0%,transparent_70%)] pointer-events-none z-0" />
+        
+        <div className="relative z-10 max-w-md w-full p-10 bg-white/5 backdrop-blur-3xl rounded-[40px] border border-white/5 shadow-2xl">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-[#ff4d4d]/5 border border-[#ff4d4d]/10 mb-6 group">
+              <UserCircle className="w-10 h-10 text-[#ff4d4d] group-hover:scale-110 transition-transform duration-500" />
+            </div>
+            <h2 className="text-3xl font-display font-bold text-white tracking-tight">System Access</h2>
+            <p className="mt-3 text-zinc-500 text-sm font-medium tracking-tight">Authenticate to access the neural core.</p>
           </div>
-          <form onSubmit={handleLogin} className="mt-8 space-y-6">
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Username</label>
+          <form onSubmit={handleLogin} className="space-y-6">
+            <div className="space-y-5">
+              <div className="space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Identifier</label>
                 <input
                   type="text"
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Username"
+                  className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm font-mono"
+                  placeholder="USERNAME"
                 />
               </div>
-              <div>
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Password</label>
+              <div className="space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Access Token</label>
                 <input
                   type="password"
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 appearance-none relative block w-full px-3 py-2 border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"
-                  placeholder="Password"
+                  className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm font-mono"
+                  placeholder="••••••••"
                 />
               </div>
             </div>
 
             {errorMSG && (
-              <div className="space-y-3">
-                <div className="text-red-500 text-xs text-center bg-red-50 dark:bg-red-900/10 p-3 rounded-lg border border-red-500/20">
-                  {errorMSG}
-                </div>
+              <div className="p-4 bg-[#ff4d4d]/5 border border-[#ff4d4d]/20 rounded-2xl text-[#ff4d4d] text-xs font-bold uppercase tracking-tighter text-center animate-shake">
+                {errorMSG}
               </div>
             )}
 
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-sm font-bold rounded-2xl transition-all duration-300 shadow-xl hover:shadow-[#ff4d4d]/20 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 tracking-[0.2em] uppercase"
             >
-              {isSubmitting ? 'Signing In...' : 'Sign In'}
+              {isSubmitting ? 'Authenticating...' : 'Establish Connection'}
             </button>
           </form>
         </div>
@@ -174,31 +171,20 @@ export function AdminLayout() {
   }
 
   return (
-    <div className="h-screen overflow-hidden flex transition-colors duration-300 relative bg-primary">
-      {bgImage && (
-        <div
-          aria-hidden
-          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
-          style={{ backgroundImage: `url("${bgImage}")` }}
-        />
-      )}
-      <div
-        aria-hidden
-        className={"fixed inset-0 z-0 pointer-events-none transition-colors duration-300 " + (bgImage ? 'bg-white/60 dark:bg-black/50' : 'bg-white dark:bg-black')}
-      />
+    <div className="h-screen overflow-hidden flex bg-[#050810] font-sans">
+      {/* Background Aura */}
+      <div className="fixed top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_left,rgba(255,77,77,0.02)_0%,transparent_50%)] pointer-events-none z-0" />
 
-      <div className="relative z-10 w-64 bg-white/40 dark:bg-black/40 backdrop-blur-xl shadow-md border-r border-white/20 dark:border-white/10 flex flex-col">
-        <div className="h-16 flex items-center justify-between px-6 border-b border-white/20 dark:border-white/10">
-          <h1 className="text-xl font-bold text-zinc-900 dark:text-white drop-shadow-sm">Portfolio CMS</h1>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-full text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
+      {/* Sidebar */}
+      <div className="relative z-10 w-72 bg-black/40 backdrop-blur-3xl border-r border-white/5 flex flex-col">
+        <div className="h-24 flex items-center justify-between px-8 border-b border-white/5">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono font-bold text-[#ff4d4d] tracking-[0.4em] mb-1 uppercase">Control Center</span>
+            <h1 className="text-xl font-display font-bold text-white tracking-tight">OpenClaw CMS</h1>
+          </div>
         </div>
-        <nav className="p-4 space-y-1 flex-1">
+        
+        <nav className="p-6 space-y-2 flex-1 overflow-y-auto scrollbar-hide">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
             return (
@@ -207,43 +193,67 @@ export function AdminLayout() {
                 to={item.href}
                 className={cn(
                   isActive
-                    ? 'bg-white/50 dark:bg-white/10 shadow-sm border border-white/40 dark:border-white/5 text-zinc-900 dark:text-white'
-                    : 'text-zinc-700 dark:text-zinc-400 hover:bg-white/30 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white',
-                  'group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors'
+                    ? 'bg-white/5 border border-white/5 text-white shadow-[0_0_20px_rgba(255,77,77,0.05)]'
+                    : 'text-zinc-500 hover:text-white hover:bg-white/[0.02] border border-transparent',
+                  'group flex items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-300'
                 )}
               >
-                <item.icon
-                  className={cn(
-                    isActive
-                      ? 'text-amber-600 dark:text-amber-400'
-                      : 'text-zinc-400 group-hover:text-zinc-500 dark:group-hover:text-zinc-300',
-                    'mr-3 flex-shrink-0 h-5 w-5 transition-colors'
-                  )}
-                  aria-hidden="true"
-                />
-                {item.name}
+                <div className={cn(
+                  "p-2 rounded-xl mr-4 transition-all duration-300",
+                  isActive ? "bg-[#ff4d4d]/10 text-[#ff4d4d]" : "bg-white/5 text-zinc-500 group-hover:text-white"
+                )}>
+                  <item.icon className="h-4 w-4" />
+                </div>
+                <span className="tracking-tight">{item.name}</span>
+                {isActive && (
+                  <motion.div 
+                    layoutId="active-pill"
+                    className="ml-auto w-1.5 h-1.5 rounded-full bg-[#ff4d4d] shadow-[0_0_8px_#ff4d4d]" 
+                  />
+                )}
               </Link>
             );
           })}
         </nav>
-        <div className="p-4 border-t border-white/20 dark:border-white/10">
+
+        <div className="p-8 border-t border-white/5 bg-black/20">
+          <div className="flex items-center gap-4 mb-6 px-2">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-bold">
+              {profile?.name?.charAt(0) || 'A'}
+            </div>
+            <div className="flex flex-col min-w-0">
+              <span className="text-xs font-bold text-white truncate">{profile?.name || 'Admin'}</span>
+              <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest truncate">{profile?.role || 'Superuser'}</span>
+            </div>
+          </div>
           <button
             onClick={handleLogout}
-            className="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:text-zinc-900 dark:hover:text-white w-full transition-colors"
+            className="group flex items-center justify-center px-4 py-3 text-xs font-bold tracking-widest uppercase rounded-2xl text-zinc-500 bg-white/5 border border-white/5 hover:bg-[#ff4d4d]/5 hover:border-[#ff4d4d]/30 hover:text-[#ff4d4d] w-full transition-all duration-300"
           >
-            <LogOut className="mr-3 flex-shrink-0 h-5 w-5 text-zinc-400 group-hover:text-zinc-500 dark:group-hover:text-zinc-300 transition-colors" />
-            Sign Out
+            <LogOut className="mr-3 h-4 w-4" />
+            Terminate
           </button>
         </div>
       </div>
 
-      <div className="relative z-10 flex-1 overflow-y-auto">
-        <main className="p-8">
+      <div className="relative z-10 flex-1 flex flex-col overflow-hidden">
+        {/* Top Header */}
+        <header className="h-20 border-b border-white/5 flex items-center justify-end px-10 bg-black/20">
+          <button
+            onClick={toggleTheme}
+            className="p-3 rounded-2xl bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:border-[#ff4d4d]/30 transition-all"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+        </header>
+
+        <main className="flex-1 overflow-y-auto p-10 scrollbar-thin scrollbar-thumb-white/5 scrollbar-track-transparent">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, ease: 'easeOut' }}
+            transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
           >
             <Outlet />
           </motion.div>

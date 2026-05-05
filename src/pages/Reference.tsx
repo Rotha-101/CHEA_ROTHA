@@ -25,7 +25,7 @@ export default function Reference() {
   if (!profileLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
-        <div className="w-6 h-6 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -42,15 +42,16 @@ export default function Reference() {
         viewport={{ once: true }}
         className="max-w-3xl mb-16"
       >
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-4">
+          <span className="text-[#ff4d4d] font-mono opacity-80">⟩</span>
           {settings?.referencesTitle || 'References'}
         </h2>
-        <p className="text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
           {settings?.referencesSubtitle || 'Professional references and contact points.'}
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {sortedReferences.map((ref, idx) => (
           <motion.article
             key={ref.id}
@@ -58,20 +59,20 @@ export default function Reference() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: idx * 0.07 }}
-            className="rounded-2xl border border-zinc-200/80 dark:border-zinc-800/80 bg-white/70 dark:bg-zinc-900/40 backdrop-blur-sm p-6"
+            className="group rounded-[32px] border border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/5 p-8 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07] transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,77,77,0.08)]"
           >
-            <div className="flex items-start gap-4">
-              <div className="h-24 w-24 rounded-full border-2 border-amber-400/50 bg-zinc-100 dark:bg-zinc-800 overflow-hidden flex-shrink-0">
+            <div className="flex items-start gap-6">
+              <div className="h-20 w-20 rounded-2xl border border-[#ff4d4d]/20 bg-white/5 overflow-hidden flex-shrink-0 group-hover:border-[#ff4d4d]/50 transition-colors">
                 {ref.profileImageUrl ? (
                   <img
                     src={ref.profileImageUrl}
                     alt={ref.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 transition-all duration-500"
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center text-zinc-400">
-                    <UserRound className="w-10 h-10" />
+                  <div className="w-full h-full flex items-center justify-center text-zinc-500">
+                    <UserRound className="w-8 h-8" />
                   </div>
                 )}
               </div>
@@ -81,7 +82,7 @@ export default function Reference() {
                     href={ref.profileUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight hover:text-amber-500 transition-colors"
+                    className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight hover:text-[#ff4d4d] transition-colors"
                   >
                     {ref.name}
                   </a>
@@ -90,34 +91,34 @@ export default function Reference() {
                     {ref.name}
                   </h3>
                 )}
-                <p className="mt-1 text-amber-600 dark:text-amber-400 font-medium">
+                <p className="mt-2 text-[#ff4d4d] font-bold text-sm tracking-tight uppercase">
                   {ref.title}
                 </p>
               </div>
             </div>
 
             {ref.description && (
-              <p className="mt-5 text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line text-sm sm:text-base">
-                {ref.description}
+              <p className="mt-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base italic">
+                &ldquo;{ref.description}&rdquo;
               </p>
             )}
 
-            <div className="mt-5 space-y-2 text-sm">
+            <div className="mt-8 flex flex-wrap gap-6 pt-6 border-t border-zinc-200 dark:border-white/5">
               {ref.phone && (
                 <a
                   href={`tel:${ref.phone}`}
-                  className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-amber-500 transition-colors"
+                  className="flex items-center gap-2.5 text-sm font-bold text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors"
                 >
-                  <Phone className="w-4 h-4" />
+                  <Phone className="w-4 h-4 text-[#ff4d4d]" />
                   {ref.phone}
                 </a>
               )}
               {ref.email && (
                 <a
                   href={`mailto:${ref.email}`}
-                  className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 hover:text-amber-500 transition-colors break-all"
+                  className="flex items-center gap-2.5 text-sm font-bold text-zinc-500 hover:text-white transition-colors break-all"
                 >
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-4 h-4 text-[#ff4d4d]" />
                   {ref.email}
                 </a>
               )}

@@ -136,13 +136,9 @@ export default function BlogPost() {
   // Loading state
   if (!blogLoaded) {
     return (
-      <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans">
-        {bgImage && (
-          <div aria-hidden className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url("${bgImage}")` }} />
-        )}
-        <div aria-hidden className={`fixed inset-0 z-0 pointer-events-none ${bgImage ? 'bg-white/60 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'}`} />
+      <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans bg-white dark:bg-[#050810]">
         <div className="relative z-10 flex flex-1 items-center justify-center min-h-screen">
-          <div className="w-10 h-10 border-4 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-10 h-10 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
         </div>
       </div>
     );
@@ -151,23 +147,19 @@ export default function BlogPost() {
   // Not found state
   if (blogLoaded && !post) {
     return (
-      <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans">
-        {bgImage && (
-          <div aria-hidden className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: `url("${bgImage}")` }} />
-        )}
-        <div aria-hidden className={`fixed inset-0 z-0 pointer-events-none ${bgImage ? 'bg-white/60 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'}`} />
+      <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans bg-white dark:bg-[#050810]">
         <div className="relative z-10 flex flex-1 items-center justify-center min-h-screen p-4">
-          <div className="text-center space-y-6 bg-white/80 dark:bg-zinc-900/80 backdrop-blur-xl rounded-3xl p-12 border border-zinc-200/50 dark:border-zinc-800/50 shadow-2xl">
-            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-amber-100 dark:bg-amber-900/30 mb-4">
-              <BookOpen className="w-10 h-10 text-amber-500" />
+          <div className="text-center space-y-8 bg-zinc-50 dark:bg-white/5 backdrop-blur-2xl rounded-[40px] p-16 border border-zinc-200 dark:border-white/5 shadow-2xl max-w-2xl">
+            <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-[#ff4d4d]/5 border border-[#ff4d4d]/10 mb-6">
+              <BookOpen className="w-12 h-12 text-[#ff4d4d]" />
             </div>
-            <h1 className="text-3xl font-display font-bold text-zinc-900 dark:text-white">Article Not Found</h1>
-            <p className="text-zinc-500 dark:text-zinc-400 max-w-md mx-auto">
-              The article you are looking for doesn't exist or has been removed.
+            <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">Article Not Found</h1>
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-md mx-auto leading-relaxed">
+              The article you are looking for doesn't exist or has been relocated within our neural network.
             </p>
-            <Link to="/" className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-zinc-950 font-bold rounded-full transition-all shadow-lg hover:shadow-amber-500/30">
+            <Link to="/" className="inline-flex items-center gap-3 px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white font-bold rounded-2xl transition-all shadow-lg hover:shadow-[#ff4d4d]/20 hover:scale-[1.02]">
               <ChevronLeft className="w-5 h-5" />
-              Back to Home
+              Return to Terminal
             </Link>
           </div>
         </div>
@@ -176,55 +168,55 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans transition-colors duration-500">
-      {/* Same background system as homepage */}
-      {bgImage && (
-        <div aria-hidden className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700" style={{ backgroundImage: `url("${bgImage}")` }} />
-      )}
-      <div aria-hidden className={`fixed inset-0 z-0 pointer-events-none transition-colors duration-500 ${bgImage ? 'bg-white/70 dark:bg-zinc-950/60' : 'bg-white dark:bg-zinc-950'}`} />
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans bg-white dark:bg-[#050810] transition-colors duration-500">
+      {/* Background Aura */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-full h-[1000px] bg-[radial-gradient(circle_at_center,rgba(255,77,77,0.03)_0%,transparent_70%)] pointer-events-none z-0" />
 
       {/* Reading Progress Bar */}
-      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-amber-500 z-[60] origin-left" style={{ scaleX }} />
+      <motion.div className="fixed top-0 left-0 right-0 h-1 bg-[#ff4d4d] z-[70] origin-left shadow-[0_0_10px_#ff4d4d]" style={{ scaleX }} />
 
       {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 w-full border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-sm transition-colors duration-500">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300 hover:text-amber-600 dark:hover:text-amber-400 transition-colors group font-medium">
-            <ChevronLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            <span className="text-sm">Back to Blog</span>
+      <nav className="sticky top-0 z-[60] w-full border-b border-zinc-200 dark:border-white/5 bg-white/80 dark:bg-[#050810]/80 backdrop-blur-2xl saturate-150 transition-colors duration-500">
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-3 text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-all group font-bold text-sm tracking-tight">
+            <div className="p-2 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 group-hover:border-[#ff4d4d]/30 transition-all">
+              <ChevronLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            </div>
+            <span>BACK TO FEED</span>
           </Link>
-          <div className="flex items-center gap-2">
-            <button onClick={handleCopyLink} title="Copy link" className="p-2 hover:bg-white/30 dark:hover:bg-white/10 rounded-full transition-colors text-zinc-600 dark:text-zinc-400">
-              {copied ? <Check className="w-5 h-5 text-green-500" /> : <LinkIcon className="w-5 h-5" />}
+          <div className="flex items-center gap-3">
+            <button onClick={handleCopyLink} title="Copy link" className="p-2.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 rounded-xl hover:border-[#ff4d4d]/30 transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
+              {copied ? <Check className="w-5 h-5 text-[#ff4d4d]" /> : <LinkIcon className="w-5 h-5" />}
             </button>
-            <button onClick={handleTwitterShare} title="Share on Twitter" className="p-2 hover:bg-white/30 dark:hover:bg-white/10 rounded-full transition-colors text-zinc-600 dark:text-zinc-400">
+            <button onClick={handleTwitterShare} title="Share on Twitter" className="p-2.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 rounded-xl hover:border-[#ff4d4d]/30 transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
               <Twitter className="w-5 h-5" />
             </button>
-            <button onClick={handleLinkedInShare} title="Share on LinkedIn" className="p-2 hover:bg-white/30 dark:hover:bg-white/10 rounded-full transition-colors text-zinc-600 dark:text-zinc-400">
+            <button onClick={handleLinkedInShare} title="Share on LinkedIn" className="p-2.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 rounded-xl hover:border-[#ff4d4d]/30 transition-all text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white">
               <Linkedin className="w-5 h-5" />
             </button>
           </div>
         </div>
       </nav>
 
-      <main className="relative z-10 flex-grow pb-24">
-        <div className="h-20"></div> {/* Spacer for nav - increased to match nav height */}
+      <main className="relative z-10 flex-grow pb-32">
+        <div className="h-12"></div>
 
         {/* Content Layout */}
-        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Left social sidebar */}
           <aside className="hidden lg:flex lg:col-span-1 flex-col items-center">
-            <div className="sticky top-24 flex flex-col gap-3">
-              <button onClick={handleCopyLink} title="Copy Link" className="p-3 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-white/40 dark:border-zinc-800 rounded-2xl text-zinc-500 hover:text-amber-500 hover:border-amber-500/50 transition-all shadow-sm">
-                {copied ? <Check className="w-5 h-5 text-green-500" /> : <LinkIcon className="w-5 h-5" />}
+            <div className="sticky top-32 flex flex-col gap-4">
+              <button onClick={handleCopyLink} title="Copy Link" className="p-4 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-2xl text-zinc-500 hover:text-[#ff4d4d] hover:border-[#ff4d4d]/30 transition-all shadow-sm">
+                {copied ? <Check className="w-5 h-5" /> : <LinkIcon className="w-5 h-5" />}
               </button>
-              <button onClick={handleTwitterShare} title="Share on Twitter" className="p-3 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-white/40 dark:border-zinc-800 rounded-2xl text-zinc-500 hover:text-[#1DA1F2] hover:border-[#1DA1F2]/40 transition-all shadow-sm">
+              <button onClick={handleTwitterShare} title="Share on Twitter" className="p-4 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-2xl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all shadow-sm">
                 <Twitter className="w-5 h-5" />
               </button>
-              <button onClick={handleLinkedInShare} title="Share on LinkedIn" className="p-3 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-white/40 dark:border-zinc-800 rounded-2xl text-zinc-500 hover:text-[#0A66C2] hover:border-[#0A66C2]/40 transition-all shadow-sm">
+              <button onClick={handleLinkedInShare} title="Share on LinkedIn" className="p-4 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-2xl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all shadow-sm">
                 <Linkedin className="w-5 h-5" />
               </button>
-              <button title="Comment" className="p-3 bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-white/40 dark:border-zinc-800 rounded-2xl text-zinc-500 hover:text-amber-500 hover:border-amber-500/50 transition-all shadow-sm">
+              <div className="w-px h-12 bg-zinc-200 dark:bg-white/10 mx-auto my-2" />
+              <button title="Comment" className="p-4 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-2xl text-zinc-500 hover:text-[#ff4d4d] hover:border-[#ff4d4d]/30 transition-all shadow-sm">
                 <MessageSquare className="w-5 h-5" />
               </button>
             </div>
@@ -232,40 +224,53 @@ export default function BlogPost() {
 
           {/* Main article content */}
           <article className="lg:col-span-7">
-            <header className="mb-10">
-              <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+            <header className="mb-12">
+              <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.25em] text-[#ff4d4d] mb-6">
+                <span className="w-8 h-px bg-[#ff4d4d]/30" />
+                Latest Insight
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-8 leading-[1.1]">
                 {post!.title}
               </h1>
-              <div className="flex flex-wrap items-center gap-4 text-sm text-zinc-500 dark:text-zinc-400">
-                <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-amber-500" />
-                  {new Date(post!.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+              <div className="flex flex-wrap items-center gap-8 text-xs font-mono font-bold uppercase tracking-widest text-zinc-500">
+                <div className="flex items-center gap-2.5">
+                  <Calendar className="w-4 h-4 text-[#ff4d4d]" />
+                  {new Date(post!.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-amber-500" />
-                  {readingTime} min read
+                <div className="flex items-center gap-2.5">
+                  <Clock className="w-4 h-4 text-[#ff4d4d]" />
+                  {readingTime} MIN READ
                 </div>
               </div>
             </header>
 
             {post!.imageUrl && (
-              <div className="mb-10 rounded-2xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-lg">
-                <img src={post!.imageUrl} alt={post!.title} className="w-full h-auto object-cover" />
+              <div className="mb-16 rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 shadow-2xl relative group">
+                <img src={post!.imageUrl} alt={post!.title} className="w-full h-auto object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-1000 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-gradient-to-t from-white/60 dark:from-[#050810]/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
               </div>
             )}
 
             <div
-              className="prose prose-lg max-w-none dark:prose-invert prose-amber"
+              className="prose dark:prose-invert prose-zinc max-w-none 
+                prose-headings:font-display prose-headings:font-bold prose-headings:tracking-tight
+                prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-8 prose-h2:text-zinc-900 dark:prose-h2:text-white
+                prose-p:text-zinc-600 dark:prose-p:text-zinc-400 prose-p:leading-relaxed prose-p:text-lg
+                prose-a:text-[#ff4d4d] prose-a:no-underline hover:prose-a:text-[#ff3333] prose-a:transition-colors
+                prose-blockquote:border-[#ff4d4d] prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-white/5 prose-blockquote:rounded-2xl prose-blockquote:px-8 prose-blockquote:py-2 prose-blockquote:italic
+                prose-code:text-[#ff4d4d] prose-code:bg-zinc-50 dark:prose-code:bg-white/5 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md prose-code:before:content-none prose-code:after:content-none
+                prose-pre:bg-zinc-950 dark:prose-pre:bg-black/50 prose-pre:border prose-pre:border-zinc-200 dark:prose-pre:border-white/5 prose-pre:rounded-3xl prose-pre:p-8
+              "
               dangerouslySetInnerHTML={{ __html: processedContent }}
             />
 
             {/* Tags */}
             {post!.tags.filter(Boolean).length > 0 && (
-              <div className="mt-12 pt-8 border-t border-zinc-200/50 dark:border-zinc-800/50">
-                <div className="flex flex-wrap gap-2 items-center">
-                  <Tag className="w-4 h-4 text-zinc-400 mr-1" />
+              <div className="mt-20 pt-10 border-t border-zinc-200 dark:border-white/5">
+                <div className="flex flex-wrap gap-3 items-center">
+                  <Tag className="w-4 h-4 text-[#ff4d4d]" />
                   {post!.tags.filter(Boolean).map(tag => (
-                    <span key={tag} className="px-3 py-1 bg-white/50 dark:bg-zinc-800/50 backdrop-blur-sm text-zinc-600 dark:text-zinc-300 text-sm font-medium rounded-full border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-amber-100 dark:hover:bg-amber-900/30 hover:text-amber-700 dark:hover:text-amber-400 transition-colors cursor-pointer">
+                    <span key={tag} className="px-4 py-1.5 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 dark:text-zinc-400 text-[10px] font-mono font-bold uppercase tracking-widest rounded-full hover:border-[#ff4d4d]/30 hover:text-zinc-900 dark:hover:text-white transition-all cursor-pointer">
                       #{tag}
                     </span>
                   ))}
@@ -275,25 +280,26 @@ export default function BlogPost() {
 
             {/* Author Card */}
             {profileLoaded && profile && (
-              <section className="mt-12 p-8 bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md rounded-3xl border border-white/40 dark:border-zinc-800/60 shadow-xl">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
+              <section className="mt-16 p-10 bg-zinc-50 dark:bg-white/5 backdrop-blur-md rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-xl relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-[#ff4d4d]/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2" />
+                <div className="flex flex-col sm:flex-row items-center gap-10 relative z-10">
                   {profile.profilePhotoUrl && (
-                    <div className="w-20 h-20 rounded-2xl overflow-hidden shadow-lg border-2 border-amber-500/30 flex-shrink-0">
-                      <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover" />
+                    <div className="w-24 h-24 rounded-3xl overflow-hidden shadow-2xl border border-zinc-200 dark:border-white/10 group-hover:border-[#ff4d4d]/30 transition-all duration-500">
+                      <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all duration-500" />
                     </div>
                   )}
                   <div className="flex-1 text-center sm:text-left">
-                    <p className="text-xs font-bold uppercase tracking-widest text-amber-500 mb-1">Written by</p>
-                    <h4 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">{profile.name}</h4>
-                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">{profile.bio}</p>
-                    <div className="flex items-center justify-center sm:justify-start gap-3">
+                    <p className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-[#ff4d4d] mb-2">Author</p>
+                    <h4 className="text-2xl font-display font-bold text-zinc-900 dark:text-white mb-3">{profile.name}</h4>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6 max-w-lg">{profile.bio}</p>
+                    <div className="flex items-center justify-center sm:justify-start gap-4">
                       {profile.linkedin && (
-                        <a href={profile.linkedin} target="_blank" rel="noreferrer" className="p-2 text-zinc-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-xl transition-all">
+                        <a href={profile.linkedin} target="_blank" rel="noreferrer" className="p-3 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 rounded-xl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all">
                           <Linkedin className="w-4 h-4" />
                         </a>
                       )}
                       {profile.email && (
-                        <a href={`mailto:${profile.email}`} className="p-2 text-zinc-400 hover:text-amber-500 hover:bg-amber-50 dark:hover:bg-amber-900/20 rounded-xl transition-all">
+                        <a href={`mailto:${profile.email}`} className="p-3 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 rounded-xl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all">
                           <Mail className="w-4 h-4" />
                         </a>
                       )}
@@ -306,25 +312,26 @@ export default function BlogPost() {
 
           {/* Right Sidebar */}
           <aside className="hidden lg:block lg:col-span-4">
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-32 space-y-8">
               {/* Table of Contents */}
               {headings.length > 0 && (
-                <div className="p-6 bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md rounded-3xl border border-white/40 dark:border-zinc-800/60 shadow-lg">
-                  <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-5 flex items-center gap-2">
+                <div className="p-8 bg-zinc-50 dark:bg-white/5 backdrop-blur-md rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-lg">
+                  <h5 className="text-[10px] font-mono font-bold uppercase tracking-widest text-[#ff4d4d] mb-8 flex items-center gap-3">
                     <BookOpen className="w-4 h-4" />
-                    Table of Contents
+                    Neural Index
                   </h5>
-                  <nav className="space-y-1">
+                  <nav className="space-y-2">
                     {headings.map((h) => (
                       <button
                         key={h.id}
                         onClick={() => scrollToHeading(h.id)}
-                        className={`w-full text-left text-sm transition-all py-1.5 px-3 rounded-xl ${
+                        className={`w-full text-left text-xs font-bold transition-all py-3 px-4 rounded-2xl group ${
                           activeHeading === h.id
-                            ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 font-medium'
-                            : 'hover:text-amber-500 ' + (h.level === 'h3' ? 'ml-4 text-zinc-400 dark:text-zinc-500' : 'text-zinc-600 dark:text-zinc-400')
+                            ? 'text-zinc-900 dark:text-white bg-[#ff4d4d]/10 border border-[#ff4d4d]/20'
+                            : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 border border-transparent ' + (h.level === 'h3' ? 'ml-4' : '')
                         }`}
                       >
+                        <span className={`inline-block mr-2 transition-transform ${activeHeading === h.id ? 'translate-x-1 text-[#ff4d4d]' : 'opacity-0'}`}>⟩</span>
                         {h.text}
                       </button>
                     ))}
@@ -333,26 +340,26 @@ export default function BlogPost() {
               )}
 
               {/* Article Meta */}
-              <div className="p-6 bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md rounded-3xl border border-white/40 dark:border-zinc-800/60 shadow-lg space-y-4">
-                <h5 className="text-xs font-bold uppercase tracking-widest text-zinc-400 mb-4 flex items-center gap-2">
+               <div className="p-8 bg-zinc-50 dark:bg-white/5 backdrop-blur-md rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-lg space-y-6">
+                <h5 className="text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-3">
                   <Eye className="w-4 h-4" />
-                  Article Details
+                  Meta Information
                 </h5>
-                <div className="space-y-3 text-sm">
-                  <div className="flex items-center justify-between">
-                    <span className="text-zinc-500">Published</span>
-                    <span className="font-medium text-zinc-900 dark:text-white">{new Date(post!.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                <div className="space-y-4 text-xs font-bold uppercase tracking-tighter">
+                  <div className="flex items-center justify-between py-3 border-b border-zinc-200 dark:border-white/5">
+                    <span className="text-zinc-500">Released</span>
+                    <span className="text-zinc-900 dark:text-white">{new Date(post!.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}</span>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className="text-zinc-500">Reading time</span>
-                    <span className="font-medium text-zinc-900 dark:text-white">{readingTime} min</span>
+                  <div className="flex items-center justify-between py-3 border-b border-zinc-200 dark:border-white/5">
+                    <span className="text-zinc-500">Runtime</span>
+                    <span className="text-zinc-900 dark:text-white">{readingTime} MIN</span>
                   </div>
                   {post!.tags.filter(Boolean).length > 0 && (
-                    <div className="flex items-start justify-between gap-2">
-                      <span className="text-zinc-500 shrink-0">Topics</span>
-                      <div className="flex flex-wrap gap-1 justify-end">
+                    <div className="flex flex-col gap-4 py-3">
+                      <span className="text-zinc-500">Classifiers</span>
+                      <div className="flex flex-wrap gap-2">
                         {post!.tags.filter(Boolean).map(t => (
-                          <span key={t} className="text-xs bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 px-2 py-0.5 rounded-full">{t}</span>
+                          <span key={t} className="px-2.5 py-1 bg-[#ff4d4d]/5 border border-[#ff4d4d]/10 text-[#ff4d4d] text-[8px] font-mono rounded-lg">{t}</span>
                         ))}
                       </div>
                     </div>
@@ -361,23 +368,23 @@ export default function BlogPost() {
               </div>
 
               {/* Newsletter Card */}
-              <div className="p-7 bg-amber-500 rounded-3xl shadow-xl shadow-amber-500/20 relative overflow-hidden group">
+              <div className="p-10 bg-[#ff4d4d] rounded-[40px] shadow-2xl shadow-[#ff4d4d]/20 relative overflow-hidden group">
                 <div className="relative z-10">
-                  <h5 className="text-xl font-display font-bold text-zinc-950 mb-2">Stay in the loop</h5>
-                  <p className="text-zinc-900/70 text-sm mb-5 leading-relaxed">Get the latest articles delivered directly to your inbox.</p>
-                  <form className="space-y-2" onSubmit={(e) => e.preventDefault()}>
+                  <h5 className="text-2xl font-display font-bold text-white mb-3">Sync Insights</h5>
+                  <p className="text-white/80 text-sm mb-8 leading-relaxed font-medium">Join the network for weekly neural transmissions on software architecture.</p>
+                  <form className="space-y-3" onSubmit={(e) => e.preventDefault()}>
                     <input
                       type="email"
-                      placeholder="your@email.com"
-                      className="w-full px-4 py-2.5 bg-white/25 border border-white/30 rounded-xl text-zinc-950 placeholder:text-zinc-800/50 outline-none focus:bg-white/40 transition-all text-sm font-medium"
+                      placeholder="neural@address.io"
+                      className="w-full px-6 py-4 bg-white/20 border border-white/30 rounded-2xl text-white placeholder:text-white/60 outline-none focus:bg-white/30 transition-all text-sm font-bold"
                     />
-                    <button className="w-full py-2.5 bg-zinc-950 text-white font-bold rounded-xl hover:bg-zinc-800 transition-colors text-sm shadow-lg">
-                      Subscribe
+                    <button className="w-full py-4 bg-white text-[#ff4d4d] font-bold rounded-2xl hover:bg-white/90 transition-all text-sm shadow-xl hover:scale-[1.02] active:scale-[0.98]">
+                      ACTIVATE SYNC
                     </button>
                   </form>
                 </div>
-                <div className="absolute -right-6 -bottom-6 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-700">
-                  <Mail className="w-28 h-28 text-white" />
+                <div className="absolute -right-8 -bottom-8 opacity-10 group-hover:opacity-20 group-hover:scale-110 transition-all duration-1000">
+                  <Mail className="w-40 h-40 text-white" />
                 </div>
               </div>
             </div>
@@ -386,14 +393,17 @@ export default function BlogPost() {
 
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
-          <section className="max-w-7xl mx-auto px-4 mt-20">
-            <div className="flex items-center justify-between mb-10">
-              <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white">More from the blog</h3>
-              <Link to="/" className="text-sm font-medium text-amber-600 dark:text-amber-400 hover:text-amber-700 transition-colors flex items-center gap-1">
-                View all <ArrowRight className="w-4 h-4" />
+          <section className="max-w-7xl mx-auto px-4 mt-32">
+            <div className="flex items-end justify-between mb-12">
+              <div>
+                <div className="text-[10px] font-mono font-bold uppercase tracking-[0.3em] text-[#ff4d4d] mb-3">Keep Exploring</div>
+                <h3 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">More transmissions</h3>
+              </div>
+              <Link to="/" className="text-sm font-bold text-[#ff4d4d] hover:text-zinc-900 dark:hover:text-white transition-all flex items-center gap-2 group/all">
+                VIEW ARCHIVE <ArrowRight className="w-4 h-4 group-hover/all:translate-x-1 transition-transform" />
               </Link>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {relatedPosts.map((p, idx) => (
                 <motion.div
                   key={p.id}
@@ -402,22 +412,24 @@ export default function BlogPost() {
                   viewport={{ once: true }}
                   transition={{ delay: idx * 0.1 }}
                 >
-                  <Link to={`/blog/${p.id}`} className="group flex flex-col bg-white/50 dark:bg-zinc-900/40 backdrop-blur-md rounded-3xl overflow-hidden border border-white/40 dark:border-zinc-800/60 hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                  <Link to={`/blog/${p.id}`} className="group flex flex-col bg-zinc-50 dark:bg-white/5 rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,77,77,0.08)] h-full">
                     {p.imageUrl && (
                       <div className="aspect-[16/10] overflow-hidden">
-                        <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <img src={p.imageUrl} alt={p.title} className="w-full h-full object-cover grayscale-[0.3] group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700" />
                       </div>
                     )}
-                    <div className="p-5 flex-1 flex flex-col">
-                      <h4 className="text-base font-bold text-zinc-900 dark:text-white group-hover:text-amber-500 transition-colors mb-2 line-clamp-2">
+                    <div className="p-8 flex-1 flex flex-col">
+                      <h4 className="text-xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors mb-4 line-clamp-2">
                         {p.title}
                       </h4>
-                      <p className="text-zinc-500 dark:text-zinc-400 text-sm line-clamp-2 mb-4 flex-1">
+                      <p className="text-zinc-600 dark:text-zinc-400 text-sm line-clamp-2 mb-8 flex-1 leading-relaxed">
                         {p.excerpt}
                       </p>
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-mono text-zinc-400 uppercase tracking-widest">{p.tags.filter(Boolean)[0]}</span>
-                        <ArrowRight className="w-4 h-4 text-amber-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                      <div className="flex items-center justify-between pt-6 border-t border-zinc-200 dark:border-white/5">
+                        <span className="text-[10px] font-mono text-zinc-500 font-bold uppercase tracking-widest">{p.tags.filter(Boolean)[0]}</span>
+                        <div className="w-8 h-8 rounded-full bg-zinc-200 dark:bg-white/5 flex items-center justify-center group-hover:bg-[#ff4d4d] transition-all">
+                          <ArrowRight className="w-4 h-4 text-[#ff4d4d] group-hover:text-white transition-all" />
+                        </div>
                       </div>
                     </div>
                   </Link>

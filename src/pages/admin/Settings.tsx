@@ -116,7 +116,7 @@ export default function Settings() {
             heroBackgroundImageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2048',
             footerText: 'Chea Rotha. All rights reserved.',
             maintenanceMode: false,
-            primaryColor: '#fbbf24',
+            primaryColor: '#ff4d4d',
             siteLogoText: 'CR.',
             experienceTitle: 'Experience',
             experienceSubtitle: 'My professional journey and roles.',
@@ -194,95 +194,94 @@ export default function Settings() {
     setExporting(false);
   };
 
-  if (loading) return <div className="text-zinc-500 dark:text-zinc-400">Loading settings...</div>;
+  if (loading) return (
+    <div className="flex items-center justify-center min-h-[40vh]">
+      <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  );
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold text-zinc-900 dark:text-white mb-8">Website Customization</h1>
+    <div className="max-w-4xl mx-auto pb-24">
+      <div className="mb-12">
+        <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-3">
+          <span className="w-8 h-px bg-[#ff4d4d]/30" />
+          CONFIGURATIONS
+        </div>
+        <h1 className="text-4xl font-display font-bold text-white tracking-tight">System Parameters</h1>
+        <p className="text-zinc-500 text-sm font-medium mt-2">Adjust the visual and functional parameters of the public terminal.</p>
+      </div>
       
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 px-4 py-5 sm:rounded-xl sm:p-6 transition-colors">
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Section Visibility</h3>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Enable or disable sections on the public homepage.</p>
+        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-white mb-2">Section Visibility</h3>
+          <p className="text-sm text-zinc-500 font-medium mb-8">Enable or disable neural pathways on the interface.</p>
           
-          <div className="mt-4 space-y-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {['About', 'Experience', 'Projects', 'Gallery', 'Skills', 'Blog', 'References', 'Contact'].map((section) => (
-              <div key={section} className="flex items-start">
-                <div className="flex items-center h-5">
+              <label key={section} className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#ff4d4d]/30 transition-all cursor-pointer group">
+                <div className="relative flex items-center h-5">
                   <input
                     id={`show${section}`}
                     type="checkbox"
                     {...register(`show${section}` as keyof SiteSettings)}
-                    className="focus:ring-amber-500 h-4 w-4 text-amber-600 border-zinc-300 rounded"
+                    className="appearance-none h-5 w-5 bg-black/40 border border-white/10 rounded-lg checked:bg-[#ff4d4d] checked:border-[#ff4d4d] transition-all cursor-pointer"
                   />
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-has-[:checked]:opacity-100 transition-opacity">
+                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={4} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
                 </div>
-                <div className="ml-3 text-sm">
-                  <label htmlFor={`show${section}`} className="font-medium text-zinc-700 dark:text-zinc-300">
-                    Show {section} Section
-                  </label>
-                </div>
-              </div>
+                <span className="text-sm font-bold text-zinc-400 group-hover:text-white transition-colors">Show {section} Section</span>
+              </label>
             ))}
           </div>
         </div>
 
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Appearance</h3>
+        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-white mb-2">Visual Identity</h3>
+          <p className="text-sm text-zinc-500 font-medium mb-8">Customize the aesthetic parameters and branding.</p>
           
-          <div className="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Hero Background Image URL</label>
-              <input type="text" {...register('heroBackgroundImageUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              <p className="mt-2 text-xs text-zinc-500">Provide an Unsplash URL or any direct image link.</p>
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="sm:col-span-2 space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Hero Background Source</label>
+              <input type="text" {...register('heroBackgroundImageUrl')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm" />
             </div>
 
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Site Logo URL</label>
-              <input type="text" {...register('siteLogoUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              <p className="mt-2 text-xs text-zinc-500">Optional logo image for the site header.</p>
+            <div className="sm:col-span-1 space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Primary Brand Accent</label>
+              <div className="flex items-center gap-4">
+                <input type="color" {...register('primaryColor')} className="h-14 w-24 bg-black/40 border border-white/5 rounded-2xl p-1 cursor-pointer" />
+                <span className="text-xs font-mono text-zinc-500">{getValues('primaryColor')}</span>
+              </div>
+            </div>
+
+            <div className="sm:col-span-1 space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Secondary Accent</label>
+              <div className="flex items-center gap-4">
+                <input type="color" {...register('secondaryColor')} className="h-14 w-24 bg-black/40 border border-white/5 rounded-2xl p-1 cursor-pointer" />
+                <span className="text-xs font-mono text-zinc-500">{getValues('secondaryColor')}</span>
+              </div>
             </div>
             
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Site Logo Text</label>
-              <input type="text" {...register('siteLogoText')} placeholder="e.g. CR." className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-              <p className="mt-2 text-xs text-zinc-500">The text displayed next to the robot animation (e.g., CR., RR.).</p>
+            <div className="sm:col-span-1 space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Logo Signature</label>
+              <input type="text" {...register('siteLogoText')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
             </div>
 
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Footer Text</label>
-              <input type="text" {...register('footerText')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Announcement Text</label>
-              <input type="text" {...register('announcementText')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-
-            <div className="sm:col-span-3">
-              <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300">
-                <input type="checkbox" {...register('showAnnouncementBar')} className="h-4 w-4 text-amber-600 border-zinc-300 rounded" />
-                Show announcement bar
-              </label>
-            </div>
-
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Brand Primary Color</label>
-              <input type="color" {...register('primaryColor')} className="mt-1 block w-full h-10 p-1 rounded-md border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950" />
-            </div>
-
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Brand Secondary Color</label>
-              <input type="color" {...register('secondaryColor')} className="mt-1 block w-full h-10 p-1 rounded-md border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950" />
+            <div className="sm:col-span-1 space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Footer Copyright</label>
+              <input type="text" {...register('footerText')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
             </div>
           </div>
         </div>
 
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Section Titles & Subtitles</h3>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">Customize the headers for each part of your website.</p>
+        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-white mb-2">Section Nomenclature</h3>
+          <p className="text-sm text-zinc-500 font-medium mb-8">Override the default titles and subtitles for each section.</p>
           
-          <div className="mt-6 space-y-8">
+          <div className="space-y-10">
             {[
               { id: 'about', label: 'About' },
               { id: 'experience', label: 'Experience' },
@@ -293,108 +292,89 @@ export default function Settings() {
               { id: 'references', label: 'References' },
               { id: 'contact', label: 'Contact' }
             ].map((section) => (
-              <div key={section.id} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                <div className="sm:col-span-1">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">{section.label} Title</label>
-                  <input type="text" {...register(`${section.id}Title` as keyof SiteSettings)} className="block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+              <div key={section.id} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div className="sm:col-span-1 space-y-2">
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-600 ml-1">{section.label} Identifier</label>
+                  <input type="text" {...register(`${section.id}Title` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-white/5 bg-black/40 text-white focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
                 </div>
-                <div className="sm:col-span-1">
-                  <label className="block text-xs font-bold uppercase tracking-wider text-zinc-400 mb-1">{section.label} Subtitle</label>
-                  <input type="text" {...register(`${section.id}Subtitle` as keyof SiteSettings)} className="block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
+                <div className="sm:col-span-1 space-y-2">
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-600 ml-1">{section.label} Descriptor</label>
+                  <input type="text" {...register(`${section.id}Subtitle` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-white/5 bg-black/40 text-zinc-400 focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">Hero Content</h3>
-          <div className="mt-4 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Hero Headline</label>
-              <input type="text" {...register('heroHeadline')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-            <div className="sm:col-span-6">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Hero Subheadline</label>
-              <input type="text" {...register('heroSubheadline')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">CTA Label</label>
-              <input type="text" {...register('heroCtaLabel')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-            <div className="sm:col-span-3">
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">CTA URL</label>
-              <input type="text" {...register('heroCtaUrl')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-amber-500 focus:border-amber-500" />
-            </div>
-          </div>
-        </div>
-
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">📧 Email Settings (Gmail)</h3>
-          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-            Used to send contact form messages to your email. Use a <strong>Gmail App Password</strong>{' '}
-            (not your regular password).{' '}
-            <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="text-amber-600 underline">Generate one here →</a>
-          </p>
-          <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Gmail Address</label>
+        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-white mb-2">Neural Link (Gmail)</h3>
+          <p className="text-sm text-zinc-500 font-medium mb-8">Configure the bridge for incoming communications.</p>
+          
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Gateway Email</label>
               <input
                 type="email"
                 placeholder="your.email@gmail.com"
                 {...register('gmailUser')}
-                className="mt-1 block w-full text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm"
               />
             </div>
-            <div>
-              <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Gmail App Password</label>
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Security Token</label>
               <input
                 type="password"
-                placeholder="xxxx xxxx xxxx xxxx"
+                placeholder="•••• •••• •••• ••••"
                 {...register('gmailPass')}
-                className="mt-1 block w-full text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-amber-500 focus:border-amber-500"
+                className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm"
               />
             </div>
           </div>
+          <div className="mt-6 p-4 rounded-2xl bg-[#ff4d4d]/5 border border-[#ff4d4d]/10">
+            <p className="text-xs text-zinc-400 leading-relaxed">
+              Use a <strong className="text-white">Gmail App Password</strong> for secure access. 
+              <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="text-[#ff4d4d] ml-2 underline">Secure your link →</a>
+            </p>
+          </div>
         </div>
 
-        <div className="border-b border-zinc-200 dark:border-zinc-800 pb-6">
-          <h3 className="text-lg font-medium leading-6 text-zinc-900 dark:text-white">System Controls</h3>
-          <div className="mt-4 flex items-center justify-between p-4 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/20 rounded-xl">
+        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-white mb-2">System Override</h3>
+          <p className="text-sm text-zinc-500 font-medium mb-8">Execute low-level system commands.</p>
+          
+          <div className="flex items-center justify-between p-6 bg-red-500/5 border border-red-500/10 rounded-3xl">
             <div>
-              <h4 className="text-sm font-bold text-red-800 dark:text-red-400">Maintenance Mode</h4>
-              <p className="text-xs text-red-600 dark:text-red-500/80">When enabled, public visitors will see a maintenance message.</p>
+              <h4 className="text-sm font-bold text-red-500 uppercase tracking-tight">Maintenance Protocol</h4>
+              <p className="text-xs text-zinc-500 mt-1">Suspend public access and broadcast a offline status.</p>
             </div>
-            <div className="flex items-center h-5">
+            <label className="relative inline-flex items-center cursor-pointer">
               <input
-                id="maintenanceMode"
                 type="checkbox"
                 {...register('maintenanceMode')}
-                className="focus:ring-red-500 h-6 w-6 text-red-600 border-zinc-300 rounded-full cursor-pointer"
+                className="sr-only peer"
               />
-            </div>
+              <div className="w-14 h-8 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600 peer-checked:after:bg-white"></div>
+            </label>
           </div>
         </div>
 
-        <div className="pt-6 flex justify-between items-center bg-white dark:bg-zinc-950 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 sticky bottom-0 z-10 transition-colors">
-          <div className="flex gap-4">
-            <button
-              type="button"
-              onClick={handleExport}
-              disabled={exporting}
-              className="inline-flex items-center px-4 py-2 border border-zinc-300 dark:border-zinc-700 rounded-md shadow-sm text-sm font-medium text-zinc-700 dark:text-zinc-300 bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors disabled:opacity-50"
-            >
-              <Download className="-ml-1 mr-2 h-4 w-4" />
-              {exporting ? 'Exporting...' : 'Export Backup'}
-            </button>
-          </div>
+        <div className="flex gap-4 sticky bottom-8 z-20">
+          <button
+            type="button"
+            onClick={handleExport}
+            disabled={exporting}
+            className="flex-1 py-4 bg-white/5 backdrop-blur-xl border border-white/5 hover:border-white/20 text-white text-sm font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl"
+          >
+            <Download className="h-4 w-4" />
+            {exporting ? 'EXPORTING...' : 'BACKUP DATA'}
+          </button>
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center px-6 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-amber-400 hover:bg-amber-500 transition-colors disabled:opacity-50"
+            className="flex-[2] py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-sm font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Save className="-ml-1 mr-2 h-4 w-4" />
-            {saving ? 'Saving...' : 'Save Changes'}
+            <Save className="h-4 w-4" />
+            {saving ? 'SYNCING...' : 'COMMIT CHANGES'}
           </button>
         </div>
       </form>

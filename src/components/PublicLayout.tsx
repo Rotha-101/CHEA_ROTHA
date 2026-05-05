@@ -112,27 +112,23 @@ export function PublicLayout() {
   const adminLabel = isAdmin ? 'Dashboard' : 'Login';
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans transition-colors duration-500">
-      {bgImage && (
-        <div
-          aria-hidden
-          className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700"
-          style={{ backgroundImage: `url("${bgImage}")` }}
-        />
-      )}
+    <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans bg-white dark:bg-[#050810] selection:bg-[#ff4d4d]/30 selection:text-white transition-colors duration-500">
+      {/* Persistent Technical Background */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 dark:opacity-100" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,77,77,0.05),transparent_50%)]" />
+        <div className="absolute inset-0 bg-white/50 dark:bg-[#050810]/50 backdrop-blur-[2px]" />
+      </div>
 
-      <div
-        aria-hidden
-        className={cn(
-          'fixed inset-0 z-0 pointer-events-none transition-colors duration-500',
-          bgImage ? 'bg-white/90 dark:bg-zinc-950/50' : 'bg-white dark:bg-zinc-950'
-        )}
-      />
-
-      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-[0_4px_30px_rgba(0,0,0,0.1)] transition-colors duration-500">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center">
-            <span className="text-2xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-amber-500 transition-colors">
+      <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/50 dark:border-white/5 bg-white/40 dark:bg-[#050810]/40 backdrop-blur-3xl transition-all duration-500">
+        <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
+          <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#ff4d4d]/50 transition-all duration-500">
+              <span className="text-xl font-display font-black tracking-tighter text-white">
+                {settings?.siteLogoText?.substring(0, 1) || 'C'}
+              </span>
+            </div>
+            <span className="text-2xl font-display font-bold tracking-tighter text-white group-hover:text-[#ff4d4d] transition-colors">
               {settings?.siteLogoText || 'CR.'}
             </span>
           </a>
@@ -144,18 +140,20 @@ export function PublicLayout() {
                 href={item.href}
                 onClick={(e) => scrollToSection(e, item.href)}
                 className={cn(
-                  'relative rounded-lg px-4 py-2 text-sm font-medium transition-colors duration-200 z-0',
+                  'relative rounded-full px-5 py-2 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-300 z-0',
                   activeSection === item.href.substring(1)
-                    ? 'text-zinc-900 dark:text-white'
-                    : 'text-zinc-600 hover:bg-white/20 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white'
+                    ? 'text-white'
+                    : 'text-zinc-500 hover:text-white'
                 )}
               >
                 {activeSection === item.href.substring(1) && (
                   <motion.div
                     layoutId="activeTabIndicatorDesktop"
-                    className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-md shadow-sm border border-white/40 dark:border-white/10 rounded-lg -z-10"
+                    className="absolute inset-0 bg-white/5 border border-white/10 rounded-full -z-10"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
-                  />
+                  >
+                    <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[#ff4d4d] shadow-[0_0_10px_#ff4d4d]" />
+                  </motion.div>
                 )}
                 {item.name}
               </a>
@@ -166,7 +164,7 @@ export function PublicLayout() {
             <div className="hidden items-center gap-2 md:flex">
               <button
                 onClick={() => toggleTheme()}
-                className="ui rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
+                className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-white/5 hover:text-white"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -174,17 +172,17 @@ export function PublicLayout() {
 
               <a
                 href="/admin"
-                className="inline-flex items-center gap-2 rounded-full border border-zinc-300/80 px-3 py-2 text-sm font-medium text-zinc-700 transition-colors hover:border-amber-400 hover:text-amber-600 dark:border-zinc-700 dark:text-zinc-300 dark:hover:border-amber-400 dark:hover:text-amber-400"
+                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-1.5 text-sm font-medium text-white transition-all hover:border-[#ff4d4d] hover:bg-[#ff4d4d]/10 hover:text-[#ff4d4d]"
                 title="Admin Login"
               >
-                <Shield className="h-4 w-4" />
+                <Shield className="h-3.5 w-3.5" />
                 {adminLabel}
               </a>
             </div>
 
             <button
               onClick={() => toggleTheme()}
-              className="ui rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white md:hidden"
+              className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-white/5 hover:text-white md:hidden"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -192,10 +190,8 @@ export function PublicLayout() {
 
             <button
               onClick={() => setMobileMenuOpen((open) => !open)}
-              className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white md:hidden"
+              className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-white/5 hover:text-white md:hidden"
               aria-label="Toggle mobile menu"
-              aria-expanded={mobileMenuOpen}
-              aria-controls="mobile-navigation"
             >
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </button>
@@ -208,7 +204,7 @@ export function PublicLayout() {
       {mobileMenuOpen && (
         <nav
           id="mobile-navigation"
-          className="fixed inset-x-0 top-20 z-40 border-b border-white/20 dark:border-white/10 bg-white/20 dark:bg-black/20 backdrop-blur-xl saturate-150 shadow-[0_4px_30px_rgba(0,0,0,0.1)] md:hidden"
+          className="fixed inset-x-0 top-20 z-40 border-b border-zinc-200 dark:border-white/5 bg-white/90 dark:bg-black/80 backdrop-blur-2xl md:hidden"
         >
           <div className="mx-auto flex max-h-[calc(100vh-5rem)] max-w-7xl flex-col gap-1 overflow-y-auto p-4">
             {navigation.map((item) => (
@@ -222,14 +218,14 @@ export function PublicLayout() {
                 className={cn(
                   'relative flex items-center gap-3 rounded-lg px-4 py-3 font-medium transition-colors duration-200 z-0',
                   activeSection === item.href.substring(1)
-                    ? 'text-zinc-900 dark:text-white'
-                    : 'text-zinc-600 hover:bg-white/20 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-white/5 dark:hover:text-white'
+                    ? 'text-zinc-900 dark:text-white bg-zinc-100 dark:bg-white/5'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 )}
               >
                 {activeSection === item.href.substring(1) && (
                   <motion.div
                     layoutId="activeTabIndicatorMobile"
-                    className="absolute inset-0 bg-white/30 dark:bg-white/10 backdrop-blur-md shadow-sm border border-white/40 dark:border-white/10 rounded-lg -z-10"
+                    className="absolute inset-y-2 left-0 w-1 bg-[#ff4d4d] shadow-[0_0_8px_#ff4d4d] rounded-full"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   />
                 )}
@@ -238,43 +234,15 @@ export function PublicLayout() {
               </a>
             ))}
 
-            <div className="flex gap-4 border-t border-zinc-200/60 px-4 pt-4 dark:border-zinc-800/60">
+            <div className="flex gap-4 border-t border-zinc-200 dark:border-white/5 px-4 pt-4">
               <a
                 href="/admin"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-2 text-zinc-500 transition-colors hover:text-amber-600 dark:text-zinc-400 dark:hover:text-amber-400"
+                className="flex items-center gap-2 text-zinc-500 transition-colors hover:text-[#ff4d4d]"
                 title="Admin Login"
               >
                 <Shield className="h-5 w-5" />
                 <span className="text-sm font-medium">{adminLabel}</span>
-              </a>
-            </div>
-
-            <div className="flex gap-4 border-t border-zinc-200/60 px-4 pt-4 dark:border-zinc-800/60">
-              <a
-                href="https://github.com/Rotha-101"
-                target="_blank"
-                rel="noreferrer"
-                className="text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
-                title="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/chea-rotha-44268b2a5/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-zinc-400 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-                title="LinkedIn"
-              >
-                <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:chearotha.itc.edu@gmail.com"
-                className="text-zinc-400 transition-colors hover:text-red-500 dark:hover:text-red-400"
-                title="Email"
-              >
-                <Mail className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -284,23 +252,23 @@ export function PublicLayout() {
       <aside className="hidden" />
 
       {settings?.maintenanceMode && (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-zinc-950 p-8">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-[#050810] p-8">
           <div className="max-w-md w-full space-y-8 text-center">
             <div className="flex justify-center">
-              <div className="rounded-3xl border border-amber-400/20 bg-amber-400/10 p-6 animate-pulse">
-                <Globe className="h-16 w-16 text-amber-400" />
+              <div className="rounded-3xl border border-[#ff4d4d]/20 bg-[#ff4d4d]/5 p-6 animate-pulse">
+                <Globe className="h-16 w-16 text-[#ff4d4d]" />
               </div>
             </div>
             <div className="space-y-4">
-              <h1 className="font-display text-4xl font-bold tracking-tight text-white">System Updating</h1>
-              <p className="leading-relaxed text-zinc-400">
-                We&apos;re currently performing scheduled maintenance. We&apos;ll be back online very shortly.
+              <h1 className="font-display text-4xl font-bold tracking-tight text-zinc-900 dark:text-white">System Updating</h1>
+              <p className="leading-relaxed text-zinc-600 dark:text-zinc-400">
+                We&apos;re currently performing scheduled maintenance. We&apos;ll be back online shortly.
               </p>
             </div>
             <div className="flex justify-center gap-4 pt-8">
-              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-              <div className="h-1 w-8 rounded-full bg-amber-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+              <div className="h-1 w-8 rounded-full bg-[#ff4d4d] animate-bounce" style={{ animationDelay: '0ms' }} />
+              <div className="h-1 w-8 rounded-full bg-[#ff4d4d] animate-bounce" style={{ animationDelay: '150ms' }} />
+              <div className="h-1 w-8 rounded-full bg-[#ff4d4d] animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         </div>
