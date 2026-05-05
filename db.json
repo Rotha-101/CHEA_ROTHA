@@ -8,11 +8,11 @@
     "location": "Toul Kork, Phnom Penh, Cambodia",
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
-    "profilePhotoUrl": "http://localhost:3001/uploads/1777971556475-127646808.jpg",
-    "coverImageUrl": "http://localhost:3001/uploads/1777968522151-559128.jpg",
-    "cvUrl": "http://localhost:3001/uploads/1777797814048-CHEA ROTHA CV 2026.pdf",
+    "profilePhotoUrl": "/uploads/1777971556475-127646808.jpg",
+    "coverImageUrl": "/uploads/1777968522151-559128.jpg",
+    "cvUrl": "/uploads/1777797814048-CHEA ROTHA CV 2026.pdf",
     "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale.",
-    "aboutSectionCoverUrl": "http://localhost:3001/uploads/1777971462330-download (3).jpg"
+    "aboutSectionCoverUrl": "/uploads/1777971462330-download (3).jpg"
   },
   "skills": [
     {
@@ -24,7 +24,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777632476143-java-512px.png",
+      "iconUrl": "/uploads/1777632476143-java-512px.png",
       "id": "1777632478197"
     },
     {
@@ -36,7 +36,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "https://github.com/pytorch/pytorch.git",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649187302-pytorch-512px.png",
+      "iconUrl": "/uploads/1777649187302-pytorch-512px.png",
       "id": "1777649191084"
     },
     {
@@ -48,7 +48,7 @@
       "description": "",
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777625610328-visual-studio-code.svg",
+      "iconUrl": "/uploads/1777625610328-visual-studio-code.svg",
       "yearsOfExperience": 5
     },
     {
@@ -57,7 +57,7 @@
       "level": 95,
       "category": "Programming Languages",
       "priority": 1,
-      "iconUrl": "http://localhost:3001/uploads/1777629578167-python.svg",
+      "iconUrl": "/uploads/1777629578167-python.svg",
       "description": "",
       "certificationUrl": "",
       "isHighlighted": false
@@ -71,7 +71,7 @@
       "yearsOfExperience": 4,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777630500988-dbeaver-512px.png",
+      "iconUrl": "/uploads/1777630500988-dbeaver-512px.png",
       "id": "1777630502565"
     },
     {
@@ -80,7 +80,7 @@
       "level": 90,
       "category": "Programming Languages",
       "priority": 2,
-      "iconUrl": "http://localhost:3001/uploads/1777632224673-azure-sql-database-512px.png",
+      "iconUrl": "/uploads/1777632224673-azure-sql-database-512px.png",
       "description": "",
       "certificationUrl": "",
       "isHighlighted": false
@@ -94,7 +94,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777629958893-jupyter.svg",
+      "iconUrl": "/uploads/1777629958893-jupyter.svg",
       "id": "1777629960734"
     },
     {
@@ -106,7 +106,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777630117571-csharp-512px.png",
+      "iconUrl": "/uploads/1777630117571-csharp-512px.png",
       "id": "1777630119123"
     },
     {
@@ -115,7 +115,7 @@
       "level": 80,
       "category": "Databases",
       "priority": 2,
-      "iconUrl": "http://localhost:3001/uploads/1777649921003-mysql-wordmark-light-512px.png",
+      "iconUrl": "/uploads/1777649921003-mysql-wordmark-light-512px.png",
       "description": "",
       "yearsOfExperience": 5,
       "certificationUrl": "",
@@ -130,7 +130,7 @@
       "yearsOfExperience": 4,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777630457556-cplusplus-512px.png",
+      "iconUrl": "/uploads/1777630457556-cplusplus-512px.png",
       "id": "1777630459103"
     },
     {
@@ -142,7 +142,7 @@
       "yearsOfExperience": 2,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777631696244-cursor-256px.png",
+      "iconUrl": "/uploads/1777631696244-cursor-256px.png",
       "id": "1777631646190"
     },
     {
@@ -154,7 +154,7 @@
       "yearsOfExperience": 4,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649983638-sqlite-512px.png",
+      "iconUrl": "/uploads/1777649983638-sqlite-512px.png",
       "id": "1777649984979"
     },
     {
@@ -166,7 +166,7 @@
       "yearsOfExperience": 4,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777632447236-matlab-512px.png",
+      "iconUrl": "/uploads/1777632447236-matlab-512px.png",
       "id": "1777632449594"
     },
     {
@@ -178,7 +178,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649392072-pycharm-512px.png",
+      "iconUrl": "/uploads/1777649392072-pycharm-512px.png",
       "id": "1777649400937"
     },
     {
@@ -190,7 +190,7 @@
       "yearsOfExperience": 2,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649485673-antigravity-google-mono-512px.png",
+      "iconUrl": "/uploads/1777649485673-antigravity-google-mono-512px.png",
       "id": "1777649487202"
     },
     {
@@ -202,7 +202,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777650108850-postgresql-512px.png",
+      "iconUrl": "/uploads/1777650108850-postgresql-512px.png",
       "id": "1777650111475"
     },
     {
@@ -214,7 +214,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777632605118-rstudio-ide-512px.png",
+      "iconUrl": "/uploads/1777632605118-rstudio-ide-512px.png",
       "id": "1777632606230"
     },
     {
@@ -226,7 +226,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649543159-spyder-ide-512px.png",
+      "iconUrl": "/uploads/1777649543159-spyder-ide-512px.png",
       "id": "1777649544603"
     },
     {
@@ -238,7 +238,7 @@
       "yearsOfExperience": 5,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777650178059-azure-sql-server-512px.png",
+      "iconUrl": "/uploads/1777650178059-azure-sql-server-512px.png",
       "id": "1777650179743"
     },
     {
@@ -250,7 +250,7 @@
       "yearsOfExperience": 1,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649610660-codex-openai-512px.png",
+      "iconUrl": "/uploads/1777649610660-codex-openai-512px.png",
       "id": "1777649618686"
     },
     {
@@ -262,7 +262,7 @@
       "yearsOfExperience": 4,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649660589-rstudio-ide-512px.png",
+      "iconUrl": "/uploads/1777649660589-rstudio-ide-512px.png",
       "id": "1777649663200"
     },
     {
@@ -274,7 +274,7 @@
       "yearsOfExperience": 3,
       "certificationUrl": "",
       "isHighlighted": false,
-      "iconUrl": "http://localhost:3001/uploads/1777649773282-eclipse-ide-512px.png",
+      "iconUrl": "/uploads/1777649773282-eclipse-ide-512px.png",
       "id": "1777649780057"
     }
   ],
@@ -283,7 +283,7 @@
       "id": "proj-001",
       "title": "Laptop Price Prediction",
       "description": "Built an end-to-end pricing model for laptop market data: data cleaning, exploratory analysis, feature engineering, and model comparison. Trained and evaluated Linear Regression, Random Forest, and SVR, with SVR delivering the best predictive accuracy.",
-      "imageUrl": "http://localhost:3001/uploads/1777615251123-Laptop Price Prediction.jpg",
+      "imageUrl": "/uploads/1777615251123-Laptop Price Prediction.jpg",
       "tags": [
         "Python",
         "Pandas",
@@ -300,7 +300,7 @@
       "id": "proj-002",
       "title": "Hotel Reservation System Database",
       "description": "Designed and implemented a relational database for hotel operations covering room booking, client management, staff scheduling, and payment confirmation workflows. Produced ERD and normalized schema with key constraints for robust data integrity.",
-      "imageUrl": "http://localhost:3001/uploads/1777614837382-hotel.jpg",
+      "imageUrl": "/uploads/1777614837382-hotel.jpg",
       "tags": [
         "MySQL",
         "SQL",
@@ -316,7 +316,7 @@
       "id": "proj-003",
       "title": "Forecasting Tourism in Cambodia",
       "description": "Performed time-series forecasting on Cambodia tourism data using Python and statistical models. Preprocessed data, evaluated models with MSE, and identified seasonality and post-COVID recovery trends to support planning and policy insights.",
-      "imageUrl": "http://localhost:3001/uploads/1777615055289-Tourism in Cambodia.webp",
+      "imageUrl": "/uploads/1777615055289-Tourism in Cambodia.webp",
       "tags": [
         "Time Series",
         "Forecasting",
@@ -333,7 +333,7 @@
       "id": "proj-004",
       "title": "Crop Yield Prediction & Recommendation",
       "description": "Developed machine learning models for crop yield prediction using agricultural, soil, and weather features. Compared Random Forest and XGBoost, evaluated with RÂ²/MAE/RMSE, and built a recommendation component for suitable crop selection.",
-      "imageUrl": "http://localhost:3001/uploads/1777615063853-Crop Yield.jpeg",
+      "imageUrl": "/uploads/1777615063853-Crop Yield.jpeg",
       "tags": [
         "XGBoost",
         "Random Forest",
@@ -360,7 +360,7 @@
       "description": "Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
       "priority": 1,
       "photos": [
-        "http://localhost:3001/uploads/1777651076666-955901603-unnamed.webp"
+        "/uploads/1777651076666-955901603-unnamed.webp"
       ]
     },
     {
@@ -373,7 +373,7 @@
       "description": "Analyzed BESS performance data, built dashboards, and developed data-driven models to optimize energy efficiency and system reliability. Collaborated with engineering teams to monitor systems, troubleshoot issues, and support deployment.\n",
       "priority": 1,
       "photos": [
-        "http://localhost:3001/uploads/1777651642155-353643884-photo_2026-05-01_23-07-00.jpg"
+        "/uploads/1777651642155-353643884-photo_2026-05-01_23-07-00.jpg"
       ],
       "id": "1777651659053"
     },
@@ -388,7 +388,7 @@
       "description": "- Taught EDA, statistics, machine learning, forecasting, and data visualization with practical Python and Power BI projects.\\n- Guided students in dashboard building, analysis, and insight generation from real datasets.\\n- Designed hands-on exercises and mini-projects to strengthen analytical and coding skills.\\n- Mentored students on data storytelling for technical and non-technical audiences.\\n- Supported students in applying ML and statistical methods to real-world problems.",
       "priority": 2,
       "photos": [
-        "http://localhost:3001/uploads/1777613764523-215775523-sunrise.JPG"
+        "/uploads/1777613764523-215775523-sunrise.JPG"
       ]
     }
   ],
@@ -416,7 +416,7 @@
       "description": "Language training focused on professional communication.",
       "priority": 2,
       "photos": [
-        "http://localhost:3001/uploads/1777613991192-704625837-tk_building.jpg"
+        "/uploads/1777613991192-704625837-tk_building.jpg"
       ]
     }
   ],
@@ -522,7 +522,7 @@
       "title": "Khmer BESS",
       "content": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com/search?sca_esv=d1b2e046e6c1a3bf&amp;rlz=1C1MYPO_enKH1196KH1196&amp;sxsrf=ANbL-n6L_gZOACU1NAKoTxyBvsAIwGARsw:1777715413406&amp;udm=2&amp;fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&amp;q=battery+energy+storage+system+operation&amp;sa=X&amp;ved=2ahUKEwjo_Oj9qZqUAxXHyDgGHRjYG7gQtKgLegQIFhAB&amp;biw=1920&amp;bih=911&amp;dpr=1.5#sv=CAMSVhoyKhBlLThrNFp3Sk9KNlJxUUhNMg44azRad0pPSjZScVFITToOUkZ2TEktMkZ1anZaeE0gBCocCgZtb3NhaWMSEGUtOGs0WndKT0o2UnFRSE0YADABGAcgmY6WyQVKCBABGAEgASgB\">hello</a></p><img src=\"https://www.power-sonic.com/wp-content/uploads/2025/08/Battery-Energy-Storage-System-Components-EVESCO-1024x334.png\"><p></p>",
       "excerpt": "ess",
-      "imageUrl": "http://localhost:3001/uploads/1777715613707-766851729-SWG1_TODAY_2026-01-13.png",
+      "imageUrl": "/uploads/1777715613707-766851729-SWG1_TODAY_2026-01-13.png",
       "tags": [
         ""
       ],
@@ -555,7 +555,7 @@
       "description": "Lecturer and professional reference in data science and applied analytics.",
       "phone": "010 64 44 96",
       "email": "long.pakrigna@itc.edu.kh",
-      "profileImageUrl": "http://localhost:3001/uploads/1777635088710-932733601-Screenshot 2026-05-01 183112.png",
+      "profileImageUrl": "/uploads/1777635088710-932733601-Screenshot 2026-05-01 183112.png",
       "priority": 2,
       "profileUrl": ""
     }
