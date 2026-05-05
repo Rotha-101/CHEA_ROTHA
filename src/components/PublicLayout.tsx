@@ -123,14 +123,11 @@ export function PublicLayout() {
       <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/50 dark:border-white/5 bg-white/40 dark:bg-[#050810]/40 backdrop-blur-3xl transition-all duration-500">
         <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
           <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#ff4d4d]/50 transition-all duration-500">
+            <div className="px-3 h-10 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#ff4d4d]/50 transition-all duration-500">
               <span className="text-xl font-display font-black tracking-tighter text-zinc-900 dark:text-white">
-                {settings?.siteLogoText?.substring(0, 1) || 'C'}
+                CR
               </span>
             </div>
-            <span className="text-2xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">
-              {settings?.siteLogoText || 'CR.'}
-            </span>
           </a>
 
           <nav className="hidden items-center gap-1 md:flex">
