@@ -123,12 +123,12 @@ export function PublicLayout() {
       <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/50 dark:border-white/5 bg-white/40 dark:bg-[#050810]/40 backdrop-blur-3xl transition-all duration-500">
         <div className="mx-auto flex h-24 max-w-7xl items-center justify-between px-6 lg:px-8">
           <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="group flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-[#ff4d4d]/50 transition-all duration-500">
-              <span className="text-xl font-display font-black tracking-tighter text-white">
+            <div className="w-10 h-10 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center group-hover:border-[#ff4d4d]/50 transition-all duration-500">
+              <span className="text-xl font-display font-black tracking-tighter text-zinc-900 dark:text-white">
                 {settings?.siteLogoText?.substring(0, 1) || 'C'}
               </span>
             </div>
-            <span className="text-2xl font-display font-bold tracking-tighter text-white group-hover:text-[#ff4d4d] transition-colors">
+            <span className="text-2xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">
               {settings?.siteLogoText || 'CR.'}
             </span>
           </a>
@@ -142,14 +142,14 @@ export function PublicLayout() {
                 className={cn(
                   'relative rounded-full px-5 py-2 text-[11px] font-mono font-bold uppercase tracking-widest transition-all duration-300 z-0',
                   activeSection === item.href.substring(1)
-                    ? 'text-white'
-                    : 'text-zinc-500 hover:text-white'
+                    ? 'text-zinc-900 dark:text-white'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                 )}
               >
                 {activeSection === item.href.substring(1) && (
                   <motion.div
                     layoutId="activeTabIndicatorDesktop"
-                    className="absolute inset-0 bg-white/5 border border-white/10 rounded-full -z-10"
+                    className="absolute inset-0 bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 rounded-full -z-10"
                     transition={{ type: "spring", stiffness: 300, damping: 30 }}
                   >
                     <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-[#ff4d4d] shadow-[0_0_10px_#ff4d4d]" />
@@ -164,7 +164,7 @@ export function PublicLayout() {
             <div className="hidden items-center gap-2 md:flex">
               <button
                 onClick={() => toggleTheme()}
-                className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-white/5 hover:text-white"
+                className="rounded-full p-2 text-zinc-500 transition-colors hover:bg-zinc-100 dark:hover:bg-white/5 hover:text-zinc-900 dark:hover:text-white"
                 aria-label="Toggle theme"
               >
                 {theme === 'dark' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
@@ -172,7 +172,7 @@ export function PublicLayout() {
 
               <a
                 href="/admin"
-                className="inline-flex items-center gap-2 rounded-full border border-white/10 px-4 py-1.5 text-sm font-medium text-white transition-all hover:border-[#ff4d4d] hover:bg-[#ff4d4d]/10 hover:text-[#ff4d4d]"
+                className="inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-white/10 px-4 py-1.5 text-sm font-medium text-zinc-600 dark:text-white transition-all hover:border-[#ff4d4d] hover:bg-[#ff4d4d]/10 hover:text-[#ff4d4d]"
                 title="Admin Login"
               >
                 <Shield className="h-3.5 w-3.5" />
