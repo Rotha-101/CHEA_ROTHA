@@ -163,34 +163,6 @@ export function PublicLayout() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-3 md:flex">
-              <a
-                href="https://github.com/Rotha-101"
-                target="_blank"
-                rel="noreferrer"
-                className="text-zinc-400 transition-colors hover:text-zinc-900 dark:hover:text-white"
-                title="GitHub"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/chea-rotha-44268b2a5/"
-                target="_blank"
-                rel="noreferrer"
-                className="text-zinc-400 transition-colors hover:text-blue-600 dark:hover:text-blue-400"
-                title="LinkedIn"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-              <a
-                href="mailto:chearotha.itc.edu@gmail.com"
-                className="text-zinc-400 transition-colors hover:text-red-500 dark:hover:text-red-400"
-                title="Email"
-              >
-                <Mail className="h-4 w-4" />
-              </a>
-            </div>
-
             <div className="hidden items-center gap-2 md:flex">
               <button
                 onClick={() => toggleTheme()}

@@ -84,6 +84,7 @@ interface Profile {
   profilePhotoUrl?: string;
   coverImageUrl?: string;
   cvUrl?: string;
+  aboutSectionCoverUrl?: string;
 }
 
 interface Skill {
@@ -206,7 +207,6 @@ interface SiteSettings {
   referencesSubtitle: string;
   contactTitle: string;
   contactSubtitle: string;
-  aboutTitle: string;
   aboutSubtitle: string;
 }
 
@@ -235,7 +235,10 @@ interface DataState {
 }
 
 export const useDataStore = create<DataState>((set, get) => ({
-  profile: normalizeUploads(staticDbRaw.profile) as Profile,
+  profile: normalizeUploads({
+    ...staticDbRaw.profile,
+    aboutSectionCoverUrl: staticDbRaw.profile?.aboutSectionCoverUrl || ''
+  }) as Profile,
   skills: normalizeUploads(staticDbRaw.skills || []) as Skill[],
   projects: normalizeUploads(staticDbRaw.projects || []) as Project[],
   experience: normalizeUploads(staticDbRaw.experience || []) as Experience[],

@@ -16,7 +16,7 @@ interface ProfileForm {
   linkedin: string;
   profilePhotoUrl?: string;
   coverImageUrl?: string;
-  cvUrl?: string;
+  aboutSectionCoverUrl?: string;
 }
 
 export default function Profile() {
@@ -221,6 +221,26 @@ export default function Profile() {
                 className="shadow-sm focus:ring-amber-500 focus:border-amber-500 block w-full resize-y sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md transition-colors leading-6"
                 placeholder="Write the full About Me text for the About section."
               />
+            </div>
+          </div>
+
+          <div className="sm:col-span-6 border-t border-zinc-100 dark:border-zinc-800 pt-6">
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">About Section Banner Image</label>
+            <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">This image will appear as a banner below your About Me text.</p>
+            <div className="mt-4 flex flex-col gap-4">
+              {getValues('aboutSectionCoverUrl') && (
+                <div className="relative aspect-[21/9] w-full rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-inner bg-zinc-100 dark:bg-zinc-950">
+                  <img src={getValues('aboutSectionCoverUrl')} alt="About Banner" className="w-full h-full object-cover" />
+                </div>
+              )}
+              <div className="flex items-center gap-4">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handleFileUpload(e, 'aboutSectionCoverUrl')}
+                  className="block w-full text-sm text-zinc-500 dark:text-zinc-400 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-amber-50 file:text-amber-700 hover:file:bg-amber-100 dark:file:bg-amber-900/30 dark:file:text-amber-400"
+                />
+              </div>
             </div>
           </div>
 

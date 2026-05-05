@@ -135,10 +135,10 @@ export default function Skills() {
           <p className="inline-flex items-center rounded-full border border-amber-400/40 bg-amber-400/10 px-3 py-1 text-xs font-mono uppercase tracking-[0.25em] text-amber-600 dark:text-amber-300 mb-5">
             Core Skills
           </p>
-          <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-5">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-5">
             {settings?.skillsTitle || 'Technical Arsenal'}
           </h1>
-          <p className="text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
             {settings?.skillsSubtitle || 'A categorized visual tool-grid of skills, frameworks, and technical strengths with custom logo support.'}
           </p>
         </motion.div>
@@ -151,7 +151,7 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: groupIdx * 0.1 }}
-                className="text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6"
+                className="text-xl sm:text-2xl font-display font-semibold text-zinc-900 dark:text-white mb-6"
               >
                 {group.category}
               </motion.h2>

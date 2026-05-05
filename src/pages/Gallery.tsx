@@ -40,8 +40,8 @@ export default function Gallery() {
         transition={{ duration: 0.8 }}
         className="max-w-3xl mb-16"
       >
-        <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">Gallery</h1>
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">Moments, setups, and visual explorations.</p>
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">Gallery</h1>
+        <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">Moments, setups, and visual explorations.</p>
       </motion.div>
 
       {loading ? (

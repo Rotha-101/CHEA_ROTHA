@@ -42,10 +42,10 @@ export default function Blog() {
         viewport={{ once: true }}
         className="max-w-3xl mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
           {settings?.blogTitle || 'Latest Articles'}
         </h2>
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="text-sm sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
           {settings?.blogSubtitle || 'Thoughts, tutorials, and insights on software development.'}
         </p>
       </motion.div>
@@ -74,7 +74,7 @@ export default function Blog() {
                 <Calendar className="w-3 h-3" />
                 {new Date(post.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
               </div>
-              <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+              <h3 className="text-lg sm:text-xl font-bold text-zinc-900 dark:text-white mb-3 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
                 {post.title}
               </h3>
               <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-6 flex-grow">

@@ -53,7 +53,47 @@ export default function Settings() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [exporting, setExporting] = useState(false);
-  const { register, handleSubmit, reset } = useForm<SiteSettings>();
+  const { register, handleSubmit, reset, getValues } = useForm<SiteSettings>();
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>, fieldName: keyof SiteSettings) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    try {
+      const reader = new FileReader();
+      const base64Promise = new Promise<string>((resolve) => {
+        reader.onload = () => {
+          const result = reader.result as string;
+          resolve(result.split(',')[1]);
+        };
+        reader.readAsDataURL(file);
+      });
+
+      const base64Content = await base64Promise;
+
+      const uploadRes = await fetch(`${API_URL}/upload`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          file: base64Content,
+          filename: file.name
+        }),
+      });
+
+      if (!uploadRes.ok) throw new Error('Upload failed');
+      const uploadData = await uploadRes.json();
+      const url = uploadData.url;
+
+      const currentData = { ...getValues() };
+      // @ts-ignore
+      currentData[fieldName] = url;
+      reset(currentData);
+      alert(`${fieldName} uploaded successfully!`);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Failed to upload file.');
+    }
+  };
 
   useEffect(() => {
     async function fetchSettings() {

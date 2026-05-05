@@ -42,10 +42,10 @@ export default function Reference() {
         viewport={{ once: true }}
         className="max-w-3xl mb-16"
       >
-        <h2 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
           {settings?.referencesTitle || 'References'}
         </h2>
-        <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+        <p className="text-sm sm:text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
           {settings?.referencesSubtitle || 'Professional references and contact points.'}
         </p>
       </motion.div>
@@ -81,12 +81,12 @@ export default function Reference() {
                     href={ref.profileUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight hover:text-amber-500 transition-colors"
+                    className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight hover:text-amber-500 transition-colors"
                   >
                     {ref.name}
                   </a>
                 ) : (
-                  <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight">
+                  <h3 className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white leading-tight">
                     {ref.name}
                   </h3>
                 )}
@@ -97,7 +97,7 @@ export default function Reference() {
             </div>
 
             {ref.description && (
-              <p className="mt-5 text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line">
+              <p className="mt-5 text-zinc-700 dark:text-zinc-300 leading-relaxed whitespace-pre-line text-sm sm:text-base">
                 {ref.description}
               </p>
             )}

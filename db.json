@@ -8,10 +8,11 @@
     "location": "Toul Kork, Phnom Penh, Cambodia",
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
-    "profilePhotoUrl": "http://localhost:3001/uploads/1777803765565-photo_2023-07-20_13-48-46.jpg",
-    "coverImageUrl": "http://localhost:3001/uploads/1777804242816-559128.jpg",
+    "profilePhotoUrl": "http://localhost:3001/uploads/1777971556475-127646808.jpg",
+    "coverImageUrl": "http://localhost:3001/uploads/1777968522151-559128.jpg",
     "cvUrl": "http://localhost:3001/uploads/1777797814048-CHEA ROTHA CV 2026.pdf",
-    "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale."
+    "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale.",
+    "aboutSectionCoverUrl": "http://localhost:3001/uploads/1777971462330-download (3).jpg"
   },
   "skills": [
     {

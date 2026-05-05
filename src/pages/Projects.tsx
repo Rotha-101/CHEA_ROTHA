@@ -44,10 +44,10 @@ export default function Projects() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-3xl mb-20">
-        <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
           {settings?.projectsTitle || 'Selected Works'}
         </h1>
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
           {settings?.projectsSubtitle || 'A showcase of my work in Data Science, Machine Learning, and Software Development. Focusing on predictive modeling, data pipelines, and actionable insights.'}
         </p>
       </div>
@@ -83,10 +83,10 @@ export default function Projects() {
 
             <div className="flex-1 p-8 flex flex-col justify-between">
               <div>
-                <h3 className="text-2xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                <h3 className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                   {project.title}
                 </h3>
-                <p className="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm">
+                <p className="mt-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-[13px] sm:text-sm">
                   {project.description}
                 </p>
                 <div className="mt-8 flex flex-wrap gap-2">

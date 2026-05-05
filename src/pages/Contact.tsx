@@ -111,10 +111,10 @@ export default function Contact() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
       <div className="max-w-3xl mb-16">
-        <h1 className="text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6">
           {settings?.contactTitle || 'Get in Touch'}
         </h1>
-        <p className="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
+        <p className="text-base sm:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed">
           {settings?.contactSubtitle || 'Feel free to reach out for collaborations or just a friendly hello.'}
         </p>
       </div>

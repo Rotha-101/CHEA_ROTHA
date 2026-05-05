@@ -5,6 +5,7 @@ import { useDataStore } from '../store/dataStore';
 // Import other sections
 import About from './About';
 import Experience from './Experience';
+import Education from './Education';
 import Projects from './Projects';
 import Gallery from './Gallery';
 import Skills from './Skills';
@@ -64,7 +65,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.2 }}
-                  className="text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.05]"
+                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold tracking-tighter text-zinc-900 dark:text-white leading-[1.1]"
                 >
                   {profile.name || 'Setup Profile'}
                 </motion.h1>
@@ -73,7 +74,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="mt-5 text-xl md:text-2xl lg:text-3xl font-display font-medium text-amber-600 dark:text-amber-400 tracking-tight"
+                  className="mt-4 text-lg sm:text-xl md:text-2xl lg:text-3xl font-display font-medium text-amber-600 dark:text-amber-400 tracking-tight"
                 >
                   {profile.title || 'Add your title in the Admin Panel'}
                 </motion.h2>
@@ -82,7 +83,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.4 }}
-                  className="mt-6 text-base md:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl"
+                  className="mt-6 text-sm sm:text-base md:text-lg text-zinc-700 dark:text-zinc-300 leading-relaxed max-w-2xl"
                 >
                   {profile.bio || 'Your biography will appear here once you set up your profile.'}
                 </motion.p>
@@ -153,6 +154,7 @@ export default function Home() {
       {/* Other Sections */}
       {settings?.showAbout !== false && <SectionReveal><section id="about"><About /></section></SectionReveal>}
       {settings?.showExperience !== false && <SectionReveal><section id="experience"><Experience /></section></SectionReveal>}
+      {settings?.showEducation !== false && <SectionReveal><section id="education"><Education /></section></SectionReveal>}
       {settings?.showProjects !== false && <SectionReveal><section id="projects"><Projects /></section></SectionReveal>}
       {settings?.showGallery !== false && <SectionReveal><section id="gallery"><Gallery /></section></SectionReveal>}
       {settings?.showSkills !== false && <SectionReveal><section id="skills"><Skills /></section></SectionReveal>}
