@@ -87,7 +87,7 @@ export function AdminLayout() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#050810]">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#050810]">
         <div className="w-8 h-8 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
@@ -95,17 +95,17 @@ export function AdminLayout() {
 
   if (!user || !isAdmin) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#050810] relative overflow-hidden font-sans">
+      <div className="min-h-screen flex items-center justify-center bg-white dark:bg-[#050810] relative overflow-hidden font-sans">
         {/* Background Aura */}
         <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(255,77,77,0.05)_0%,transparent_70%)] pointer-events-none z-0" />
         
-        <div className="relative z-10 max-w-md w-full p-10 bg-white/5 backdrop-blur-3xl rounded-[40px] border border-white/5 shadow-2xl">
+        <div className="relative z-10 max-w-md w-full p-10 bg-zinc-50 dark:bg-white/5 backdrop-blur-3xl rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-2xl">
           <div className="text-center mb-10">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-3xl bg-[#ff4d4d]/5 border border-[#ff4d4d]/10 mb-6 group">
               <UserCircle className="w-10 h-10 text-[#ff4d4d] group-hover:scale-110 transition-transform duration-500" />
             </div>
-            <h2 className="text-3xl font-display font-bold text-white tracking-tight">System Access</h2>
-            <p className="mt-3 text-zinc-500 text-sm font-medium tracking-tight">Authenticate to access the neural core.</p>
+            <h2 className="text-3xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">System Access</h2>
+            <p className="mt-3 text-zinc-600 dark:text-zinc-500 text-sm font-medium tracking-tight">Authenticate to access the neural core.</p>
           </div>
           <form onSubmit={handleLogin} className="space-y-6">
             <div className="space-y-5">
@@ -116,7 +116,7 @@ export function AdminLayout() {
                   required
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm font-mono"
+                  className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-800 text-sm font-mono"
                   placeholder="USERNAME"
                 />
               </div>
@@ -127,7 +127,7 @@ export function AdminLayout() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm font-mono"
+                  className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 dark:placeholder:text-zinc-800 text-sm font-mono"
                   placeholder="••••••••"
                 />
               </div>
@@ -171,16 +171,16 @@ export function AdminLayout() {
   }
 
   return (
-    <div className="h-screen overflow-hidden flex bg-[#050810] font-sans">
+    <div className="h-screen overflow-hidden flex bg-white dark:bg-[#050810] font-sans">
       {/* Background Aura */}
       <div className="fixed top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_top_left,rgba(255,77,77,0.02)_0%,transparent_50%)] pointer-events-none z-0" />
 
       {/* Sidebar */}
-      <div className="relative z-10 w-72 bg-black/40 backdrop-blur-3xl border-r border-white/5 flex flex-col">
-        <div className="h-24 flex items-center justify-between px-8 border-b border-white/5">
+      <div className="relative z-10 w-72 bg-zinc-50 dark:bg-black/40 backdrop-blur-3xl border-r border-zinc-200 dark:border-white/5 flex flex-col">
+        <div className="h-24 flex items-center justify-between px-8 border-b border-zinc-200 dark:border-white/5">
           <div className="flex flex-col">
             <span className="text-[10px] font-mono font-bold text-[#ff4d4d] tracking-[0.4em] mb-1 uppercase">Control Center</span>
-            <h1 className="text-xl font-display font-bold text-white tracking-tight">OpenClaw CMS</h1>
+            <h1 className="text-xl font-display font-bold text-zinc-900 dark:text-white tracking-tight text-nowrap">CHEA ROTHA CMS</h1>
           </div>
         </div>
         
@@ -193,14 +193,14 @@ export function AdminLayout() {
                 to={item.href}
                 className={cn(
                   isActive
-                    ? 'bg-white/5 border border-white/5 text-white shadow-[0_0_20px_rgba(255,77,77,0.05)]'
-                    : 'text-zinc-500 hover:text-white hover:bg-white/[0.02] border border-transparent',
+                    ? 'bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-900 dark:text-white shadow-[0_0_20px_rgba(255,77,77,0.05)]'
+                    : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/[0.02] border border-transparent',
                   'group flex items-center px-4 py-3.5 text-sm font-bold rounded-2xl transition-all duration-300'
                 )}
               >
                 <div className={cn(
                   "p-2 rounded-xl mr-4 transition-all duration-300",
-                  isActive ? "bg-[#ff4d4d]/10 text-[#ff4d4d]" : "bg-white/5 text-zinc-500 group-hover:text-white"
+                  isActive ? "bg-[#ff4d4d]/10 text-[#ff4d4d]" : "bg-zinc-200/50 dark:bg-white/5 text-zinc-500 group-hover:text-zinc-900 dark:group-hover:text-white"
                 )}>
                   <item.icon className="h-4 w-4" />
                 </div>
@@ -216,19 +216,19 @@ export function AdminLayout() {
           })}
         </nav>
 
-        <div className="p-8 border-t border-white/5 bg-black/20">
+        <div className="p-8 border-t border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-black/20">
           <div className="flex items-center gap-4 mb-6 px-2">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white font-bold">
+            <div className="w-10 h-10 rounded-xl bg-zinc-200 dark:bg-white/5 border border-zinc-300 dark:border-white/10 flex items-center justify-center text-zinc-900 dark:text-white font-bold">
               {profile?.name?.charAt(0) || 'A'}
             </div>
             <div className="flex flex-col min-w-0">
-              <span className="text-xs font-bold text-white truncate">{profile?.name || 'Admin'}</span>
+              <span className="text-xs font-bold text-zinc-900 dark:text-white truncate">{profile?.name || 'Admin'}</span>
               <span className="text-[10px] font-mono text-zinc-500 uppercase tracking-widest truncate">{profile?.role || 'Superuser'}</span>
             </div>
           </div>
           <button
             onClick={handleLogout}
-            className="group flex items-center justify-center px-4 py-3 text-xs font-bold tracking-widest uppercase rounded-2xl text-zinc-500 bg-white/5 border border-white/5 hover:bg-[#ff4d4d]/5 hover:border-[#ff4d4d]/30 hover:text-[#ff4d4d] w-full transition-all duration-300"
+            className="group flex items-center justify-center px-4 py-3 text-xs font-bold tracking-widest uppercase rounded-2xl text-zinc-500 bg-zinc-200/50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 hover:bg-[#ff4d4d]/5 hover:border-[#ff4d4d]/30 hover:text-[#ff4d4d] w-full transition-all duration-300"
           >
             <LogOut className="mr-3 h-4 w-4" />
             Terminate
@@ -238,17 +238,17 @@ export function AdminLayout() {
 
       <div className="relative z-10 flex-1 flex flex-col overflow-hidden">
         {/* Top Header */}
-        <header className="h-20 border-b border-white/5 flex items-center justify-end px-10 bg-black/20">
+        <header className="h-20 border-b border-zinc-200 dark:border-white/5 flex items-center justify-end px-10 bg-white/50 dark:bg-black/20">
           <button
             onClick={toggleTheme}
-            className="p-3 rounded-2xl bg-white/5 border border-white/5 text-zinc-500 hover:text-white hover:border-[#ff4d4d]/30 transition-all"
+            className="p-3 rounded-2xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
         </header>
 
-        <main className="flex-1 overflow-y-auto p-10 scrollbar-thin scrollbar-thumb-white/5 scrollbar-track-transparent">
+        <main className="flex-1 overflow-y-auto p-10 scrollbar-hide">
           <motion.div
             key={location.pathname}
             initial={{ opacity: 0, y: 10 }}

@@ -14,6 +14,11 @@ interface ProfileForm {
   location: string;
   github: string;
   linkedin: string;
+  discord?: string;
+  threads?: string;
+  twitter?: string;
+  instagram?: string;
+  facebook?: string;
   profilePhotoUrl?: string;
   coverImageUrl?: string;
   aboutSectionCoverUrl?: string;
@@ -136,17 +141,17 @@ export default function Profile() {
           <span className="w-8 h-px bg-[#ff4d4d]/30" />
           ENTITY PROFILE
         </div>
-        <h1 className="text-4xl font-display font-bold text-white tracking-tight">Identity Management</h1>
+        <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">Identity Management</h1>
         <p className="text-zinc-500 text-sm font-medium mt-2">Update your public persona and system identifiers.</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Media & Assets</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Media & Assets</h3>
           <p className="text-sm text-zinc-500 font-medium mb-10">Upload visual identifiers for your repository.</p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
+            <div className="p-6 rounded-3xl bg-white dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
               <label className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Avatar</label>
               <div className="flex flex-col items-center gap-4">
                 {getValues('profilePhotoUrl') ? (
@@ -163,7 +168,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
+            <div className="p-6 rounded-3xl bg-white dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
               <label className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Hero Background</label>
               <div className="flex flex-col gap-4">
                 {getValues('coverImageUrl') ? (
@@ -180,7 +185,7 @@ export default function Profile() {
               </div>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white/[0.02] border border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
+            <div className="p-6 rounded-3xl bg-white dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/20 transition-all flex flex-col gap-4">
               <label className="text-[10px] font-mono font-bold text-zinc-500 uppercase tracking-widest">Neural CV (PDF)</label>
               <div className="flex flex-col gap-4 justify-center flex-1">
                 {getValues('cvUrl') && (
@@ -197,61 +202,86 @@ export default function Profile() {
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Core Identity</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Core Identity</h3>
           <p className="text-sm text-zinc-500 font-medium mb-10">Define your nomenclature and primary descriptors.</p>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Assigned Name</label>
-              <input type="text" {...register('name')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
+              <input type="text" {...register('name')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
             </div>
 
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Functional Designation</label>
-              <input type="text" {...register('title')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
+              <input type="text" {...register('title')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
             </div>
 
             <div className="sm:col-span-2 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Terminal Bio (Short)</label>
-              <textarea rows={4} {...register('bio')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
+              <textarea rows={4} {...register('bio')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
             </div>
 
             <div className="sm:col-span-2 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Extended Narrative (About)</label>
-              <textarea rows={8} {...register('aboutMe')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
+              <textarea rows={8} {...register('aboutMe')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Neural Linkage</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Neural Linkage</h3>
           <p className="text-sm text-zinc-500 font-medium mb-10">Configure communication gateways and node coordinates.</p>
 
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Email Endpoint</label>
-              <input type="email" {...register('email')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
+              <input type="email" {...register('email')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
             </div>
 
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Voice Frequency</label>
-              <input type="text" {...register('phone')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+              <input type="text" {...register('phone')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
             </div>
 
             <div className="sm:col-span-2 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Geospatial Coordinates</label>
-              <input type="text" {...register('location')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
+              <input type="text" {...register('location')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
             </div>
 
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">GitHub Node</label>
-              <input type="url" {...register('github')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+              <input type="url" {...register('github')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
             </div>
 
             <div className="space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">LinkedIn Uplink</label>
-              <input type="url" {...register('linkedin')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+              <input type="url" {...register('linkedin')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Discord Hub</label>
+              <input type="text" {...register('discord')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" placeholder="Username#0000" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">X / Twitter Node</label>
+              <input type="url" {...register('twitter')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Instagram Feed</label>
+              <input type="url" {...register('instagram')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Facebook Profile</label>
+              <input type="url" {...register('facebook')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
+            </div>
+
+            <div className="space-y-2">
+              <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Threads Signal</label>
+              <input type="url" {...register('threads')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
             </div>
           </div>
         </div>

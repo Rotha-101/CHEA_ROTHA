@@ -117,69 +117,82 @@ export default function Education() {
   if (loading) return <div className="text-zinc-500 dark:text-zinc-400">Loading education...</div>;
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage Education</h1>
-        <button
-          onClick={() => { setEditingId(null); setPhotos([]); reset({ institution: '', degree: '', field: '', startDate: '', endDate: '', description: '', priority: 0 }); setIsFormOpen(true); }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors"
-        >
-          <Plus className="-ml-1 mr-2 h-5 w-5" /> Add Education
-        </button>
+    <div className="max-w-5xl mx-auto pb-24">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+        <div>
+          <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-3">
+            <span className="w-8 h-px bg-[#ff4d4d]/30" />
+            ACADEMICS
+          </div>
+          <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">Academic Records</h1>
+          <p className="text-zinc-500 text-sm font-medium mt-2">Manage your educational background and qualifications.</p>
+        </div>
+        {!isFormOpen && (
+          <button
+            onClick={() => { setEditingId(null); setPhotos([]); reset({ institution: '', degree: '', field: '', startDate: '', endDate: '', description: '', priority: 0 }); setIsFormOpen(true); }}
+            className="group px-6 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all flex items-center gap-3 shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase"
+          >
+            <Plus className="h-4 w-4" /> Initialize Entry
+          </button>
+        )}
       </div>
 
       {isFormOpen && (
-        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-4">
-            {editingId ? 'Edit Education' : 'New Education'}
+        <div className="mb-12 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff4d4d]/5 blur-[100px] pointer-events-none" />
+          <h2 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-8">
+            {editingId ? 'Edit Configuration' : 'New Configuration'}
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Institution</label>
-                <input type="text" {...register('institution', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Institution</label>
+                <input type="text" {...register('institution', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Degree</label>
-                <input type="text" {...register('degree', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Degree</label>
+                <input type="text" {...register('degree', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Field of Study</label>
-                <input type="text" {...register('field')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Field of Study</label>
+                <input type="text" {...register('field')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Display Priority</label>
+                <input type="number" {...register('priority')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Start Date</label>
-                <input type="text" placeholder="e.g., 2018" {...register('startDate', { required: true })} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Start Date</label>
+                <input type="text" placeholder="e.g., 2018" {...register('startDate', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">End Date</label>
-                <input type="text" placeholder="e.g., 2022" {...register('endDate')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">End Date</label>
+                <input type="text" placeholder="e.g., 2022" {...register('endDate')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description / Achievements</label>
-                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md px-3 py-2 focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Description / Achievements</label>
+                <textarea rows={4} {...register('description')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
               </div>
 
               {/* Photo Upload */}
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2 flex items-center gap-2">
-                  <Image className="w-4 h-4" /> Photos (optional — multiple allowed)
+              <div className="sm:col-span-6 space-y-4">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1 flex items-center gap-2">
+                  <Image className="w-3 h-3" /> Diplomas & Certifications (Optional)
                 </label>
-                <label className="flex items-center gap-2 cursor-pointer w-fit px-4 py-2 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-700 hover:border-[#ff4d4d] text-zinc-600 dark:text-zinc-400 hover:text-[#ff4d4d] transition-colors text-sm">
-                  <Upload className="w-4 h-4" />
-                  {uploading ? 'Uploading...' : 'Upload Photos'}
-                  <input type="file" accept="image/*" multiple className="hidden" onChange={e => handlePhotoUpload(e.target.files)} disabled={uploading} />
-                </label>
+                <div className="flex items-center gap-6">
+                  <label className="flex items-center gap-3 cursor-pointer px-6 py-4 rounded-2xl border-2 border-dashed border-zinc-200 dark:border-white/10 hover:border-[#ff4d4d]/40 text-zinc-500 hover:text-[#ff4d4d] transition-all text-[10px] font-mono font-bold uppercase tracking-widest">
+                    <Upload className="w-4 h-4" />
+                    {uploading ? 'Processing...' : 'Link Asset'}
+                    <input type="file" accept="image/*" multiple className="hidden" onChange={e => handlePhotoUpload(e.target.files)} disabled={uploading} />
+                  </label>
+                  {uploading && <span className="text-[10px] font-mono text-[#ff4d4d] animate-pulse">UPLOADING_ASSETS...</span>}
+                </div>
                 {photos.length > 0 && (
                   <div className="mt-3 flex flex-wrap gap-3">
                     {photos.map((url, i) => (
-                      <div key={i} className="relative group w-24 h-24 rounded-lg overflow-hidden border border-zinc-200 dark:border-zinc-700">
-                        <img src={url} alt="" className="w-full h-full object-cover" />
-                        <button type="button" onClick={() => removePhoto(url)} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div key={i} className="relative group w-24 h-24 rounded-2xl overflow-hidden border border-zinc-200 dark:border-white/10 shadow-lg transition-all hover:scale-110">
+                        <img src={url} alt="" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" />
+                        <button type="button" onClick={() => removePhoto(url)} className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
                           <X className="w-3 h-3" />
                         </button>
                       </div>
@@ -189,44 +202,58 @@ export default function Education() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-3">
-              <button type="button" onClick={() => { setIsFormOpen(false); setPhotos([]); }} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">Cancel</button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors">Save Education</button>
+            <div className="flex justify-end gap-4 pt-4">
+              <button type="button" onClick={() => { setIsFormOpen(false); setPhotos([]); }} className="px-6 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 text-zinc-500 text-xs font-bold hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all tracking-widest uppercase">
+                Abort
+              </button>
+              <button type="submit" className="px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase">
+                Save Node
+              </button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-colors">
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {educationList.map((edu) => (
-            <li key={edu.id} className="p-4 sm:px-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {edu.photos?.length > 0 && (
-                    <div className="w-10 h-10 rounded-lg overflow-hidden flex-shrink-0 border border-zinc-200 dark:border-zinc-700">
-                      <img src={edu.photos[0]} alt="" className="w-full h-full object-cover" />
-                    </div>
-                  )}
-                  <div>
-                    <h3 className="text-sm font-medium text-zinc-900 dark:text-white">{edu.degree} in {edu.field}</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                      {edu.institution} • {edu.startDate} - {edu.endDate} • Priority: {edu.priority}
-                      {edu.photos?.length > 0 && <span className="ml-2 text-[#ff4d4d]">📷 {edu.photos.length} photo{edu.photos.length > 1 ? 's' : ''}</span>}
-                    </p>
+      <div className="grid grid-cols-1 gap-6">
+        {educationList.map((edu) => (
+          <div key={edu.id} className="group bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-3xl p-6 transition-all hover:border-[#ff4d4d]/20 hover:shadow-[0_0_30px_rgba(255,77,77,0.05)]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-6 flex-1">
+                {edu.photos?.length > 0 ? (
+                  <div className="w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-zinc-200 dark:border-white/10 group-hover:scale-105 transition-transform duration-500">
+                    <img src={edu.photos[0]} alt="" className="w-full h-full object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-16 h-16 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500">
+                    <Users className="h-6 w-6" />
+                  </div>
+                )}
+                <div className="text-center sm:text-left">
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight group-hover:text-[#ff4d4d] transition-colors">{edu.degree} in {edu.field}</h3>
+                  <p className="text-sm font-mono font-bold text-[#ff4d4d] mt-1 uppercase tracking-tighter">{edu.institution}</p>
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-[#ff4d4d]/10 text-[#ff4d4d] uppercase">{edu.startDate} - {edu.endDate}</span>
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-zinc-100 dark:bg-white/5 text-zinc-500 uppercase">PRIORITY_{edu.priority}</span>
+                    {edu.photos?.length > 0 && <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-emerald-500/10 text-emerald-500 uppercase">📷 {edu.photos.length} ASSETS</span>}
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(edu)} className="p-2 text-zinc-400 hover:text-[#ff4d4d] transition-colors"><Edit2 className="h-4 w-4" /></button>
-                  <button onClick={() => handleDelete(edu.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors"><Trash2 className="h-4 w-4" /></button>
-                </div>
               </div>
-            </li>
-          ))}
-          {educationList.length === 0 && (
-            <li className="p-6 text-center text-zinc-500 dark:text-zinc-400">No education found. Add one to get started.</li>
-          )}
-        </ul>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleEdit(edu)} className="p-3 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all">
+                  <Edit2 className="h-4 w-4" />
+                </button>
+                <button onClick={() => handleDelete(edu.id)} className="p-3 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        {educationList.length === 0 && (
+          <div className="p-20 text-center bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 border-dashed rounded-[40px]">
+            <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">No academic records detected. Initialize New Entry.</p>
+          </div>
+        )}
       </div>
     </div>
   );

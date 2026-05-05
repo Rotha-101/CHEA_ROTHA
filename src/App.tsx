@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PublicLayout } from './components/PublicLayout';
 import { AdminLayout } from './components/AdminLayout';
-import { BackendStatus } from './components/BackendStatus';
+
 import { useThemeStore } from './store/themeStore';
 import { useDataStore } from './store/dataStore';
 import { Helmet } from 'react-helmet-async';
@@ -58,7 +58,7 @@ export default function App() {
         <title>{settings?.footerText?.replace('. All rights reserved.', '') || 'Portfolio'}</title>
         <meta name="description" content="Professional Portfolio and Content Management System" />
       </Helmet>
-      <BackendStatus />
+
       <Routes>
         {/* Public Routes */}
         <Route path="/" element={<PublicLayout />}>

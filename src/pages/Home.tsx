@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Github, Linkedin, Mail, MapPin, Phone, ArrowRight, User } from 'lucide-react';
+import { Github, Linkedin, Mail, MapPin, Phone, ArrowRight, User, Twitter, Instagram, Facebook, MessageSquare, AtSign } from 'lucide-react';
 import { useDataStore } from '../store/dataStore';
 
 // Import other sections
@@ -116,15 +116,40 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </a>
 
-                <div className="flex items-center gap-6">
+                <div className="flex flex-wrap items-center gap-4">
                   {profile.github && (
-                    <a href={profile.github} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all">
-                      <Github className="h-5 w-5" />
+                    <a href={profile.github} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="GitHub">
+                      <Github className="h-4.5 w-4.5" />
                     </a>
                   )}
                   {profile.linkedin && (
-                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-12 h-12 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all">
-                      <Linkedin className="h-5 w-5" />
+                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="LinkedIn">
+                      <Linkedin className="h-4.5 w-4.5" />
+                    </a>
+                  )}
+                  {profile.twitter && (
+                    <a href={profile.twitter} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="X / Twitter">
+                      <Twitter className="h-4.5 w-4.5" />
+                    </a>
+                  )}
+                  {profile.instagram && (
+                    <a href={profile.instagram} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Instagram">
+                      <Instagram className="h-4.5 w-4.5" />
+                    </a>
+                  )}
+                  {profile.facebook && (
+                    <a href={profile.facebook} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Facebook">
+                      <Facebook className="h-4.5 w-4.5" />
+                    </a>
+                  )}
+                  {profile.discord && (
+                    <a href={`https://discord.com/users/${profile.discord}`} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Discord">
+                      <MessageSquare className="h-4.5 w-4.5" />
+                    </a>
+                  )}
+                  {profile.threads && (
+                    <a href={profile.threads} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Threads">
+                      <AtSign className="h-4.5 w-4.5" />
                     </a>
                   )}
                 </div>
@@ -133,11 +158,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-          <span className="text-[9px] font-mono font-bold uppercase tracking-[0.5em] text-zinc-500 dark:text-zinc-500">Scroll_To_Explore</span>
-          <div className="w-px h-20 bg-gradient-to-b from-[#ff4d4d] to-transparent animate-shimmer" />
-        </div>
       </section>
 
       {/* Other Sections */}

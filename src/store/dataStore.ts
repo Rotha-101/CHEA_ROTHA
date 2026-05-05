@@ -81,6 +81,11 @@ interface Profile {
   location: string;
   github: string;
   linkedin: string;
+  discord?: string;
+  threads?: string;
+  twitter?: string;
+  instagram?: string;
+  facebook?: string;
   profilePhotoUrl?: string;
   coverImageUrl?: string;
   cvUrl?: string;
@@ -247,7 +252,7 @@ export const useDataStore = create<DataState>((set, get) => ({
   blog: normalizeUploads(staticDbRaw.blog || []) as BlogPost[],
   settings: normalizeUploads({
     ...staticDbRaw.settings,
-    siteLogoText: staticDbRaw.settings?.siteLogoText || 'CR.'
+    siteLogoText: staticDbRaw.settings?.siteLogoText || 'CR'
   }) as SiteSettings,
   
   profileLoaded: false,

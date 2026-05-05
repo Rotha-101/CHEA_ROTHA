@@ -174,7 +174,7 @@ export default function Skills() {
                       <motion.article
                         key={`${skill.id}-${idx}`}
                         whileHover={{ y: -8, scale: 1.05 }}
-                        className={`relative flex flex-col items-center p-6 rounded-3xl transition-all duration-500 w-[160px] sm:w-[180px] h-[240px] flex-shrink-0 ${
+                        className={`relative flex flex-col items-center p-6 rounded-[32px] transition-all duration-500 w-[160px] sm:w-[190px] h-[280px] flex-shrink-0 ${
                           skill.isHighlighted 
                             ? 'bg-[#ff4d4d]/5 border border-[#ff4d4d]/30 shadow-[0_0_30px_rgba(255,77,77,0.1)]' 
                             : 'bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07]'
@@ -221,8 +221,8 @@ export default function Skills() {
                             />
                           </div>
                           
-                          <div className="mt-3 h-8 overflow-hidden">
-                            <p className="text-[10px] leading-snug text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="mt-3 h-10 overflow-hidden">
+                            <p className="text-[10px] leading-relaxed text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               {skill.description || getSkillBlurb(skill.name, skill.category, level)}
                             </p>
                           </div>

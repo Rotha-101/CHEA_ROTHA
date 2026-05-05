@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Briefcase, FileText, Code2, Users, TrendingUp, MousePointer2 } from 'lucide-react';
+import { useThemeStore } from '../../store/themeStore';
 import {
   AreaChart,
   Area,
@@ -56,6 +57,7 @@ export default function Dashboard() {
   const [chartData, setChartData] = useState<ChartData[]>(MOCK_CHART);
   const [logs, setLogs] = useState<LogEntry[]>(MOCK_LOGS);
   const [loading, setLoading] = useState(true);
+  const { theme } = useThemeStore();
 
   useEffect(() => {
     async function init() {
@@ -112,10 +114,10 @@ export default function Dashboard() {
   );
 
   const statCards = [
-    { name: 'Total Projects', value: stats.projects, icon: Code2, color: 'bg-blue-500' },
-    { name: 'Work Experience', value: stats.experience, icon: Briefcase, color: 'bg-emerald-500' },
-    { name: 'Blog Posts', value: stats.blog, icon: FileText, color: 'bg-purple-500' },
-    { name: 'Total Users', value: stats.users, icon: Users, color: 'bg-[#ff4d4d]' },
+    { name: 'Total Projects', value: stats.projects, icon: Code2, color: 'bg-blue-500', iconColor: 'text-blue-500' },
+    { name: 'Work Experience', value: stats.experience, icon: Briefcase, color: 'bg-emerald-500', iconColor: 'text-emerald-500' },
+    { name: 'Blog Posts', value: stats.blog, icon: FileText, color: 'bg-purple-500', iconColor: 'text-purple-500' },
+    { name: 'Total Users', value: stats.users, icon: Users, color: 'bg-[#ff4d4d]', iconColor: 'text-[#ff4d4d]' },
   ];
 
   return (
@@ -125,21 +127,21 @@ export default function Dashboard() {
           <span className="w-8 h-px bg-[#ff4d4d]/30" />
           SYSTEM OVERVIEW
         </div>
-        <h1 className="text-4xl font-display font-bold text-white tracking-tight">Neural Core</h1>
+        <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">Neural Core</h1>
         <p className="text-zinc-500 text-sm font-medium">Real-time performance and repository state.</p>
       </div>
 
       {/* Stat Cards */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {statCards.map((item) => (
-          <div key={item.name} className="bg-white/5 backdrop-blur-md overflow-hidden border border-white/5 rounded-3xl p-8 transition-all hover:border-[#ff4d4d]/20 group">
+          <div key={item.name} className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md overflow-hidden border border-zinc-200 dark:border-white/5 rounded-3xl p-8 transition-all hover:border-[#ff4d4d]/20 group">
             <div className="flex items-center">
-              <div className={`rounded-2xl p-4 ${item.color} bg-opacity-10 group-hover:scale-110 transition-transform duration-500`}>
-                <item.icon className="h-6 w-6 text-white" />
+              <div className={`rounded-2xl p-4 ${item.color}/10 dark:${item.color}/20 group-hover:scale-110 transition-transform duration-500`}>
+                <item.icon className={`h-6 w-6 ${item.iconColor} dark:text-white`} />
               </div>
               <div className="ml-6">
                 <p className="text-xs font-mono font-bold text-zinc-500 uppercase tracking-widest mb-1">{item.name}</p>
-                <p className="text-3xl font-display font-bold text-white">{item.value}</p>
+                <p className="text-3xl font-display font-bold text-zinc-900 dark:text-white">{item.value}</p>
               </div>
             </div>
           </div>
@@ -148,11 +150,11 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
         {/* Main Chart */}
-        <div className="lg:col-span-2 bg-white/5 backdrop-blur-md p-10 rounded-[40px] border border-white/5 shadow-xl relative overflow-hidden">
+        <div className="lg:col-span-2 bg-zinc-50 dark:bg-white/5 backdrop-blur-md p-10 rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff4d4d]/5 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
           <div className="flex items-center justify-between mb-12 relative z-10">
             <div>
-              <h3 className="text-xl font-display font-bold text-white mb-2">Traffic Analysis</h3>
+              <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Traffic Analysis</h3>
               <p className="text-sm text-zinc-500 font-medium tracking-tight">Website visits over the last 7 solar days</p>
             </div>
             <div className="p-3 bg-emerald-500/10 rounded-2xl">
@@ -168,11 +170,18 @@ export default function Dashboard() {
                     <stop offset="95%" stopColor="#ff4d4d" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#ffffff" opacity={0.03} />
-                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#71717a', fontWeight: 600 }} dy={10} />
-                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#71717a', fontWeight: 600 }} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={theme === 'dark' ? '#ffffff' : '#000000'} opacity={0.05} />
+                <XAxis dataKey="date" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: theme === 'dark' ? '#71717a' : '#52525b', fontWeight: 600 }} dy={10} />
+                <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: theme === 'dark' ? '#71717a' : '#52525b', fontWeight: 600 }} />
                 <Tooltip 
-                  contentStyle={{ backgroundColor: '#050810', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', color: '#fff', fontSize: '12px', fontWeight: 'bold' }}
+                  contentStyle={{ 
+                    backgroundColor: theme === 'dark' ? '#050810' : '#ffffff', 
+                    border: theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(0,0,0,0.1)', 
+                    borderRadius: '16px', 
+                    color: theme === 'dark' ? '#fff' : '#000', 
+                    fontSize: '12px', 
+                    fontWeight: 'bold' 
+                  }}
                   itemStyle={{ color: '#ff4d4d' }}
                 />
                 <Area type="monotone" dataKey="visits" stroke="#ff4d4d" strokeWidth={4} fillOpacity={1} fill="url(#colorVisits)" />
@@ -182,10 +191,10 @@ export default function Dashboard() {
         </div>
 
         {/* Engagement + Recent Activity */}
-        <div className="bg-white/5 backdrop-blur-md p-10 rounded-[40px] border border-white/5 shadow-xl flex flex-col">
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md p-10 rounded-[40px] border border-zinc-200 dark:border-white/5 shadow-xl flex flex-col">
           <div className="flex items-center justify-between mb-12">
             <div>
-              <h3 className="text-xl font-display font-bold text-white mb-2">Engagement</h3>
+              <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Engagement</h3>
               <p className="text-sm text-zinc-500 font-medium tracking-tight">Interaction breakdown</p>
             </div>
             <div className="p-3 bg-[#ff4d4d]/10 rounded-2xl">
@@ -210,7 +219,7 @@ export default function Dashboard() {
                 <div key={log.id} className="flex items-start gap-4 group">
                   <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-[#ff4d4d] shadow-[0_0_8px_#ff4d4d] flex-shrink-0 group-hover:scale-125 transition-transform" />
                   <div>
-                    <p className="text-xs font-bold text-white capitalize tracking-tight mb-1">{log.action.replace(/_/g, ' ')}</p>
+                    <p className="text-xs font-bold text-zinc-900 dark:text-white capitalize tracking-tight mb-1">{log.action.replace(/_/g, ' ')}</p>
                     <p className="text-[10px] text-zinc-500 font-medium line-clamp-1">{log.details}</p>
                   </div>
                 </div>

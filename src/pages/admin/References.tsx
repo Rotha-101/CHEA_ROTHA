@@ -121,144 +121,154 @@ export default function References() {
   if (loading) return <div className="text-zinc-500 dark:text-zinc-400">Loading references...</div>;
 
   return (
-    <div className="max-w-5xl mx-auto">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Manage References</h1>
-        <button
-          onClick={() => {
-            setEditingId(null);
-            reset({
-              name: '',
-              title: '',
-              description: '',
-              phone: '',
-              email: '',
-              profileImageUrl: '',
-              priority: 0,
-            });
-            setIsFormOpen(true);
-          }}
-          className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors"
-        >
-          <Plus className="-ml-1 mr-2 h-5 w-5" />
-          Add Reference
-        </button>
+    <div className="max-w-5xl mx-auto pb-24">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
+        <div>
+          <div className="flex items-center gap-3 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-3">
+            <span className="w-8 h-px bg-[#ff4d4d]/30" />
+            VOUCHERS
+          </div>
+          <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">Professional Endorsements</h1>
+          <p className="text-zinc-500 text-sm font-medium mt-2">Manage your network and professional references.</p>
+        </div>
+        {!isFormOpen && (
+          <button
+            onClick={() => {
+              setEditingId(null);
+              reset({
+                name: '',
+                title: '',
+                description: '',
+                phone: '',
+                email: '',
+                profileImageUrl: '',
+                priority: 0,
+              });
+              setIsFormOpen(true);
+            }}
+            className="group px-6 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all flex items-center gap-3 shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase"
+          >
+            <Plus className="h-4 w-4" /> Initialize Entry
+          </button>
+        )}
       </div>
 
       {isFormOpen && (
-        <div className="mb-8 bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 transition-colors">
-          <h2 className="text-lg font-medium text-zinc-900 dark:text-white mb-4">
-            {editingId ? 'Edit Reference' : 'New Reference'}
+        <div className="mb-12 bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#ff4d4d]/5 blur-[100px] pointer-events-none" />
+          <h2 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-8">
+            {editingId ? 'Edit Configuration' : 'New Configuration'}
           </h2>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Profile Circle Image</label>
-                <div className="mt-2 flex items-center gap-4">
-                  <div className="h-20 w-20 rounded-full border-2 border-zinc-300 dark:border-zinc-700 overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+              <div className="sm:col-span-6 space-y-4">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Profile Identifier (Circle)</label>
+                <div className="mt-2 flex items-center gap-6">
+                  <div className="h-24 w-24 rounded-full border-4 border-zinc-200 dark:border-white/10 overflow-hidden bg-zinc-100 dark:bg-white/5 flex items-center justify-center shadow-xl group transition-transform hover:scale-105 duration-500">
                     {profileImageUrl ? (
-                      <img src={profileImageUrl} alt="Preview" className="h-full w-full object-cover" />
+                      <img src={profileImageUrl} alt="Preview" className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                     ) : (
-                      <UserRound className="w-8 h-8 text-zinc-400" />
+                      <UserRound className="w-10 h-10 text-zinc-400" />
                     )}
                   </div>
-                  <div className="flex flex-col gap-2">
-                    <label className="inline-flex items-center cursor-pointer text-sm text-zinc-600 dark:text-zinc-300">
-                      <span className="inline-flex items-center px-3 py-2 rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-                        <Upload className="w-4 h-4 mr-2" />
-                        {uploadingImage ? 'Uploading...' : 'Upload Image'}
-                      </span>
+                  <div className="flex flex-col gap-4">
+                    <label className="flex items-center gap-3 cursor-pointer px-6 py-3 rounded-xl border-2 border-dashed border-zinc-200 dark:border-white/10 hover:border-[#ff4d4d]/40 text-zinc-500 hover:text-[#ff4d4d] transition-all text-[10px] font-mono font-bold uppercase tracking-widest">
+                      <Upload className="w-4 h-4" />
+                      {uploadingImage ? 'Processing...' : 'Link Asset'}
                       <input type="file" accept="image/*" onChange={handleImageUpload} className="hidden" />
                     </label>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">Best with square images (1:1).</p>
+                    <p className="text-[10px] font-mono text-zinc-400 uppercase tracking-tighter">Recommended: Square 1:1 Aspect Ratio</p>
                   </div>
                 </div>
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Name</label>
-                <input type="text" {...register('name', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Name</label>
+                <input type="text" {...register('name', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Role / Title</label>
-                <input type="text" {...register('title', { required: true })} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Role / Designation</label>
+                <input type="text" {...register('title', { required: true })} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Description</label>
-                <textarea rows={4} {...register('description')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Vouch Statement</label>
+                <textarea rows={4} {...register('description')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm leading-relaxed" />
               </div>
 
-                <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Phone</label>
-                <input type="text" {...register('phone')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Phone Signal</label>
+                <input type="text" {...register('phone')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-3">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Email</label>
-                <input type="email" {...register('email')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-3 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Email Endpoint</label>
+                <input type="email" {...register('email')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-6">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Profile Link</label>
-                <input type="url" {...register('profileUrl')} placeholder="https://example.com/profile" className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
-                <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">Add a public profile or reference link so visitors can jump directly to their page.</p>
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Digital Uplink (Profile URL)</label>
+                <input type="url" {...register('profileUrl')} placeholder="https://..." className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-[#ff4d4d] focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
 
-              <div className="sm:col-span-2">
-                <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300">Display Priority</label>
-                <input type="number" {...register('priority')} className="mt-1 block w-full sm:text-sm border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-950 text-zinc-900 dark:text-white rounded-md shadow-sm focus:ring-[#ff4d4d] focus:border-[#ff4d4d]" />
+              <div className="sm:col-span-6 space-y-2">
+                <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Display Priority</label>
+                <input type="number" {...register('priority')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono" />
               </div>
             </div>
 
-            <div className="flex justify-end gap-3">
-              <button type="button" onClick={() => setIsFormOpen(false)} className="py-2 px-4 border border-zinc-300 dark:border-zinc-700 rounded-md text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors">
-                Cancel
+            <div className="flex justify-end gap-4 pt-4">
+              <button type="button" onClick={() => setIsFormOpen(false)} className="px-6 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 text-zinc-500 text-xs font-bold hover:text-zinc-900 dark:hover:text-white hover:bg-zinc-100 dark:hover:bg-white/5 transition-all tracking-widest uppercase">
+                Abort
               </button>
-              <button type="submit" className="py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-zinc-950 bg-[#ff4d4d] hover:bg-[#ff4d4d] transition-colors">
-                Save Reference
+              <button type="submit" className="px-8 py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all shadow-xl hover:scale-105 active:scale-95 tracking-widest uppercase">
+                Save Node
               </button>
             </div>
           </form>
         </div>
       )}
 
-      <div className="bg-white dark:bg-zinc-900 shadow-sm border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden transition-colors">
-        <ul className="divide-y divide-zinc-200 dark:divide-zinc-800">
-          {references.map((item) => (
-            <li key={item.id} className="p-4 sm:px-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 transition-colors">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-4 min-w-0">
-                  <div className="h-12 w-12 rounded-full overflow-hidden border border-zinc-300 dark:border-zinc-700 bg-zinc-100 dark:bg-zinc-800 flex-shrink-0">
-                    {item.profileImageUrl ? (
-                      <img src={item.profileImageUrl} alt={item.name} className="h-full w-full object-cover" />
-                    ) : (
-                      <div className="h-full w-full flex items-center justify-center text-zinc-400">
-                        <UserRound className="w-5 h-5" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="min-w-0">
-                    <h3 className="text-sm font-medium text-zinc-900 dark:text-white truncate">{item.name}</h3>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate">{item.title}</p>
-                  </div>
+      <div className="grid grid-cols-1 gap-6">
+        {references.map((item) => (
+          <div key={item.id} className="group bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-3xl p-6 transition-all hover:border-[#ff4d4d]/20 hover:shadow-[0_0_30px_rgba(255,77,77,0.05)]">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-6 flex-1">
+                <div className="h-16 w-16 rounded-full overflow-hidden border-2 border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-white/5 flex-shrink-0 group-hover:scale-110 transition-all duration-500">
+                  {item.profileImageUrl ? (
+                    <img src={item.profileImageUrl} alt={item.name} className="h-full w-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center text-zinc-400">
+                      <UserRound className="w-8 h-8" />
+                    </div>
+                  )}
                 </div>
-                <div className="flex items-center gap-2">
-                  <button onClick={() => handleEdit(item)} className="p-2 text-zinc-400 hover:text-[#ff4d4d] transition-colors">
-                    <Edit2 className="h-4 w-4" />
-                  </button>
-                  <button onClick={() => handleDelete(item.id)} className="p-2 text-zinc-400 hover:text-red-500 transition-colors">
-                    <Trash2 className="h-4 w-4" />
-                  </button>
+                <div className="text-center sm:text-left min-w-0">
+                  <h3 className="text-lg font-bold text-zinc-900 dark:text-white tracking-tight group-hover:text-[#ff4d4d] transition-colors truncate">{item.name}</h3>
+                  <p className="text-sm font-mono font-bold text-[#ff4d4d] mt-1 uppercase tracking-tighter truncate">{item.title}</p>
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-3 mt-2">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-zinc-100 dark:bg-white/5 text-zinc-500 uppercase tracking-widest">PRIORITY_{item.priority}</span>
+                    {item.email && <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-500/10 text-blue-500 uppercase tracking-widest truncate">{item.email}</span>}
+                  </div>
                 </div>
               </div>
-            </li>
-          ))}
-          {references.length === 0 && (
-            <li className="p-6 text-center text-zinc-500 dark:text-zinc-400">No references found. Add one to get started.</li>
-          )}
-        </ul>
+              <div className="flex items-center gap-2">
+                <button onClick={() => handleEdit(item)} className="p-3 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-[#ff4d4d]/30 transition-all">
+                  <Edit2 className="h-4 w-4" />
+                </button>
+                <button onClick={() => handleDelete(item.id)} className="p-3 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/5 text-zinc-500 hover:text-red-500 hover:border-red-500/30 transition-all">
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+        {references.length === 0 && (
+          <div className="p-20 text-center bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 border-dashed rounded-[40px]">
+            <p className="text-zinc-500 font-mono text-sm tracking-widest uppercase">No verified endorsements detected. Add one to build trust.</p>
+          </div>
+        )}
       </div>
     </div>
   );

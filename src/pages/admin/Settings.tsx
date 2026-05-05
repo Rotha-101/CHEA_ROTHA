@@ -117,7 +117,7 @@ export default function Settings() {
             footerText: 'Chea Rotha. All rights reserved.',
             maintenanceMode: false,
             primaryColor: '#ff4d4d',
-            siteLogoText: 'CR.',
+            siteLogoText: 'CR',
             experienceTitle: 'Experience',
             experienceSubtitle: 'My professional journey and roles.',
             educationTitle: 'Education',
@@ -207,25 +207,25 @@ export default function Settings() {
           <span className="w-8 h-px bg-[#ff4d4d]/30" />
           CONFIGURATIONS
         </div>
-        <h1 className="text-4xl font-display font-bold text-white tracking-tight">System Parameters</h1>
+        <h1 className="text-4xl font-display font-bold text-zinc-900 dark:text-white tracking-tight">System Parameters</h1>
         <p className="text-zinc-500 text-sm font-medium mt-2">Adjust the visual and functional parameters of the public terminal.</p>
       </div>
       
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
         
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Section Visibility</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Section Visibility</h3>
           <p className="text-sm text-zinc-500 font-medium mb-8">Enable or disable neural pathways on the interface.</p>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {['About', 'Experience', 'Projects', 'Gallery', 'Skills', 'Blog', 'References', 'Contact'].map((section) => (
-              <label key={section} className="flex items-center gap-4 p-4 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-[#ff4d4d]/30 transition-all cursor-pointer group">
+              <label key={section} className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-white/[0.02] border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 transition-all cursor-pointer group">
                 <div className="relative flex items-center h-5">
                   <input
                     id={`show${section}`}
                     type="checkbox"
                     {...register(`show${section}` as keyof SiteSettings)}
-                    className="appearance-none h-5 w-5 bg-black/40 border border-white/10 rounded-lg checked:bg-[#ff4d4d] checked:border-[#ff4d4d] transition-all cursor-pointer"
+                    className="appearance-none h-5 w-5 bg-zinc-200 dark:bg-black/40 border border-zinc-300 dark:border-white/10 rounded-lg checked:bg-[#ff4d4d] checked:border-[#ff4d4d] transition-all cursor-pointer"
                   />
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 group-has-[:checked]:opacity-100 transition-opacity">
                     <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -233,26 +233,26 @@ export default function Settings() {
                     </svg>
                   </div>
                 </div>
-                <span className="text-sm font-bold text-zinc-400 group-hover:text-white transition-colors">Show {section} Section</span>
+                <span className="text-sm font-bold text-zinc-500 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">Show {section} Section</span>
               </label>
             ))}
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Visual Identity</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Visual Identity</h3>
           <p className="text-sm text-zinc-500 font-medium mb-8">Customize the aesthetic parameters and branding.</p>
           
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
             <div className="sm:col-span-2 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Hero Background Source</label>
-              <input type="text" {...register('heroBackgroundImageUrl')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-800 text-sm" />
+              <input type="text" {...register('heroBackgroundImageUrl')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all placeholder:text-zinc-400 text-sm" />
             </div>
 
             <div className="sm:col-span-1 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Primary Brand Accent</label>
               <div className="flex items-center gap-4">
-                <input type="color" {...register('primaryColor')} className="h-14 w-24 bg-black/40 border border-white/5 rounded-2xl p-1 cursor-pointer" />
+                <input type="color" {...register('primaryColor')} className="h-14 w-24 bg-white dark:bg-black/40 border border-zinc-200 dark:border-white/5 rounded-2xl p-1 cursor-pointer" />
                 <span className="text-xs font-mono text-zinc-500">{getValues('primaryColor')}</span>
               </div>
             </div>
@@ -260,25 +260,25 @@ export default function Settings() {
             <div className="sm:col-span-1 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Secondary Accent</label>
               <div className="flex items-center gap-4">
-                <input type="color" {...register('secondaryColor')} className="h-14 w-24 bg-black/40 border border-white/5 rounded-2xl p-1 cursor-pointer" />
+                <input type="color" {...register('secondaryColor')} className="h-14 w-24 bg-white dark:bg-black/40 border border-zinc-200 dark:border-white/5 rounded-2xl p-1 cursor-pointer" />
                 <span className="text-xs font-mono text-zinc-500">{getValues('secondaryColor')}</span>
               </div>
             </div>
             
             <div className="sm:col-span-1 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Logo Signature</label>
-              <input type="text" {...register('siteLogoText')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
+              <input type="text" {...register('siteLogoText')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
             </div>
 
             <div className="sm:col-span-1 space-y-2">
               <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">Footer Copyright</label>
-              <input type="text" {...register('footerText')} className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
+              <input type="text" {...register('footerText')} className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
             </div>
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Section Nomenclature</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Section Nomenclature</h3>
           <p className="text-sm text-zinc-500 font-medium mb-8">Override the default titles and subtitles for each section.</p>
           
           <div className="space-y-10">
@@ -294,20 +294,20 @@ export default function Settings() {
             ].map((section) => (
               <div key={section.id} className="grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <div className="sm:col-span-1 space-y-2">
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-600 ml-1">{section.label} Identifier</label>
-                  <input type="text" {...register(`${section.id}Title` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-white/5 bg-black/40 text-white focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">{section.label} Identifier</label>
+                  <input type="text" {...register(`${section.id}Title` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-bold" />
                 </div>
                 <div className="sm:col-span-1 space-y-2">
-                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-600 ml-1">{section.label} Descriptor</label>
-                  <input type="text" {...register(`${section.id}Subtitle` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-white/5 bg-black/40 text-zinc-400 focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
+                  <label className="block text-[10px] font-mono font-bold uppercase tracking-widest text-zinc-500 ml-1">{section.label} Descriptor</label>
+                  <input type="text" {...register(`${section.id}Subtitle` as keyof SiteSettings)} className="w-full px-5 py-3 rounded-xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-500 dark:text-zinc-400 focus:ring-1 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm" />
                 </div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">Neural Link (Gmail)</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">Neural Link (Gmail)</h3>
           <p className="text-sm text-zinc-500 font-medium mb-8">Configure the bridge for incoming communications.</p>
           
           <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
@@ -317,7 +317,7 @@ export default function Settings() {
                 type="email"
                 placeholder="your.email@gmail.com"
                 {...register('gmailUser')}
-                className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm"
+                className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm font-mono"
               />
             </div>
             <div className="space-y-2">
@@ -326,20 +326,21 @@ export default function Settings() {
                 type="password"
                 placeholder="•••• •••• •••• ••••"
                 {...register('gmailPass')}
-                className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm"
+                className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all text-sm"
               />
             </div>
           </div>
           <div className="mt-6 p-4 rounded-2xl bg-[#ff4d4d]/5 border border-[#ff4d4d]/10">
-            <p className="text-xs text-zinc-400 leading-relaxed">
-              Use a <strong className="text-white">Gmail App Password</strong> for secure access. 
-              <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="text-[#ff4d4d] ml-2 underline">Secure your link →</a>
+            <p className="text-[10px] font-mono font-bold text-[#ff4d4d] tracking-widest uppercase flex items-center gap-3">
+              <Save className="w-4 h-4" />
+              Use a Gmail App Password for secure access. 
+              <a href="https://myaccount.google.com/apppasswords" target="_blank" rel="noreferrer" className="underline ml-auto hover:text-white transition-colors">Generate Token →</a>
             </p>
           </div>
         </div>
 
-        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-[40px] p-10 shadow-xl">
-          <h3 className="text-xl font-display font-bold text-white mb-2">System Override</h3>
+        <div className="bg-zinc-50 dark:bg-white/5 backdrop-blur-md border border-zinc-200 dark:border-white/5 rounded-[40px] p-10 shadow-xl">
+          <h3 className="text-xl font-display font-bold text-zinc-900 dark:text-white mb-2">System Override</h3>
           <p className="text-sm text-zinc-500 font-medium mb-8">Execute low-level system commands.</p>
           
           <div className="flex items-center justify-between p-6 bg-red-500/5 border border-red-500/10 rounded-3xl">
@@ -353,7 +354,7 @@ export default function Settings() {
                 {...register('maintenanceMode')}
                 className="sr-only peer"
               />
-              <div className="w-14 h-8 bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600 peer-checked:after:bg-white"></div>
+              <div className="w-14 h-8 bg-zinc-200 dark:bg-zinc-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:start-[4px] after:bg-zinc-400 after:border-zinc-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-red-600 peer-checked:after:bg-white"></div>
             </label>
           </div>
         </div>
@@ -363,7 +364,7 @@ export default function Settings() {
             type="button"
             onClick={handleExport}
             disabled={exporting}
-            className="flex-1 py-4 bg-white/5 backdrop-blur-xl border border-white/5 hover:border-white/20 text-white text-sm font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl"
+            className="flex-1 py-5 bg-white dark:bg-white/5 backdrop-blur-xl border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 text-zinc-500 hover:text-zinc-900 dark:hover:text-white text-xs font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl tracking-widest uppercase"
           >
             <Download className="h-4 w-4" />
             {exporting ? 'EXPORTING...' : 'BACKUP DATA'}
@@ -371,7 +372,7 @@ export default function Settings() {
           <button
             type="submit"
             disabled={saving}
-            className="flex-[2] py-4 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-sm font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl hover:scale-[1.02] active:scale-[0.98]"
+            className="flex-[2] py-5 bg-[#ff4d4d] hover:bg-[#ff3333] text-white text-xs font-bold rounded-2xl transition-all flex items-center justify-center gap-3 shadow-2xl hover:scale-[1.01] active:scale-[0.99] tracking-widest uppercase"
           >
             <Save className="h-4 w-4" />
             {saving ? 'SYNCING...' : 'COMMIT CHANGES'}

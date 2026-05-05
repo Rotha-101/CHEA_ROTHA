@@ -196,7 +196,7 @@ export default function Contact() {
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-5 py-4 rounded-2xl border border-white/5 bg-black/40 text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-700"
+              className="w-full px-5 py-4 rounded-2xl border border-zinc-200 dark:border-white/5 bg-white dark:bg-black/40 text-zinc-900 dark:text-white focus:ring-2 focus:ring-[#ff4d4d]/50 focus:border-transparent outline-none transition-all resize-none placeholder:text-zinc-400 dark:placeholder:text-zinc-700"
               placeholder="Write your message here..."
             />
           </div>
