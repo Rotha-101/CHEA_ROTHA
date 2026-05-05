@@ -205,12 +205,12 @@ function SectionCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
-      className="group rounded-3xl border border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/5 p-6 sm:p-8 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07] transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,77,77,0.05)]"
+      className="group rounded-3xl border border-zinc-200 dark:border-white/5 bg-zinc-50 dark:bg-white/5 p-5 sm:p-8 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07] transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,77,77,0.05)]"
     >
       <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h3 className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">{title}</h3>
-          <p className="mt-1.5 text-base sm:text-lg font-medium text-zinc-700 dark:text-zinc-300 opacity-90">{subtitle}</p>
+          <h3 className="text-lg sm:text-2xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">{title}</h3>
+          <p className="mt-1 text-sm sm:text-lg font-medium text-zinc-700 dark:text-zinc-300 opacity-90">{subtitle}</p>
         </div>
         <div className="font-mono text-[10px] uppercase tracking-widest text-zinc-500 border border-zinc-200 dark:border-white/10 rounded-full px-4 py-1.5 w-fit">
           {date}

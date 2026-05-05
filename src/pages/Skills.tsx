@@ -174,28 +174,28 @@ export default function Skills() {
                       <motion.article
                         key={`${skill.id}-${idx}`}
                         whileHover={{ y: -8, scale: 1.05 }}
-                        className={`relative flex flex-col items-center p-6 rounded-[32px] transition-all duration-500 w-[160px] sm:w-[190px] h-[280px] flex-shrink-0 ${
+                        className={`relative flex flex-col items-center p-5 sm:p-6 rounded-[28px] sm:rounded-[32px] transition-all duration-500 w-[130px] sm:w-[190px] h-[230px] sm:h-[280px] flex-shrink-0 ${
                           skill.isHighlighted 
                             ? 'bg-[#ff4d4d]/5 border border-[#ff4d4d]/30 shadow-[0_0_30px_rgba(255,77,77,0.1)]' 
                             : 'bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07]'
                         } backdrop-blur-md cursor-pointer group hover:shadow-[0_0_40px_rgba(255,77,77,0.05)]`}
                       >
                         {/* Icon Container */}
-                        <div className="relative flex-1 w-full flex items-center justify-center mb-6">
+                        <div className="relative flex-1 w-full flex items-center justify-center mb-4 sm:mb-6">
                           <div className={`absolute inset-4 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
                             skill.isHighlighted ? 'bg-[#ff4d4d]' : 'bg-white'
                           }`} />
                           
-                          <div className="h-full w-full p-2 flex items-center justify-center relative z-0">
+                          <div className="h-full w-full p-1 sm:p-2 flex items-center justify-center relative z-0">
                             {skill.iconUrl ? (
                               <img
                                 src={skill.iconUrl}
                                 alt={`${skill.name} logo`}
-                                className="max-h-16 sm:max-h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                                className="max-h-12 sm:max-h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-110"
                                 loading="lazy"
                               />
                             ) : (
-                              <div className="h-10 w-10 sm:h-12 sm:w-12 text-[#ff4d4d] flex items-center justify-center">
+                              <div className="h-8 w-8 sm:h-12 sm:w-12 text-[#ff4d4d] flex items-center justify-center">
                                 {getSkillIcon(skill.name, skill.category)}
                               </div>
                             )}
@@ -203,11 +203,11 @@ export default function Skills() {
                         </div>
 
                         <div className="text-center w-full mt-auto">
-                          <div className="h-14 mb-2 flex flex-col justify-center px-1">
-                            <h3 className="text-sm sm:text-base font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-2 leading-tight">
+                          <div className="h-12 sm:h-14 mb-1 sm:mb-2 flex flex-col justify-center px-1">
+                            <h3 className="text-[11px] sm:text-base font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-2 leading-tight">
                               {skill.name}
                             </h3>
-                            <p className="mt-1 text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-zinc-500 line-clamp-1">
+                            <p className="mt-1 text-[7px] sm:text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-zinc-500 line-clamp-1">
                               {skill.category}
                             </p>
                           </div>
@@ -221,8 +221,8 @@ export default function Skills() {
                             />
                           </div>
                           
-                          <div className="mt-3 h-10 overflow-hidden">
-                            <p className="text-[10px] leading-relaxed text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="mt-2 sm:mt-3 h-8 sm:h-10 overflow-hidden">
+                            <p className="text-[8px] sm:text-[10px] leading-relaxed text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               {skill.description || getSkillBlurb(skill.name, skill.category, level)}
                             </p>
                           </div>

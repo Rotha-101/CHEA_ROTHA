@@ -67,7 +67,7 @@ export default function Projects() {
             className="group flex flex-col bg-zinc-50 dark:bg-white/5 rounded-[32px] border border-zinc-200 dark:border-white/5 overflow-hidden hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07] transition-all duration-500 hover:shadow-[0_0_50px_rgba(255,77,77,0.08)]"
           >
             {/* Image Section */}
-            <div className="h-64 w-full bg-zinc-100 dark:bg-white/5 relative overflow-hidden">
+            <div className="h-48 sm:h-64 w-full bg-zinc-100 dark:bg-white/5 relative overflow-hidden">
               {project.imageUrl ? (
                 <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover grayscale-[0.5] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700" referrerPolicy="no-referrer" />
               ) : (
@@ -75,22 +75,22 @@ export default function Projects() {
                   <span className="font-display text-4xl font-bold text-zinc-900 dark:text-white">{project.title.substring(0, 2).toUpperCase()}</span>
                 </div>
               )}
-              <div className="absolute top-6 right-6">
-                <span className={`inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase backdrop-blur-xl ${project.status === 'Completed' ? 'bg-[#ff4d4d]/20 text-[#ff4d4d] border border-[#ff4d4d]/30' : 'bg-white/10 text-white border border-white/20'}`}>
+              <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
+                <span className={`inline-flex items-center px-3 py-1 sm:px-4 sm:py-1.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase backdrop-blur-xl ${project.status === 'Completed' ? 'bg-[#ff4d4d]/20 text-[#ff4d4d] border border-[#ff4d4d]/30' : 'bg-white/10 text-white border border-white/20'}`}>
                   {project.status}
                 </span>
               </div>
             </div>
 
-            <div className="flex-1 p-8 sm:p-10 flex flex-col justify-between">
+            <div className="flex-1 p-6 sm:p-10 flex flex-col justify-between">
               <div>
-                <h3 className="text-2xl sm:text-3xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">
+                <h3 className="text-xl sm:text-3xl font-display font-bold text-zinc-900 dark:text-white group-hover:text-[#ff4d4d] transition-colors">
                   {project.title}
                 </h3>
-                <p className="mt-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
+                <p className="mt-4 sm:mt-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-xs sm:text-base">
                   {project.description}
                 </p>
-                <div className="mt-10 flex flex-wrap gap-2.5">
+                <div className="mt-6 sm:mt-10 flex flex-wrap gap-2 sm:gap-2.5">
                   {project.tags.map((tag) => (
                     <span key={tag} className="inline-flex items-center px-4 py-1.5 rounded-full text-[11px] font-mono font-semibold bg-zinc-100 dark:bg-white/5 text-zinc-500 dark:text-zinc-400 border border-zinc-200 dark:border-white/5 group-hover:border-[#ff4d4d]/20 group-hover:text-zinc-800 dark:group-hover:text-zinc-200 transition-colors">
                       {tag}

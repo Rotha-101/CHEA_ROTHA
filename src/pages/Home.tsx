@@ -76,7 +76,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="text-6xl sm:text-7xl lg:text-9xl font-display font-black tracking-tighter text-zinc-950 dark:text-white leading-[0.9] uppercase"
+                className="text-4xl sm:text-7xl lg:text-9xl font-display font-black tracking-tighter text-zinc-950 dark:text-white leading-[0.95] uppercase"
               >
                 {profile.name?.split(' ')[0] || 'Node'}
                 <br />
@@ -87,9 +87,9 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-8 text-xl sm:text-2xl font-mono font-bold text-[#ff4d4d] tracking-widest uppercase flex items-center gap-4"
+                className="mt-5 sm:mt-8 text-base sm:text-2xl font-mono font-bold text-[#ff4d4d] tracking-widest uppercase flex items-center gap-4"
               >
-                <span className="w-2 h-2 rounded-full bg-[#ff4d4d] animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d4d] animate-pulse" />
                 {profile.title}
               </motion.h2>
 
@@ -97,7 +97,7 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
-                className="mt-8 text-lg text-zinc-600 dark:text-zinc-500 leading-relaxed max-w-2xl font-medium"
+                className="mt-6 sm:mt-8 text-sm sm:text-lg text-zinc-600 dark:text-zinc-500 leading-relaxed max-w-2xl font-medium"
               >
                 {profile.bio}
               </motion.p>
@@ -106,50 +106,50 @@ export default function Home() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.6 }}
-                className="mt-12 flex flex-wrap items-center gap-6"
+                className="mt-8 sm:mt-12 flex flex-wrap items-center gap-4 sm:gap-6"
               >
-                <a href="#projects" className="group relative overflow-hidden px-10 py-5 bg-[#ff4d4d] text-white text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(255,77,77,0.3)]">
+                <a href="#projects" className="group relative overflow-hidden px-6 py-3 bg-[#ff4d4d] sm:px-10 sm:py-5 text-white text-[10px] sm:text-[11px] font-mono font-black tracking-[0.2em] uppercase rounded-full transition-all hover:scale-105 active:scale-95 shadow-[0_20px_40px_-10px_rgba(255,77,77,0.3)]">
                   <span className="relative z-10 flex items-center gap-3">
                     Initialize Projects
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-2 transition-transform" />
+                    <ArrowRight className="h-3.5 w-3.5 sm:h-4 sm:w-4 group-hover:translate-x-2 transition-transform" />
                   </span>
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                 </a>
 
-                <div className="flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-4">
                   {profile.github && (
-                    <a href={profile.github} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="GitHub">
-                      <Github className="h-4.5 w-4.5" />
+                    <a href={profile.github} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="GitHub">
+                      <Github className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.linkedin && (
-                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="LinkedIn">
-                      <Linkedin className="h-4.5 w-4.5" />
+                    <a href={profile.linkedin} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="LinkedIn">
+                      <Linkedin className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.twitter && (
-                    <a href={profile.twitter} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="X / Twitter">
-                      <Twitter className="h-4.5 w-4.5" />
+                    <a href={profile.twitter} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="X / Twitter">
+                      <Twitter className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.instagram && (
-                    <a href={profile.instagram} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Instagram">
-                      <Instagram className="h-4.5 w-4.5" />
+                    <a href={profile.instagram} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Instagram">
+                      <Instagram className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.facebook && (
-                    <a href={profile.facebook} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Facebook">
-                      <Facebook className="h-4.5 w-4.5" />
+                    <a href={profile.facebook} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Facebook">
+                      <Facebook className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.discord && (
-                    <a href={`https://discord.com/users/${profile.discord}`} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Discord">
-                      <MessageSquare className="h-4.5 w-4.5" />
+                    <a href={`https://discord.com/users/${profile.discord}`} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Discord">
+                      <MessageSquare className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                   {profile.threads && (
-                    <a href={profile.threads} target="_blank" rel="noreferrer" className="w-11 h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Threads">
-                      <AtSign className="h-4.5 w-4.5" />
+                    <a href={profile.threads} target="_blank" rel="noreferrer" className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-white/20 hover:bg-white/10 transition-all" title="Threads">
+                      <AtSign className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
                     </a>
                   )}
                 </div>
