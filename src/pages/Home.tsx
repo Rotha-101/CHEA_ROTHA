@@ -72,36 +72,41 @@ export default function Home() {
 
             {/* Right Column - Content */}
             <div className="lg:col-span-7 order-1 lg:order-2 relative">
-              <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#ff4d4d] mb-6 tracking-[0.4em] uppercase">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#ff4d4d] mb-6 tracking-[0.4em] uppercase"
+              >
                 <span className="w-12 h-px bg-[#ff4d4d]/40" />
                 Core_Identifier
-              </div>
+              </motion.div>
               
               <motion.h1 
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
+                transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 className="text-4xl sm:text-7xl lg:text-9xl font-display font-black tracking-tighter text-zinc-950 dark:text-white leading-[0.95] uppercase"
               >
                 {profile.name?.split(' ')[0] || 'Node'}
                 <br />
                 <span className="text-zinc-100 dark:text-zinc-800 outline-text">{profile.name?.split(' ')[1] || 'Initialized'}</span>
               </motion.h1>
-
+ 
               <motion.h2 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
+                transition={{ duration: 0.8, delay: 0.6 }}
                 className="mt-5 sm:mt-8 text-base sm:text-2xl font-mono font-bold text-[#ff4d4d] tracking-widest uppercase flex items-center gap-4"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#ff4d4d] animate-pulse" />
                 {profile.title}
               </motion.h2>
-
+ 
               <motion.p 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.5 }}
+                transition={{ duration: 0.8, delay: 0.8 }}
                 className="mt-6 sm:mt-8 text-sm sm:text-lg text-zinc-600 dark:text-zinc-500 leading-relaxed max-w-2xl font-medium"
               >
                 {profile.bio}

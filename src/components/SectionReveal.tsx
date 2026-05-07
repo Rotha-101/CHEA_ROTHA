@@ -11,13 +11,15 @@ export default function SectionReveal({ children, delay = 0, width = "100%" }: S
   return (
     <div style={{ position: "relative", width, overflow: "visible" }}>
       <motion.div
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
+        viewport={{ once: true, margin: "-15% 0px -15% 0px" }}
         transition={{ 
-          duration: 1.2, 
+          type: "spring",
+          stiffness: 40,
+          damping: 20,
+          mass: 1,
           delay: delay,
-          ease: [0.22, 1, 0.36, 1] 
         }}
       >
         {children}
