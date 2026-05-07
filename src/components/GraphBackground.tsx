@@ -25,6 +25,8 @@ export default function GraphBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
+    let lastWidth = window.innerWidth;
+    
     const isMobile = window.innerWidth < 768;
     const particleCount = isMobile ? 80 : 200;
     const connectionDistance = isMobile ? 180 : 280;
@@ -49,16 +51,32 @@ export default function GraphBackground() {
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.x < 0 || this.x > w) this.vx *= -1;
-        if (this.y < 0 || this.y > h) this.vy *= -1;
+        if (this.x < 0) this.x = w;
+        if (this.x > w) this.x = 0;
+        if (this.y < 0) this.y = h;
+        if (this.y > h) this.y = 0;
       }
     }
 
-    const init = () => {
-      const dpr = window.devicePixelRatio || 1;
+    const init = (isResize = false) => {
       const width = window.innerWidth;
       const height = window.innerHeight;
       
+      // On mobile, browser UI changes (address bar) trigger resize.
+      // We only want to reset particles if the width changes (orientation change).
+      if (isResize && isMobile && Math.abs(width - lastWidth) < 50) {
+        // Just adjust canvas size without resetting particles
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = width * dpr;
+        canvas.height = height * dpr;
+        ctx.scale(dpr, dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        return;
+      }
+
+      lastWidth = width;
+      const dpr = window.devicePixelRatio || 1;
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
@@ -75,7 +93,6 @@ export default function GraphBackground() {
       const w = window.innerWidth;
       const h = window.innerHeight;
       
-      // Fill background instead of clearRect for performance with alpha:false
       ctx.fillStyle = themeRef.current === 'dark' ? '#050810' : '#ffffff';
       ctx.fillRect(0, 0, w, h);
 
@@ -85,7 +102,6 @@ export default function GraphBackground() {
       opacities.current.node += (targetNode - opacities.current.node) * 0.1;
       opacities.current.line += (targetLine - opacities.current.line) * 0.1;
 
-      // Draw nodes and update positions
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 77, 77, ${opacities.current.node})`;
       for (const p of particles) {
@@ -95,7 +111,6 @@ export default function GraphBackground() {
       }
       ctx.fill();
 
-      // Draw connections with spatial optimization (simple grid or just optimized loop)
       ctx.lineWidth = 0.5;
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
@@ -103,7 +118,6 @@ export default function GraphBackground() {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
           const dy = p1.y - p2.y;
-          // Avoid Math.sqrt for performance
           const distSq = dx * dx + dy * dy;
 
           if (distSq < connectionDistanceSq) {
@@ -122,7 +136,7 @@ export default function GraphBackground() {
     };
 
     const handleResize = () => {
-      init();
+      init(true);
     };
 
     window.addEventListener('resize', handleResize);
