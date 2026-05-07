@@ -61,8 +61,14 @@ export default function GraphBackground() {
     }
 
     const init = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      const dpr = window.devicePixelRatio || 1;
+      canvas.width = window.innerWidth * dpr;
+      canvas.height = window.innerHeight * dpr;
+      ctx.scale(dpr, dpr);
+      
+      canvas.style.width = `${window.innerWidth}px`;
+      canvas.style.height = `${window.innerHeight}px`;
+
       particles = [];
       for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
@@ -70,42 +76,50 @@ export default function GraphBackground() {
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
 
-      // Smoothly interpolate opacities
       const targetNode = themeRef.current === 'dark' ? 0.4 : 0.2;
       const targetLine = themeRef.current === 'dark' ? 0.15 : 0.08;
       
-      opacities.current.node += (targetNode - opacities.current.node) * 0.2;
-      opacities.current.line += (targetLine - opacities.current.line) * 0.2;
+      opacities.current.node += (targetNode - opacities.current.node) * 0.1;
+      opacities.current.line += (targetLine - opacities.current.line) * 0.1;
 
-      particles.forEach((p, i) => {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.update();
         p.draw();
 
+        // Limit connections to keep O(N^2) light
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p.x - p2.x;
           const dy = p.y - p2.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+          const distSq = dx * dx + dy * dy;
+          const maxDistSq = connectionDistance * connectionDistance;
 
-          if (dist < connectionDistance) {
+          if (distSq < maxDistSq) {
+            const dist = Math.sqrt(distSq);
             ctx.beginPath();
             const strength = (1 - dist / connectionDistance);
             ctx.strokeStyle = `rgba(255, 77, 77, ${opacities.current.line * strength})`;
-            ctx.lineWidth = 0.8;
+            ctx.lineWidth = 0.6;
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
           }
         }
-      });
+      }
 
       animationFrameId = requestAnimationFrame(animate);
     };
 
+    let lastWidth = window.innerWidth;
     const handleResize = () => {
-      init();
+      // Only re-init if width changes (prevents mobile scroll jump due to address bar)
+      if (window.innerWidth !== lastWidth) {
+        lastWidth = window.innerWidth;
+        init();
+      }
     };
 
     window.addEventListener('resize', handleResize);
@@ -121,7 +135,7 @@ export default function GraphBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transition-colors duration-200"
+      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transition-colors duration-200 will-change-transform"
     />
   );
 }
