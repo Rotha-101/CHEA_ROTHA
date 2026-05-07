@@ -27,6 +27,7 @@ import { analyticsService } from '../lib/analytics';
 import { useAuthStore } from '../store/authStore';
 import { useDataStore } from '../store/dataStore';
 import { useThemeStore } from '../store/themeStore';
+import GraphBackground from './GraphBackground';
 
 const HEADER_HEIGHT = 80;
 const SECTION_SCROLL_OFFSET = 96;
@@ -113,12 +114,7 @@ export function PublicLayout() {
 
   return (
     <div className="relative flex min-h-screen flex-col overflow-x-hidden font-sans bg-white dark:bg-[#050810] selection:bg-[#ff4d4d]/30 selection:text-white transition-colors duration-500">
-      {/* Persistent Technical Background */}
-      <div className="fixed inset-0 z-0 pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px] opacity-20 dark:opacity-100" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,77,77,0.05),transparent_50%)]" />
-        <div className="absolute inset-0 bg-white/50 dark:bg-[#050810]/50 backdrop-blur-[2px]" />
-      </div>
+      <GraphBackground />
 
       <header className="fixed inset-x-0 top-0 z-50 w-full border-b border-zinc-200/50 dark:border-white/5 bg-white/40 dark:bg-[#050810]/40 backdrop-blur-3xl transition-all duration-500">
         <div className="mx-auto flex h-20 sm:h-24 max-w-7xl items-center justify-between px-5 sm:px-8">
