@@ -27,8 +27,8 @@ export default function GraphBackground() {
     let particles: Particle[] = [];
     // Significantly increased for a dense "technical" feel
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 50 : 130;
-    const connectionDistance = isMobile ? 160 : 250;
+    const particleCount = isMobile ? 80 : 200;
+    const connectionDistance = isMobile ? 180 : 280;
 
     class Particle {
       x: number;
