@@ -32,7 +32,12 @@ export default function Home() {
   if (!profile) return <div className="min-h-screen flex items-center justify-center font-mono text-zinc-500">Profile not found.</div>;
 
   return (
-    <div className="w-full">
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5, ease: "easeOut" }}
+      className="w-full"
+    >
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-40">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
@@ -170,6 +175,6 @@ export default function Home() {
       {settings?.showBlog !== false && <SectionReveal><section id="blog"><Blog /></section></SectionReveal>}
       {settings?.showReferences !== false && <SectionReveal><section id="reference"><Reference /></section></SectionReveal>}
       {settings?.showContact !== false && <SectionReveal><section id="contact"><Contact /></section></SectionReveal>}
-    </div>
+    </motion.div>
   );
 }

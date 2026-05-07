@@ -9,15 +9,15 @@ interface SectionRevealProps {
 
 export default function SectionReveal({ children, delay = 0, width = "100%" }: SectionRevealProps) {
   return (
-    <div style={{ position: "relative", width, overflow: "hidden" }}>
+    <div style={{ position: "relative", width, overflow: "visible" }}>
       <motion.div
-        initial={{ opacity: 0, y: 50, scale: 0.9 }}
-        whileInView={{ opacity: 1, y: 0, scale: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-10% 0px -10% 0px" }}
         transition={{ 
-          duration: 0.8, 
+          duration: 1.2, 
           delay: delay,
-          ease: [0.21, 0.47, 0.32, 0.98] // Custom ease for a smooth "pop"
+          ease: [0.22, 1, 0.36, 1] 
         }}
       >
         {children}
