@@ -51,7 +51,7 @@ export default function Home() {
                 
                 <div className="relative w-full max-w-xs lg:max-w-sm aspect-[3/4] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
                   {profile.profilePhotoUrl ? (
-                    <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
+                    <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-100" />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-700">
                       <User className="h-20 w-20 mb-4 opacity-20" />
