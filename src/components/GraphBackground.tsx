@@ -25,8 +25,10 @@ export default function GraphBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    const particleCount = window.innerWidth < 768 ? 40 : 80;
-    const connectionDistance = 150;
+    // Lowered counts for better scroll performance
+    const isMobile = window.innerWidth < 768;
+    const particleCount = isMobile ? 25 : 55;
+    const connectionDistance = isMobile ? 100 : 150;
 
     class Particle {
       x: number;
@@ -38,9 +40,10 @@ export default function GraphBackground() {
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        this.vx = (Math.random() - 0.5) * 0.4;
-        this.vy = (Math.random() - 0.5) * 0.4;
-        this.size = Math.random() * 1.5 + 0.5;
+        // Slightly slower for smoother feel
+        this.vx = (Math.random() - 0.5) * 0.3;
+        this.vy = (Math.random() - 0.5) * 0.3;
+        this.size = Math.random() * 1.2 + 0.3;
       }
 
       update() {
@@ -50,22 +53,14 @@ export default function GraphBackground() {
         if (this.x < 0 || this.x > canvas!.width) this.vx *= -1;
         if (this.y < 0 || this.y > canvas!.height) this.vy *= -1;
       }
-
-      draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(255, 77, 77, ${opacities.current.node})`;
-        ctx.fill();
-      }
     }
 
     const init = () => {
+      // Use devicePixelRatio for sharper, smoother rendering
       const dpr = window.devicePixelRatio || 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
       ctx.scale(dpr, dpr);
-      
       canvas.style.width = `${window.innerWidth}px`;
       canvas.style.height = `${window.innerHeight}px`;
 
@@ -76,34 +71,39 @@ export default function GraphBackground() {
     };
 
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width / (window.devicePixelRatio || 1), canvas.height / (window.devicePixelRatio || 1));
+      ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      const targetNode = themeRef.current === 'dark' ? 0.4 : 0.2;
-      const targetLine = themeRef.current === 'dark' ? 0.15 : 0.08;
+      const targetNode = themeRef.current === 'dark' ? 0.35 : 0.15;
+      const targetLine = themeRef.current === 'dark' ? 0.12 : 0.06;
       
       opacities.current.node += (targetNode - opacities.current.node) * 0.1;
       opacities.current.line += (targetLine - opacities.current.line) * 0.1;
 
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
+      // Draw all nodes in a single pass
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(255, 77, 77, ${opacities.current.node})`;
+      particles.forEach(p => {
         p.update();
-        p.draw();
+        ctx.moveTo(p.x, p.y);
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      });
+      ctx.fill();
 
-        // Limit connections to keep O(N^2) light
+      // Draw connections
+      ctx.lineWidth = 0.6;
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
-          const distSq = dx * dx + dy * dy;
-          const maxDistSq = connectionDistance * connectionDistance;
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-          if (distSq < maxDistSq) {
-            const dist = Math.sqrt(distSq);
-            ctx.beginPath();
+          if (dist < connectionDistance) {
             const strength = (1 - dist / connectionDistance);
+            ctx.beginPath();
             ctx.strokeStyle = `rgba(255, 77, 77, ${opacities.current.line * strength})`;
-            ctx.lineWidth = 0.6;
-            ctx.moveTo(p.x, p.y);
+            ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
             ctx.stroke();
           }
@@ -113,13 +113,8 @@ export default function GraphBackground() {
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    let lastWidth = window.innerWidth;
     const handleResize = () => {
-      // Only re-init if width changes (prevents mobile scroll jump due to address bar)
-      if (window.innerWidth !== lastWidth) {
-        lastWidth = window.innerWidth;
-        init();
-      }
+      init();
     };
 
     window.addEventListener('resize', handleResize);
@@ -135,7 +130,7 @@ export default function GraphBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transition-colors duration-200 will-change-transform"
+      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transition-colors duration-200 transform-gpu will-change-transform"
     />
   );
 }
