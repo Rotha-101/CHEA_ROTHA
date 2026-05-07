@@ -49,7 +49,7 @@ export default function Home() {
                 {/* Visual Orbs */}
                 <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 
-                <div className="relative w-full max-w-xs aspect-[3/4] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
+                <div className="relative w-full max-w-xs lg:max-w-sm aspect-[3/4] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
                   {profile.profilePhotoUrl ? (
                     <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700 scale-105 group-hover:scale-100" />
                   ) : (

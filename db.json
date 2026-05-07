@@ -8,7 +8,7 @@
     "location": "Toul Kork, Phnom Penh, Cambodia",
     "github": "https://github.com/Rotha-101",
     "linkedin": "https://www.linkedin.com/in/chea-rotha-44268b2a5/",
-    "profilePhotoUrl": "/uploads/1777971556475-127646808.jpg",
+    "profilePhotoUrl": "http://localhost:3001/uploads/1778124701736-photo_2026-05-07_10-30-59.jpg",
     "coverImageUrl": "/uploads/1777968522151-559128.jpg",
     "cvUrl": "http://localhost:3001/uploads/1777978270007-CV.pdf",
     "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale.",
@@ -23,7 +23,7 @@
     {
       "name": "Java",
       "level": 50,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 0,
       "description": "",
       "yearsOfExperience": 5,
@@ -31,18 +31,6 @@
       "isHighlighted": false,
       "iconUrl": "/uploads/1777632476143-java-512px.png",
       "id": "1777632478197"
-    },
-    {
-      "name": "Pytorch",
-      "level": 70,
-      "category": "Machine Learning",
-      "priority": 0,
-      "description": "Building flexible and efficient deep learning models with PyTorch for research and production applications.",
-      "yearsOfExperience": 5,
-      "certificationUrl": "https://github.com/pytorch/pytorch.git",
-      "isHighlighted": false,
-      "iconUrl": "/uploads/1777649187302-pytorch-512px.png",
-      "id": "1777649191084"
     },
     {
       "name": "Vs code",
@@ -60,7 +48,7 @@
       "id": "skill-001",
       "name": "Python",
       "level": 95,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 1,
       "iconUrl": "/uploads/1777629578167-python.svg",
       "description": "",
@@ -83,7 +71,7 @@
       "id": "skill-002",
       "name": "SQL",
       "level": 90,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 2,
       "iconUrl": "/uploads/1777632224673-azure-sql-database-512px.png",
       "description": "",
@@ -105,7 +93,7 @@
     {
       "name": "C#",
       "level": 50,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 2,
       "description": "",
       "yearsOfExperience": 5,
@@ -129,7 +117,7 @@
     {
       "name": "C++",
       "level": 50,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 3,
       "description": "",
       "yearsOfExperience": 4,
@@ -165,7 +153,7 @@
     {
       "name": "Matlab",
       "level": 50,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 4,
       "description": "",
       "yearsOfExperience": 4,
@@ -213,7 +201,7 @@
     {
       "name": "R programming",
       "level": 50,
-      "category": "Programming Languages",
+      "category": "Programming Languages & Tools",
       "priority": 6,
       "description": "",
       "yearsOfExperience": 5,
@@ -271,6 +259,18 @@
       "id": "1777649663200"
     },
     {
+      "name": "Numpy",
+      "level": 80,
+      "category": "Programming Languages & Tools",
+      "priority": 8,
+      "description": "Advanced numerical computing library for Python used for multidimensional arrays, matrix operations, mathematical functions, data processing, linear algebra, statistical analysis, and high-performance scientific computation for AI, data science, and engineering applications.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://numpy.org/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778120287554-numpy-512px.png",
+      "id": "1778120289384"
+    },
+    {
       "name": "Eclipse IDE",
       "level": 80,
       "category": "IDE & Editors",
@@ -281,6 +281,90 @@
       "isHighlighted": false,
       "iconUrl": "/uploads/1777649773282-eclipse-ide-512px.png",
       "id": "1777649780057"
+    },
+    {
+      "name": "Keras",
+      "level": 80,
+      "category": "Programming Languages & Tools",
+      "priority": 9,
+      "description": "High-level deep learning framework built on TensorFlow for designing, training, and deploying neural networks, including CNN, RNN, LSTM, and AI models for computer vision, predictive analytics, and intelligent automation systems.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://keras.io/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778120342898-keras-512px.png",
+      "id": "1778120345961"
+    },
+    {
+      "name": "MongoDB",
+      "level": 80,
+      "category": "Programming Languages & Tools",
+      "priority": 10,
+      "description": "Document-oriented NoSQL database designed for scalable, high-performance applications with flexible schema architecture, real-time data handling, cloud integration, API-driven systems, and modern full-stack development environments.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://www.mongodb.com/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778120397079-mongodb-512px.png",
+      "id": "1778120399324"
+    },
+    {
+      "name": "Django",
+      "level": 70,
+      "category": "Programming Languages & Tools",
+      "priority": 11,
+      "description": "High-level Python web framework used for building secure, scalable, and data-driven web applications with integrated ORM, authentication, REST API support, admin dashboard management, and rapid backend development capabilities.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://www.djangoproject.com/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778120442090-django-512px.png",
+      "id": "1778120492879"
+    },
+    {
+      "name": "Anaconda",
+      "level": 85,
+      "category": "Programming Languages & Tools",
+      "priority": 12,
+      "description": "Comprehensive Python and data science distribution used for package management, virtual environment creation, machine learning workflows, Jupyter Notebook integration, scientific computing, and AI development with optimized library management.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://www.anaconda.com/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778121013196-anaconda-512px.png",
+      "id": "1778121108108"
+    },
+    {
+      "name": "PyTorch",
+      "level": 70,
+      "category": "Programming Languages & Tools",
+      "priority": 13,
+      "description": "Open-source deep learning framework used for building, training, and deploying neural networks, computer vision models, NLP systems, and advanced AI applications with dynamic computation graphs and GPU acceleration support.",
+      "yearsOfExperience": 4,
+      "certificationUrl": "https://pytorch.org/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778121149896-pytorch-512px.png",
+      "id": "1778121189697"
+    },
+    {
+      "name": "Git",
+      "level": 90,
+      "category": "Programming Languages & Tools",
+      "priority": 14,
+      "description": "Distributed version control system used for source code management, collaboration, branch management, change tracking, CI/CD workflows, and efficient software development across web, AI, and enterprise applications.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://git-scm.com/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778121204933-git-512px.png",
+      "id": "1778121244340"
+    },
+    {
+      "name": "Power BI",
+      "level": 80,
+      "category": "Programming Languages & Tools",
+      "priority": 15,
+      "description": "Business analytics and data visualization platform used for interactive dashboards, KPI monitoring, real-time reporting, ETL workflows, data modeling, and enterprise decision-making through advanced visual analytics and cloud-based business intelligence solutions.",
+      "yearsOfExperience": 5,
+      "certificationUrl": "https://powerbi.microsoft.com/",
+      "isHighlighted": false,
+      "iconUrl": "http://localhost:3001/uploads/1778121294015-azure-power-bi-embedded-512px.png",
+      "id": "1778121346821"
     }
   ],
   "projects": [
@@ -351,6 +435,22 @@
       "liveUrl": "",
       "status": "Completed",
       "priority": 4
+    },
+    {
+      "title": "SWG Dispatch EMS",
+      "description": "SWG Dispatch EMS is an intelligent Energy Management System module designed to monitor, control, and optimize power dispatch operations in real time.\nIt enables seamless communication between switchgear, BESS, SCADA, and grid systems for reliable energy coordination.\nBuilt for modern energy infrastructure, it enhances operational efficiency, stability, and smart dispatch management.",
+      "imageUrl": "http://localhost:3001/uploads/1778117056842-image_2026-05-06_09-09-39.png",
+      "tags": [
+        "HTML",
+        "TypeScript",
+        "JavaScript",
+        "CSS"
+      ],
+      "githubUrl": "https://github.com/Rotha-101/swg_dispatch_ems",
+      "liveUrl": "https://swgdispatchems.vercel.app/",
+      "status": "Completed",
+      "priority": 5,
+      "id": "1778117058252"
     }
   ],
   "experience": [
@@ -402,27 +502,36 @@
       "id": "edu-001",
       "institution": "Institute of Technology of Cambodia (ITC)",
       "degree": "Engineering Degree",
-      "field": "Data Science (Applied Mathematics and Statistics)",
+      "field": "Industrial Engineering / Data & Intelligent Systems Engineering",
       "startDate": "2020",
       "endDate": "2025",
-      "description": "Thesis: Analysis and Forecasting of Inflation in Cambodia.",
+      "description": "Pursuing an Engineering Degree at the Institute of Technology of Cambodia (ITC) with focus on industrial systems, data analysis, intelligent technologies, automation, and engineering problem-solving. Experienced in software development, AI integration, energy systems analysis, database management, and advanced data visualization for technical and industrial applications. Participated in academic and technical projects involving machine learning, dashboard systems, and smart energy management solutions.",
       "priority": 1,
-      "photos": [
-        "/uploads/1776918735927-404003877-ITC 4.jpg"
-      ]
+      "photos": []
     },
     {
       "id": "edu-002",
       "institution": "Aii Language Center",
       "degree": "Language Studies",
-      "field": "English and French (Basic)",
+      "field": "English ",
       "startDate": "2019",
       "endDate": "2022",
-      "description": "Language training focused on professional communication.",
+      "description": "Completed English language studies at Aii Language Center with focus on communication, academic writing, grammar, presentation skills, and professional English usage. Developed strong reading, speaking, listening, and analytical communication abilities for academic, technical, and professional environments. Participated in language practice activities, presentations, and collaborative learning programs to improve fluency and confidence in English communication.",
       "priority": 2,
       "photos": [
         "/uploads/1777613991192-704625837-tk_building.jpg"
       ]
+    },
+    {
+      "institution": "Sunrise Institute",
+      "degree": "Foundation Certificate",
+      "field": "Cybersecurity",
+      "startDate": "2024",
+      "endDate": "2025",
+      "description": "Completed foundational training in cybersecurity principles, network security, ethical hacking concepts, cyber risk awareness, digital threat analysis, password security, data protection, and secure system practices. Developed practical understanding of cyber defense techniques, security monitoring, and basic incident response methodologies.",
+      "priority": 3,
+      "photos": [],
+      "id": "1778121946150"
     }
   ],
   "settings": {
@@ -467,47 +576,16 @@
     "aboutSubtitle": "",
     "skillCategoryOrder": [
       "IDE & Editors",
-      "Programming Languages",
+      "Programming Languages & Tools",
       "Machine Learning",
       "Databases"
     ],
     "disabledSkillCategories": [
-      "Programming Languages",
-      "Machine Learning",
-      "Databases"
+      "Databases",
+      "Machine Learning"
     ]
   },
   "blog": [
-    {
-      "title": "Artificial Intelligence",
-      "content": "<p>The U.S. State Department has ordered a global push to bring attention to what it says are widespread ‌efforts by Chinese companies, including AI startup DeepSeek, to steal intellectual property from U.S. artificial intelligence labs, according to a diplomatic cable seen by Reuters.</p>",
-      "excerpt": "Exclusive: US State Dept orders global warning about alleged China AI thefts by DeepSeek, others",
-      "imageUrl": "/uploads/1777077224828-211037617-KIK4AUMDLBLZ3MA7ULN3KENZZQ.avif",
-      "tags": [
-        "Deepseek"
-      ],
-      "status": "published",
-      "createdAt": "2026-04-25T00:32:34.887Z",
-      "seoTitle": "",
-      "seoDescription": "",
-      "seoKeywords": "",
-      "id": "1777077226855"
-    },
-    {
-      "title": "Articles on Civil engineering",
-      "content": "<h2><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/traffic-engineers-build-roads-that-invite-crashes-because-they-rely-on-outdated-research-and-faulty-data-223710\"><strong>Traffic engineers build roads that invite crashes because they rely on outdated research and faulty&nbsp;data</strong></a></h2><p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://theconversation.com/profiles/wesley-marshall-1512110\">Wesley Marshall</a>, <em>University of Colorado Denver</em></p><p>A traffic engineer argues that, contrary to his professionÃ¢â‚¬â„¢s view, Ã¢â‚¬Ëœhuman errorÃ¢â‚¬â„¢ is not the main cause of deaths in car crashes in the US.</p>",
-      "excerpt": "What a gaping hole on a bridge reveals about aging infrastructure in Canada",
-      "imageUrl": "/uploads/1776835929229-966487069-file-20250422-56-vefd7q.avif",
-      "tags": [
-        ""
-      ],
-      "status": "published",
-      "createdAt": "2026-04-22T05:31:01.537Z",
-      "seoTitle": "https://theconversation.com/how-rising-wages-for-construction-workers-are-shifting-the-foundations-of-the-housing-market-255087",
-      "seoDescription": "",
-      "seoKeywords": "Civil",
-      "id": "1776835945185"
-    },
     {
       "title": "CDC reviewing eight projects, $490M in capital",
       "content": "<p></p><p>A Ã¢â‚¬Å“One Window ServiceÃ¢â‚¬Â meeting of the Cambodian Investment Board to examine and discuss investment project registration applications was held on the morning of April 21. The meeting was chaired by Chea Vuthy, CIB secretary-general, with participation from representatives of several government institutions, including subnational administrations.</p><p>According to the CDC, the eight projects have a combined capital of $490 million and are expected to create around 2,000 jobs. Among them, four projects fall under the industrial sector, including: a factory for manufacturing household electrical appliances; a factory producing inflatable mattresses, toys and swimming equipment; a yarn production and dyeing factory; and an expansion project adding garment washing operations to an existing garment and embroidery factory.</p>",
@@ -522,21 +600,6 @@
       "seoDescription": "",
       "seoKeywords": "",
       "id": "1776831924851"
-    },
-    {
-      "title": "Khmer BESS",
-      "content": "<p><a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com/search?sca_esv=d1b2e046e6c1a3bf&amp;rlz=1C1MYPO_enKH1196KH1196&amp;sxsrf=ANbL-n6L_gZOACU1NAKoTxyBvsAIwGARsw:1777715413406&amp;udm=2&amp;fbs=ADc_l-aN0CWEZBOHjofHoaMMDiKpaEWjvZ2Py1XXV8d8KvlI3vWUtYx0DZdicpfE1faGYek-FGtKxD7AwCl01PyIDDoh3JcXAiS5pTxB6RsrrZG4swMNBsuh4Ofkws4KxGh5aFU0UwDVD43rNrLtQp4ciaD-5F64os8tdP3PfQWjmtXEzCK6XFEx0SGqCmDDUWEokdV5IdPBpgiqfTrvTGpNyLSL6ZwKjQ&amp;q=battery+energy+storage+system+operation&amp;sa=X&amp;ved=2ahUKEwjo_Oj9qZqUAxXHyDgGHRjYG7gQtKgLegQIFhAB&amp;biw=1920&amp;bih=911&amp;dpr=1.5#sv=CAMSVhoyKhBlLThrNFp3Sk9KNlJxUUhNMg44azRad0pPSjZScVFITToOUkZ2TEktMkZ1anZaeE0gBCocCgZtb3NhaWMSEGUtOGs0WndKT0o2UnFRSE0YADABGAcgmY6WyQVKCBABGAEgASgB\">hello</a></p><img src=\"https://www.power-sonic.com/wp-content/uploads/2025/08/Battery-Energy-Storage-System-Components-EVESCO-1024x334.png\"><p></p>",
-      "excerpt": "ess",
-      "imageUrl": "/uploads/1777715613707-766851729-SWG1_TODAY_2026-01-13.png",
-      "tags": [
-        ""
-      ],
-      "status": "published",
-      "createdAt": "2026-05-02T09:35:46.980Z",
-      "seoTitle": "",
-      "seoDescription": "",
-      "seoKeywords": "",
-      "id": "1777715616092"
     }
   ],
   "activity_logs": [],

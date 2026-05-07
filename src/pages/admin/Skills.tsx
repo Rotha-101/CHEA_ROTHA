@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 const API_URL = '/api';
-import { Plus, Edit2, Trash2, ArrowUp, ArrowDown, Eye, EyeOff } from 'lucide-react';
+import { Plus, Edit2, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Check, X } from 'lucide-react';
 
 interface Skill {
   id: string;
@@ -30,6 +30,9 @@ export default function Skills() {
   const [savingCategories, setSavingCategories] = useState(false);
   const [filterCategory, setFilterCategory] = useState<string>("All");
   const [toast, setToast] = useState<string | null>(null);
+  const [editingCategoryIndex, setEditingCategoryIndex] = useState<number | null>(null);
+  const [tempCategoryName, setTempCategoryName] = useState("");
+  const [hasSkillsModified, setHasSkillsModified] = useState(false);
 
   const showToast = (msg: string) => { setToast(msg); setTimeout(() => setToast(null), 2500); };
 
@@ -55,7 +58,9 @@ export default function Skills() {
       const res = await fetch(`${API_URL}/db/settings`);
       const settings = await res.json();
       if (settings.skillCategoryOrder && Array.isArray(settings.skillCategoryOrder)) {
-        setCategoryOrderList(settings.skillCategoryOrder);
+        // Deduplicate the list to prevent visuals like the one reported
+        const unique = Array.from(new Set(settings.skillCategoryOrder.map(c => c.trim())));
+        setCategoryOrderList(unique);
       } else {
         setCategoryOrderList([
           'IDE & Editors',
@@ -120,12 +125,66 @@ export default function Skills() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(settings)
       });
+
+      // Save skills if modified by a rename
+      if (hasSkillsModified) {
+        await fetch(`${API_URL}/db/skills`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(skills)
+        });
+        setHasSkillsModified(false);
+      }
+
       setIsCategoryModalOpen(false);
       showToast('Category settings saved!');
     } catch (e) {
       alert("Failed to save category order.");
     }
     setSavingCategories(false);
+  };
+
+  const startRenamingCategory = (index: number, name: string) => {
+    setEditingCategoryIndex(index);
+    setTempCategoryName(name);
+  };
+
+  const finishRenamingCategory = (index: number) => {
+    const oldName = categoryOrderList[index];
+    const newName = tempCategoryName.trim();
+    
+    if (!newName || oldName === newName) {
+      setEditingCategoryIndex(null);
+      return;
+    }
+
+    // Duplicate Check
+    const exists = categoryOrderList.some((c, i) => i !== index && c.trim().toLowerCase() === newName.toLowerCase());
+    if (exists) {
+      showToast(`Category "${newName}" already exists.`);
+      return;
+    }
+
+    // Update order list
+    const newList = [...categoryOrderList];
+    newList[index] = newName;
+    setCategoryOrderList(newList);
+
+    // Update disabled list
+    if (disabledCategories.includes(oldName)) {
+      setDisabledCategories(disabledCategories.map(c => c === oldName ? newName : c));
+    }
+
+    // Update skills locally
+    const updatedSkills = skills.map(s => 
+      s.category.trim().toLowerCase() === oldName.trim().toLowerCase() 
+        ? { ...s, category: newName } 
+        : s
+    );
+    setSkills(updatedSkills);
+    setHasSkillsModified(true);
+
+    setEditingCategoryIndex(null);
   };
 
   const moveCategoryUp = (index: number) => {
@@ -155,8 +214,14 @@ export default function Skills() {
   };
 
   const addCategory = () => {
-    if (newCategoryName.trim()) {
-      setCategoryOrderList([...categoryOrderList, newCategoryName.trim()]);
+    const trimmed = newCategoryName.trim();
+    if (trimmed) {
+      const exists = categoryOrderList.some(c => c.trim().toLowerCase() === trimmed.toLowerCase());
+      if (exists) {
+        showToast(`Category "${trimmed}" already exists.`);
+        return;
+      }
+      setCategoryOrderList([...categoryOrderList, trimmed]);
       setNewCategoryName("");
     }
   };
@@ -339,9 +404,10 @@ export default function Skills() {
           <ul className="divide-y divide-zinc-200 dark:divide-white/5 border border-zinc-200 dark:border-white/5 rounded-3xl overflow-hidden bg-white/50 dark:bg-black/20 mb-8">
             {categoryOrderList.map((cat, index) => {
               const isDisabled = disabledCategories.includes(cat);
+              const isEditing = editingCategoryIndex === index;
               return (
               <li key={cat} className={`p-4 flex items-center justify-between transition-all group ${isDisabled ? 'opacity-40' : 'hover:bg-white/[0.02]'}`}>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-6 flex-1">
                   <button
                     type="button"
                     onClick={() => toggleCategory(cat)}
@@ -351,19 +417,47 @@ export default function Skills() {
                   >
                     <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-all ${isDisabled ? 'translate-x-1' : 'translate-x-6'}`} />
                   </button>
-                  <span className="text-sm font-bold text-zinc-900 dark:text-white">{cat}</span>
+                  
+                  {isEditing ? (
+                    <div className="flex items-center gap-2 flex-1">
+                      <input 
+                        type="text"
+                        autoFocus
+                        value={tempCategoryName}
+                        onChange={(e) => setTempCategoryName(e.target.value)}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') finishRenamingCategory(index);
+                          if (e.key === 'Escape') setEditingCategoryIndex(null);
+                        }}
+                        className="flex-1 bg-zinc-100 dark:bg-white/5 border border-[#ff4d4d]/30 rounded-xl px-3 py-1.5 text-sm font-bold text-zinc-900 dark:text-white outline-none focus:ring-1 focus:ring-[#ff4d4d]"
+                      />
+                      <button type="button" onClick={() => finishRenamingCategory(index)} className="p-1.5 bg-[#ff4d4d] text-white rounded-lg hover:bg-[#ff3333] transition-colors">
+                        <Check className="w-3.5 h-3.5" />
+                      </button>
+                      <button type="button" onClick={() => setEditingCategoryIndex(null)} className="p-1.5 bg-zinc-200 dark:bg-white/10 text-zinc-600 dark:text-zinc-400 rounded-lg hover:bg-zinc-300 dark:hover:bg-white/20 transition-colors">
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  ) : (
+                    <span className="text-sm font-bold text-zinc-900 dark:text-white">{cat}</span>
+                  )}
                 </div>
-                <div className="flex gap-2">
-                  <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
-                    <ArrowUp className="w-4 h-4" />
-                  </button>
-                  <button type="button" onClick={() => moveCategoryDown(index)} disabled={index === categoryOrderList.length - 1} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
-                    <ArrowDown className="w-4 h-4" />
-                  </button>
-                  <button type="button" onClick={() => removeCategory(index)} className="p-2 text-zinc-500 hover:text-red-500">
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
+                {!isEditing && (
+                  <div className="flex gap-2">
+                    <button type="button" onClick={() => startRenamingCategory(index, cat)} className="p-2 text-zinc-400 hover:text-[#ff4d4d] transition-colors">
+                      <Edit2 className="w-4 h-4" />
+                    </button>
+                    <button type="button" onClick={() => moveCategoryUp(index)} disabled={index === 0} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
+                      <ArrowUp className="w-4 h-4" />
+                    </button>
+                    <button type="button" onClick={() => moveCategoryDown(index)} disabled={index === categoryOrderList.length - 1} className="p-2 text-zinc-500 hover:text-[#ff4d4d] disabled:opacity-20">
+                      <ArrowDown className="w-4 h-4" />
+                    </button>
+                    <button type="button" onClick={() => removeCategory(index)} className="p-2 text-zinc-500 hover:text-red-500">
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
               </li>
               );
             })}

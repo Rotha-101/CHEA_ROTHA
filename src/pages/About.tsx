@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'motion/react';
 import { useDataStore } from '../store/dataStore';
+import CodingConsole from '../components/CodingConsole';
 
 export default function About() {
   const { profile, profileLoaded, fetchProfileAndSkills, settings } = useDataStore();
@@ -37,22 +38,7 @@ export default function About() {
           {profile?.aboutMe || profile?.bio}
         </p>
 
-        {profile?.aboutSectionCoverUrl && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="mt-16 relative h-[250px] md:h-[350px] w-full rounded-3xl overflow-hidden border border-zinc-200 dark:border-white/5 shadow-2xl group bg-zinc-100 dark:bg-white/5"
-          >
-            <img 
-              src={profile.aboutSectionCoverUrl} 
-              alt="About Section Banner" 
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 opacity-80"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-white dark:from-[#050810] to-transparent opacity-40 dark:opacity-60" />
-          </motion.div>
-        )}
+        <CodingConsole />
       </motion.div>
     </div>
   );

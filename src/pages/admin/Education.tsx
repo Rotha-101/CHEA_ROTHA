@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Plus, Edit2, Trash2, Upload, X, Image } from 'lucide-react';
+import { Plus, Edit2, Trash2, Upload, X, Image, GraduationCap } from 'lucide-react';
 
 const API_URL = '/api';
 
@@ -225,7 +225,7 @@ export default function Education() {
                   </div>
                 ) : (
                   <div className="w-16 h-16 rounded-xl bg-zinc-100 dark:bg-white/5 border border-zinc-200 dark:border-white/10 flex items-center justify-center text-zinc-500">
-                    <Users className="h-6 w-6" />
+                    <GraduationCap className="h-6 w-6" />
                   </div>
                 )}
                 <div className="text-center sm:text-left">
