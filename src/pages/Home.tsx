@@ -36,7 +36,7 @@ export default function Home() {
       {/* Hero Section */}
       <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-40">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
 
             {/* Left Column - Profile Visual */}
             <motion.div 
@@ -49,7 +49,7 @@ export default function Home() {
                 {/* Visual Orbs */}
                 <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 
-                <div className="relative w-full max-w-xs lg:max-w-md aspect-square rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
+                <div className="relative w-full max-w-xs lg:max-w-lg aspect-[4/5] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
                   {profile.profilePhotoUrl ? (
                     <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-100" />
                   ) : (

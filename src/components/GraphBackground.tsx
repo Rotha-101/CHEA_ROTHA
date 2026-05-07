@@ -27,8 +27,8 @@ export default function GraphBackground() {
     let particles: Particle[] = [];
     // Significantly increased for a dense "technical" feel
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 45 : 110;
-    const connectionDistance = isMobile ? 150 : 220;
+    const particleCount = isMobile ? 50 : 130;
+    const connectionDistance = isMobile ? 160 : 250;
 
     class Particle {
       x: number;
@@ -42,7 +42,7 @@ export default function GraphBackground() {
         this.y = Math.random() * canvas!.height;
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
-        this.size = Math.random() * 2 + 0.8;
+        this.size = Math.random() * 3 + 1.5;
       }
 
       update() {
