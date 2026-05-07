@@ -267,9 +267,30 @@ export function PublicLayout() {
 
       <main className="relative z-10 w-full flex-grow">
         <Outlet />
-
-
       </main>
+
+      <footer className="relative z-10 w-full py-12 border-t border-zinc-200/50 dark:border-white/5 bg-white/40 dark:bg-[#050810]/40 backdrop-blur-3xl">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="flex flex-wrap justify-center md:justify-start gap-4 sm:gap-8">
+              {['DataLab', 'Machine Learning', 'Cybersecurity', 'Coding'].map((specialty) => (
+                <div key={specialty} className="flex items-center gap-2 group">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#ff4d4d] opacity-40 group-hover:opacity-100 transition-opacity" />
+                  <span className="text-[10px] font-mono font-bold tracking-[0.3em] uppercase text-zinc-500 dark:text-zinc-500 group-hover:text-[#ff4d4d] transition-colors cursor-default">
+                    {specialty}
+                  </span>
+                </div>
+              ))}
+            </div>
+            
+            <div className="flex flex-col items-center md:items-end gap-2">
+              <span className="text-[10px] font-mono font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest">
+                © {new Date().getFullYear()} {profile?.name || 'CHEA ROTHA'} • Systematic_Integrity
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
