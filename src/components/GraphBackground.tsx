@@ -27,8 +27,8 @@ export default function GraphBackground() {
     let particles: Particle[] = [];
     // Lowered counts for better scroll performance
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 25 : 55;
-    const connectionDistance = isMobile ? 100 : 150;
+    const particleCount = isMobile ? 35 : 75;
+    const connectionDistance = isMobile ? 140 : 200;
 
     class Particle {
       x: number;
@@ -43,7 +43,7 @@ export default function GraphBackground() {
         // Slightly slower for smoother feel
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
-        this.size = Math.random() * 1.2 + 0.3;
+        this.size = Math.random() * 2 + 0.8;
       }
 
       update() {
@@ -73,8 +73,8 @@ export default function GraphBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      const targetNode = themeRef.current === 'dark' ? 0.35 : 0.15;
-      const targetLine = themeRef.current === 'dark' ? 0.12 : 0.06;
+      const targetNode = themeRef.current === 'dark' ? 0.5 : 0.25;
+      const targetLine = themeRef.current === 'dark' ? 0.2 : 0.1;
       
       opacities.current.node += (targetNode - opacities.current.node) * 0.1;
       opacities.current.line += (targetLine - opacities.current.line) * 0.1;
