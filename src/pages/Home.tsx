@@ -43,13 +43,13 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start"
+              className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-start"
             >
               <div className="relative group">
                 {/* Visual Orbs */}
                 <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
                 
-                <div className="relative w-full max-w-xs lg:max-w-sm aspect-square rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
+                <div className="relative w-full max-w-xs lg:max-w-md aspect-square rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
                   {profile.profilePhotoUrl ? (
                     <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-100" />
                   ) : (
@@ -66,7 +66,7 @@ export default function Home() {
             </motion.div>
 
             {/* Right Column - Content */}
-            <div className="lg:col-span-7 order-1 lg:order-2 relative">
+            <div className="lg:col-span-6 order-1 lg:order-2 relative">
               <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#ff4d4d] mb-6 tracking-[0.4em] uppercase">
                 <span className="w-12 h-px bg-[#ff4d4d]/40" />
                 Core_Identifier

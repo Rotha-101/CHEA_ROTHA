@@ -27,7 +27,7 @@ export default function GraphBackground() {
     let particles: Particle[] = [];
     // Lowered counts for better scroll performance
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 35 : 75;
+    const particleCount = isMobile ? 50 : 130;
     const connectionDistance = isMobile ? 140 : 200;
 
     class Particle {
