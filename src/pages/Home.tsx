@@ -43,7 +43,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 order-2 lg:order-1 flex justify-center lg:justify-start"
+              className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start"
             >
               <div className="relative group">
                 {/* Visual Orbs */}
@@ -66,7 +66,7 @@ export default function Home() {
             </motion.div>
 
             {/* Right Column - Content */}
-            <div className="lg:col-span-6 order-1 lg:order-2 relative">
+            <div className="lg:col-span-7 order-1 lg:order-2 relative">
               <div className="flex items-center gap-3 text-[10px] font-mono font-bold text-[#ff4d4d] mb-6 tracking-[0.4em] uppercase">
                 <span className="w-12 h-px bg-[#ff4d4d]/40" />
                 Core_Identifier

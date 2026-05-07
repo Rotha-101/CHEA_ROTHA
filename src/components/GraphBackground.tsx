@@ -8,8 +8,8 @@ export default function GraphBackground() {
   
   // Transition states
   const opacities = useRef({
-    node: theme === 'dark' ? 0.4 : 0.2,
-    line: theme === 'dark' ? 0.15 : 0.1
+    node: theme === 'dark' ? 0.6 : 0.3,
+    line: theme === 'dark' ? 0.25 : 0.12
   });
 
   useEffect(() => {
@@ -25,10 +25,10 @@ export default function GraphBackground() {
 
     let animationFrameId: number;
     let particles: Particle[] = [];
-    // Lowered counts for better scroll performance
+    // Significantly increased for a dense "technical" feel
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 50 : 130;
-    const connectionDistance = isMobile ? 140 : 200;
+    const particleCount = isMobile ? 45 : 110;
+    const connectionDistance = isMobile ? 150 : 220;
 
     class Particle {
       x: number;
@@ -40,7 +40,6 @@ export default function GraphBackground() {
       constructor() {
         this.x = Math.random() * canvas!.width;
         this.y = Math.random() * canvas!.height;
-        // Slightly slower for smoother feel
         this.vx = (Math.random() - 0.5) * 0.3;
         this.vy = (Math.random() - 0.5) * 0.3;
         this.size = Math.random() * 2 + 0.8;
@@ -56,7 +55,6 @@ export default function GraphBackground() {
     }
 
     const init = () => {
-      // Use devicePixelRatio for sharper, smoother rendering
       const dpr = window.devicePixelRatio || 1;
       canvas.width = window.innerWidth * dpr;
       canvas.height = window.innerHeight * dpr;
@@ -73,13 +71,13 @@ export default function GraphBackground() {
     const animate = () => {
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      const targetNode = themeRef.current === 'dark' ? 0.5 : 0.25;
-      const targetLine = themeRef.current === 'dark' ? 0.2 : 0.1;
+      const targetNode = themeRef.current === 'dark' ? 0.6 : 0.3;
+      const targetLine = themeRef.current === 'dark' ? 0.25 : 0.12;
       
       opacities.current.node += (targetNode - opacities.current.node) * 0.1;
       opacities.current.line += (targetLine - opacities.current.line) * 0.1;
 
-      // Draw all nodes in a single pass
+      // Draw nodes
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 77, 77, ${opacities.current.node})`;
       particles.forEach(p => {
