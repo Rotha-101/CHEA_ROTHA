@@ -6,7 +6,7 @@ export default function GraphBackground() {
   const { theme } = useThemeStore();
   const themeRef = useRef(theme);
   
-  // Transition states
+  // Transition states for smooth theme switching
   const opacities = useRef({
     node: theme === 'dark' ? 0.6 : 0.3,
     line: theme === 'dark' ? 0.25 : 0.12
@@ -20,16 +20,17 @@ export default function GraphBackground() {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const ctx = canvas.getContext('2d', { alpha: false }); // Performance optimization
+    const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
     if (!ctx) return;
 
     let animationFrameId: number;
     let particles: Particle[] = [];
     let lastWidth = window.innerWidth;
     
+    // Balanced counts for maximum smoothness at 4K/60fps
     const isMobile = window.innerWidth < 768;
-    const particleCount = isMobile ? 80 : 200;
-    const connectionDistance = isMobile ? 180 : 280;
+    const particleCount = isMobile ? 65 : 155;
+    const connectionDistance = isMobile ? 170 : 250;
     const connectionDistanceSq = connectionDistance * connectionDistance;
 
     class Particle {
@@ -42,8 +43,9 @@ export default function GraphBackground() {
       constructor(w: number, h: number) {
         this.x = Math.random() * w;
         this.y = Math.random() * h;
-        this.vx = (Math.random() - 0.5) * 0.25;
-        this.vy = (Math.random() - 0.5) * 0.25;
+        // Slower speed = more "premium" and smoother perception
+        this.vx = (Math.random() - 0.5) * 0.2;
+        this.vy = (Math.random() - 0.5) * 0.2;
         this.size = Math.random() * 2 + 1;
       }
 
@@ -62,11 +64,8 @@ export default function GraphBackground() {
       const width = window.innerWidth;
       const height = window.innerHeight;
       
-      // On mobile, browser UI changes (address bar) trigger resize.
-      // We only want to reset particles if the width changes (orientation change).
       if (isResize && isMobile && Math.abs(width - lastWidth) < 50) {
-        // Just adjust canvas size without resetting particles
-        const dpr = window.devicePixelRatio || 1;
+        const dpr = Math.min(window.devicePixelRatio || 1, 2); // Cap DPR at 2 for performance on ultra-high-res
         canvas.width = width * dpr;
         canvas.height = height * dpr;
         ctx.scale(dpr, dpr);
@@ -76,7 +75,7 @@ export default function GraphBackground() {
       }
 
       lastWidth = width;
-      const dpr = window.devicePixelRatio || 1;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2); 
       canvas.width = width * dpr;
       canvas.height = height * dpr;
       ctx.scale(dpr, dpr);
@@ -99,27 +98,34 @@ export default function GraphBackground() {
       const targetNode = themeRef.current === 'dark' ? 0.6 : 0.3;
       const targetLine = themeRef.current === 'dark' ? 0.25 : 0.12;
       
-      opacities.current.node += (targetNode - opacities.current.node) * 0.1;
-      opacities.current.line += (targetLine - opacities.current.line) * 0.1;
+      opacities.current.node += (targetNode - opacities.current.node) * 0.05;
+      opacities.current.line += (targetLine - opacities.current.line) * 0.05;
 
+      // Draw nodes in a single batch
       ctx.beginPath();
       ctx.fillStyle = `rgba(255, 77, 77, ${opacities.current.node})`;
-      for (const p of particles) {
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
         p.update(w, h);
-        ctx.moveTo(p.x, p.y);
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        // Using rect for nodes is significantly faster than arc for many items
+        ctx.rect(p.x, p.y, p.size, p.size);
       }
       ctx.fill();
 
+      // Optimized connection loop
       ctx.lineWidth = 0.5;
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
         for (let j = i + 1; j < particles.length; j++) {
           const p2 = particles[j];
           const dx = p1.x - p2.x;
+          // Early exit if horizontal distance is already too large
+          if (Math.abs(dx) > connectionDistance) continue;
+          
           const dy = p1.y - p2.y;
-          const distSq = dx * dx + dy * dy;
+          if (Math.abs(dy) > connectionDistance) continue;
 
+          const distSq = dx * dx + dy * dy;
           if (distSq < connectionDistanceSq) {
             const dist = Math.sqrt(distSq);
             const strength = (1 - dist / connectionDistance);
@@ -152,7 +158,7 @@ export default function GraphBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transition-colors duration-200 transform-gpu will-change-transform"
+      className="fixed inset-0 z-0 pointer-events-none bg-white dark:bg-[#050810] transform-gpu will-change-transform"
     />
   );
 }
