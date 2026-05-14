@@ -125,26 +125,26 @@ export default function Skills() {
 
   return (
     <div className="relative min-h-screen">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="max-w-3xl mb-14"
+          className="max-w-3xl mb-10"
         >
-          <p className="inline-flex items-center rounded-full border border-[#ff4d4d]/20 bg-[#ff4d4d]/5 px-4 py-1.5 text-[10px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-6">
+          <p className="inline-flex items-center rounded-full border border-[#ff4d4d]/20 bg-[#ff4d4d]/5 px-3 py-1 text-[9px] font-mono font-bold uppercase tracking-[0.2em] text-[#ff4d4d] mb-4">
             Technical Stack
           </p>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-6 flex items-center gap-4">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-bold tracking-tight text-zinc-900 dark:text-white mb-4 flex items-center gap-3">
             <span className="text-[#ff4d4d] font-mono opacity-80">⟩</span>
             {settings?.skillsTitle || 'Technical Arsenal'}
           </h1>
-          <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
+          <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-2xl">
             {settings?.skillsSubtitle || 'A curated visual tool-grid of technical strengths.'}
           </p>
         </motion.div>
 
-        <div className="space-y-20">
+        <div className="space-y-12">
           {groupedSkills.map((group, groupIdx) => (
             <div key={group.category}>
               <motion.h2 
@@ -152,14 +152,14 @@ export default function Skills() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: groupIdx * 0.1 }}
-                className="text-xl sm:text-2xl font-display font-bold text-zinc-900 dark:text-white mb-8 flex items-center gap-3"
+                className="text-lg sm:text-xl font-display font-bold text-zinc-900 dark:text-white mb-6 flex items-center gap-2"
               >
                 <span className="text-[#ff4d4d] font-mono opacity-60 text-lg">⟩</span>
                 {group.category}
               </motion.h2>
-              <div className="relative w-full overflow-hidden py-6">
+              <div className="relative w-full overflow-hidden py-4">
                 <motion.div 
-                  className="flex gap-4 sm:gap-6 w-max"
+                  className="flex gap-3 sm:gap-4 w-max"
                   animate={{ x: groupIdx % 2 === 0 ? ["0%", "-50%"] : ["-50%", "0%"] }}
                   transition={{ 
                     duration: 30 + (group.skills.length * 2), 
@@ -173,16 +173,16 @@ export default function Skills() {
                     return (
                       <motion.article
                         key={`${skill.id}-${idx}`}
-                        whileHover={{ y: -8, scale: 1.05 }}
-                        className={`relative flex flex-col items-center p-4 sm:p-6 rounded-[24px] sm:rounded-[32px] transition-all duration-500 w-[110px] sm:w-[190px] h-[190px] sm:h-[280px] flex-shrink-0 ${
+                        whileHover={{ y: -6, scale: 1.05 }}
+                        className={`relative flex flex-col items-center p-3 sm:p-4 rounded-[16px] sm:rounded-[24px] transition-all duration-500 w-[90px] sm:w-[150px] h-[150px] sm:h-[220px] flex-shrink-0 ${
                           skill.isHighlighted 
-                            ? 'bg-[#ff4d4d]/5 border border-[#ff4d4d]/30 shadow-[0_0_30px_rgba(255,77,77,0.1)]' 
+                            ? 'bg-[#ff4d4d]/5 border border-[#ff4d4d]/30 shadow-[0_0_20px_rgba(255,77,77,0.05)]' 
                             : 'bg-zinc-50 dark:bg-white/5 border border-zinc-200 dark:border-white/5 hover:border-[#ff4d4d]/30 hover:bg-zinc-100 dark:hover:bg-white/[0.07]'
-                        } backdrop-blur-md cursor-pointer group hover:shadow-[0_0_40px_rgba(255,77,77,0.05)]`}
+                        } backdrop-blur-md cursor-pointer group hover:shadow-[0_0_30px_rgba(255,77,77,0.03)]`}
                       >
                         {/* Icon Container */}
-                        <div className="relative flex-1 w-full flex items-center justify-center mb-2 sm:mb-6">
-                          <div className={`absolute inset-4 rounded-full blur-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                        <div className="relative flex-1 w-full flex items-center justify-center mb-1 sm:mb-4">
+                          <div className={`absolute inset-3 rounded-full blur-xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
                             skill.isHighlighted ? 'bg-[#ff4d4d]' : 'bg-white'
                           }`} />
                           
@@ -191,11 +191,11 @@ export default function Skills() {
                               <img
                                 src={skill.iconUrl}
                                 alt={`${skill.name} logo`}
-                                className="max-h-10 sm:max-h-20 w-auto object-contain transition-transform duration-500 group-hover:scale-110"
+                                className="max-h-8 sm:max-h-14 w-auto object-contain transition-transform duration-500 group-hover:scale-110"
                                 loading="lazy"
                               />
                             ) : (
-                              <div className="h-8 w-8 sm:h-12 sm:w-12 text-[#ff4d4d] flex items-center justify-center">
+                              <div className="h-6 w-6 sm:h-8 sm:w-8 text-[#ff4d4d] flex items-center justify-center">
                                 {getSkillIcon(skill.name, skill.category)}
                               </div>
                             )}
@@ -203,11 +203,11 @@ export default function Skills() {
                         </div>
 
                         <div className="text-center w-full mt-auto">
-                          <div className="h-10 sm:h-14 mb-1 sm:mb-2 flex flex-col justify-center px-1">
-                            <h3 className="text-[10px] sm:text-base font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-2 leading-tight">
+                          <div className="h-8 sm:h-12 mb-0.5 sm:mb-1 flex flex-col justify-center px-1">
+                            <h3 className="text-[9px] sm:text-sm font-bold text-zinc-900 dark:text-white tracking-tight line-clamp-2 leading-tight">
                               {skill.name}
                             </h3>
-                            <p className="mt-0.5 text-[6px] sm:text-[9px] font-mono font-bold uppercase tracking-[0.15em] text-zinc-500 line-clamp-1">
+                            <p className="mt-0.5 text-[5px] sm:text-[8px] font-mono font-bold uppercase tracking-[0.15em] text-zinc-500 line-clamp-1">
                               {skill.category}
                             </p>
                           </div>
@@ -221,8 +221,8 @@ export default function Skills() {
                             />
                           </div>
                           
-                          <div className="mt-2 sm:mt-3 h-8 sm:h-10 overflow-hidden">
-                            <p className="text-[7px] sm:text-[10px] leading-relaxed text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="mt-1 sm:mt-2 h-6 sm:h-8 overflow-hidden">
+                            <p className="text-[6px] sm:text-[9px] leading-relaxed text-zinc-400 line-clamp-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                               {skill.description || getSkillBlurb(skill.name, skill.category, level)}
                             </p>
                           </div>
