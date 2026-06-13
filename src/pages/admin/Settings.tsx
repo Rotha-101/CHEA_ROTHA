@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useDataStore } from '../../store/dataStore';
+
 const API_URL = '/api';
 import { Save, Download } from 'lucide-react';
 import { analyticsService } from '../../lib/analytics';
@@ -151,6 +153,7 @@ export default function Settings() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
+      useDataStore.getState().resetSyncFlags();
       alert('Settings updated successfully!');
     } catch (error) {
       console.error('Error updating settings:', error);

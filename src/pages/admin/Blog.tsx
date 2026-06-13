@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { Plus, Edit2, Trash2, Image as ImageIcon, Globe, Eye, EyeOff, Search, Copy, BarChart2, X, ExternalLink, Calendar, Tag, FileText } from 'lucide-react';
 import Editor from '../../components/admin/Editor';
 
+import { useDataStore } from '../../store/dataStore';
+
 const API_URL = '/api';
 
 interface BlogPost {
@@ -67,6 +69,7 @@ export default function AdminBlog() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(newPosts),
     });
+    useDataStore.getState().resetSyncFlags();
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {

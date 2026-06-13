@@ -56,23 +56,12 @@ const getSkillBlurb = (name: string, category: string, level: number) => {
 
 export default function Skills() {
   const { skills, profileLoaded, fetchProfileAndSkills, settings } = useDataStore();
-  const [liveSettings, setLiveSettings] = useState<Record<string, any> | null>(null);
-  const [settingsReady, setSettingsReady] = useState(false);
 
   useEffect(() => {
     fetchProfileAndSkills();
-    // Always fetch FRESH settings from API to bypass the Zustand cache guard.
-    // This ensures admin changes to disabled categories are immediately visible.
-    (async () => {
-      try {
-        const res = await fetch('/api/db/settings');
-        if (res.ok) setLiveSettings(await res.json());
-      } catch { /* show all categories as fallback */ }
-      setSettingsReady(true);
-    })();
   }, [fetchProfileAndSkills]);
 
-  if (!profileLoaded || !settingsReady) {
+  if (!profileLoaded) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
@@ -80,7 +69,7 @@ export default function Skills() {
     );
   }
 
-  const CATEGORY_ORDER: string[] = liveSettings?.skillCategoryOrder || settings?.skillCategoryOrder || [
+  const CATEGORY_ORDER: string[] = settings?.skillCategoryOrder || [
     'IDE & Editors',
     'Programming Languages',
     'Data Wrangling & EDA',
@@ -97,8 +86,8 @@ export default function Skills() {
     'Core Strengths'
   ];
 
-  // Always read disabled list from fresh API data (fallback to Zustand settings on Vercel)
-  const DISABLED_CATEGORIES: string[] = liveSettings?.disabledSkillCategories || settings?.disabledSkillCategories || [];
+  // Always read disabled list from settings
+  const DISABLED_CATEGORIES: string[] = settings?.disabledSkillCategories || [];
 
   const disabledSet = new Set(DISABLED_CATEGORIES.map(c => c.trim().toLowerCase()));
   const orderSet = new Set(CATEGORY_ORDER.map(c => c.trim().toLowerCase()));

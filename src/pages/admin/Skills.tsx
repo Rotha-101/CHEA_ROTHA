@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
+import { useDataStore } from '../../store/dataStore';
+
 const API_URL = '/api';
 import { Plus, Edit2, Trash2, ArrowUp, ArrowDown, Eye, EyeOff, Check, X } from 'lucide-react';
 
@@ -101,6 +103,7 @@ export default function Skills() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(current)
       });
+      useDataStore.getState().resetSyncFlags();
       const msg = newDisabled.includes(cat)
         ? '"' + cat + '" hidden from public page'
         : '"' + cat + '" now visible on public page';
@@ -136,6 +139,7 @@ export default function Skills() {
         setHasSkillsModified(false);
       }
 
+      useDataStore.getState().resetSyncFlags();
       setIsCategoryModalOpen(false);
       showToast('Category settings saved!');
     } catch (e) {
@@ -292,6 +296,7 @@ export default function Skills() {
         body: JSON.stringify(newSkills)
       });
 
+      useDataStore.getState().resetSyncFlags();
       setIsFormOpen(false);
       setEditingId(null);
       reset();
@@ -317,6 +322,7 @@ export default function Skills() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newSkills)
       });
+      useDataStore.getState().resetSyncFlags();
       fetchSkills();
     } catch (error) {
       console.error("Error deleting skill:", error);

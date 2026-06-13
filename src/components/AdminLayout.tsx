@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
 import {
@@ -255,7 +255,13 @@ export function AdminLayout() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
           >
-            <Outlet />
+            <Suspense fallback={
+              <div className="flex items-center justify-center min-h-[40vh]">
+                <div className="w-6 h-6 border-2 border-[#ff4d4d] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <Outlet />
+            </Suspense>
           </motion.div>
         </main>
       </div>

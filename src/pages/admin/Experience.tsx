@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Plus, Edit2, Trash2, Upload, X, ChevronLeft, ChevronRight, Image } from 'lucide-react';
+import { Plus, Edit2, Trash2, Upload, X, ChevronLeft, ChevronRight, Image, Briefcase } from 'lucide-react';
+import { useDataStore } from '../../store/dataStore';
 
 const API_URL = '/api';
 
@@ -84,6 +85,7 @@ export default function Experience() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newExperiences),
       });
+      useDataStore.getState().resetSyncFlags();
       setIsFormOpen(false);
       setEditingId(null);
       setPhotos([]);
@@ -111,6 +113,7 @@ export default function Experience() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newExperiences),
       });
+      useDataStore.getState().resetSyncFlags();
       fetchExperiences();
     } catch (error) {
       alert('Failed to delete experience.');

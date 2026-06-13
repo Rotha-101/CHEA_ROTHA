@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Plus, Edit2, Trash2, Upload, X, Image, GraduationCap } from 'lucide-react';
 
+import { useDataStore } from '../../store/dataStore';
+
 const API_URL = '/api';
 
 interface Education {
@@ -81,6 +83,7 @@ export default function Education() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newList),
       });
+      useDataStore.getState().resetSyncFlags();
       setIsFormOpen(false);
       setEditingId(null);
       setPhotos([]);
@@ -108,6 +111,7 @@ export default function Education() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newList),
       });
+      useDataStore.getState().resetSyncFlags();
       fetchEducation();
     } catch (error) {
       alert('Failed to delete education.');

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Edit2, Plus, Trash2, Upload, UserRound } from 'lucide-react';
 
+import { useDataStore } from '../../store/dataStore';
+
 const API_URL = '/api';
 
 interface ReferenceItem {
@@ -86,6 +88,7 @@ export default function References() {
         body: JSON.stringify(newReferences),
       });
 
+      useDataStore.getState().resetSyncFlags();
       setIsFormOpen(false);
       setEditingId(null);
       reset();
@@ -111,6 +114,7 @@ export default function References() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newReferences),
       });
+      useDataStore.getState().resetSyncFlags();
       fetchReferences();
     } catch (error) {
       console.error('Error deleting reference:', error);

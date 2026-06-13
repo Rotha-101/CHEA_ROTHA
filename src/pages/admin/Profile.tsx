@@ -59,6 +59,7 @@ export default function Profile() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
       });
+      useDataStore.getState().resetSyncFlags();
       setProfile(data);
       alert('Profile updated successfully! Deployment sync may take a minute.');
     } catch (error) {
@@ -120,6 +121,7 @@ export default function Profile() {
         throw new Error(errorData.error || `Save failed (${saveRes.status})`);
       }
 
+      useDataStore.getState().resetSyncFlags();
       setProfile(currentData);
       alert(`${fieldName} uploaded and saved to GitHub successfully!`);
     } catch (error: any) {

@@ -55,20 +55,33 @@ function normalizeUploads<T>(value: T): T {
   return value;
 }
 
+const inFlightRequests: Record<string, Promise<any>> = {};
+
 async function fetchCollection(collection: string) {
-  try {
-    const data = await fetchJsonWithTimeout(`${API_URL}/db/${collection}`);
-    return normalizeUploads(data);
-  } catch (apiError) {
-    console.warn(`API request for "${collection}" failed. Falling back to static db.json.`, apiError);
-    try {
-      const staticData = await fetchJsonWithTimeout(STATIC_JSON_URL);
-      return normalizeUploads(staticData?.[collection]);
-    } catch (staticError) {
-      console.error(`Static fallback for "${collection}" failed.`, staticError);
-      throw apiError;
-    }
+  if (inFlightRequests[collection]) {
+    return inFlightRequests[collection];
   }
+
+  const promise = (async () => {
+    try {
+      const data = await fetchJsonWithTimeout(`${API_URL}/db/${collection}`);
+      return normalizeUploads(data);
+    } catch (apiError) {
+      console.warn(`API request for "${collection}" failed. Falling back to static db.json.`, apiError);
+      try {
+        const staticData = await fetchJsonWithTimeout(STATIC_JSON_URL);
+        return normalizeUploads(staticData?.[collection]);
+      } catch (staticError) {
+        console.error(`Static fallback for "${collection}" failed.`, staticError);
+        throw apiError;
+      }
+    } finally {
+      delete inFlightRequests[collection];
+    }
+  })();
+
+  inFlightRequests[collection] = promise;
+  return promise;
 }
 
 interface Profile {
@@ -231,13 +244,23 @@ interface DataState {
   blogLoaded: boolean;
   settingsLoaded: boolean;
 
+  // Background sync tracking flags
+  hasFetchedProfile: boolean;
+  hasFetchedProjects: boolean;
+  hasFetchedExperience: boolean;
+  hasFetchedBlog: boolean;
+  hasFetchedSettings: boolean;
+
   setProfile: (profile: Profile | null) => void;
   fetchProfileAndSkills: () => Promise<void>;
   fetchProjects: () => Promise<void>;
   fetchExperienceAndEducation: () => Promise<void>;
   fetchBlog: () => Promise<void>;
   fetchSettings: () => Promise<void>;
+  resetSyncFlags: () => void;
 }
+
+const isDbPopulated = !!(staticDbRaw && staticDbRaw.profile && Object.keys(staticDbRaw.profile).length > 0);
 
 export const useDataStore = create<DataState>((set, get) => ({
   profile: normalizeUploads({
@@ -255,19 +278,36 @@ export const useDataStore = create<DataState>((set, get) => ({
     siteLogoText: staticDbRaw.settings?.siteLogoText || 'CR'
   }) as SiteSettings,
   
-  profileLoaded: false,
-  projectsLoaded: false,
-  experienceLoaded: false,
-  blogLoaded: false,
-  settingsLoaded: false,
+  profileLoaded: isDbPopulated,
+  projectsLoaded: isDbPopulated,
+  experienceLoaded: isDbPopulated,
+  blogLoaded: isDbPopulated,
+  settingsLoaded: isDbPopulated,
+
+  // Background sync tracking flags initialization
+  hasFetchedProfile: false,
+  hasFetchedProjects: false,
+  hasFetchedExperience: false,
+  hasFetchedBlog: false,
+  hasFetchedSettings: false,
 
   setProfile: (profile) => set({
     profile,
     profileLoaded: true,
+    hasFetchedProfile: true,
+  }),
+
+  resetSyncFlags: () => set({
+    hasFetchedProfile: false,
+    hasFetchedProjects: false,
+    hasFetchedExperience: false,
+    hasFetchedBlog: false,
+    hasFetchedSettings: false,
   }),
 
   fetchProfileAndSkills: async () => {
-    if (get().profileLoaded) return;
+    if (get().hasFetchedProfile) return;
+    set({ hasFetchedProfile: true });
     
     try {
       const [profileData, skillsData, referencesData] = await Promise.all([
@@ -284,17 +324,20 @@ export const useDataStore = create<DataState>((set, get) => ({
       });
     } catch (error) {
       console.error("Error fetching profile:", error);
-      set({
-        profile: null,
-        skills: [],
-        references: [],
-        profileLoaded: true,
-      });
+      if (!get().profile) {
+        set({
+          profile: null,
+          skills: [],
+          references: [],
+        });
+      }
+      set({ profileLoaded: true });
     }
   },
 
   fetchProjects: async () => {
-    if (get().projectsLoaded) return;
+    if (get().hasFetchedProjects) return;
+    set({ hasFetchedProjects: true });
     
     try {
       const projectsData = await fetchCollection('projects');
@@ -304,15 +347,16 @@ export const useDataStore = create<DataState>((set, get) => ({
       });
     } catch (error) {
       console.error("Error fetching projects:", error);
-      set({
-        projects: [],
-        projectsLoaded: true,
-      });
+      if (!get().projects || get().projects.length === 0) {
+        set({ projects: [] });
+      }
+      set({ projectsLoaded: true });
     }
   },
 
   fetchExperienceAndEducation: async () => {
-    if (get().experienceLoaded) return;
+    if (get().hasFetchedExperience) return;
+    set({ hasFetchedExperience: true });
     
     try {
       const [expData, eduData] = await Promise.all([
@@ -327,16 +371,19 @@ export const useDataStore = create<DataState>((set, get) => ({
       });
     } catch (error) {
       console.error("Error fetching experience:", error);
-      set({
-        experience: [],
-        education: [],
-        experienceLoaded: true,
-      });
+      if ((!get().experience || get().experience.length === 0) && (!get().education || get().education.length === 0)) {
+        set({
+          experience: [],
+          education: [],
+        });
+      }
+      set({ experienceLoaded: true });
     }
   },
 
   fetchBlog: async () => {
-    if (get().blogLoaded) return;
+    if (get().hasFetchedBlog) return;
+    set({ hasFetchedBlog: true });
     
     try {
       const blogData = await fetchCollection('blog');
@@ -346,21 +393,68 @@ export const useDataStore = create<DataState>((set, get) => ({
       });
     } catch (error) {
       console.error("Error fetching blog:", error);
-      set({
-        blog: [],
-        blogLoaded: true,
-      });
+      if (!get().blog || get().blog.length === 0) {
+        set({ blog: [] });
+      }
+      set({ blogLoaded: true });
     }
   },
 
   fetchSettings: async () => {
-    if (get().settingsLoaded) return;
+    if (get().hasFetchedSettings) return;
+    set({ hasFetchedSettings: true });
     try {
       const settingsData = await fetchCollection('settings');
       if (Object.keys(settingsData || {}).length > 0) {
         set({ settings: settingsData as SiteSettings, settingsLoaded: true });
       } else {
-        // Default settings if none exist
+        if (!get().settings) {
+          set({
+            settings: {
+              showAbout: true,
+              showExperience: true,
+              showProjects: true,
+              showGallery: true,
+              showSkills: true,
+              showBlog: true,
+              showReferences: true,
+              showContact: true,
+              heroBackgroundImageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2048',
+              siteLogoUrl: '',
+              announcementText: 'Welcome to the enhanced portfolio experience — now with custom hero CTA and navigation.',
+              showAnnouncementBar: true,
+              heroHeadline: 'Engineering modern digital experiences',
+              heroSubheadline: 'Building polished websites with rich features, performance, and reliability.',
+              heroCtaLabel: 'Explore Work',
+              heroCtaUrl: '#projects',
+              footerText: 'Chea Rotha. All rights reserved.',
+              maintenanceMode: false,
+              primaryColor: '#fbbf24',
+              secondaryColor: '#38bdf8',
+              experienceTitle: 'Experience',
+              experienceSubtitle: 'My professional journey and roles.',
+              educationTitle: 'Education',
+              educationSubtitle: 'Academic background and qualifications.',
+              projectsTitle: 'Selected Works',
+              projectsSubtitle: 'A showcase of my work in Data Science, Machine Learning, and Software Development.',
+              skillsTitle: 'Technical Arsenal',
+              skillsSubtitle: 'A curated selection of my professional skills and technologies.',
+              blogTitle: 'Latest Articles',
+              blogSubtitle: 'Thoughts, tutorials, and insights on software development.',
+              referencesTitle: 'References',
+              referencesSubtitle: 'Professional references and contact points.',
+              contactTitle: 'Get in Touch',
+              contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
+              aboutTitle: 'About Me',
+              aboutSubtitle: ''
+            }
+          });
+        }
+        set({ settingsLoaded: true });
+      }
+    } catch (error) {
+      console.error("Error fetching settings:", error);
+      if (!get().settings) {
         set({
           settings: {
             showAbout: true,
@@ -371,7 +465,7 @@ export const useDataStore = create<DataState>((set, get) => ({
             showBlog: true,
             showReferences: true,
             showContact: true,
-            heroBackgroundImageUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=2048',
+            heroBackgroundImageUrl: '',
             siteLogoUrl: '',
             announcementText: 'Welcome to the enhanced portfolio experience — now with custom hero CTA and navigation.',
             showAnnouncementBar: true,
@@ -399,53 +493,10 @@ export const useDataStore = create<DataState>((set, get) => ({
             contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
             aboutTitle: 'About Me',
             aboutSubtitle: ''
-          },
-          settingsLoaded: true
+          }
         });
       }
-    } catch (error) {
-      console.error("Error fetching settings:", error);
-      set({
-        settings: {
-          showAbout: true,
-          showExperience: true,
-          showProjects: true,
-          showGallery: true,
-          showSkills: true,
-          showBlog: true,
-          showReferences: true,
-          showContact: true,
-          heroBackgroundImageUrl: '',
-          siteLogoUrl: '',
-          announcementText: 'Welcome to the enhanced portfolio experience — now with custom hero CTA and navigation.',
-          showAnnouncementBar: true,
-          heroHeadline: 'Engineering modern digital experiences',
-          heroSubheadline: 'Building polished websites with rich features, performance, and reliability.',
-          heroCtaLabel: 'Explore Work',
-          heroCtaUrl: '#projects',
-          footerText: 'Chea Rotha. All rights reserved.',
-          maintenanceMode: false,
-          primaryColor: '#fbbf24',
-          secondaryColor: '#38bdf8',
-          experienceTitle: 'Experience',
-          experienceSubtitle: 'My professional journey and roles.',
-          educationTitle: 'Education',
-          educationSubtitle: 'Academic background and qualifications.',
-          projectsTitle: 'Selected Works',
-          projectsSubtitle: 'A showcase of my work in Data Science, Machine Learning, and Software Development.',
-          skillsTitle: 'Technical Arsenal',
-          skillsSubtitle: 'A curated selection of my professional skills and technologies.',
-          blogTitle: 'Latest Articles',
-          blogSubtitle: 'Thoughts, tutorials, and insights on software development.',
-          referencesTitle: 'References',
-          referencesSubtitle: 'Professional references and contact points.',
-          contactTitle: 'Get in Touch',
-          contactSubtitle: 'Feel free to reach out for collaborations or just a friendly hello.',
-          aboutTitle: 'About Me',
-          aboutSubtitle: ''
-        },
-        settingsLoaded: true
-      });
+      set({ settingsLoaded: true });
     }
   }
 }));

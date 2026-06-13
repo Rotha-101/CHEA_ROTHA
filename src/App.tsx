@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useEffect } from 'react';
+import { useEffect, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { PublicLayout } from './components/PublicLayout';
 import { AdminLayout } from './components/AdminLayout';
@@ -17,18 +17,18 @@ import Home from './pages/Home';
 import BlogPost from './pages/BlogPost';
 
 // Admin Pages
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminProfile from './pages/admin/Profile';
-import AdminProjects from './pages/admin/Projects';
-import AdminExperience from './pages/admin/Experience';
-import AdminEducation from './pages/admin/Education';
-import AdminSkills from './pages/admin/Skills';
-import AdminBlog from './pages/admin/Blog';
-import AdminReferences from './pages/admin/References';
-import AdminSettings from './pages/admin/Settings';
-import AdminMediaLibrary from './pages/admin/MediaLibrary';
-import AdminUsers from './pages/admin/Users';
-import AdminActivityLogs from './pages/admin/ActivityLogs';
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminProfile = lazy(() => import('./pages/admin/Profile'));
+const AdminProjects = lazy(() => import('./pages/admin/Projects'));
+const AdminExperience = lazy(() => import('./pages/admin/Experience'));
+const AdminEducation = lazy(() => import('./pages/admin/Education'));
+const AdminSkills = lazy(() => import('./pages/admin/Skills'));
+const AdminBlog = lazy(() => import('./pages/admin/Blog'));
+const AdminReferences = lazy(() => import('./pages/admin/References'));
+const AdminSettings = lazy(() => import('./pages/admin/Settings'));
+const AdminMediaLibrary = lazy(() => import('./pages/admin/MediaLibrary'));
+const AdminUsers = lazy(() => import('./pages/admin/Users'));
+const AdminActivityLogs = lazy(() => import('./pages/admin/ActivityLogs'));
 
 const routerBase = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
 

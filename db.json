@@ -11,7 +11,7 @@
     "profilePhotoUrl": "http://localhost:3001/uploads/1778737278216-IMG_20260501_151142_533.jpg",
     "coverImageUrl": "/uploads/1777968522151-559128.jpg",
     "cvUrl": "http://localhost:3001/uploads/1778139645517-CV.pdf",
-    "aboutMe": "I am an innovative Data Scientist and Machine Learning Engineer with a strong academic foundation in Applied Mathematics and Statistics. My expertise lies in designing and delivering end-to-end predictive systems, transforming complex data into scalable, high-performance solutions—from advanced feature engineering to production-ready model deployment.\n\nI have a proven ability to architect sophisticated machine learning frameworks and leverage advanced data visualization techniques to address high-complexity technical challenges. \nMy work focuses not only on building accurate models, but also on creating systems that are robust, efficient, and aligned with real-world business needs.\n\nDriven by curiosity and continuous innovation, I am passionate about pushing the boundaries of AI and data science to unlock deeper insights, optimize performance, and create meaningful impact at scale.",
+    "aboutMe": "Innovative Data Scientist & ML Engineer with a strong academic foundation in Applied Mathematics and Statistics. Specialized in the end-to-end development of predictive systems, from feature engineering to scalable model deployment. Proven capability in architecting sophisticated ML frameworks and utilizing advanced visualization techniques to solve high-complexity technical challenges. Passionate about pushing the boundaries of AI research to optimize real-world performance.",
     "aboutSectionCoverUrl": "/uploads/1777971462330-download (3).jpg",
     "discord": "",
     "twitter": "https://x.com/Rotha_TTT",
@@ -462,7 +462,7 @@
       "startDate": "Feb 2025",
       "endDate": "Oct 2025",
       "current": false,
-      "description": "Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\\n- Created interactive dashboards and reports for policy-making and economic planning.\\n- Collaborated with economists and policymakers to translate data into actionable insights.",
+      "description": "-Developed a hybrid inflation forecasting model (XGBoost + LSTM + SARIMAX) to improve national projection accuracy.\n- Built and maintained macroeconomic data pipelines including cleaning, feature engineering, and stationarity testing.\\n- Analyzed global (oil, gold) and domestic indicators affecting inflation.\n- Created interactive dashboards and reports for policy-making and economic planning. Collaborated with economists and policymakers to translate data into actionable insights.",
       "priority": 1,
       "photos": [
         "/uploads/1777651076666-955901603-unnamed.webp"
@@ -490,7 +490,7 @@
       "startDate": "Jan 2024",
       "endDate": "Feb 2025",
       "current": false,
-      "description": "- Taught EDA, statistics, machine learning, forecasting, and data visualization with practical Python and Power BI projects.\\n- Guided students in dashboard building, analysis, and insight generation from real datasets.\\n- Designed hands-on exercises and mini-projects to strengthen analytical and coding skills.\\n- Mentored students on data storytelling for technical and non-technical audiences.\\n- Supported students in applying ML and statistical methods to real-world problems.",
+      "description": "- Taught EDA, statistics, machine learning, forecasting, and data visualization with practical Python and Power BI projects.\n- Guided students in dashboard building, analysis, and insight generation from real datasets.\n- Designed hands-on exercises and mini-projects to strengthen analytical and coding skills.\n- Mentored students on data storytelling for technical and non-technical audiences.\n- Supported students in applying ML and statistical methods to real-world problems.",
       "priority": 2,
       "photos": [
         "/uploads/1777613764523-215775523-sunrise.JPG"
