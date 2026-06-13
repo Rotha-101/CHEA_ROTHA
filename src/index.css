@@ -96,3 +96,88 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 .prose a {
   @apply text-[#ff4d4d] font-medium underline underline-offset-4 decoration-[#ff4d4d]/30 hover:decoration-[#ff4d4d] transition-all;
 }
+
+/* Morphing Blob Animations */
+@keyframes morph-blob-1 {
+  0% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 40% 60% 50% 50% / 50% 45% 55% 50%;
+  }
+  50% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  75% {
+    border-radius: 55% 45% 40% 60% / 45% 50% 50% 55%;
+  }
+  100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+}
+
+@keyframes morph-blob-2 {
+  0% {
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 60%;
+  }
+  25% {
+    border-radius: 60% 40% 60% 40% / 60% 50% 50% 40%;
+  }
+  50% {
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+  }
+  75% {
+    border-radius: 45% 55% 50% 50% / 55% 45% 45% 55%;
+  }
+  100% {
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 60%;
+  }
+}
+
+@keyframes morph-blob-3 {
+  0% {
+    border-radius: 40% 60% 50% 50% / 50% 45% 55% 50%;
+  }
+  33% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  66% {
+    border-radius: 50% 50% 30% 70% / 50% 60% 40% 60%;
+  }
+  100% {
+    border-radius: 40% 60% 50% 50% / 50% 45% 55% 50%;
+  }
+}
+
+@keyframes float-gentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(6px) rotate(-2deg);
+  }
+}
+
+.blob-layer-1 {
+  animation: morph-blob-1 12s infinite linear, float-gentle 8s infinite ease-in-out;
+  will-change: border-radius, transform;
+}
+
+.blob-layer-2 {
+  animation: morph-blob-2 15s infinite linear, float-reverse 9s infinite ease-in-out;
+  will-change: border-radius, transform;
+}
+
+.blob-layer-3 {
+  animation: morph-blob-3 18s infinite linear, float-gentle 10s infinite ease-in-out;
+  will-change: border-radius, transform;
+}

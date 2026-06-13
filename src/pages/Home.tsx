@@ -42,31 +42,44 @@ export default function Home() {
       <section id="home" className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-32 pb-40">
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
-
             {/* Left Column - Profile Visual */}
             <motion.div 
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start"
+              className="lg:col-span-5 order-2 lg:order-1 flex justify-center lg:justify-start items-center"
             >
-              <div className="relative group">
-                {/* Visual Orbs */}
-                <div className="absolute -inset-4 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+              <div className="relative w-[300px] h-[340px] sm:w-[380px] sm:h-[430px] flex items-center justify-center group select-none">
+                {/* Visual Orbs / Glow */}
+                <div className="absolute -inset-6 bg-gradient-to-tr from-[#ff4d4d]/20 to-transparent blur-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
                 
-                <div className="relative w-full max-w-xs lg:max-w-lg aspect-[4/5] rounded-[40px] overflow-hidden border border-zinc-200 dark:border-white/5 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-3xl shadow-2xl">
+                {/* Back Layer 1: Charcoal shape in light mode, dark/navy accent in dark mode */}
+                <div className="absolute w-full h-full -top-4 -left-4 blob-layer-1 opacity-90 bg-zinc-800 dark:bg-zinc-900 border border-zinc-700/50 dark:border-white/5 shadow-2xl transition-colors duration-500" />
+                
+                {/* Middle Layer 2: Warm beige in light mode, semi-transparent coral in dark mode */}
+                <div className="absolute w-full h-full top-3 left-3 blob-layer-2 opacity-80 bg-[#d9c5b2] dark:bg-[#ff4d4d]/10 border border-zinc-400/30 dark:border-[#ff4d4d]/20 shadow-xl transition-colors duration-500" />
+                
+                {/* Front Layer 3: Image Container Blob */}
+                <div className="absolute w-full h-full blob-layer-3 overflow-hidden border border-zinc-200 dark:border-white/10 bg-zinc-100 dark:bg-white/[0.02] backdrop-blur-md shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
                   {profile.profilePhotoUrl ? (
-                    <img src={profile.profilePhotoUrl} alt={profile.name} className="w-full h-full object-cover transition-all duration-700 scale-105 group-hover:scale-100" />
+                    <img 
+                      src={profile.profilePhotoUrl} 
+                      alt={profile.name} 
+                      className="w-full h-full object-cover transition-transform duration-700 scale-105 group-hover:scale-100" 
+                    />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-zinc-400 dark:text-zinc-700">
                       <User className="h-20 w-20 mb-4 opacity-20" />
                       <p className="font-mono text-[10px] uppercase tracking-widest">Null_Visual</p>
                     </div>
                   )}
-                  {/* Decorative corner */}
-                  <div className="absolute top-6 right-6 w-3 h-3 border-t-2 border-r-2 border-[#ff4d4d]/40" />
-                  <div className="absolute bottom-6 left-6 w-3 h-3 border-b-2 border-l-2 border-[#ff4d4d]/40" />
                 </div>
+
+                {/* Floating Micro-Decorations */}
+                {/* Bottom Right Dot */}
+                <div className="absolute bottom-4 -right-2 w-3.5 h-3.5 rounded-full bg-[#ff4d4d] animate-pulse shadow-[0_0_12px_#ff4d4d]" />
+                {/* Top Left Dot */}
+                <div className="absolute -top-2 -left-2 w-2.5 h-2.5 rounded-full bg-zinc-400 dark:bg-zinc-600 opacity-60 animate-bounce" />
               </div>
             </motion.div>
 
